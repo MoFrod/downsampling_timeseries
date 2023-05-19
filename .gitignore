@@ -1,6 +1,9 @@
 *.R
+*.Rhistory
 *.docx
 *.pdf
+*.jpg
+*png
 data/
 cache/
 
