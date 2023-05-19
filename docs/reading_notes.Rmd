@@ -12,12 +12,16 @@ knitr::opts_chunk$set(echo = TRUE)
 knitr::opts_knit$set(root.dir= normalizePath('..'))
 ```
 
+```{r, include=FALSE}
+options(tinytex.verbose = TRUE)
+```
+
 ```{r ProjectTemplate, include = FALSE}
 library(ProjectTemplate)
 load.project()
 ```
 
-##TVStore @TVStore
+## TVStore @TVStore
 
 **Abstract**
 
@@ -224,7 +228,7 @@ cases. Already it is being put to use by DataMarket and is reported to be a grea
 
 - "For future work, it might be prudent to explore other polyline simplification algorithms applied in cartographic generalization to adapt them for the purpose of simplifying line charts. Furthermore, similar to cartographic generalization, what is needed is a deeper understanding of how line charts are perceived [11], what characteristics have the most perceptual impact and to what degree." pg 50
 
-## Change Point Detection Algorithms @ChangePoint Direction 
+## Change Point Detection Algorithms @ChangePointDirection 
 
 **Abstract**
 
@@ -274,7 +278,7 @@ Yet, the latency is often high for large time-series data stored on remote datab
 
 - "A common approach to reducing the latency is data reduction [4], by aggregating the data to reduce its size before visualization. Various strategies have been proposed to preserve salient features in the reduction. However, most of them do not account for the perceptual effects of, e.g., resizing the display, and thus often produce erroneous visualizations that can significantly distort the shape of the rendered data." pg 145:2
 
-- "Time-series visualization [1] has been extensively explored for facilitating users to discover trends and patterns at varying time scales. Line chart is still the most popular vehicle for presenting time series. However, displaying many time series as line charts on a limited screen inevitably produces heavy overplot. To address this issue, various lens-based interaction techniques [16] and overview+detail interaction techniques [12, 29] have been developed for simultaneously showing
+- "Time-series visualization [1] has been extensively explored for facilitating users to discover trends and patterns at varying time scales. Line chart is still the most popular vehicle for presenting time series. However, displaying many time series as line charts on a limited screen inevitably produces heavy overplot. To address this issue, various lens-based interaction techniques [16] and overview detail interaction techniques [12, 29] have been developed for simultaneously showing
 the regions of interest in detail with an overview of the whole data." pg 145:4
 
 - "Point Aggregation. To ensure a manageable size for the query data, point aggregation methods often first group the entire time series into a few time spans and then compute an aggregated value and an aggregated timestamp for each interval using aggregation functions such as minimum, maximum, mean, and median." pg 145:4
@@ -284,11 +288,12 @@ the regions of interest in detail with an overview of the whole data." pg 145:4
 - "Line Simplification. Given a time-series curve, line simplification is another data-reduction approach that aims to preserve its rough shape with fewer curve segments." pg 145:5
 
 - "One widely-used method is the top-down Ramer-Douglas-Peucker [7, 9] algorithm, which joins the first and last points in the curve and divides the curve into two segments, if the distance from the farthest point to the line is larger than a threshold. Then, each curve segment is recursively divided until all points of
-the original curve are within the simplification’s tolerance. Fu et al. [5] further attempts to preserve salient points in the simplification. However, these methods have a high computational complexity, 𝑂(n2 ) or 𝑂(n logn), (n is the number of data points in the time series), so interactive queries cannot be supported for large data. Instead, INCVISAGE [23] uses online sampling-based algorithms to incrementally generate curve segments, attaining 46x speedup relative to baselines. Yet, it provides only approximate visualizations and does not support interactive operations like zooming." pg 145:5
+the original curve are within the simplification’s tolerance. Fu et al. [5] further attempts to preserve salient points in the simplification. However, these methods have a high computational complexity, 0 (n2 ) or 0(n logn), (n is the number of data points in the time series), so interactive queries cannot be supported for large data. Instead, INCVISAGE [23] uses online sampling-based algorithms to incrementally generate curve segments, attaining 46x speedup relative to baselines. Yet, it provides only approximate visualizations and does not support interactive operations like zooming." pg 145:5
 
 - "We have four observations from Fig. 7. First, M4-P, M4-I, M3, OM3, and OM3-NP all produce error-free visualizations, whereas Haar wavelet cannot preserve the original shape of the time series. Second, all methods have high data reduction ratios larger than 0.98 on average, while M4-P performs relatively poorly with a data reduction ratio of only around 0.77 for some data caused by the join operation. Third, Haar wavelet, M3, and OM3 are all able to support interactive exploration with the average response time around 100 ms, 280 ms, and 210 ms, respectively. In contrast, the average response time of M4-P is larger than 500 ms for all the test data, while the one of M4-I is more than 1 minute for 16M data and it quickly grows as the dataset size increases. For the query time, Haar wavelet, M3, OM3 , and OM3
 -NP all take less than 100 ms, whereas the other methods take more than 1 second for most data. Fourth, M3 requires more coefficients to load and transfer, resulting in a slightly smaller data reduction ratio than OM3 (0.996 vs. 0.998) and higher query time (45 ms vs. 30 ms) and response time (280 ms vs. 210 ms) on average. Last, our pruning strategy helps avoid around half of the data points in the OM3 search, contributing to a reduction of query time by around 200 ms." pg 145:17 (Fig 7 image saved)
 
 ## MinMaxLTTB @MinMaxLTTB
 
-##Bibliography
+## Bibliography
+
