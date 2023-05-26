@@ -295,5 +295,25 @@ the original curve are within the simplification’s tolerance. Fu et al. [5] fu
 
 ## MinMaxLTTB @MinMaxLTTB
 
+- "Visualization plays an important role in analyzing and exploring time series data. To facilitate efficient visualization of large datasets, downsampling has emerged as a well-established approach." pg 1
+
+- "...we propose MinMaxLTTB, a two-step algorithm that marks a significant enhancement in the scalability of
+LTTB. MinMaxLTTB entails the following two steps: (i) the MinMax algorithm preselects a certain ratio of minimum and maximum
+data points, followed by (ii) applying the LTTB algorithm on only
+these preselected data points, effectively reducing LTTB’s time complexity." pg 1
+
+- " As the volume of time series data continues to expand, there is an increasing need for efficient visualization methods capable of handling large datasets [4, 10, 19]. " pg 1
+
+- " By reducing the number of data points while preserving the overall shape of the time series, downsampling minimizes network latency and improves rendering time, making it a vital component in numerous widely adopted time
+series databases [6, 20]." pg 1
+
+- "Visualization is crucial for exploring time series data, with the human
+eye frequently being advocated as the ultimate data mining instrument [17]." pg 2
+
+- "For the majority of time series analysis tasks, simple visualizations, such as line charts, have proven most effective [2]. Interactive visualization techniques, as emphasized by Shneiderman’s visual information-seeking mantra [22], are essential for exploring large time series data by providing an overview, enabling zooming and filtering, and allowing access to details-on-demand [28]." pg 2
+
+- 
+
+
 ## Bibliography
 
