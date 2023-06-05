@@ -74,21 +74,15 @@ The visualisation of the project plan highlights the key activities within each 
 
 **Project Risks and Mitigation**
 
-
+There are five significant risks for this project. 
 
 - Not enough UR (balance practitioners decision-makers / send invite to as many as possible); UR interest, but not scheduled
 
-- Dependencies, 
+- Dependencies (EDA / Visals)  - Too many properties to create clear common principles for comparison.  (iterate score and approach as needed) - finding common properties that are sufficiently clear for visuals- take too long / disrupts other project elements (use pre-exiting visuals as prompts in UR?)
 
-- Too many properties to create clear common principles for comparison.  (iterate score and approach as needed)
-
-- data availability (use open source, cleaned data from turing). 
+ - data availability (use open source, cleaned data from turing). 
 
 - time (part time - scope)
-
-- finding common properties that are sufficiently clear for visuals- take too long / disrupts other project elements (use pre-exiting visuals as prompts in UR?)
-
-
 
 \newpage 
 
