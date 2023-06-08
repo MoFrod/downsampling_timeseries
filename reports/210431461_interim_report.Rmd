@@ -26,7 +26,7 @@ The research outlined by this interim report aims to improve how data practition
 
 To better understand and explain the impact of downsampling voluminous time series data, the research addresses the following five objectives:
 
-- Develop a baseline understanding current downsampling algorithms' impact on original data sets by using the R package `TS Impute` (@imputeTS() to compare visualisations of the original and compressed data.
+- Develop a baseline understanding current downsampling algorithms' impact on original data sets by using the R package `ImputeTS` (@imputeTS) to compare visualisations of the original and compressed data.
 
 - Conduct exploratory analysis to determine common properties of time series data, attempting to refine the 22 time series features identified by `catch22` (@catch22) to identify the most useful features for comparing the impacts of downsampling algorithms on original time series data.
 
@@ -62,23 +62,24 @@ The visualisation of the project plan highlights the key activities within each 
 
 ![ ](~/Documents/MF MSc/downsampling_timeseries/docs/Agile Roadmap - Explaining Time Series Downsampling.png)
 
+
 **Project Risks and Mitigation**
 
 To be delivered successfully, there are several risks that this project may need to mitigate. These are set out in the table below with a risk rating of low, medium or high. 
 
-| **Rating** | **Risk** | **Mitigation** |
-|:-------:|:------:|:---------:| 
-| Low | Fewer people agreed to participate in User Research than expected. | Invites will be sent in a phased approach to enable further invites to be sent if response numbers are lower than expected. |
-|------|------|------| 
-| Low  | Number of decision-makers and data practitioners who agreed to participate in User Research is imbalanced. | The numbers for User Research are unlikely to be statistically significant for this project anyway,  so any further limitations on the findings of User Research and their impact will be set out in the final report. |
-|------|------|------| 
-| Medium | There are several elements of this project that are, to some extent, dependent on other project elements. For example, the exploratory data analysis and visualisation. | These dependencies are being mitigated by the agile approach to the project, allowing the author to adapt as needed, and clear communication with the supervisor. |
-|------|------|------| 
-| High | The author is a part-time student working towards the same deadlines and criteria as full-time students. | The agile roadmap clearly sets out how the project is likely to progress, and the research objectives have been selected to help maximise impact if there are delays with some components. Progress will be clearly communicated to the supervisor, and an extension may be applied for if required. |
-|------|------|------| 
-| Low | Data availability and cleaning take a significant amount of time, and may detract from original research. | A subs-selection of open source data previous time series visualisation research has been chosen in mitigation. |
-|------|------|------| 
-| Low | The outputs from User Research, such as interview content or personal details, are not stored and treated securely. | Consent forms will be collected prior to scheduling interviews and participants will be annonymised in a locked spreadsheet saved separated from the project. There will be no personal details associated with the interview content, which will also be saved in a locked folder separate from the project.
+| **Impact** | **Likelihood** | **Risk** | **Mitigation** |
+|:-------:|:-------:|:------:|:---------:| 
+| Low | High | Fewer people agreed to participate in User Research than expected. | Invites will be sent in a phased approach to enable further invites to be sent if response numbers are lower than expected. |
+|------|------|------|------| 
+| Low  | High | Number of decision-makers and data practitioners who agreed to participate in User Research is imbalanced. | The numbers for User Research are unlikely to be statistically significant for this project anyway,  so any further limitations on the findings of User Research and their impact will be set out in the final report. |
+|------|------|------|------|  
+| Low | Medium | Data availability and cleaning take a significant amount of time, and may detract from original research. | A subs-selection of open source data previous time series visualisation research has been chosen in mitigation. |
+|------|------|------|------|  
+| Low | Medium | The outputs from User Research, such as interview content or personal details, are not stored and treated securely. | Consent forms will be collected prior to scheduling interviews and participants will be annonymised in a locked spreadsheet saved separated from the project. There will be no personal details associated with the interview content, which will also be saved in a locked folder separate from the project.
+|------|------|------|------|  
+| Medium | Medium | There are several elements of this project that are, to some extent, dependent on other project elements. For example, the exploratory data analysis and visualisation. | These dependencies are being mitigated by the agile approach to the project, allowing the author to adapt as needed, and clear communication with the supervisor. |
+|------|------|------|------|  
+| High | Medium | The author is a part-time student working towards the same deadlines and criteria as full-time students. | The agile roadmap clearly sets out how the project is likely to progress, and the research objectives have been selected to help maximise impact if there are delays with some components. Progress will be clearly communicated to the supervisor, and an extension may be applied for if required. |
 
 This list of risks and mitigations will be reviewed and updated throughout the project as more may arise when the research is iterated.
 
@@ -90,13 +91,20 @@ The research of this project aims to improve how data practitioners better under
 
 ## Annex A: Data Management Plan
 
-A data management plan (DMP) is a written document outlining how you are planning to manage your research data both during and after your research project. The plan should address what types of data will be collected and how the data will be documented, stored, shared and preserved.
+![](~/Documents/MF MSc/downsampling_timeseries/docs/210431461_Data-Management-Plan-DMP.pdf)
+
 
 ## Annex B: Draft Invite for User Research
 
+![](~/Documents/MF MSc/downsampling_timeseries/docs/210431461_User-Research-Invite.pdf)
+
 ## Annex C: Draft Question List for User Research
 
+![](~/Documents/MF MSc/downsampling_timeseries/docs/210431461_Interview-Script.pdf)
+
 ## Annex D: Draft Consent Form for User Research
+
+![](~/Documents/MF MSc/downsampling_timeseries/docs/210431461_User-Research-Consent-Form.pdf)
 
 ## Annex E: References
 
