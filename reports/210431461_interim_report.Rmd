@@ -12,6 +12,16 @@ biblio-style: 'apalike'
 output: pdf_document
 ---
 
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_knit$set(root.dir= normalizePath('..'))
+```
+
+```{r ProjectTemplate, include = FALSE}
+library(ProjectTemplate)
+load.project()
+```
+
 ### Introduction
 
 Decision-makers must trust that the data being considered sufficiently represents the situation they are deciding on. Trusting the data means trusting which data points are selected, how this data collected and stored, and the capability of data practitioners to understand the quality, insights and limitations of it. This data pipeline can obscure or loose important information making it difficult to determine and explain that the data reliably and truthfully reflects the situation in question. Today's increasing volume of data makes this even more difficult (@TVStore).
@@ -60,7 +70,7 @@ Progress on the project so far includes activity specified in phases (1) and (2)
 
 The visualisation of the project plan highlights the key activities within each theme across the project phases. Because of this iterative approach, it was agreed with the project supervisor that an agile approach was appropriate; the project plan is visualised as an agile roadmap. This visualisation, created on a platform provided by `roadmunk`, is interactive and will be updated to reflect the iterative nature of the project. 
 
-![ ](~/Documents/MF MSc/downsampling_timeseries/docs/Agile Roadmap - Explaining Time Series Downsampling.png)
+![ ](D:/Morgan/Documents/NCL MSc/final_project/mofrod_project/docs/Agile Roadmap - Explaining Time Series Downsampling.png)
 
 \newpage
 
