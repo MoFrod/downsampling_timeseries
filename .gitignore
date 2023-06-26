@@ -1,6 +1,3 @@
 *.R
 *.Rhistory
-data/
-cache/
-*.docx
-*.pdf
+
