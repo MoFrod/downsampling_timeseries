@@ -27,5 +27,3 @@ funPercentageChange <- function(df, i = 1)
   }
   df[id_to_keep,]
 }
-
-

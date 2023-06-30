@@ -1,4 +1,9 @@
 # Create data frames from JSON files of Turing Change Annotated Change Dataset.
+library(patchwork)
+library(tidyverse)
+library(here)
+library(imputeTS)
+
 
 # Set base path used for all file loading.
 BASE_PATH = "~/Documents/MF MSc/downsampling_timeseries/data/AnnotateChange"
@@ -36,3 +41,4 @@ tsp <- merged %>% ggplot(aes(x = id, y = val)) + geom_line() + geom_point() + fa
 
 # Show the visualisation
 tsp
+

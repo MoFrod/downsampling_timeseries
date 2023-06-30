@@ -12,6 +12,7 @@ df <- tibble(
   indexes_of_values_kept = character()
 )
 
+
 # List of datasets to use in testing
 list_of_dataset <- c("df100","df200","df300","df400","df500","df600","df700","df800a","df800b")
 
@@ -55,7 +56,6 @@ for (dataset in list_of_dataset)
   }
 }
 
-
 # Pivot the results dataset into a 'longer' form with a row for each metric type, to make it easier to facet on different values.
 metrics_of_interest <- c("vol","number_NAs","number_na_gaps")
 
@@ -63,11 +63,4 @@ metrics_of_interest <- c("vol","number_NAs","number_na_gaps")
 df_longer <- df %>%
   pivot_longer(cols = c("vol","number_NAs","number_na_gaps")) %>%
   mutate(value = as.numeric(value))
-
-# Simple visualisation for datasets and methods
-resplot <- df_longer %>%
-  ggplot(aes(x = param, y = value, colour = method)) + facet_grid(name~dataset) + geom_point() + theme(legend.position = "bottom")
-
-# Plot original data and visualisation graph side-by-side using patchwork '+' operator.
-tsp + resplot
 
