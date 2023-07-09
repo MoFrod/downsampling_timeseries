@@ -25,12 +25,12 @@ features_sd100_long <- features_sd100 %>%
   pivot_longer(cols = (2:6), names_to = "parameters", values_to = "value")
 
 # Point plot
-ggplot(features_sd100_long, aes(x = names, y = value, color = as.numeric(parameters))) + 
+Rcatch22_plot_sd100 <- ggplot(features_sd100_long, aes(y = names, x = value, color = as.numeric(parameters))) + 
   geom_point() + 
   theme_minimal() + 
-  labs(x = "Names", y = "Values", color = "Param") + 
-  ggtitle("Comparative Visualization of Time Series Data") +
-  theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5)) 
+  labs(y = "Names", x = "Values", color = "Param") + 
+  ggtitle("Comparative Visualization of Simple Decimation for DF100") +
+  theme(axis.title.y = element_blank(), axis.title.x = element_blank())
 
 ## Percentage Change df100
 #==
@@ -57,9 +57,16 @@ features_pc100_long <- features_pc100 %>%
   pivot_longer(cols = (2:6), names_to = "parameters", values_to = "value")
 
 # Point plot
-ggplot(features_pc100_long, aes(x = names, y = value, color = as.numeric(parameters))) + 
+Rcatch22_plot_pc100 <- ggplot(features_pc100_long, aes(y = names, x = value, color = as.numeric(parameters))) + 
   geom_point() + 
   theme_minimal() + 
-  labs(x = "Names", y = "Values", color = "Param") + 
-  ggtitle("Comparative Visualization of Time Series Data") +
-  theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5))
+  labs(y = "Names", x = "Values", color = "Param") + 
+  ggtitle("Comparative Visualization of Percentage Change for DF100") +
+  theme(axis.title.y = element_blank(), axis.title.x = element_blank())
+
+## Combine plots
+#==
+
+
+grid.arrange(patchworkGrob(Rcatch22_plot_sd100 + Rcatch22_plot_pc100), left = "Names", bottom = "Values")
+

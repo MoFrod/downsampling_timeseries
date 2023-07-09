@@ -25,12 +25,12 @@ features_sd800a_long <- features_sd800a %>%
   pivot_longer(cols = (2:6), names_to = "parameters", values_to = "value")
 
 # Point plot
-ggplot(features_sd800a_long, aes(x = names, y = value, color = as.numeric(parameters))) + 
+Rcatch22_plot_sd800a <- ggplot(features_sd800a_long, aes(y = names, x = value, color = as.numeric(parameters))) + 
   geom_point() + 
   theme_minimal() + 
-  labs(x = "Names", y = "Values", color = "Param") + 
-  ggtitle("Comparative Visualization of Time Series Data") +
-  theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5))
+  labs(y = "Names", x = "Values", color = "Param") + 
+  ggtitle("Comparative Visualization of Simple Decimation for DF800a") +
+  theme(axis.title.y = element_blank(), axis.title.x = element_blank())
 
 ## Percentage Change df800a
 #==
@@ -50,16 +50,23 @@ features_pc800a <- full_join(features_pc800a_1, features_pc800a_2, by = "names")
 
 # normalize columns 1, 2, 5, 10, 20
 cols_to_normalize <- c('1', '2', '5', '10', '20')
-features_pc800a[cols_to_normalize] <- scale(features_pc800a[cols_to_normalize])
+features_pc800a[cols_to_normalize] <- scale(features_sd800a[cols_to_normalize])
 
 # Pivoting the data to long format
 features_pc800a_long <- features_pc800a %>%
   pivot_longer(cols = (2:6), names_to = "parameters", values_to = "value")
 
 # Point plot
-ggplot(features_pc800a_long, aes(x = names, y = value, color = as.numeric(parameters))) + 
+Rcatch22_plot_pc800a <- ggplot(features_pc800a_long, aes(y = names, x = value, color = as.numeric(parameters))) + 
   geom_point() + 
   theme_minimal() + 
-  labs(x = "Names", y = "Values", color = "Param") + 
-  ggtitle("Comparative Visualization of Time Series Data") +
-  theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5))
+  labs(y = "Names", x = "Values", color = "Param") + 
+  ggtitle("Comparative Visualization of Percentage Change for DF800a") +
+  theme(axis.title.y = element_blank(), axis.title.x = element_blank())
+
+## Combine plots
+#==
+
+
+grid.arrange(patchworkGrob(Rcatch22_plot_sd800a + Rcatch22_plot_pc800a), left = "Names", bottom = "Values")
+
