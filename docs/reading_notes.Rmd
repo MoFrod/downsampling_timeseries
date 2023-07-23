@@ -312,8 +312,54 @@ eye frequently being advocated as the ultimate data mining instrument [17]." pg 
 
 - "For the majority of time series analysis tasks, simple visualizations, such as line charts, have proven most effective [2]. Interactive visualization techniques, as emphasized by Shneiderman’s visual information-seeking mantra [22], are essential for exploring large time series data by providing an overview, enabling zooming and filtering, and allowing access to details-on-demand [28]." pg 2
 
-- 
+- "This work proposes MinMaxLTTB, a downsampling technique that mitigates the unfavorable computational properties of LTTB through the use of MinMax-preselection." pg 4
 
+## ChanngePoint
+
+- This work specifically focuses on evaluating data point selection algorithms, also referred to as value preserving aggregation [16, 17],
+which select data points from the original time series to downsample the data. pg 1
+
+- Despite their widespread use, a profound evaluation of these algorithms remains under-studied due to the absence of a one-size-fits-all metric, the complex interplay of visualization components (e.g., line width, line shape, toolkit), and the lack of attention to visual stability during limited interactions such as small zooms or panning. pg 1 
+
+- Visual representativeness assesses the extent to which a downsampled time series line chart visually approximates the original data by employing image-based metrics, as such capturing toolkit and line drawing characteristics. Visual stability, a novel concept that we introduce, quantifies the perceptual
+coherence between two slightly different aggregations, which is particularly relevant when updating visualizations gradually, such as during data streaming, panning, or small zooms. pg 2
+
+- Value preserving data aggregation selects data points from the original time series while aiming to preserve its overall shape. To do
+so, such techniques leverage interpolation between the selected data
+points. pg 2
+
+- The EveryNth algorithm, also known as sampling or decimation,
+is a highly efficient method for value preserving downsampling... Although easily parallelizable, multi-threading may not offer
+significant benefits due to the simplicity of the sampling task. pg 3
+
+- Several works have made steps toward assessing the visual representativeness of data aggregation for time series visualization.
+Shi et al. [29] proposed two data-based metrics for evaluating
+cartographic line simplification: displacement measure (the maximal
+perpendicular distance between the simplified and original line) and
+shape distortion measure (the average difference in inclination angles
+between the simplified and original line).
+Jugel et al. [16] used the Structural Similarity Index Measure
+(SSIM) as an image-based metric to evaluate and compare their M4
+data aggregation algorithm. However, the reliability of SSIM has
+been questioned by Nilsson et al. [25] and Sara et al. [28], who
+both demonstrated that assessing image quality based on SSIM
+can lead to incorrect conclusions and does not consistently capture
+reconstruction errors.
+Gil et al. [11] contributed a method for adaptively identifying
+optimal data point selection algorithms for time series compression,
+using multiple value preserving algorithms and a data-based error
+score. However, the approach has limitations: MinMax was not
+included, only mean absolute error (MAE) was evaluated, and interpolating the downsampled signal to the original signal results
+in O(N) memory complexity. Furthermore, their results suggest
+that using LTTB or M4 is only marginally worse than the optimal
+strategy, questioning the practical applicability of their approach.
+
+- We evaluated the EveryNth, MinMax, M4, and LTTB algorithms
+using our proposed methodology, taking various figure-drawing
+properties into account. In most cases, LTTB and/or MinMax
+emerged as superior algorithms in terms of visual representativeness. pg 10
+
+@
 
 ## Bibliography
 

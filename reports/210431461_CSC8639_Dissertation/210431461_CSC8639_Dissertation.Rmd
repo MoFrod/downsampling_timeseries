@@ -1,0 +1,187 @@
+---
+title: Explaining time series downsampling through visualisation
+authors:
+  - name: Morgan Frodsham
+    department: School of Computing
+    affiliation: Newcastle University
+    location: Newcastle upon Tyne, UK
+    email: M.C.M.Frodsham2@newcastle.ac.uk
+  - name: Matthew Forshaw
+    department: School of Computing
+    affiliation: Newcastle University
+    location: Newcastle upon Tyne, UK
+    email: matthew.forshaw@newcastle.ac.uk
+abstract: |
+  Enter the text of your abstract here.
+keywords:
+  - blah
+  - blee
+  - bloo
+  - these are optional and can be removed
+citation-package: natbib
+bibliography: references.bib
+csl: ieee-transactions-on-cloud-computing.csl
+documentclass: article
+output: rticles::arxiv_article
+link-citations: TRUE
+---
+
+# INTRODUCTION
+
+The UK Government is committed to making data-driven decisions that engender public trust [@data2017; @data2020; @data2021; @data2022]. Data-driven decisions are considered to be "more well-informed" @data2017, effective @data2022, consistent @data2021, and better "at scale" @data2020. Despite this, there is a lack of trust in government use of data @trust. This suggests that public trust in data-driven decisions goes beyond how the "data complies with legal, regulatory and ethical obligations" @data2021. Transparency is needed for the UK public to have "confidence and trust in how data, including personal data, is used" [@data2020; @trust]. 
+
+To make data-driven decisions, government decision-makers also need to trust the data and how it is used. This means trusting which data points are selected, how this data collected and stored, and the capability of data practitioners to understand the quality, insights and limitations of it. At every stage of the data processing pipeline, data practitioners have the opportunity to communicate the impact of the assumptions and choices they are making to support decision-makers in trusting the data informing their decisions.
+
+Time series data is used across the UK Government @pathway to inform decision-makers across various domains @onstool. It is also widely generated and used by industry and research @TVStore. The volume of time series data has been increasingly continuously @datapoint, posing significant challenges for handling and visualising this popular data type @TVStore. Data practitioners must utilise methods that reduce data volumes to align with limitations like processing time, computing costs, storage capabilities, and sustainability ambitions [@Sveinn; @TVStore; @Shift].  
+
+Downsampling is an established technique [@downsampling; @sampling] that involves selecting a representative subset of the time series data to preserve its shape while reducing the number of data points [@datapoint; @MinMaxLTTB]. This is a vital part of making voluminous time series understandable for human observation @Sveinn and an essential step in many time series database solutions @datapoint. However, little attention has been devoted to how downsampling impacts decision-makers trust in the data.
+
+Despite widespread use, how to communicate the impact of downsampling algorithms on time series data remains understudied [@Sveinn; @datapoint]. Downsampling expands the boundaries risk for decision-makers as data practitioners may not realise the significance of the data being discarded. Such choices throughout the data pipeline may have disproportionately larger consequences later as their ramifications for future decisions are not fully understood by all. It is important, therefore, that data practitioners are able to communicate the impact of choices made throughout the data pipeline.
+
+To address these challenges, this work proposes a visualisation methodology for understanding and communicating the impact of downsampling algorithms on time series data. 
+
+- method
+- results 
+- then outline of paper.
+
+# RELATED WORK
+\label{sec:headings}
+
+
+
+
+
+
+You can use directly LaTeX command or Markdown text. 
+
+LaTeX command can be used to reference other section. See Section \ref{sec:headings}.
+However, you can also use **bookdown** extensions mechanism for this.
+
+## Headings: second level
+
+You can use equation in blocks
+
+$$
+\xi _{ij}(t)=P(x_{t}=i,x_{t+1}=j|y,v,w;\theta)= {\frac {\alpha _{i}(t)a^{w_t}_{ij}\beta _{j}(t+1)b^{v_{t+1}}_{j}(y_{t+1})}{\sum _{i=1}^{N} \sum _{j=1}^{N} \alpha _{i}(t)a^{w_t}_{ij}\beta _{j}(t+1)b^{v_{t+1}}_{j}(y_{t+1})}}
+$$
+
+But also inline i.e $z=x+y$
+
+### Headings: third level
+
+Another paragraph. 
+
+# METHODOLOGY
+\label{sec:headings}
+
+## ImputeTS
+
+## Rcatch22
+
+## Downsamplng Impat
+
+## User Research
+
+# RESULTS AND EVALUATION 
+\label{sec:headings}
+
+# FUTURE WORK
+\label{sec:headings}
+
+# CONCLUSION
+\label{sec:headings}
+
+# REFERENCES
+\label{sec:headings}
+
+
+# Examples of citations, figures, tables, references
+\label{sec:others}
+
+You can insert references. Here is some text [@kour2014real; @kour2014fast] and see @hadash2018estimate.
+
+The documentation for \verb+natbib+ may be found at
+
+You can use custom blocks with LaTeX support from **rmarkdown** to create environment.
+
+::: {.center latex=true}
+  <http://mirrors.ctan.org/macros/latex/contrib/natbib/natnotes.pdf}>
+:::
+
+Of note is the command \verb+\citet+, which produces citations
+appropriate for use in inline text.  
+
+You can insert LaTeX environment directly too.
+
+\begin{verbatim}
+   \citet{hasselmo} investigated\dots
+\end{verbatim}
+
+produces
+
+\begin{quote}
+  Hasselmo, et al.\ (1995) investigated\dots
+\end{quote}
+
+\begin{center}
+  \url{https://www.ctan.org/pkg/booktabs}
+\end{center}
+
+
+## Figures
+
+You can insert figure using LaTeX directly. 
+
+See Figure \ref{fig:fig1}. Here is how you add footnotes. [^Sample of the first footnote.]
+
+\begin{figure}
+  \centering
+  \fbox{\rule[-.5cm]{4cm}{4cm} \rule[-.5cm]{4cm}{0cm}}
+  \caption{Sample figure caption.}
+  \label{fig:fig1}
+\end{figure}
+
+But you can also do that using R.
+
+```{r fig2, fig.cap = "Another sample figure"}
+plot(mtcars$mpg)
+```
+
+You can use **bookdown** to allow references for Tables and Figures.
+
+
+## Tables
+
+Below we can see how to use tables. 
+
+See awesome Table~\ref{tab:table} which is written directly in LaTeX in source Rmd file.
+
+\begin{table}
+ \caption{Sample table title}
+  \centering
+  \begin{tabular}{lll}
+    \toprule
+    \multicolumn{2}{c}{Part}                   \\
+    \cmidrule(r){1-2}
+    Name     & Description     & Size ($\mu$m) \\
+    \midrule
+    Dendrite & Input terminal  & $\sim$100     \\
+    Axon     & Output terminal & $\sim$10      \\
+    Soma     & Cell body       & up to $10^6$  \\
+    \bottomrule
+  \end{tabular}
+  \label{tab:table}
+\end{table}
+
+You can also use R code for that.
+
+```{r}
+knitr::kable(head(mtcars), caption = "Head of mtcars table")
+```
+
+
+## Lists
+
+- Item 1
+- Item 2 
+- Item 3

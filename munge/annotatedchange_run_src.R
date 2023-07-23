@@ -1,6 +1,7 @@
 # Run downsampling functions and experiments
+source("D:/Morgan/Documents/NCL MSc/final_project/mofrod_project/src/all_downsampling_functions.R", echo=TRUE)
 source("D:/Morgan/Documents/NCL MSc/final_project/mofrod_project/src/annotatedchange_downsampling_experiments.R", echo=TRUE)
-source("D:/Morgan/Documents/NCL MSc/final_project/mofrod_project/src/all_downsampling_functons.R", echo=TRUE)
+
 
 # Code set-up for 100
 source("D:/Morgan/Documents/NCL MSc/final_project/mofrod_project/src/df100_downsampling_imputeTS_visualisations.R", echo=TRUE)
