@@ -26,31 +26,112 @@ output: rticles::arxiv_article
 link-citations: TRUE
 ---
 
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_knit$set(root.dir= normalizePath('..'))
+```
+
+```{r ProjectTemplate, include = FALSE}
+library(ProjectTemplate)
+setwd("D:/Morgan/Documents/NCL MSc/final_project/mofrod_project")
+load.project()
+```
+
+```{r, echo=FALSE, results='asis'}
+cat("\\twocolumn")
+```
+
 # INTRODUCTION
 
 The UK Government is committed to making data-driven decisions that engender public trust [@data2017; @data2020; @data2021; @data2022]. Data-driven decisions are considered to be "more well-informed" @data2017, effective @data2022, consistent @data2021, and better "at scale" @data2020. Despite this, there is a lack of trust in government use of data @trust. This suggests that public trust in data-driven decisions goes beyond how the "data complies with legal, regulatory and ethical obligations" @data2021. Transparency is needed for the UK public to have "confidence and trust in how data, including personal data, is used" [@data2020; @trust]. 
 
-To make data-driven decisions, government decision-makers also need to trust the data and how it is used. This means trusting which data points are selected, how this data collected and stored, and the capability of data practitioners to understand the quality, insights and limitations of it. At every stage of the data processing pipeline, data practitioners have the opportunity to communicate the impact of the assumptions and choices they are making to support decision-makers in trusting the data informing their decisions.
+To make data-driven decisions, government decision-makers also need to trust how the data used (cite user research here). This means trusting which data points are selected, how this data collected and stored, and the capability of data practitioners to understand the quality, insights and limitations of it. At every stage of the data processing pipeline, data practitioners have the opportunity to communicate the impact of the assumptions and choices they are making to support decision-makers in trusting the data informing their decisions.
 
-Time series data is used across the UK Government @pathway to inform decision-makers across various domains @onstool. It is also widely generated and used by industry and research @TVStore. The volume of time series data has been increasingly continuously @datapoint, posing significant challenges for handling and visualising this popular data type @TVStore. Data practitioners must utilise methods that reduce data volumes to align with limitations like processing time, computing costs, storage capabilities, and sustainability ambitions [@Sveinn; @TVStore; @Shift].  
+Time series data is used across the UK Government @pathway to inform decision-makers across various domains @onstool. It is also widely generated and used by industry and research @TVStore. The volume of time series data is continuously increasingly @datapoint, posing significant challenges for handling and visualising this popular data type @TVStore. Data practitioners must utilise methods that reduce data volumes to align with limitations like processing time, computing costs, storage capabilities, and sustainability ambitions [@Sveinn; @TVStore; @Shift].  
 
 Downsampling is an established technique [@downsampling; @sampling] that involves selecting a representative subset of the time series data to preserve its shape while reducing the number of data points [@datapoint; @MinMaxLTTB]. This is a vital part of making voluminous time series understandable for human observation @Sveinn and an essential step in many time series database solutions @datapoint. However, little attention has been devoted to how downsampling impacts decision-makers trust in the data.
 
-Despite widespread use, how to communicate the impact of downsampling algorithms on time series data remains understudied [@Sveinn; @datapoint]. Downsampling expands the boundaries risk for decision-makers as data practitioners may not realise the significance of the data being discarded. Such choices throughout the data pipeline may have disproportionately larger consequences later as their ramifications for future decisions are not fully understood by all. It is important, therefore, that data practitioners are able to communicate the impact of choices made throughout the data pipeline.
+Despite widespread use, how to communicate the impact of downsampling algorithms on time series data remains understudied [@Sveinn; @datapoint]. Downsampling expands the boundaries of risk for decision-makers as data practitioners may not realise the significance of the data being discarded. Such choices throughout the data pipeline may have disproportionately larger consequences later as their ramifications for future decisions are not fully understood by all. It is important, therefore, that data practitioners are able to communicate the impact of choices made throughout the data pipeline.
 
-To address these challenges, this work proposes a visualisation methodology for understanding and communicating the impact of downsampling algorithms on time series data. 
+To address these challenges, this work proposes a visualisation methodology for understanding and communicating the impact of downsampling algorithms on time series data. Section *II* contextualises the impact of this work for data practitioners and decision-makers by sharing insights from user research. Section *III* provides an overview of previous related work to help assess the contributions of this work. Section *IV* presents how R packages `imputeTS` @imputeTS_R and `Rcatch22` @Rcatch22 are combined to identify the time series features that are most sensitive to downsampling. Section *V* outlines how this approach allows data practitioners to communicate which downsampling algorithms and parameters are most appropriate for particular use cases. Section *VI* shares the potential impact of this work and the opportunities for further work to improve decision-makers' trust in data. 
 
-- method
-- results 
-- then outline of paper.
-
-# RELATED WORK
+# MOTIVATION
 \label{sec:headings}
 
 
 
+# RELATED WORK
+\label{sec:headings}
+
+*A. Downsampling applications and processes*
+
+Data-driven decision-making necessitates that time series data is kept for future analysis. Technological innovation has generated unprecedented amount of time series data, which continues to grow [@data2020; @TVstore; @storage; @CatchUp]. For example, climate simulations that inform recommendations for decision-makers generate tens of terabytes per second. Downsampling plays an important role in addressing how this voluminous data is processed, stored @TVstore and visualised [@Sveinn; @dashql]. 
+
+Data practitioners have made recent advances in the performance of value preserving downsampling algorithms [@downsampling; @samping; @EveryNth; @MinMaxOrdered; @MinMaxLTTB; @dashql]. Examples of these advances are set out in the table below:
+
+[insert table @datapoint ]
+- EveryNth, also known as sampling or decimation, selects *n^th^* datapoint @EveryNth
+- percentage change
+- Mode-Median Bucket. The bucket part in the algorithm name refers to the data being split up into buckets, each containing approximately equal number of data points. The algorithm then finds one data point within each bucket as follows. If there is a single y-value which has the highest frequency (the mode) then the leftmost corresponding data point is selected. If no such data point exists a point corrosponding to the median of the y-values is selected.@Svienn
+- Min-Std-Error-Bucket @Svienn It is based on linear regression and uses the formula for the standard error of the estimate (SEE) to downsample data. The SEE is a measure of the accuracy of predictions made with a regression line when a linear least squares technique is applied. The greater the error the more discrepancy between the line and the data points. 
+- MinMax preserves the minimum and maximum of every data bucket @MinMaxLTTB
+- OM^3^ maintains minimum and maximum values at every time interval that is used to rasterize a pixel column in the display window @MinMaxOrdered
+- M4 combines EveryNth and MinMax, selecting the first and last values of each data bucket as well as its minimum and maximum [@M4; @dashql]
+- Longest line bucket @Sveinn very similar to the MSEB algorithm but with some key differences. It starts off exactly the same, splitting the data points into buckets and calculating lines going through all the points in one bucket and all the points in the next bucket as was shown in figure 2.3 on page 8. The main difference is that instead of calculating the standard error for each line segment it simply calculates its length (Euclidean distance between the two points defining the line).
+- Largest-Triangle One-Bucket (LTOB) First all the points are ranked by calculating their effective areas. Points with effective areas as null are excluded. The data points are then split up into approximately equal number of buckets as the specified downsample threshold. Finally, one point with the highest rank (largest effective area) is selected to represent each bucket in the downsampled data. @Svienn
+- Largest-Triangle-Dynamic @Svienn 
+
+- Largest Triangle Three Buckets LTTB selects the data point that forms the largest triangular surface between the previously selected data point and the next data bucket's average value @MinMaxLTTB
+- MinMaxLTTB preselects data using MinMax before applying LTTB on the selected datapoints @MinLaxLTTB
 
 
+*B. Time series visualisation*
+
+One of the most common type of data visualization used is a line chart...visualizing a large amount of data as a line chart, if it is preferred or required to
+view the chart in its entirety @Svienn
+
+Visualization plays a crucial role in understanding time series data,
+especially given the complexity of this data modality @datapoint
+
+In the last two decades, a lot of research has been done on time
+series visualization techniques [6, 13–15, 17, 24, 33, 34]. This work
+focused on describing and comparing time series visualization approaches @plotly resampler - Van Der Donckt, J., Van Der Donckt, J., Deprost, E., & Van Hoecke, S. (2022, October). Plotly-resampler: Effective visual analytics for large time series. In 2022 IEEE Visualization and Visual Analytics (VIS) (pp. 21-25). IEEE.
+
+Interactive visualization techniques, as emphasized by Shneiderman’s
+visual information-seeking mantra [22], are essential for exploring
+large time series data by providing an overview, enabling zooming
+and filtering, and allowing access to details-on-demand [28]. @MinMaxTTB
+
+@datapoint
+Shi et al. [29] proposed two data-based metrics for evaluating
+cartographic line simplification: displacement measure (the maximal
+perpendicular distance between the simplified and original line) and
+shape distortion measure (the average difference in inclination angles
+between the simplified and original line).
+Jugel et al. [16] used the Structural Similarity Index Measure
+(SSIM) as an image-based metric to evaluate and compare their M4
+data aggregation algorithm. However, the reliability of SSIM has
+been questioned by Nilsson et al. [25] and Sara et al. [28], who
+both demonstrated that assessing image quality based on SSIM
+can lead to incorrect conclusions and does not consistently capture
+reconstruction errors.
+Gil et al. [11] contributed a method for adaptively identifying
+optimal data point selection algorithms for time series compression,
+using multiple value preserving algorithms and a data-based error
+score. However, the approach has limitations: MinMax was not
+included, only mean absolute error (MAE) was evaluated, and interpolating the downsampled signal to the original signal results
+in O(N) memory complexity. Furthermore, their results suggest
+that using LTTB or M4 is only marginally worse than the optimal
+strategy, questioning the practical applicability of their approach
+
+
+*C. Trust in Data* 
+
+
+
+```{r, echo=FALSE, results='asis'}
+cat("\\onecolumn")
+```
 
 You can use directly LaTeX command or Markdown text. 
 

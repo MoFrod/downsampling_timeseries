@@ -160,184 +160,129 @@ personal data, is used'' \protect\hyperlink{ref-data2020}{{[}2{]}},
 \protect\hyperlink{ref-trust}{{[}5{]}}.
 
 To make data-driven decisions, government decision-makers also need to
-trust the data and how it is used. This means trusting which data points
-are selected, how this data collected and stored, and the capability of
-data practitioners to understand the quality, insights and limitations
-of it. At every stage of the data processing pipeline, data
-practitioners have the opportunity to communicate the impact of the
+trust how the data used (cite user research here). This means trusting
+which data points are selected, how this data collected and stored, and
+the capability of data practitioners to understand the quality, insights
+and limitations of it. At every stage of the data processing pipeline,
+data practitioners have the opportunity to communicate the impact of the
 assumptions and choices they are making to support decision-makers in
 trusting the data informing their decisions.
 
 Time series data is used across the UK Government
-\protect\hyperlink{ref-pathway}{{[}6{]}} to inform for decision-makers
-across various domains \protect\hyperlink{ref-onstool}{{[}7{]}}. The
-volume of time series data has been increasingly continuously
-\protect\hyperlink{ref-datapoint}{{[}8{]}}, posing significant
-challenges for handing and visualising this popular data type
-\protect\hyperlink{ref-TVStore}{{[}9{]}}. Data practitioners must
-utilise methods that reduce data volumes to align with limitations like
-processing time, computing costs, storage capabilities, and
-sustainability ambitions
-\protect\hyperlink{ref-TVStore}{{[}9{]}}--\protect\hyperlink{ref-Shift}{{[}11{]}}.
+\protect\hyperlink{ref-pathway}{{[}6{]}} to inform decision-makers
+across various domains \protect\hyperlink{ref-onstool}{{[}7{]}}. It is
+also widely generated and used by industry and research
+\protect\hyperlink{ref-TVStore}{{[}8{]}}. The volume of time series data
+is continuously increasingly \protect\hyperlink{ref-datapoint}{{[}9{]}},
+posing significant challenges for handling and visualising this popular
+data type \protect\hyperlink{ref-TVStore}{{[}8{]}}. Data practitioners
+must utilise methods that reduce data volumes to align with limitations
+like processing time, computing costs, storage capabilities, and
+sustainability ambitions \protect\hyperlink{ref-TVStore}{{[}8{]}},
+\protect\hyperlink{ref-Sveinn}{{[}10{]}},
+\protect\hyperlink{ref-Shift}{{[}11{]}}.
 
 Downsampling is an established technique
 \protect\hyperlink{ref-downsampling}{{[}12{]}},
 \protect\hyperlink{ref-sampling}{{[}13{]}} that involves selecting a
 representative subset of the time series data to preserve its shape
 while reducing the number of data points
-\protect\hyperlink{ref-datapoint}{{[}8{]}},
-\protect\hyperlink{ref-MinMaxLTTB}{{[}14{]}}. This is an essential step
-in many time series database solutions
-\protect\hyperlink{ref-datapoint}{{[}8{]}} and a vital part of making
-voluminous time series understandable for human observation
-\protect\hyperlink{ref-Sveinn}{{[}10{]}}.
+\protect\hyperlink{ref-datapoint}{{[}9{]}},
+\protect\hyperlink{ref-MinMaxLTTB}{{[}14{]}}. This is a vital part of
+making voluminous time series understandable for human observation
+\protect\hyperlink{ref-Sveinn}{{[}10{]}} and an essential step in many
+time series database solutions
+\protect\hyperlink{ref-datapoint}{{[}9{]}}. However, little attention
+has been devoted to how downsampling impacts decision-makers trust in
+the data.
 
-Despite widespread use, the how to communicate the impact of
-downsampling algorithms on time series data remains understudied
-\protect\hyperlink{ref-datapoint}{{[}8{]}},
+Despite widespread use, how to communicate the impact of downsampling
+algorithms on time series data remains understudied
+\protect\hyperlink{ref-datapoint}{{[}9{]}},
 \protect\hyperlink{ref-Sveinn}{{[}10{]}}. Downsampling expands the
-boundaries risk for decision-makers as data practitioners may not
+boundaries of risk for decision-makers as data practitioners may not
 realise the significance of the data being discarded. Such choices
 throughout the data pipeline may have disproportionately larger
 consequences later as their ramifications for future decisions are not
-fully understood by all.
+fully understood by all. It is important, therefore, that data
+practitioners are able to communicate the impact of choices made
+throughout the data pipeline.
 
-\onecolumn
+To address these challenges, this work proposes a visualisation
+methodology for understanding and communicating the impact of
+downsampling algorithms on time series data. Section \emph{II}
+contextualises the impact of this work for data practitioners and
+decision-makers by sharing insights from user research. Section
+\emph{III} provides an overview of previous related work to help assess
+the contributions of this work. Section \emph{IV} presents how R
+packages \texttt{imputeTS} \protect\hyperlink{ref-imputeTS_R}{{[}15{]}}
+and \texttt{Rcatch22}
+\protect\hyperlink{ref-Rcatch22}{\textbf{Rcatch22?}} are combined to
+identify the time series features that are most sensitive to
+downsampling. Section \emph{V} outlines how this approach allows data
+practitioners to communicate which downsampling algorithms and
+parameters are most appropriate for particular use cases. Section
+\emph{VI} shares the potential impact of this work and the opportunities
+for further work to improve decision-makers' trust in data.
 
-.
+\hypertarget{motivation}{%
+\section{MOTIVATION}\label{motivation}}
+
+\label{sec:headings}
 
 \hypertarget{related-work}{%
 \section{RELATED WORK}\label{related-work}}
 
 \label{sec:headings}
 
-This section provides a comprehensive overview of related work in the
-field. (Summarise section) By doing so, we aim to offer a clear
-understanding of the current state-of-the-art and identify the gaps that
-our work seeks to address.
+\emph{A. Downsampling applications and processes}
 
-Trust
+Data-driven decision-making necessitates that time series data is kept
+for future analysis. Technological innovation has generated
+unprecedented amount of time series data, which continues to grow
+\protect\hyperlink{ref-data2020}{{[}2{]}},
+\protect\hyperlink{ref-storage}{{[}16{]}},
+\protect\hyperlink{ref-CatchUp}{{[}17{]}},
+\protect\hyperlink{ref-TVstore}{\textbf{TVstore?}}. For example, climate
+simulations that inform recommendations for decision-makers generate
+tens of terabytes per second. Downsampling plays an important role in
+addressing how this voluminous data is processed, stored
+\protect\hyperlink{ref-TVstore}{\textbf{TVstore?}} and visualised
+\protect\hyperlink{ref-Sveinn}{{[}10{]}},
+\protect\hyperlink{ref-dashql}{{[}18{]}}.
 
-Although easy to grasp intuitively, transparency is hard to define and
-even harder to realize.@digital\_transparency - Merely opening data does
-not result in digital transparency and might only result in information
-overload for those wanting to examine such data.
+Data practitioners have made recent advances in the performance of value
+preserving downsampling algorithms
+\protect\hyperlink{ref-downsampling}{{[}12{]}},
+\protect\hyperlink{ref-MinMaxLTTB}{{[}14{]}},
+\protect\hyperlink{ref-dashql}{{[}18{]}}--\protect\hyperlink{ref-MinMaxOrdered}{{[}20{]}},
+\protect\hyperlink{ref-samping}{\textbf{samping?}}. Examples of these
+advances are set out in the table below:
 
-transparency'' initiatives become part of an obfuscation process that
-often uses the rhetoric of placation and diversion
-\protect\hyperlink{ref-transparency_obfuscation}{{[}15{]}}
+insert table \protect\hyperlink{ref-datapoint}{{[}9{]}} - EveryNth, also
+known as sampling or decimation, selects \emph{n\textsuperscript{th}}
+datapoint \protect\hyperlink{ref-EveryNth}{{[}19{]}} - percentage change
+- MinMax preserves the minimum and maximum of every data bucket
+\protect\hyperlink{ref-MinMaxLTTB}{{[}14{]}} - OM\textsuperscript{3}
+maintains minimum and maximum values at every time interval that is used
+to rasterize a pixel column in the display window
+\protect\hyperlink{ref-MinMaxOrdered}{{[}20{]}} - M4 combines EveryNth
+and MinMax, selecting the first and last values of each data bucket as
+well as its minimum and maximum
+\protect\hyperlink{ref-dashql}{{[}18{]}},
+\protect\hyperlink{ref-M4}{{[}21{]}} - Largest-TriangleOne-Bucket (LTOB)
+- Largest Triangle Three Buckets LTTB selects the data point that forms
+the largest triangular surface between the previously selected data
+point and the next data bucket's average value
+\protect\hyperlink{ref-MinMaxLTTB}{{[}14{]}} - MinMaxLTTB preselects
+data using MinMax before applying LTTB on the selected datapoints
+\protect\hyperlink{ref-MinLaxLTTB}{\textbf{MinLaxLTTB?}}
 
-Ananny and Crawford argue transparency alone can not create accountable
-systems as simply looking is insufficient.
-\protect\hyperlink{ref-transparency_lack}{{[}16{]}} Mike Ananny and Kate
-Crawford (2018) reinforce this point, noting that ``the implicit
-assumption behind calls for transparency is that seeing a phenomenon
-creates opportunities and obligations to make it accountable and thus to
-change it'' (Ananny and Crawford, 2018: 974, emphasis in original). They
-describe the promise of transparency as being rooted in the connection
-between seeing, knowing, and controlling.
+\emph{B. Time series visualisation}
 
-Socially meaningful transparency moves away from meaninfulness in
-relation to individuals' specific needs to o focus attention on societal
-needs in terms of what is made transparent, for whom, how, when and in
-what ways, and, crucially, who decides.
-\protect\hyperlink{ref-social_transparency}{{[}17{]}}
+\emph{C. Trust in Data}
 
-told that access to information is essential, but without the tools for
-turning that access to agency - transparency fallacy - archieving
-meaningful transparency is difficult
-\protect\hyperlink{ref-transparency_fallacy}{{[}18{]}}
-
-The political valence of data transparency is a critical reminder of the
-inherently sociopolitical nature of all technologies, including
-institutional data practices.
-\protect\hyperlink{ref-political_transparency}{{[}19{]}}
-
-\begin{itemize}
-\tightlist
-\item
-  time series volume
-\end{itemize}
-
-\protect\hyperlink{ref-TVStore}{{[}9{]}} - ``\ldots mounting demands
-have emerged for keeping time series data for future analysis {[}94{]}.
-But time series data are generated at a growing speed that is outpacing
-the increase of computing capabilities {[}17, 79{]}. Many application
-scenarios cannot afford enough computing resources such as storage and
-network bandwidth to accommodate the processing needs for time series
-data.'' pg 84
-
-\begin{itemize}
-\item
-  time series visualisation
-\item
-  characteristics of time series
-\item
-  downsampling
-\item
-  trust
-\item
-  masters thesis
-\item
-  imputeTS
-\end{itemize}
-
-In statistics this process of replacing missing values is called
-imputation.
-
-At the moment imputeTS (Moritz, 2016a) is the only package on CRAN that
-is solely dedicated to univariate time series imputation and includes
-multiple algorithms. Nevertheless, there are some other packages that
-include imputation functions as addition to their core package
-functionality. Most noteworthy being zoo (Zeileis and Grothendieck,
-2005) and forecast (Hyndman, 2016). Both packages offer also some
-advanced time series imputation functions. The packages spacetime
-(Pebesma, 2012), timeSeries (Rmetrics Core Team et al., 2015) and xts
-(Ryan and Ulrich, 2014) should also be mentioned, since they contain
-some very simple but quick time series imputation methods.
-
-Univariate means there is just one attribute that is observed over time.
-Which leads to a sequence of single observations o1 , o2, o3, \ldots{}
-on at successive points t1 , t2, t3, \ldots{} tn in time
-
-\begin{itemize}
-\tightlist
-\item
-  Rcatch22
-\end{itemize}
-
-Selecting an appropriate feature-based representation of time series for
-a given application can be achieved through systematic comparison across
-a comprehensive time-series feature library, such as those in the hctsa
-toolbox. However, this approach is computationally expensive and
-involves evaluating many similar features, limiting the widespread
-adoption of feature-based representations of time series for real-world
-applications. In this work, we introduce a method to infer small sets of
-time-series features that (i) exhibit strong classification performance
-across a given collection of time-series problems, and (ii) are
-minimally redundant. Applying our method to a set of 93 time-series
-classification datasets (containing over 147,000 time series) and using
-a filtered version of the hctsa feature library (4791 features), we
-introduce a set of 22 CAnonical Time-series CHaracteristics, catch22,
-tailored to the dynamics typically encountered in time-series
-data-mining tasks.
-
-This dimensionality reduction, from 4791 to 22, is associated with an
-approximately 1000- fold reduction in computation time and near linear
-scaling with time-series length, despite an average reduction in
-classification accuracy of just 7\%
-
-An ideal starting point for such an exercise is the comprehensive
-library of over 7500 features provided in the hctsa toolbox (Fulcher et
-al.~2013; Fulcher and Jones 2017).
-
-\begin{itemize}
-\tightlist
-\item
-  visualisation of time series
-\item
-  turing change point / annotated change
-\end{itemize}
+\onecolumn
 
 You can use directly LaTeX command or Markdown text.
 
@@ -593,21 +538,21 @@ explorer.''}
 \url{https://www.ons.gov.uk/timeseriestool?query=\&topic=\&updated=\&fromDateDay=\&fromDateMonth=\&fromDateYear=\&toDateDay=\&toDateMonth=\&toDateYear=\&size=50},
 Unknown.}
 
-\leavevmode\vadjust pre{\hypertarget{ref-datapoint}{}}%
-\CSLLeftMargin{{[}8{]} }
-\CSLRightInline{J. Donckt, J. Donckt, M. Rademaker, and S. Hoecke,
-{``Data point selection for line chart visualization: Methodological
-assessment and evidence-based guidelines.''} 2023. doi:
-\href{https://doi.org/10.48550/arXiv.2304.00900}{10.48550/arXiv.2304.00900}.}
-
 \leavevmode\vadjust pre{\hypertarget{ref-TVStore}{}}%
-\CSLLeftMargin{{[}9{]} }
+\CSLLeftMargin{{[}8{]} }
 \CSLRightInline{Y. An, Y. Su, Y. Zhu, and J. Wang, {``TVStore:
 Automatically bounding time series storage via time-varying
 compression,''} in \emph{Proceedings of the 20th USENIX conference on
 file and storage technologies}, in USENIX conference on file and STorage
 technologies. Santa Clara, CA, USA: USENIX Association, 2022, pp.
 83--99.}
+
+\leavevmode\vadjust pre{\hypertarget{ref-datapoint}{}}%
+\CSLLeftMargin{{[}9{]} }
+\CSLRightInline{J. Donckt, J. Donckt, M. Rademaker, and S. Hoecke,
+{``Data point selection for line chart visualization: Methodological
+assessment and evidence-based guidelines.''} 2023. doi:
+\href{https://doi.org/10.48550/arXiv.2304.00900}{10.48550/arXiv.2304.00900}.}
 
 \leavevmode\vadjust pre{\hypertarget{ref-Sveinn}{}}%
 \CSLLeftMargin{{[}10{]} }
@@ -643,42 +588,53 @@ Graphics and Applications}, vol. 37, no. 1, pp. 100--108, 2017, doi:
 {``MinMaxLTTB: Leveraging MinMax-preselection to scale LTTB.''} 2023.
 Available: \url{https://arxiv.org/abs/2305.00332}}
 
-\leavevmode\vadjust pre{\hypertarget{ref-transparency_obfuscation}{}}%
+\leavevmode\vadjust pre{\hypertarget{ref-imputeTS_R}{}}%
 \CSLLeftMargin{{[}15{]} }
-\CSLRightInline{N. A. Draper and J. Turow, {``The corporate cultivation
-of digital resignation,''} \emph{New Media \& Society}, vol. 21, no. 8,
-pp. 1824--1839, 2019, doi:
-\href{https://doi.org/10.1177/1461444819833331}{10.1177/1461444819833331}.}
+\CSLRightInline{S. Moritz and T. Bartiz-Beielstein, {``imputeTS: Time
+series missing value imputation in r,''} vol. 9.1. R Journal, 2017. doi:
+\href{https://doi.org/10.32614/RJ-2017-009}{10.32614/RJ-2017-009}.}
 
-\leavevmode\vadjust pre{\hypertarget{ref-transparency_lack}{}}%
+\leavevmode\vadjust pre{\hypertarget{ref-storage}{}}%
 \CSLLeftMargin{{[}16{]} }
-\CSLRightInline{M. Ananny and K. Crawford, {``Seeing without knowing:
-Limitations of the transparency ideal and its application to algorithmic
-accountability,''} \emph{New Media \& Society}, vol. 20, no. 3, pp.
-973--989, 2018, doi:
-\href{https://doi.org/10.1177/1461444816676645}{10.1177/1461444816676645}.}
+\CSLRightInline{A. Visheratin \emph{et al.}, {``Peregreen {\textendash}
+modular database for efficient storage of historical time series in
+cloud environments,''} in \emph{2020 USENIX annual technical conference
+(USENIX ATC 20)}, USENIX Association, 2020, pp. 589--601. Available:
+\url{https://www.usenix.org/conference/atc20/presentation/visheratin}}
 
-\leavevmode\vadjust pre{\hypertarget{ref-social_transparency}{}}%
+\leavevmode\vadjust pre{\hypertarget{ref-CatchUp}{}}%
 \CSLLeftMargin{{[}17{]} }
-\CSLRightInline{J. Bates, H. Kennedy, I. Medina Perea, S. Oman, and L.
-Pinney, {``Socially meaningful transparency in data-based systems:
-Reflections and proposals from practice,''} \emph{Journal of
-Documentation}, vol. ahead--of--print, 2023, doi:
-\href{https://doi.org/10.1108/JD-01-2023-0006}{10.1108/JD-01-2023-0006}.}
+\CSLRightInline{T. Schlossnagle, J. Sheehy, and C. McCubbin,
+{``Always-on time-series database: Keeping up where there's no way to
+catch up,''} \emph{Commun. ACM}, vol. 64, no. 7, pp. 50--56, 2021,
+Available: \url{https://doi.org/10.1145/3442518}}
 
-\leavevmode\vadjust pre{\hypertarget{ref-transparency_fallacy}{}}%
+\leavevmode\vadjust pre{\hypertarget{ref-dashql}{}}%
 \CSLLeftMargin{{[}18{]} }
-\CSLRightInline{J. A. Obar, {``Sunlight alone is not a disinfectant:
-Consent and the futility of opening big data black boxes (without
-assistance),''} \emph{Big Data \& Society}, vol. 7, no. 1, 2020, doi:
-\href{https://doi.org/10.1177/2053951720935615}{10.1177/2053951720935615}.}
+\CSLRightInline{A. Kohn, D. Moritz, and T. Neumann, {``DashQL --
+complete analysis workflows with SQL.''} 2023. doi:
+\href{https://doi.org/10.48550/arXiv.2306.03714}{10.48550/arXiv.2306.03714}.}
 
-\leavevmode\vadjust pre{\hypertarget{ref-political_transparency}{}}%
+\leavevmode\vadjust pre{\hypertarget{ref-EveryNth}{}}%
 \CSLLeftMargin{{[}19{]} }
-\CSLRightInline{K. E. Levy and D. M. Johns, {``When open data is a
-trojan horse: The weaponization of transparency in science and
-governance,''} \emph{Big Data \& Society}, vol. 3, no. 1, 2016, doi:
-\href{https://doi.org/10.1177/2053951715621568}{10.1177/2053951715621568}.}
+\CSLRightInline{U. Jugel, Z. Jerzak, G. Hackenbroic, and V. Markl,
+{``VDDA: Automatic visualization-driven data aggregation in relational
+databases,''} \emph{The VLDB Journal}, vol. 25, 2016, doi:
+\href{https://doi.org/10.1007/s00778-015-0396-z}{10.1007/s00778-015-0396-z}.}
+
+\leavevmode\vadjust pre{\hypertarget{ref-MinMaxOrdered}{}}%
+\CSLLeftMargin{{[}20{]} }
+\CSLRightInline{W. Yunhai \emph{et al.}, {``OM3: An ordered multi-level
+min-max representation for interactive progressive visualization of time
+series,''} in \emph{Proc. ACM manag. data}, ACM, 2023. Available:
+\url{https://doi.org/10.1145/3589290}}
+
+\leavevmode\vadjust pre{\hypertarget{ref-M4}{}}%
+\CSLLeftMargin{{[}21{]} }
+\CSLRightInline{U. Jugel, Z. Jerzak, G. Hackenbroich, and V. Markl,
+{``M4: A visualization-oriented time series data aggregation.
+Proceedings of the VLDB endowment,''} vol. 7, 2014, Available:
+\url{https://www.vldb.org/2014/program/http://www.vldb.org/pvldb/vol7/p797-jugel.pdf}}
 
 \end{CSLReferences}
 

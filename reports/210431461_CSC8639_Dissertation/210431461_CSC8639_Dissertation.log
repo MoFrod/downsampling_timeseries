@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.7.22)  23 JUL 2023 18:56
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.7.22)  29 JUL 2023 16:16
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -371,6 +371,9 @@ LaTeX Warning: Label `sec:headings' multiply defined.
 
 LaTeX Warning: Label `sec:headings' multiply defined.
 
+
+LaTeX Warning: Label `sec:headings' multiply defined.
+
 )
 \openout1 = `210431461_CSC8639_Dissertation.aux'.
 
@@ -542,272 +545,293 @@ LaTeX Font Warning: Font shape `T1/lmr/bx/sc' undefined
 [1
 
 
-{c:/Users/morga/AppData/Roaming/TinyTeX/texmf-var/fonts/map/pdftex/updmap/pdftex.map}{c:/Users/morga/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}{c:/Users/morga/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}] [2
+{c:/Users/morga/AppData/Roaming/TinyTeX/texmf-var/fonts/map/pdftex/updmap/pdftex.map}{c:/Users/morga/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}{c:/Users/morga/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}]
+Underfull \vbox (badness 10000) has occurred while \output is active []
 
+[2
 
-]
-Underfull \hbox (badness 2547) in paragraph at lines 221--225
-[]\T1/lmr/m/n/10 (+20) Although easy to grasp in-tu-itively, trans-parency is hard to de-fine and even harder to re-al-
- []
+] [3
 
-LaTeX Font Info:    Trying to load font information for TS1+lmr on input line 259.
-(c:/Users/morga/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/lm/ts1lmr.fd
-File: ts1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
-) [3
-
-{c:/Users/morga/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-ts1.enc}] [4{c:/Users/morga/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}{c:/Users/morga/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}{c:/Users/morga/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathex.enc}]
-<210431461_CSC8639_Dissertation_files/figure-latex/fig2-1.pdf, id=180, 469.755pt x 325.215pt>
+{c:/Users/morga/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}{c:/Users/morga/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}{c:/Users/morga/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathex.enc}]
+<210431461_CSC8639_Dissertation_files/figure-latex/fig2-1.pdf, id=208, 469.755pt x 325.215pt>
 File: 210431461_CSC8639_Dissertation_files/figure-latex/fig2-1.pdf Graphic file (type pdf)
 <use 210431461_CSC8639_Dissertation_files/figure-latex/fig2-1.pdf>
-Package pdftex.def Info: 210431461_CSC8639_Dissertation_files/figure-latex/fig2-1.pdf  used on input line 466.
+Package pdftex.def Info: 210431461_CSC8639_Dissertation_files/figure-latex/fig2-1.pdf  used on input line 411.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-[5]
-Underfull \hbox (badness 10000) in paragraph at lines 551--551
+
+Underfull \vbox (badness 7168) has occurred while \output is active []
+
+[4 <./210431461_CSC8639_Dissertation_files/figure-latex/fig2-1.pdf>]
+LaTeX Font Info:    Trying to load font information for TS1+lmr on input line 481.
+(c:/Users/morga/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/lm/ts1lmr.fd
+File: ts1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
+)
+Underfull \hbox (badness 10000) in paragraph at lines 496--496
 []\T1/lmr/m/n/10 (+20) Cabinet Of-fice and Gov-ern-ment Dig-i-tal Ser-vice, ``Gov-ern-ment trans-for-ma-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 551--551
+Underfull \hbox (badness 10000) in paragraph at lines 496--496
 \T1/lmr/m/n/10 (+20) tion strat-egy: Bet-ter use of data.'' HM Gov-ern-ment; []$\T1/lmtt/m/n/10 https : / / www . gov . uk /
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 551--551
+Underfull \hbox (badness 10000) in paragraph at lines 496--496
 \T1/lmtt/m/n/10 government / publications / government-[]transformation-[]strategy-[]2017-[]to-[]2020 /
  []
 
 
-Overfull \hbox (2.22221pt too wide) in paragraph at lines 545--552
+Overfull \hbox (2.22221pt too wide) in paragraph at lines 490--497
 [][] []
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 545--552
+Underfull \hbox (badness 10000) in paragraph at lines 490--497
 
  []
 
 
-Overfull \hbox (2.22221pt too wide) in paragraph at lines 553--560
+Overfull \hbox (2.22221pt too wide) in paragraph at lines 498--505
 [][] []
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 553--560
+Underfull \hbox (badness 10000) in paragraph at lines 498--505
 
  []
 
-[6 <./210431461_CSC8639_Dissertation_files/figure-latex/fig2-1.pdf>]
-Overfull \hbox (2.22221pt too wide) in paragraph at lines 561--567
+
+Overfull \hbox (2.22221pt too wide) in paragraph at lines 506--512
 [][] []
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 561--567
+Underfull \hbox (badness 10000) in paragraph at lines 506--512
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 574--574
+Underfull \hbox (badness 10000) in paragraph at lines 519--519
 []\T1/lmr/m/n/10 (+20) Central Dig-i-tal & Data Of-fice, ``Trans-form-ing for a dig-i-tal fu-ture: 2022
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 574--574
+Underfull \hbox (badness 10000) in paragraph at lines 519--519
 \T1/lmr/m/n/10 (+20) to 2025 roadmap for dig-i-tal and data.'' HM Gov-ern-ment; []$\T1/lmtt/m/n/10 https : / / www .
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 574--574
+Underfull \hbox (badness 10000) in paragraph at lines 519--519
 \T1/lmtt/m/n/10 gov . uk / government / publications / roadmap-[]for-[]digital-[]and-[]data-[]2022-[]to-[]2025 /
  []
 
 
-Overfull \hbox (2.22221pt too wide) in paragraph at lines 568--575
+Overfull \hbox (2.22221pt too wide) in paragraph at lines 513--520
 [][] []
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 568--575
+Underfull \hbox (badness 10000) in paragraph at lines 513--520
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 580--580
+Underfull \hbox (badness 10000) in paragraph at lines 525--525
 []\T1/lmr/m/n/10 (+20) Centre for Data Ethics & In-no-va-tion, ``Ad-dress-ing trust in pub-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 580--580
+Underfull \hbox (badness 10000) in paragraph at lines 525--525
 \T1/lmr/m/n/10 (+20) lic sec-tor data use.'' []$\T1/lmtt/m/n/10 https : / / www . gov . uk / government / publications /
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 580--580
+Underfull \hbox (badness 10000) in paragraph at lines 525--525
 \T1/lmtt/m/n/10 cdei-[]publishes-[]its-[]first-[]report-[]on-[]public-[]sector-[]data-[]sharing /
  []
 
 
-Overfull \hbox (2.22221pt too wide) in paragraph at lines 576--581
+Overfull \hbox (2.22221pt too wide) in paragraph at lines 521--526
 [][] []
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 576--581
+Underfull \hbox (badness 10000) in paragraph at lines 521--526
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 587--587
+Underfull \hbox (badness 10000) in paragraph at lines 532--532
 \T1/lmtt/m/n/10 / / analysisfunction . civilservice . gov . uk / learning-[]development / learning-[]pathways /
  []
 
 
-Overfull \hbox (2.22221pt too wide) in paragraph at lines 582--588
+Overfull \hbox (2.22221pt too wide) in paragraph at lines 527--533
 [][] []
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 582--588
+Underfull \hbox (badness 10000) in paragraph at lines 527--533
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 594--594
+Underfull \hbox (badness 10000) in paragraph at lines 539--539
 \T1/lmtt/m/n/10 query = &topic = &updated = &fromDateDay = &fromDateMonth = &fromDateYear = &toDateDay =
  []
 
 
-Overfull \hbox (2.22221pt too wide) in paragraph at lines 589--595
+Overfull \hbox (2.22221pt too wide) in paragraph at lines 534--540
 [][] []
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 589--595
+Underfull \hbox (badness 10000) in paragraph at lines 534--540
 
  []
 
-
-Overfull \hbox (2.22221pt too wide) in paragraph at lines 596--602
+[5{c:/Users/morga/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-ts1.enc}]
+Overfull \hbox (2.22221pt too wide) in paragraph at lines 541--549
 [][] []
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 596--602
+Underfull \hbox (badness 10000) in paragraph at lines 541--549
 
  []
 
 
-Overfull \hbox (2.22221pt too wide) in paragraph at lines 603--611
+Overfull \hbox (2.22221pt too wide) in paragraph at lines 550--556
 [][] []
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 603--611
+Underfull \hbox (badness 10000) in paragraph at lines 550--556
 
  []
 
 
-Overfull \hbox (2.22221pt too wide) in paragraph at lines 612--619
+Overfull \hbox (2.22221pt too wide) in paragraph at lines 557--564
 [][] []
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 612--619
+Underfull \hbox (badness 10000) in paragraph at lines 557--564
 
  []
 
 
-Overfull \hbox (2.22221pt too wide) in paragraph at lines 620--624
+Overfull \hbox (2.22221pt too wide) in paragraph at lines 565--569
 [][] []
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 620--624
+Underfull \hbox (badness 10000) in paragraph at lines 565--569
 
  []
 
 
-Overfull \hbox (2.22221pt too wide) in paragraph at lines 625--632
+Overfull \hbox (2.22221pt too wide) in paragraph at lines 570--577
 [][] []
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 625--632
+Underfull \hbox (badness 10000) in paragraph at lines 570--577
 
  []
 
 
-Overfull \hbox (2.22221pt too wide) in paragraph at lines 633--639
+Overfull \hbox (2.22221pt too wide) in paragraph at lines 578--584
 [][] []
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 633--639
+Underfull \hbox (badness 10000) in paragraph at lines 578--584
 
  []
 
 
-Overfull \hbox (2.22221pt too wide) in paragraph at lines 640--645
+Overfull \hbox (2.22221pt too wide) in paragraph at lines 585--590
 [][] []
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 640--645
+Underfull \hbox (badness 10000) in paragraph at lines 585--590
 
  []
 
 
-Overfull \hbox (2.22221pt too wide) in paragraph at lines 646--652
+Overfull \hbox (2.22221pt too wide) in paragraph at lines 591--596
 [][] []
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 646--652
+Underfull \hbox (badness 10000) in paragraph at lines 591--596
 
  []
 
 
-Overfull \hbox (2.22221pt too wide) in paragraph at lines 653--660
+Overfull \hbox (2.22221pt too wide) in paragraph at lines 597--604
 [][] []
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 653--660
+Underfull \hbox (badness 10000) in paragraph at lines 597--604
 
  []
 
 
-Overfull \hbox (2.22221pt too wide) in paragraph at lines 661--668
+Overfull \hbox (2.22221pt too wide) in paragraph at lines 605--611
 [][] []
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 661--668
+Underfull \hbox (badness 10000) in paragraph at lines 605--611
 
  []
 
 
-Overfull \hbox (2.22221pt too wide) in paragraph at lines 669--675
+Overfull \hbox (2.22221pt too wide) in paragraph at lines 612--617
 [][] []
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 669--675
+Underfull \hbox (badness 10000) in paragraph at lines 612--617
 
  []
 
 
-Overfull \hbox (2.22221pt too wide) in paragraph at lines 676--682
+Overfull \hbox (2.22221pt too wide) in paragraph at lines 618--624
 [][] []
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 676--682
+Underfull \hbox (badness 10000) in paragraph at lines 618--624
+
+ []
+
+
+Overfull \hbox (2.22221pt too wide) in paragraph at lines 625--631
+[][] []
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 625--631
+
+ []
+
+
+Overfull \hbox (2.22221pt too wide) in paragraph at lines 632--638
+[][] []
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 632--638
 
  []
 
 No file 210431461_CSC8639_Dissertation.bbl.
-[7] (./210431461_CSC8639_Dissertation.aux)
+[6] (./210431461_CSC8639_Dissertation.aux)
  ***********
 LaTeX2e <2023-06-01> patch level 1
 L3 programming layer <2023-06-30>
@@ -819,16 +843,16 @@ LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 LaTeX Warning: There were multiply-defined labels.
 
 Package rerunfilecheck Info: File `210431461_CSC8639_Dissertation.out' has not changed.
-(rerunfilecheck)             Checksum: 41B7B4ACFC272DD791C47C64AFE34B34;2145.
+(rerunfilecheck)             Checksum: 9F3FD8CFCB2D48917939EBD39FB84C7E;2239.
  ) 
 Here is how much of TeX's memory you used:
- 12516 strings out of 477197
- 203925 string characters out of 5812280
- 1936238 words of memory out of 5000000
- 33127 multiletter control sequences out of 15000+600000
- 606842 words of font info for 119 fonts, out of 8000000 for 9000
+ 12557 strings out of 477197
+ 204333 string characters out of 5812280
+ 1941238 words of memory out of 5000000
+ 33133 multiletter control sequences out of 15000+600000
+ 615473 words of font info for 134 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 75i,12n,79p,1027b,499s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 75i,12n,79p,1027b,472s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
 pdfTeX warning (dest): name{ref-hadash2018estimate} has been referenced but does not exist, replaced by a fixed one
 
@@ -838,11 +862,23 @@ pdfTeX warning (dest): name{ref-kour2014fast} has been referenced but does not e
 
 pdfTeX warning (dest): name{ref-kour2014real} has been referenced but does not exist, replaced by a fixed one
 
-<c:/Users/morga/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmbx10.pfb><c:/Users/morga/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmbx12.pfb><c:/Users/morga/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmbxi10.pfb><c:/Users/morga/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmcsc10.pfb><c:/Users/morga/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmex10.pfb><c:/Users/morga/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi10.pfb><c:/Users/morga/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi5.pfb><c:/Users/morga/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi7.pfb><c:/Users/morga/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr10.pfb><c:/Users/morga/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr5.pfb><c:/Users/morga/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr7.pfb><c:/Users/morga/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmri10.pfb><c:/Users/morga/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy10.pfb><c:/Users/morga/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtt10.pfb>
-Output written on 210431461_CSC8639_Dissertation.pdf (7 pages, 273392 bytes).
+
+pdfTeX warning (dest): name{ref-MinLaxLTTB} has been referenced but does not exist, replaced by a fixed one
+
+
+pdfTeX warning (dest): name{ref-samping} has been referenced but does not exist, replaced by a fixed one
+
+
+pdfTeX warning (dest): name{ref-TVstore} has been referenced but does not exist, replaced by a fixed one
+
+
+pdfTeX warning (dest): name{ref-Rcatch22} has been referenced but does not exist, replaced by a fixed one
+
+<c:/Users/morga/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmbx10.pfb><c:/Users/morga/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmbx12.pfb><c:/Users/morga/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmbxi10.pfb><c:/Users/morga/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmcsc10.pfb><c:/Users/morga/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmex10.pfb><c:/Users/morga/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi10.pfb><c:/Users/morga/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi5.pfb><c:/Users/morga/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi7.pfb><c:/Users/morga/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr10.pfb><c:/Users/morga/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr5.pfb><c:/Users/morga/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr7.pfb><c:/Users/morga/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmri10.pfb><c:/Users/morga/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmri7.pfb><c:/Users/morga/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy10.pfb><c:/Users/morga/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtt10.pfb>
+Output written on 210431461_CSC8639_Dissertation.pdf (6 pages, 284410 bytes).
 PDF statistics:
- 324 PDF objects out of 1000 (max. 8388607)
- 280 compressed objects within 3 object streams
- 69 named destinations out of 1000 (max. 500000)
- 27278 words of extra memory for PDF output out of 29859 (max. 10000000)
+ 364 PDF objects out of 1000 (max. 8388607)
+ 317 compressed objects within 4 object streams
+ 76 named destinations out of 1000 (max. 500000)
+ 31382 words of extra memory for PDF output out of 35830 (max. 10000000)
 

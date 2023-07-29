@@ -29,3 +29,5 @@ def split_dataframe(big_dataframe: pd.DataFrame, dataset: str) -> Generator[pd.D
     for method_str in big_dataframe.method.unique():
         for param_str in big_dataframe.param.unique():
             yield partial_filter(method=method_str, param=param_str)
+
+def 
