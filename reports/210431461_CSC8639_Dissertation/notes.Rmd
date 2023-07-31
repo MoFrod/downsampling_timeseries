@@ -66,11 +66,20 @@ The political valence of data transparency is a critical reminder of the inheren
 - time series visualisation
 
 
-
+Data-driven decision-making necessitates that time series data is kept for future analysis. 
 
 
 - characteristics of time series
 - downsampling 
+
+Examples of these approaches are set out in the table below:
+
+
+ Henderson and Fulcher characterised the behaviour and overlaps across prominent time series feature extraction libraries: `hctsa`, `catch22`, `tsfeatures`, `feasts`, `Kats`, `tsfresh`, and `TSFEL` @henderson.
+
+
+Conclusion: The data pipeline developed by C. H. Lubba et. al could be used to generate other subsets of time series features for distinct tasks in any domain. This is likely to be important for highly specialised tasks or domains.
+
 - trust
 
 
