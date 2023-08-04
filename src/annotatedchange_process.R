@@ -16,6 +16,12 @@ wrapperInterpolateNew <- function(d) {
 }
 
 
+# Wrapper for NAs
+wrapperNAs <- function(d) {
+  
+  na.omit(d %>% str_split(",") %>% unlist() %>% as.numeric()) %>% paste(collapse = ",")
+}
+
 
 # Generate NA Distribution plot.
 generateNAPlotNew <- function(d, paramMethod,paramDataset,paramParam) {
@@ -30,3 +36,10 @@ enriched_df <- df %>%
   mutate(interpTSLinear = wrapperInterpolateNew(full_ts),
          wrapperCatch22New(interpTSLinear),
          plot = list(generateNAPlotNew(full_ts, method,dataset,param)))
+
+enriched_df2 <- df %>% 
+  rowwise() %>%
+  mutate(adjusted_ts = wrapperNAs(full_ts),
+         wrapperCatch22New(adjusted_ts),
+         plot = list(generateNAPlotNew(full_ts, method,dataset,param)))
+
