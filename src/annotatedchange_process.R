@@ -1,53 +1,32 @@
-# Update expand_ts so the full_ts column has numeric values
-expand_ts <- expand_ts %>% mutate(full_ts = as.numeric(full_ts))
+library(Rcatch22)
 
-
-
-# Percentage change based on previous value (irrespective whether it was transmitted).
-generateNAPlot <- function(paramMethod,paramDataset,paramVol) {
-  tmpdata <- expand_ts %>% filter(method == paramMethod,
-                                  dataset == paramDataset,
-                                  vol == paramVol)
-  
-  
-  
-  ggplot_na_distribution(tmpdata %>% select(full_ts)) +
-    labs(title = paste0("Distribution of Missing Values: ",paramMethod,", ",paramDataset,", ",paramVol))
-}
-
-
-
-# Wrapper around catch22 to make it easier to pull values back out
-wrapperCatch22 <- function(paramMethod,paramDataset,paramVol) {
-  
-  
-  
-  tmpdata <- df %>% filter(method == "simpleDecimation",
-                           dataset == "df100",
-                           vol == "100") %>% pull(full_ts) %>% str_split(",") %>% unlist() %>% as.numeric()
-  
-  
-  
-  catch22_all(tmpdata, catch24 = TRUE) %>%
+# Wrapper for applying catch22
+wrapperCatch22New <- function(d) {
+  catch22_all(d %>% str_split(",") %>% unlist() %>% as.numeric(), catch24 = TRUE) %>%
     mutate(asdf = names) %>% select(-names) %>%
-    pivot_wider(names_from = asdf, values_from = values)
+    pivot_wider(names_from = asdf, values_from = values) %>% as_tibble()
 }
 
 
 
-# Group the dataframe by param, method and dataset, and 'nest' the remaining values into a 'data' nested dataframe.
-df_nested <- df %>%
-  group_by(vol,method,dataset) %>%
-  nest()
-
-# Mutate the dataframe to add a 'plot' column containing the ggplot object
-enriched_df <- df_nested %>% head(10) %>%
-  mutate(plot = map2(data, vol, ~generateNAPlot(method, dataset, vol)),
-         c22 = map2(data, vol, ~wrapperCatch22(method, dataset, vol))) %>%
-  unnest(data) %>% unnest(c22)
+# Wrapper for interpolation
+wrapperInterpolateNew <- function(d) {
+  
+  na_interpolation(d %>% str_split(",") %>% unlist() %>% as.numeric(), option = "linear") %>% paste(collapse = ",")
+}
 
 
 
-# Run catch22 or NA plot for a particular config.
-wrapperCatch22("simpleDecimation","df100","100")
-generateNAPlot("simpleDecimation","df100","100")
+# Generate NA Distribution plot.
+generateNAPlotNew <- function(d, paramMethod,paramDataset,paramParam) {
+  ggplot_na_distribution(d %>% str_split(",") %>% unlist() %>% as.numeric()) +
+    labs(title = paste0("Distribution of Missing Values: ",paramMethod,", ",paramDataset,", ",paramParam))
+}
+
+
+
+enriched_df <- df %>% 
+  rowwise() %>%
+  mutate(interpTSLinear = wrapperInterpolateNew(full_ts),
+         wrapperCatch22New(interpTSLinear),
+         plot = list(generateNAPlotNew(full_ts, method,dataset,param)))

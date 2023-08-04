@@ -29,12 +29,8 @@ df700 <- data.frame(val = f700$series$raw[[1]]) %>% mutate(id = row_number(), da
 df800a <- data.frame(val = f800$series$raw[[1]]) %>% mutate(id = row_number(), dataset = "800A")
 df800b <- data.frame(val = f800$series$raw[[2]]) %>% mutate(id = row_number(), dataset = "800B")
 
-# Airgap sample data
-airgap <- data.frame(val=as.matrix(tsAirgap)#, id=time(tsAirgap)
-) %>% mutate(id = row_number(), dataset = "airgap")
-
 # Merge all data sets into a single dataframe.
-merged <- rbind(df100, df200, df300, df400, df500, df600, df700, df800a, df800b, airgap)
+merged <- rbind(df100, df200, df300, df400, df500, df600, df700, df800a, df800b)
 
 # Simple visualisation of each dataset, one per facet.
 tsp <- merged %>% ggplot(aes(x = id, y = val)) + geom_line() + geom_point() + facet_grid(dataset~., scales = "free")
