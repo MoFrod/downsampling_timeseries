@@ -17,7 +17,7 @@ df <- tibble(
 list_of_dataset <- c("df100","df200","df300","df400","df500","df600","df700","df800a","df800b")
 
 # Specify methods to use in experiment
-list_of_methods <- c("simpleDecimation","percentageChange")
+list_of_methods <- c("EveryNth","PercentageChange")
 
 # Iterate across all datasets.
 for (dataset in list_of_dataset)
@@ -30,9 +30,9 @@ for (dataset in list_of_dataset)
   {
     for(i in 1:50)
     {
-      if (method == "simpleDecimation") {
+      if (method == "EveryNth") {
         a <- funSimpleDecimation(datats, i)
-      } else if (method == "percentageChange") {
+      } else if (method == "PercentageChange") {
         a <- funPercentageChange(datats, i)
       }
       
