@@ -80,6 +80,43 @@ ggplot(sensitivity_joined_long, aes(x = StandardDeviation, y = names, fill = Met
   scale_fill_brewer(palette = "Paired")
 
 
+# Reshape sensitivity subset data to a long format
+subset_sensitivity_joined_long <- subset_sensitivity_joined %>%
+  pivot_longer(cols = c(everyNthSensitivity, PercentageChangeSensitivity, CombinedSensitivity), 
+               names_to = "Method", 
+               values_to = "StandardDeviation")
+
+# Change the Method into a factor and set the levels
+subset_sensitivity_joined_long$Method <- factor(subset_sensitivity_joined_long$Method, levels = c("PercentageChangeSensitivity", "everyNthSensitivity", "CombinedSensitivity"))
+
+# Recode the names of the Rcatch22 features
+subset_sensitivity_joined_long$names <- recode(subset_sensitivity_joined_long$names,  
+                                               'CO_f1ecac' = "Autocorrelation_ApproxScale",
+                                               'CO_FirstMin_ac' = "Autocorrelation_FirstMinimum",
+                                               'SB_BinaryStats_mean_longstretch1' = "LongestSuccessivePeriod_AboveAverage",
+                                               'PD_PeriodicityWang_th0_01' = "Autocorrelation_FirstPeak",
+                                               'CO_Embed2_Dist_tau_d_expfit_meandiff' = "DistributionExponentialFit_MeanAbsoluteError",
+                                               'IN_AutoMutualInfoStats_40_gaussian_fmmi' = "Autocorrelation_Automutual",
+                                               'SB_BinaryStats_diff_longstretch0' = "LongestSuccessivePeriod_SuccessiveDecreases")
+
+# Arrange in alphabetical order
+subset_sensitivity_joined_long <- subset_sensitivity_joined_long %>%
+  arrange(desc(names))
+
+# Convert "names" to a factor
+subset_sensitivity_joined_long$names <- factor(subset_sensitivity_joined_long$names, levels = unique(subset_sensitivity_joined_long$names))
+
+# Create a bar plot
+ggplot(subset_sensitivity_joined_long, aes(x = StandardDeviation, y = names, fill = Method)) +
+  geom_bar(stat = "identity", position = position_dodge()) +
+  theme_minimal() +
+  theme(legend.position = "top") +
+  labs(x = "Standard Deviation", y = "Feature", fill = "Method", title = "Standard Deviation of Most Sensitive Catch22 Features by Downsampling Method") +
+  scale_fill_brewer(palette = "Paired")
+
+
+
+
 ## Heatmap of catch22 features
 #==
 

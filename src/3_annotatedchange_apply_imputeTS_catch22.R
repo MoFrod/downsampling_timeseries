@@ -1,4 +1,3 @@
-library(Rcatch22)
 
 # Wrapper for applying catch22
 wrapperCatch22New <- function(d) {

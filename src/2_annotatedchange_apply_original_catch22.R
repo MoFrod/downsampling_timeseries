@@ -1,3 +1,5 @@
+library(Rcatch22)
+
 # Apply catch22 to DF100
 catch22_df100 <- catch22_all(df100$val, catch24 = TRUE)
 
