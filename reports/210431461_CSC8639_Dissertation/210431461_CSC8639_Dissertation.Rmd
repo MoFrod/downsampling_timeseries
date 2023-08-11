@@ -37,10 +37,6 @@ setwd("~/Documents/MF MSc/downsampling_timeseries")
 load.project()
 ```
 
-```{r, echo=FALSE, results='asis'}
-cat("\\twocolumn")
-```
-
 # INTRODUCTION
 
 HM Government is committed to making data-driven decisions that engender public trust [@data2017; @data2020; @data2021; @data2022]. Data-driven decisions are considered to be "more well-informed" @data2017, effective @data2022, consistent @data2021, and better "at scale" @data2020. Despite this, there is a lack of trust in government use of data @trust. This suggests that public trust in data-driven decisions goes beyond how the "data complies with legal, regulatory and ethical obligations" @data2021. The UK public need to have "confidence and trust in how data, including personal data, is used" @data2020, and this requires transparency @trust. 
@@ -60,7 +56,7 @@ To address these challenges, this paper shares initial insights from user resear
 
 This section provides an overview of previous related work to create a clear understanding of the most relevant fields of research and identify the gaps being addressed by the paper.
 
-##Data Transparency 
+**2.1 Data Transparency** 
 
 Technology transparency, "including institutional data practices", is sociopolitical in nature @political_transparency. There is a growing number of researchers reflecting on "societal needs in terms of what is made transparent, for whom, how, when and in what ways, and, crucially, who decides" @social_transparency. 
 
@@ -68,44 +64,57 @@ The implicit assumption behind calls for transparency is that "seeing a phenomen
 
 Meaningful transparency is only realised when the information is provided with the tools to turn "access to agency" [@transparency_fallacy; @transparency_lack]. This suggests that data practitioners communicating the assumptions and choices made throughout the data processing pipeline with decision-makers is not likely to create trust in how the data is used. Instead, data practitioners should be encouraged to find tools, such as interactive visualisations @datapoint, that put agency into the hands of decision-makers.
 
-##Time series visualisation
+**2.2 Time series visualisation**
 
 Time series data is commonly visualised as a line graph [@Sveinn; @timenotes]. Line graphs help the human eye to observe only the most important data points @Sveinn by convey the overall shape and complexity of the time series data [@downsampling; @datapoint]. The most effective time series visualisations are, however, interactive [@timenotes; @plotly], turning access into agency @transparency_fallacy by allowing the user to access details on demand. Evaluation of time series visualisation is, therefore, a growing field of research [@Sveinn, @timenotes; @datapoint]. 
 
 However, this growing field of research does not extend to visualisations of choices and assumptions made during data processing pipline. Indeed, such visualisations are a side effect of the research. This dynamic is exemplified by the R package `imputeTS` @imputeTS_R where the impact of imputation choices made by the user is only visualised to support the user through the complete process of replacing missing values in time series @imputeTS. The research set out in this paper harnesses the capabilities of `imputeTS` and its 'process' visualisations to help data practitioners communicate the impact of downsampling choices made in the data processing pipeline.
 
-##Value Preserving Data Aggregation
+**2.3 Value Preserving Data Aggregation**
 
 Technological innovation has generated unprecedented amount of time series data and this data continues to grow [@data2020; @TVStore; @storage; @CatchUp]. For example, tackling climate change is the UK Government's "number one international priority" @IR, yet climate simulations that help inform decision-makers generate tens of terabytes per second [@TVStore; @climate]. Downsampling (value preserving data aggregation) plays an important role in addressing how this voluminous data is processed, stored @TVStore and visualised [@Sveinn; @dashql] by minimising computing resources needed @TVStore, reducing network latency, and improving rendering time [@MinMaxLTTB; @datapoint]. 
 
 An overview of commonly used downsampling (value preserving data aggregation) algorithms is provided in the table below:
 
-[insert table @datapoint]
-- EveryNth, also known as sampling or decimation, selects *n^th^* datapoint @EveryNth
-- percentage change
-- Mode-Median Bucket. The bucket part in the algorithm name refers to the data being split up into buckets, each containing approximately equal number of data points. The algorithm then finds one data point within each bucket as follows. If there is a single y-value which has the highest frequency (the mode) then the leftmost corresponding data point is selected. If no such data point exists a point corrosponding to the median of the y-values is selected.@Sveinn
-- Min-Std-Error-Bucket @Sveinn It is based on linear regression and uses the formula for the standard error of the estimate (SEE) to downsample data. The SEE is a measure of the accuracy of predictions made with a regression line when a linear least squares technique is applied. The greater the error the more discrepancy between the line and the data points. 
-- MinMax preserves the minimum and maximum of every data bucket @MinMaxLTTB
-- OM^3^ maintains minimum and maximum values at every time interval that is used to rasterize a pixel column in the display window @MinMaxOrdered
-- M4 combines EveryNth and MinMax, selecting the first and last values of each data bucket as well as its minimum and maximum [@M4; @dashql]
-- Longest line bucket @Sveinn very similar to the MSEB algorithm but with some key differences. It starts off exactly the same, splitting the data points into buckets and calculating lines going through all the points in one bucket and all the points in the next bucket as was shown in figure 2.3 on page 8. The main difference is that instead of calculating the standard error for each line segment it simply calculates its length (Euclidean distance between the two points defining the line).
-- Largest-Triangle One-Bucket (LTOB) First all the points are ranked by calculating their effective areas. Points with effective areas as null are excluded. The data points are then split up into approximately equal number of buckets as the specified downsample threshold. Finally, one point with the highest rank (largest effective area) is selected to represent each bucket in the downsampled data. @Sveinn
-- Largest-Triangle-Dynamic @Sveinn 
+```{r echo=FALSE, results='asis'}
 
-- Largest Triangle Three Buckets LTTB selects the data point that forms the largest triangular surface between the previously selected data point and the next data bucket's average value @MinMaxLTTB
-- MinMaxLTTB preselects data using MinMax before applying LTTB on the selected datapoints @MinMaxLTTB
+# Manually create a table 
+table_content <- matrix(
+  c(
+    "EveryNth", "Selects every nth datapoint for downsampling.",
+    "Percentage Change", "TBC",
+    "Mode-Median Bucket", "Finds mode or median within equally sized data buckets for selection.",
+    "Min-Std-Error-Bucket", "Uses standard error of the estimate (SEE) in linear regression for downsampling.",
+    "MinMax", "Preserves minimum and maximum of data buckets.",
+    "OM^3^", "Maintains the minimum and maximum values at every time interval for rasterizing.",
+    "M4", "Combines EveryNth and MinMax, selecting the first and last values of each data bucket as well as the minimum and maximum values.",
+    "Longest-Line Bucket", "Calculates line length (Euclidean distance) instead of standard error between buckets.",
+    "Largest-Triangle One-Bucket", "All the data points are ranked by calculating their effective areas. One point with the highest rank (largest effective area) is selected to represent each bucket.",
+    "Largest Triangle Three Buckets", "The data point that forms the largest triangular surface between the previously selected data point and the average value of the next data bucket.",
+    "MinMaxLTTB", "Preselects data using MinMax before applying Largest Triangle Three Buckets."
+  ), nrow = 11, byrow = TRUE
+)
+
+# Define the column names
+colnames(table_content) <- c("Algorithm", "Description")
+
+# Create the table with the title "Downsampling Algorithms"
+knitr::kable(table_content, caption = "Downsampling Algorithms")
+
+```
+[@datapoint; @EveryNth; @Sveinn; @MinMaxLTTB; @MinMaxOrdered; @M4; @dashql]
 
 
 Data practitioners have made recent advances in the performance and evaluation of downsampling approaches [@downsampling; @sampling; @EveryNth; @MinMaxOrdered; @MinMaxLTTB; @dashql; @datapoint; @plotly]. These advances focus on the effectiveness of the algorithm in delivering downsampled data that represents the original data as accurately as possible. This is vital part of enabling and improving data-driven decision-making, but is focused on supporting data practitioners in their analysis of the data. Instead, the research set out in this paper aims to support data practitioners to communicate the impact of their downsampling choices for decision-makers.
 
 
-##Time series feature analysis
+**2.4 Time series feature analysis**
 
 The increasing size of modern time series data sets has also generated new research into the dynamical characteristics of time series @catch22. These characteristics are often used to identify features that enable efficient clustering and classification of time series data, especially for machine learning. A comprehensive library of such features is the *hctsa* (highly comparative time series analysis) toolbox. This shares the 4791 best performing features after computationally comparing thousands of features from across scientific time series analysis literature @fulcher2017. 
 
 Utilising such a library, however, is computationally expensive @catch22. C. H. Lubba et. al have attempted to address this by identified a subset of 22 features that are tailored to time series data mining tasks [@bagnall; @catch22]. Although further research is needed to evaluate the relative performance of different feature sets on different types of problems, `catch22` performs well against other feature libraries across 800 diverse real-world and model-generated time series @henderson. 
 
-Features used to classify time series data could provide a common framework by which to consistenly compare different downsampling algorithms and parameters. The research set out in this paper utilises the `Rcatch22` subset of features to explore impact of downsampling and create a visual tool for explaining this impact.
+Features used to classify time series data could provide a common framework by which to consistently compare different downsampling algorithms and parameters. The research set out in this paper utilises the `Rcatch22` subset of features to explore impact of downsampling and create a visual tool for explaining this impact.
 
 # MOTIVATION
 \label{sec:headings}
@@ -115,148 +124,518 @@ Features used to classify time series data could provide a common framework by w
 # METHODOLOGY
 \label{sec:headings}
 
-- Two basic downsampling approaches applied Annotated Change Turing Data sets
+**4.1 Data**
 
-- Used imputeTS to calculate number of nas, na gaps and remaining volume of data as well as visualise gaps
+The research outlined by this report starts with the eight demonstrative time series shared by the Alan Turing Institute `Annotated Change` GitHub repository @ATIChangePoint. The demonstrative time series are synthetic with known change points that provide examples of different types of time series. These synthetic time series (demo_100, demo_200, demo_300, demo_400, demo_500, demo_600, demo_700, demo_800) support change point annotators annotate real-world data sets for the `Turing Change Point Dataset` @ATIChangePoint. Nine synthetic time series are used for this research as the eighth `Annotated Change` demonstrative time series (demo_800) is multivate and split in two (800A and 800B) for this research to enable better comparison. 
 
-- Used imputTS to apply simple linear interpolation
+**4.2 Downsampling**
 
-- Ran Rcatch22 over original downsampled and interpolated data
+These nine synthetic time series are imported into `RStudio` from JSON scripts and two downsampling algorithms are applied to all with the`Jettison MVP Code` @Jettison. These simple algorithms are chosen to provide initial insights into the impacts of downsampling with minimally complex code; the algorithm *EveryNth* selects every other data point and *Percentage Change* selects every data point that has greater than one per cent difference between the last transmitted and newest values. 
 
-- Calculate difference from original data to choose subselection 
-
-- visualise variation of method over features
-
-- visualise variation of data loss over features
-
-
-```{r, echo=FALSE, results='asis'}
-cat("\\onecolumn")
-```
-
-
-
-You can use equation in blocks
+[SHOULD I ADD AN EQUATION HERE FOR THE ALGORITHMS?]
 
 $$
 \xi _{ij}(t)=P(x_{t}=i,x_{t+1}=j|y,v,w;\theta)= {\frac {\alpha _{i}(t)a^{w_t}_{ij}\beta _{j}(t+1)b^{v_{t+1}}_{j}(y_{t+1})}{\sum _{i=1}^{N} \sum _{j=1}^{N} \alpha _{i}(t)a^{w_t}_{ij}\beta _{j}(t+1)b^{v_{t+1}}_{j}(y_{t+1})}}
 $$
+These algorithms are applied iteratively across each time series, creating parameters 1 to 50 for each downsampling algorithm and `Annotated Change` time series. There are now 900 time series for investigation; 450 for each downsampling algorithm.
 
-But also inline i.e $z=x+y$
+The R package `imputeTS` @imputeTS_R is applied to the time series to obtain the data volume, number of missing values (NAs) and number of gaps. This is important to understand the effect of each downsampling algorithm across the 900 time series. Data volume provides a common variable for comparison because the effect of each downsampling algorithm is unevenly distributed across the 50 parameters. For example, *EveryNth* discards data more quickly than *Percentage Change* so comparing the time series for each parameter is insufficient.
 
+The missing values for each of the 900 time series are then replaced by the `imputeTS` linear interpolation function. This is a simple imputation algorithm that  returns each time series to its original length, enabling a better comparison of the impact of downsampling. [DO I NEED TO EXPLAIN MORE THAN THIS?] For each `Annotated Change` synthetic time series there is now an imputed time series for parameters 1 to 50 and each downsampling method.
 
+**4.3 Features**
 
+The values for each catch22 time series feature @catch22 is calculated by the `Rcatch22` package @catch22_R. This is applied to each of the nine original synthetic time series and 900 imputed time series. The difference between the original and imputed time series feature values is calculated and scaled to investigate the impact of downsampling on these catch22 features. The standard deviation across the time series for each catch22 feature is calculated to indicate whether some features are more sensitive to downsampling. 
 
-## ImputeTS
+**4.4 Visualisation**
 
-## Rcatch22
+Combining `imputeTS` and `Rcatch22` in this way unstudied; initial visual analysis to observe the impact of downsampling on catch22 features is conducted utilising bar and line graphs alongside heatmaps. All the decision-makers who were interviewed as part of this research emphaised the importance of visualisation in data-driven decision-making and data transparency. In line with this, different approaches to visualising the impact of downsampling are tried to explore how best the impact of downsampling could be visually communicated by data practitioners for decision-makers.
 
-## Downsamplng Impat
-
-## User Research
-
-# RESULTS AND EVALUATION 
+# RESULTS AND EVALUATION
 \label{sec:headings}
+
+**5.1 Downsampling Sensitivity**
+
+Across the 900 time series, there apppear to be catch22 time series features that more impacted by downsampling than others. The analysis set out in Annex A suggests that seven of the features are most senstive to downsampling. These features are visualised by the bar graph below:
+
+```{r CombinedSensitivity, echo=FALSE, message=FALSE, warning=FALSE, fig.height=5, fig.with=3}
+# Reshape sensitivity data to a long format
+sensitivity_joined_long <- sensitivity_joined %>%
+  pivot_longer(cols = c(everyNthSensitivity, PercentageChangeSensitivity), 
+               names_to = "Method", 
+               values_to = "StandardDeviation")
+
+# Change the Method into a factor and set the levels
+sensitivity_joined_long$Method <- factor(sensitivity_joined_long$Method, levels = c("everyNthSensitivity", "PercentageChangeSensitivity"))
+
+# Recode the names of the Rcatch22 features
+sensitivity_joined_long$names <- recode(sensitivity_joined_long$names, 
+                                 'DN_HistogramMode_5' = "HistogramBin5",
+                                 'DN_HistogramMode_10' = "HistogramBin10",
+                                 'CO_f1ecac' = "Autocorr_ApproxScale",
+                                 'CO_FirstMin_ac' = "Autocorr_FirstMinimum",
+                                 'CO_HistogramAMI_even_2_5' = "NonLinear_HistogramBin5",
+                                 'CO_trev_1_num' = "CubeDifference_Average",
+                                 'MD_hrv_classic_pnn40' = "DifferenceMagnitude_Above4%",
+                                 'SB_BinaryStats_mean_longstretch1' = "LongestPeriod_AboveAverage",
+                                 'SB_TransitionMatrix_3ac_sumdiagcov' = "TransitionMatrix_Variances",
+                                 'PD_PeriodicityWang_th0_01' = "Autocorr_FirstPeak",
+                                 'CO_Embed2_Dist_tau_d_expfit_meandiff' = "DistributionExponentialFit_MAE",
+                                 'IN_AutoMutualInfoStats_40_gaussian_fmmi' = "Autocorr_Automutual",
+                                 'FC_LocalSimple_mean1_tauresrat' = "SuccessiveDifferences_Zero-crossing",
+                                 'DN_OutlierInclude_p_001_mdrmd' = "Over-threshold_Positive",
+                                 'DN_OutlierInclude_n_001_mdrmd' = "Over-threshold_Negative",
+                                 'SP_Summaries_welch_rect_area_5_1' = "PowerSpectrum_Lowest20%",
+                                 'SB_BinaryStats_diff_longstretch0' = "LongestPeriod_Decreases",
+                                 'SB_MotifThree_quantile_hh' = "ThreeSymbolProbability_Entropy",
+                                 'SC_FluctAnal_2_rsrangefit_50_1_logi_prop_r1' = "LogarithmicTimescaleFluctuation",
+                                 'SC_FluctAnal_2_dfa_50_1_2_logi_prop_r1' = "DetrendedTimescaleFluctuation",
+                                 'SP_Summaries_welch_rect_centroid' = "PowerSpectrum_Centroid",
+                                 'FC_LocalSimple_mean3_stderr' = "ErrorMeasure_Previous3Values", 
+                                 'DN_Spread_Std' = 'Spead',
+                                 'DN_Mean' = 'Mean')
+
+# Recode the names of the Methods
+sensitivity_joined_long$Method <- recode(sensitivity_joined_long$Method,  
+                                                "PercentageChangeSensitivity" = "Percentage Change", 
+                                                "everyNthSensitivity" = "EveryNth")
+
+# Arrange in alphabetical order
+sensitivity_joined_long <- sensitivity_joined_long %>%
+  arrange(StandardDeviation)
+
+# Convert "names" to a factor
+sensitivity_joined_long$names <- factor(sensitivity_joined_long$names, levels = unique(sensitivity_joined_long$names))
+
+# Create a bar plot
+ggplot(sensitivity_joined_long, aes(x = StandardDeviation, y = names, fill = Method)) +
+  geom_bar(stat = "identity", position = position_dodge()) +
+  theme_minimal() +
+  theme(plot.title = element_text(hjust = -0.15), legend.position = "top", legend.justification = c(-0.14, 1)) +
+  labs(x = "Standard Deviation", y = "Catch 22 Feature", fill = "Method", title = "Figure 1: Standard Deviation of Catch22 Feature Values") +
+  scale_fill_brewer(palette = "Paired")
+```
+
+This visualisation highlights that approximately half of the catch22 time series features are noticeably impacted by both downsampling algorithms. The *EveryNth* algorithm impacts more features than *Percentage Change*; this is likely to be because more data is discarded by the former algorithm than the latter in the 50 parameters explored by this research. It would be beneficial to explore this difference with further iterations of *Percentage Change* downsampling across the time series to understand its impact after more data is discarded. For parameters 1 to 50, the different impacts of the two downsampling algorithms on the ten most sensitive features for each time series are presented in Annex B.
+
+The seven catch22 features with the highest standard deviation across the 900 time series are presented in the table below. 
+
+```{r echo=FALSE, results='asis'}
+# Create a combined dataframe of all sensitivity
+all_sensitivity<- left_join(sensitivity_joined, sensitivity, by = "names") %>%
+  rename(Feature = names) %>%
+  arrange(desc(CombinedSensitivity)) %>%
+  head(7)
+
+# Recode the names of the Rcatch22 features
+all_sensitivity$Feature <- recode(all_sensitivity$Feature, 
+                            'CO_f1ecac' = "Autocorr_ApproxScale",
+                            'CO_FirstMin_ac' = "Autocorr_FirstMinimum",
+                            'SB_BinaryStats_mean_longstretch1' = "LongestPeriod_AboveAverage",
+                            'PD_PeriodicityWang_th0_01' = "Autocorr_FirstPeak",
+                            'CO_Embed2_Dist_tau_d_expfit_meandiff' = "DistributionExponentialFit_MAE",
+                            'IN_AutoMutualInfoStats_40_gaussian_fmmi' = "Autocorr_Automutual",
+                            'SB_BinaryStats_diff_longstretch0' = "LongestPeriod_Decreases")
+
+
+knitr::kable((all_sensitivity), caption = "Standard Deviation of the Seven Most Sensitive Catch22 Features")
+```
+The values set out by this table suggests 
+
+the first minimum of the autocorrelation function ('Autocorr_FirstMinimum' or 'CO_FirstMin_ac'.
+
+that the catch22 feature measuring the longest sequence of successive steps that decrease ('LongestPeriod_Decrease' or 'SB_BinaryStats_diff_longstretch0') is most sensitive to the *EveryNth* algorithm 
+
+the longest sequence of successive values greater than the mean ('LongestPeriod_AboveAverage' or 'SB_BinaryStats_mean_longstretch1')
+
+**5.2 Downsampling Impact**
+
+The values of catch22 features appear to increase as data is discarded. It would be beneficial to explore this dynamic further; the analysis on this dynamic conducted as part of this research is presented in Annex C. The *EveryNth* algorithm discards more data, more quickly, by comparison to *Percentage Change* algorithm. This creates acute differences in the imputed time series which are discussed in the next section.
+
+**5.3 Feature Variation**
+
+
+```{r echo=FALSE, results='asis'}
+
+# Manually create a table 
+table_content <- data.frame(
+  Feature = c("First Minimum of the Autocorrelation Function", "", "Longest Sequence of Successive Steps that Decrease", "", "Longest Sequence of Successive Values Greater than the Mean", "", "Minimum of the Automutual Information Function", "", "First Peak in the Autocorrelation Function", "", "Approximate Scale of Autocorrelation", "", "Mean Absolute Error of an Exponential Fit", ""),
+  Algorithm = c("EveryNth", "Percentage Change", "EveryNth", "Percentage Change", "EveryNth", "Percentage Change", "EveryNth", "Percentage Change", "EveryNth", "Percentage Change", "EveryNth", "Percentage Change", "EveryNth", "Percentage Change"),
+  "TimeSeries" = rep("", 14) # Fill this with the corresponding values
+)
+
+table <- kable(table_content, caption = " ") %>%
+  collapse_rows(columns = 1, valign = "top")
+
+table
+```
+
+*5.2a First Minimum of the Autocorrelation Function*
+
+The catch22 feature with the highest standard deviation across the 900 time series is the first minimum of the autocorrelation function ('Autocorr_FirstMinimum' or 'CO_FirstMin_ac'. This feature represents "the number of steps into the future at which a value of the time series at the current point and that future point remain substantially (>1/e) correlated" @feature_book. The line graphs below highlight how this feature changes over the time series interpolated from different volumes of data after both downsampling algorithms were applied. The difference between the catch22 feature value of the original and imputed time series has been scaled for better comparisons. 
+
+```{r FirstMinimum, echo=FALSE, message=FALSE, warning=FALSE, fig.height=5, fig.with=3}
+# Recode the names of the methods
+filtered_df$method <- recode(filtered_df$method,  
+                                                "PercentageChange" = "Percentage Change")
+# Recode the names of the Rcatch22 features
+filtered_df$names <- recode(filtered_df$names, 
+                            'CO_f1ecac' = "Autocorr_ApproxScale",
+                            'CO_FirstMin_ac' = "Autocorr_FirstMinimum",
+                            'SB_BinaryStats_mean_longstretch1' = "LongestPeriod_AboveAverage",
+                            'PD_PeriodicityWang_th0_01' = "Autocorr_FirstPeak",
+                            'DN_Mean' = 'Mean',
+                            'DN_HistogramMode_10' = "HistogramBin10",
+                            'DN_Spread_Std' = 'Spead',
+                            'CO_Embed2_Dist_tau_d_expfit_meandiff' = "DistributionExponentialFit_MAE",
+                            'IN_AutoMutualInfoStats_40_gaussian_fmmi' = "Autocorr_Automutual",
+                            'SB_BinaryStats_diff_longstretch0' = "LongestPeriod_Decreases")
+
+# Arrange in alphabetical order
+filtered_df <- filtered_df %>%
+  arrange(desc(names))
+
+# Convert "names" to a factor
+filtered_df$names <- factor(filtered_df$names, levels = unique(filtered_df$names))
+
+# Recode the names of the datasets
+filtered_df$dataset <- recode(filtered_df$dataset,
+                              "df100" = "100", 
+                              "df200" = "200", 
+                              "df300" = "300", 
+                              "df400" = "400", 
+                              "df500" = "500", 
+                              "df600" = "600", 
+                              "df700" = "700", 
+                              "df800a" = "800A", 
+                              "df800b" = "800B")
+
+# Create the difference line graph for CO_FirstMin_ac
+ggplot(filtered_df %>%
+         filter(names == "Autocorr_FirstMinimum"), 
+       aes(x = as.numeric(vol), y = scaled, color = method)) +
+  scale_color_brewer(palette = "Paired") +
+  geom_line(linewidth = 0.5) +
+  scale_x_reverse() +
+  theme_minimal() +
+  theme(plot.title = element_text(hjust = -0.15), legend.position = "top", legend.justification = c(-0.14, 1)) +
+  labs(x = "Volume of Data", y = "Scaled Difference", color = "Method", title = "Variation of the First Minimum of the Autocorrelation Function") +
+  facet_wrap(~ dataset, ncol = 3)
+```
+
+The visualisation clearly presents the impact of discarding data in downsampling algorithms. The volume of data retained by *Percentage Change* algorithm varies by the type of time series whereas the volume of data retained by the *EveryNth* algorithm ends close to zero for all the time series with significant difference observable when the remaining data volume is below 25. 
+
+Line graphs of the original time series are provided in Annex D to support comparison. The original time series '100' and '200' are similarly shaped, with '100' trending upwards and '200' experiencing a noticeable drop towards the end of the time series. In the line graphs below, it is observable that '100' and '200' are similarly impacted by *EveryNth* and *Percentage Change*, respectively. The impact of *Percentage Change* is more acute and variable than for the other time series. 
+
+The original time series '300' and '400' are similarly shaped, with significant peaks and troughs that start earlier for '400'. This is likely to account for why *Percentage Change* retains more data, causing a negible impact on the catch22 feature for these time series. The time series '500' and '600' are particularly distinct with some obvious outliers in '500' and a gradual trend upwards for '600'. More data is discarded by the *Percentage Change* algorithm for these time series than any of the others. Interestingly, '600' appears to be the only time series for which the scaled difference between the original and imputed catch22 feature values trends positively. 
+
+The remaining original time series '700', '800A' and '800B' are distinct, but have similar slow-varying oscillation. This is mirrored by the impacts of *EveryNth* and *Percentage Change*. The scaled difference of the catch22 feature for the *EveryNth* algorithm in '700' has the widest spread of three and *Percentage Change* appears to retain more data than in '800A' and '800B'. Again, this is likley to be because the changes in the peaks and troughs are more acute in the original data. 
+
+*5.2b Longest Sequence of Successive Steps that Decrease*
+
+The feature with the second highest standard deviation across the 900 time series is the longest sequence of successive steps that decrease ('LongestPeriod_Decrease' or 'SB_BinaryStats_diff_longstretch0'). This catch22 feature "calculates the longest sequence of successive steps in the time series that decrease" @feature_book.
+
+```{r LongestDecrease, echo=FALSE, message=FALSE, warning=FALSE, fig.height=5, fig.with=3}
+# Create the scaled difference line graph for SB_BinaryStats_diff_longstretch0
+ggplot(filtered_df %>%
+         filter(names == "LongestPeriod_Decreases"), 
+       aes(x = as.numeric(vol), y = scaled, color = method)) +
+  scale_color_brewer(palette = "Paired") +
+  geom_line(linewidth = 0.5) +
+  scale_x_reverse() +
+  theme_minimal() +
+  theme(plot.title = element_text(hjust = -0.15), legend.position = "top", legend.justification = c(-0.14, 1)) +
+  labs(x = "Volume of Data", y = "Scaled Difference", color = "Method", title = "Longest Sequence of Successive Steps that Decrease") +
+  facet_wrap(~ dataset, ncol = 3)
+
+```
+
+*5.2c Longest Sequence of Successive Values Greater than the Mean*
+
+The feature with the third highest standard deviation across the 900 time series is the longest sequence of successive values greater than the mean ('LongestPeriod_AboveAverage' or 'SB_BinaryStats_mean_longstretch1'). This catch22 feature "calculates the longest successive period of above average values" @feature_book.
+
+```{r LongestGreater, echo=FALSE, message=FALSE, warning=FALSE, fig.height=5, fig.with=3}
+# Create the line graph for SB_BinaryStats_mean_longstretch1
+ggplot(filtered_df %>%
+         filter(names == "LongestPeriod_AboveAverage"), 
+       aes(x = as.numeric(vol), y = scaled, color = method)) +
+  scale_color_brewer(palette = "Paired") +
+  geom_line(linewidth = 0.5) +
+  scale_x_reverse() +
+  theme_minimal() +
+  theme(plot.title = element_text(hjust = -0.15), legend.position = "top", legend.justification = c(-0.14, 1)) +
+  labs(x = "Volume of Data", y = "Scaled Difference", color = "Method", title = "Longest Sequence of Successive Values Greater than the Mean") +
+  facet_wrap(~ dataset, ncol = 3)
+```
+
+*5.2d Minimum of the Automutual Information Function*
+
+The feature with the fourth highest standard deviation across the 900 time series is the minimum of the automutual information function ('Autocorr_Automutual' or 'IN_AutoMutualInfoStats_40_gaussian_fmmi'). This catch22 feature outputs a measure of "autocorrelation in the time series, as the minimum of the automutual information function" @feature_book.
+
+```{r AutoMutalFunction, echo=FALSE, message=FALSE, warning=FALSE, fig.height=5, fig.with=3}
+# Create the difference line graph for IN_AutoMutualInfoStats_40_gaussian_fmmi
+ggplot(filtered_df %>%
+         filter(names == "Autocorr_Automutual"), 
+       aes(x = as.numeric(vol), y = difference, color = method)) +
+  scale_color_brewer(palette = "Paired") +
+  geom_line(linewidth = 0.5) +
+  scale_x_reverse() +
+  theme_minimal() +
+  theme(plot.title = element_text(hjust = -0.15), legend.position = "top", legend.justification = c(-0.14, 1)) +
+  labs(x = "Volume of Data", y = "Scaled Difference", color = "Method", title = "Minimum of the Automutual Information Function") +
+  facet_wrap(~ dataset, ncol = 3)
+
+```
+
+*5.2e First Peak in the Autocorrelation Function*
+
+The feature with the fifth highest standard deviation across the 900 time series is the first peak in the autocorrelation function ('Autocorr_FirstPeak' or 'PD_PeriodicityWang_th0_01'). This catch22 feature "returns the first peak in the autocorrelation function satisfying a set of conditions (after detrending the time series using a single-knot cubic regression spline)" @feature_book. In general, the feature returns higher values for slower time series oscillation.
+
+
+```{r FirstPeak, echo=FALSE, message=FALSE, warning=FALSE, fig.height=5, fig.with=3}
+# Create the difference line graph for PD_PeriodicityWang_th0_01 
+ggplot(filtered_df %>%
+         filter(names == "Autocorr_FirstPeak"), 
+       aes(x = as.numeric(vol), y = difference, color = method)) +
+  scale_color_brewer(palette = "Paired") +
+  geom_line(linewidth = 0.5) +
+  scale_x_reverse() +
+  theme_minimal() +
+  theme(plot.title = element_text(hjust = -0.15), legend.position = "top", legend.justification = c(-0.14, 1)) +
+  labs(x = "Volume of Data", y = "Scaled Difference", color = "Method", title = "First Peak in the Autocorrelation Function") +
+  facet_wrap(~ dataset, ncol = 3)
+```
+
+*5.2f Approximate Scale of Autocorrelation*
+
+The feature with the sixth highest standard deviation across the 900 time series is the approximate scale of autocorrelation ('Autocorr_ApproxScale' or 'CO_f1ecac'). This catch22 feature "computes the first 1/e crossing of the autocorrelation function of the time series" @feature_book. It is similar to the first minimum of the autocorrelation function.
+
+```{r ApproxScale, echo=FALSE, message=FALSE, warning=FALSE, fig.height=5, fig.with=3}
+# Create the difference line graph for CO_f1ecac
+ggplot(filtered_df %>%
+         filter(names == "Autocorr_ApproxScale"), 
+       aes(x = as.numeric(vol), y = difference, color = method)) +
+  scale_color_brewer(palette = "Paired") +
+  geom_line(linewidth = 0.5) +
+  scale_x_reverse() +
+  theme_minimal() +
+  theme(plot.title = element_text(hjust = -0.15), legend.position = "top", legend.justification = c(-0.14, 1)) +
+  labs(x = "Volume of Data", y = "Scaled Difference", color = "Method", title = "Approximate Scale of Autocorrelation") +
+  facet_wrap(~ dataset, ncol = 3)
+```
+
+*5.2g Mean Absolute Error of an Exponential Fit*
+
+The feature with the seventh highest standard deviation across the 900 time series is the approximate scale of autocorrelation ('DistributionExponentialFit_MAE' or 'CO_Embed2_Dist_tau_d_expfit_meandiff'). This catch22 feature outputs the mean absolute error of an exponential fit to a distribution which is calculated by representing "the time series in a two-dimensional time-delay embedding space (using a time delay equal to the first zero-crossing of the autocorrelation function)... [then computing the] successive distances between points in this 2D embedding space and analyzes the probability distribution of these distances" @feature_book. 
+
+```{r MAE, echo=FALSE, message=FALSE, warning=FALSE, fig.height=5, fig.with=3}
+# Create the difference line graph for CO_Embed2_Dist_tau_d_expfit_meandiff
+ggplot(filtered_df %>%
+         filter(names == "DistributionExponentialFit_MAE"), 
+       aes(x = as.numeric(vol), y = difference, color = method)) +
+  scale_color_brewer(palette = "Paired") +
+  geom_line(linewidth = 0.5) +
+  scale_x_reverse() +
+  theme_minimal() +
+  theme(plot.title = element_text(hjust = -0.15), legend.position = "top", legend.justification = c(-0.14, 1)) +
+  labs(x = "Volume of Data", y = "Scaled Difference", color = "Method", title = "Mean Absolute Error of an Exponential Fit") +
+  facet_wrap(~ dataset, ncol = 3)
+```
 
 # FUTURE WORK
 \label{sec:headings}
 
 The data pipeline developed by C. H. Lubba et. al could be used to generate other subsets of time series features for distinct tasks in any domain. This is likely to be important for highly specialised tasks or domains.
 
+Highlight in text:
+- The values of catch22 features appear to increase as data is discarded. It would be beneficial to explore this dynamic further; 
+- he *EveryNth* algorithm impacts more features than *Percentage Change*; this is likely to be because more data is discarded by the former algorithm than the latter in the 50 parameters explored by this research. It would be beneficial to explore this difference with further iterations of *Percentage Change* downsampling across the time series to understand its impact after more data is discarded.
+
 # CONCLUSION
 \label{sec:headings}
+
 
 # REFERENCES
 \label{sec:headings}
 
 
-# Examples of citations, figures, tables, references
-\label{sec:others}
-
-You can insert references. Here is some text [@kour2014real; @kour2014fast] and see @hadash2018estimate.
-
-The documentation for \verb+natbib+ may be found at
-
-You can use custom blocks with LaTeX support from **rmarkdown** to create environment.
-
-::: {.center latex=true}
-  <http://mirrors.ctan.org/macros/latex/contrib/natbib/natnotes.pdf}>
-:::
-
-Of note is the command \verb+\citet+, which produces citations
-appropriate for use in inline text.  
-
-You can insert LaTeX environment directly too.
-
-\begin{verbatim}
-   \citet{hasselmo} investigated\dots
-\end{verbatim}
-
-produces
-
-\begin{quote}
-  Hasselmo, et al.\ (1995) investigated\dots
-\end{quote}
-
-\begin{center}
-  \url{https://www.ctan.org/pkg/booktabs}
-\end{center}
-
-
-## Figures
-
-You can insert figure using LaTeX directly. 
-
-See Figure \ref{fig:fig1}. Here is how you add footnotes. [^Sample of the first footnote.]
-
-\begin{figure}
-  \centering
-  \fbox{\rule[-.5cm]{4cm}{4cm} \rule[-.5cm]{4cm}{0cm}}
-  \caption{Sample figure caption.}
-  \label{fig:fig1}
-\end{figure}
-
-But you can also do that using R.
-
-```{r fig2, fig.cap = "Another sample figure"}
-plot(mtcars$mpg)
-```
-
-You can use **bookdown** to allow references for Tables and Figures.
-
-
-## Tables
-
-Below we can see how to use tables. 
-
-See awesome Table~\ref{tab:table} which is written directly in LaTeX in source Rmd file.
-
-\begin{table}
- \caption{Sample table title}
-  \centering
-  \begin{tabular}{lll}
-    \toprule
-    \multicolumn{2}{c}{Part}                   \\
-    \cmidrule(r){1-2}
-    Name     & Description     & Size ($\mu$m) \\
-    \midrule
-    Dendrite & Input terminal  & $\sim$100     \\
-    Axon     & Output terminal & $\sim$10      \\
-    Soma     & Cell body       & up to $10^6$  \\
-    \bottomrule
-  \end{tabular}
-  \label{tab:table}
-\end{table}
-
-You can also use R code for that.
+# Annex A: Sensitivity of Catch22 Features
 
 ```{r}
-knitr::kable(head(mtcars), caption = "Head of mtcars table")
+# Reshape sensitivity subset data to a long format
+subset_sensitivity_joined_long <- subset_sensitivity_joined %>%
+  pivot_longer(cols = c(everyNthSensitivity, PercentageChangeSensitivity), 
+               names_to = "Method", 
+               values_to = "StandardDeviation")
+
+# Change the Method into a factor and set the levels
+subset_sensitivity_joined_long$Method <- factor(subset_sensitivity_joined_long$Method, levels = c("PercentageChangeSensitivity", "everyNthSensitivity"))
+
+# Recode the names of the Methods
+subset_sensitivity_joined_long$Method <- recode(subset_sensitivity_joined_long$Method,  
+                                                "PercentageChangeSensitivity" = "Percentage Change", 
+                                                "everyNthSensitivity" = "EveryNth")
+# Recode the names of the Rcatch22 features
+subset_sensitivity_joined_long$names <- recode(subset_sensitivity_joined_long$names,  
+                                               'CO_f1ecac' = "Autocorrelation_ApproxScale",
+                                               'CO_FirstMin_ac' = "Autocorrelation_FirstMinimum",
+                                               'SB_BinaryStats_mean_longstretch1' = "LongestSuccessivePeriod_AboveAverage",
+                                               'PD_PeriodicityWang_th0_01' = "Autocorrelation_FirstPeak",
+                                               'DN_Mean' = 'Mean',
+                                               'DN_HistogramMode_10' = "HistogramBin10",
+                                               'DN_Spread_Std' = 'Spead',
+                                               'CO_Embed2_Dist_tau_d_expfit_meandiff' = "DistributionExponentialFit_MeanAbsoluteError",
+                                               'IN_AutoMutualInfoStats_40_gaussian_fmmi' = "Autocorrelation_Automutual",
+                                               'SB_BinaryStats_diff_longstretch0' = "LongestSuccessivePeriod_SuccessiveDecreases")
+
+# Create a bar plot
+sensitive_subset_plot <- ggplot(subset_sensitivity_joined_long, aes(x = StandardDeviation, y = names, fill = Method)) +
+  geom_bar(stat = "identity", position = position_dodge()) +
+  theme_minimal() +
+  theme(text = element_text(size = 30), legend.position = "top") +
+  labs(x = "Standard Deviation", y = "Catch22 Feature", fill = "Method", title = "Standard Deviation of Most Sensitive Features") +
+  scale_fill_brewer(palette = "Paired") +
+  scale_x_continuous(limits = c(0, NA))
 ```
 
+```{r}
+knitr::kable((sensitivity_joined), caption = "Sensitivity of Catch22 Features to EveryNth and Percentage Change Downsampling")
+```
 
-## Lists
+# Annex B: Top Ten Most Sensitive Catch22 Features
 
-- Item 1
-- Item 2 
-- Item 3
+The ten features most impacted by both downsampling algorithms are selected for further investigation. The bar graph below visualises the standard deviation of the *EveryNth* algorithm for these features across all the parameters for each of the nine synthetic time series.
+
+```{r NthSensitivity, echo=FALSE, message=FALSE, warning=FALSE, fig.height=4.1, fig.with=3}
+sensitivity_ts_Nth$names <- recode(sensitivity_ts_Nth$names,  
+                            'CO_f1ecac' = "Autocorr_ApproxScale",
+                            'CO_FirstMin_ac' = "Autocorr_FirstMinimum",
+                            'SB_BinaryStats_mean_longstretch1' = "LongestPeriod_AboveAverage",
+                            'PD_PeriodicityWang_th0_01' = "Autocorr_FirstPeak",
+                            'DN_Mean' = 'Mean',
+                            'DN_HistogramMode_10' = "HistogramBin10",
+                            'DN_Spread_Std' = 'Spead',
+                            'CO_Embed2_Dist_tau_d_expfit_meandiff' = "DistributionExponentialFit_MAE",
+                            'IN_AutoMutualInfoStats_40_gaussian_fmmi' = "Autocorr_Automutual",
+                            'SB_BinaryStats_diff_longstretch0' = "LongestPeriod_Decreases", 
+                            'PD_PeriodicityWang_th0_01' = "Autocorr_FirstPeak")
+
+# Recode the names of the datasets
+sensitivity_ts_Nth$dataset <- recode(sensitivity_ts_Nth$dataset,
+                         "df100" = "100", 
+                         "df200" = "200", 
+                         "df300" = "300", 
+                         "df400" = "400", 
+                         "df500" = "500", 
+                         "df600" = "600", 
+                         "df700" = "700", 
+                         "df800a" = "800A", 
+                         "df800b" = "800B")
+
+# Arrange order
+sensitivity_ts_Nth <- sensitivity_ts_Nth %>%
+  arrange(sensitivity)
+
+# Convert "names" to a factor
+sensitivity_ts_Nth$names <- factor(sensitivity_ts_Nth$names, levels = unique(sensitivity_ts_Nth$names))
+
+# Create a bar plot
+ggplot(sensitivity_ts_Nth, aes(x = sensitivity, y = names, fill = dataset)) +
+  geom_bar(stat = "identity", position = position_dodge()) +
+  theme_minimal() +
+  theme(plot.title = element_text(hjust = -0.15), legend.position = "top", legend.justification = c(-0.14, 1)) +
+  labs(x = "Standard Deviation", y = "Catch22 Feature", fill = "Method", title = "EveryNth: Standard Deviation of Sensitive Features") +
+  scale_fill_brewer(palette = "Blues") +
+  scale_x_continuous(limits = c(0, NA))
+```
+
+The visualisation above highlights that the impact of downsampling on each catch22 feature is different for each time series type. This holds true for the *Percentage Change* algorithm too. The bar graph below visualises the standard deviation for the same ten features across all the parameters for each of the nine synthetic time series.
+
+```{r PCSensitivity, echo=FALSE, message=FALSE, warning=FALSE, fig.height=5, fig.with=3}
+# Recode the names of the Rcatch22 features
+sensitivity_ts_PC$names <- recode(sensitivity_ts_PC$names,  
+                            'CO_f1ecac' = "Autocorr_ApproxScale",
+                            'CO_FirstMin_ac' = "Autocorr_FirstMinimum",
+                            'SB_BinaryStats_mean_longstretch1' = "LongestPeriod_AboveAverage",
+                            'PD_PeriodicityWang_th0_01' = "Autocorr_FirstPeak",
+                            'DN_Mean' = 'Mean',
+                            'DN_HistogramMode_10' = "HistogramBin10",
+                            'DN_Spread_Std' = 'Spead',
+                            'CO_Embed2_Dist_tau_d_expfit_meandiff' = "DistributionExponentialFit_MAE",
+                            'IN_AutoMutualInfoStats_40_gaussian_fmmi' = "Autocorr_Automutual",
+                            'SB_BinaryStats_diff_longstretch0' = "LongestPeriod_Decreases", 
+                            'PD_PeriodicityWang_th0_01' = "Autocorr_FirstPeak")
+
+# Recode the names of the datasets
+sensitivity_ts_PC$dataset <- recode(sensitivity_ts_PC$dataset,
+                                     "df100" = "100", 
+                                     "df200" = "200", 
+                                     "df300" = "300", 
+                                     "df400" = "400", 
+                                     "df500" = "500", 
+                                     "df600" = "600", 
+                                     "df700" = "700", 
+                                     "df800a" = "800A", 
+                                     "df800b" = "800B")
+
+# Arrange order
+sensitivity_ts_PC <- sensitivity_ts_PC %>%
+  arrange(sensitivity)
+
+# Convert "names" to a factor
+sensitivity_ts_PC$names <- factor(sensitivity_ts_PC$names, levels = unique(sensitivity_ts_PC$names))
+
+# Create a bar plot
+ggplot(sensitivity_ts_PC, aes(x = sensitivity, y = names, fill = dataset)) +
+  geom_bar(stat = "identity", position = position_dodge()) +
+  theme_minimal() +
+  theme(plot.title = element_text(hjust = -0.15), legend.position = "top", legend.justification = c(-0.14, 1)) +
+  labs(x = "Standard Deviation", y = "Catch22 Feature", fill = "Method", title = "Percentage Change: Standard Deviation of Sensitive Features") +
+  scale_fill_brewer(palette = "Blues") +
+  scale_x_continuous(limits = c(0, NA))
+```
+
+Interestingly, the impact of *Percentage Change* on many of these features is acute despite the spread of standard deviation being smaller. For example... [ADD OBSERVATION]
+
+# Annex C: Data Volume vs. Downsampling Parameters
+
+To better compare this impact, the heatmap below visualises the scaled difference between the original and imputed time series by the data volume remaining after each downsampling algorithm is applied. Annex B shares this graph with downsampling parameter instead of data volume to explain why data volume was chosen.
+
+```{r Heatmap, echo=FALSE, message=FALSE, warning=FALSE, fig.height=5, fig.with=3}
+# Recode the names of the Methods
+filtered_df$method <- recode(filtered_df$method,  
+                                                "PercentageChange" = "Percentage Change")
+# Recode the names of the Rcatch22 features
+filtered_df$names <- recode(filtered_df$names, 
+                            'CO_f1ecac' = "Autocorr_ApproxScale",
+                            'CO_FirstMin_ac' = "Autocorr_FirstMinimum",
+                            'SB_BinaryStats_mean_longstretch1' = "LongestPeriod_AboveAverage",
+                            'PD_PeriodicityWang_th0_01' = "Autocorr_FirstPeak",
+                            'DN_Mean' = 'Mean',
+                            'DN_HistogramMode_10' = "HistogramBin10",
+                            'DN_Spread_Std' = 'Spead',
+                            'CO_Embed2_Dist_tau_d_expfit_meandiff' = "DistributionExponentialFit_MAE",
+                            'IN_AutoMutualInfoStats_40_gaussian_fmmi' = "Autocorr_Automutual",
+                            'SB_BinaryStats_diff_longstretch0' = "LongestPeriod_Decreases")
+
+# Arrange in alphabetical order
+filtered_df <- filtered_df %>%
+  arrange(desc(names))
+
+# Convert "names" to a factor
+filtered_df$names <- factor(filtered_df$names, levels = unique(filtered_df$names))
+
+# Create the heatmap showing scaled difference for most sensitive features across volume, one per method.
+ggplot(filtered_df, aes(x = as.numeric(vol), y = names, fill = scaled)) +
+  geom_tile() +
+  scale_fill_gradient2(low = "#084594", high = "#eff3ff", mid = "#c6dbef",
+                       midpoint = 0, limits = range(joined_df$scaled)) +
+  scale_x_reverse() +
+  theme_minimal() +
+  labs(x = "Volume of Data", y = "Catch22 Feature", fill = "Scaled Difference", title = "Scaled Difference of Sensitive Features by Volume") +
+  theme(legend.position = "bottom", plot.title = element_text(hjust = -0.15)) +
+  facet_wrap(~ method, ncol = 1)
+```
+
+Interestingly, this visualisation demonstrated that the catch22 features that are impacted by both downsampling algorithms tend to increase in comparison the original feature values. The visualisation emphasises how quickly *EveryNth* discards data by comparison to *Percentage Change*. This creates acute differences in the imputed time series created when less than 20 data points remained after *EveryNth* is applied. For both downsampling algorithms, the 'Autocorr_ApproxScale' and 'LongestPeriod_AboveAverage' appear to be the first features to be impacted. [EXPLAIN FEATURES]. The impact on both features appears to be inconsistent when *Percentage Change* is applied before linear interpolation. For example, the are data volumes where `Autocorr_ApproxScale` and `LongestPeriod_AboveAverage` do not appear to be impacted by *Percentage Change* when higher date volumes appear to be impacted.    
+

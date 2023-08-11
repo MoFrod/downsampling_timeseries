@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.8.7)  7 AUG 2023 15:02
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.8.7)  11 AUG 2023 19:12
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -542,305 +542,412 @@ Package microtype Info: Loading generic protrusion settings for font family
 LaTeX Font Warning: Font shape `T1/lmr/bx/sc' undefined
 (Font)              using `T1/lmr/bx/n' instead on input line 126.
 
+
+Underfull \vbox (badness 1997) has occurred while \output is active []
+
 [1
 
 
-{c:/Users/Morgan/AppData/Roaming/TinyTeX/texmf-var/fonts/map/pdftex/updmap/pdftex.map}{c:/Users/Morgan/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}{c:/Users/Morgan/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}]
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-
-Underfull \vbox (badness 1728) has occurred while \output is active []
-
-[2
-
-]
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-LaTeX Font Info:    Trying to load font information for TS1+lmr on input line 365.
+{c:/Users/Morgan/AppData/Roaming/TinyTeX/texmf-var/fonts/map/pdftex/updmap/pdftex.map}{c:/Users/Morgan/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}{c:/Users/Morgan/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}] [2]
+LaTeX Font Info:    Trying to load font information for TS1+lmr on input line 421.
 (c:/Users/Morgan/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/lm/ts1lmr.fd
 File: ts1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
-) [3{c:/Users/Morgan/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-ts1.enc}] [4
+) [3{c:/Users/Morgan/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-ts1.enc}]
+<210431461_CSC8639_Dissertation_files/figure-latex/CombinedSensitivity-1.pdf, id=198, 469.755pt x 361.35pt>
+File: 210431461_CSC8639_Dissertation_files/figure-latex/CombinedSensitivity-1.pdf Graphic file (type pdf)
+<use 210431461_CSC8639_Dissertation_files/figure-latex/CombinedSensitivity-1.pdf>
+Package pdftex.def Info: 210431461_CSC8639_Dissertation_files/figure-latex/CombinedSensitivity-1.pdf  used on input line 521.
+(pdftex.def)             Requested size: 469.75386pt x 361.34912pt.
 
-]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[4{c:/Users/Morgan/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}{c:/Users/Morgan/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}{c:/Users/Morgan/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathex.enc}]
+<210431461_CSC8639_Dissertation_files/figure-latex/FirstMinimum-1.pdf, id=213, 469.755pt x 361.35pt>
+File: 210431461_CSC8639_Dissertation_files/figure-latex/FirstMinimum-1.pdf Graphic file (type pdf)
+<use 210431461_CSC8639_Dissertation_files/figure-latex/FirstMinimum-1.pdf>
+Package pdftex.def Info: 210431461_CSC8639_Dissertation_files/figure-latex/FirstMinimum-1.pdf  used on input line 560.
+(pdftex.def)             Requested size: 469.75386pt x 361.34912pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[5 <./210431461_CSC8639_Dissertation_files/figure-latex/CombinedSensitivity-1.pdf>]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[6 <./210431461_CSC8639_Dissertation_files/figure-latex/FirstMinimum-1.pdf>]
+<210431461_CSC8639_Dissertation_files/figure-latex/LongestDecrease-1.pdf, id=234, 469.755pt x 361.35pt>
+File: 210431461_CSC8639_Dissertation_files/figure-latex/LongestDecrease-1.pdf Graphic file (type pdf)
+<use 210431461_CSC8639_Dissertation_files/figure-latex/LongestDecrease-1.pdf>
+Package pdftex.def Info: 210431461_CSC8639_Dissertation_files/figure-latex/LongestDecrease-1.pdf  used on input line 607.
+(pdftex.def)             Requested size: 469.75386pt x 361.34912pt.
+<210431461_CSC8639_Dissertation_files/figure-latex/LongestGreater-1.pdf, id=236, 469.755pt x 361.35pt>
+File: 210431461_CSC8639_Dissertation_files/figure-latex/LongestGreater-1.pdf Graphic file (type pdf)
+<use 210431461_CSC8639_Dissertation_files/figure-latex/LongestGreater-1.pdf>
+Package pdftex.def Info: 210431461_CSC8639_Dissertation_files/figure-latex/LongestGreater-1.pdf  used on input line 618.
+(pdftex.def)             Requested size: 469.75386pt x 361.34912pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[7 <./210431461_CSC8639_Dissertation_files/figure-latex/LongestDecrease-1.pdf>]
+<210431461_CSC8639_Dissertation_files/figure-latex/AutoMutalFunction-1.pdf, id=248, 469.755pt x 361.35pt>
+File: 210431461_CSC8639_Dissertation_files/figure-latex/AutoMutalFunction-1.pdf Graphic file (type pdf)
+<use 210431461_CSC8639_Dissertation_files/figure-latex/AutoMutalFunction-1.pdf>
+Package pdftex.def Info: 210431461_CSC8639_Dissertation_files/figure-latex/AutoMutalFunction-1.pdf  used on input line 630.
+(pdftex.def)             Requested size: 469.75386pt x 361.34912pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[8 <./210431461_CSC8639_Dissertation_files/figure-latex/LongestGreater-1.pdf>]
+<210431461_CSC8639_Dissertation_files/figure-latex/FirstPeak-1.pdf, id=259, 469.755pt x 361.35pt>
+File: 210431461_CSC8639_Dissertation_files/figure-latex/FirstPeak-1.pdf Graphic file (type pdf)
+<use 210431461_CSC8639_Dissertation_files/figure-latex/FirstPeak-1.pdf>
+Package pdftex.def Info: 210431461_CSC8639_Dissertation_files/figure-latex/FirstPeak-1.pdf  used on input line 644.
+(pdftex.def)             Requested size: 469.75386pt x 361.34912pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[9 <./210431461_CSC8639_Dissertation_files/figure-latex/AutoMutalFunction-1.pdf>]
+<210431461_CSC8639_Dissertation_files/figure-latex/ApproxScale-1.pdf, id=270, 469.755pt x 361.35pt>
+File: 210431461_CSC8639_Dissertation_files/figure-latex/ApproxScale-1.pdf Graphic file (type pdf)
+<use 210431461_CSC8639_Dissertation_files/figure-latex/ApproxScale-1.pdf>
+Package pdftex.def Info: 210431461_CSC8639_Dissertation_files/figure-latex/ApproxScale-1.pdf  used on input line 656.
+(pdftex.def)             Requested size: 469.75386pt x 361.34912pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[10 <./210431461_CSC8639_Dissertation_files/figure-latex/FirstPeak-1.pdf>]
+<210431461_CSC8639_Dissertation_files/figure-latex/MAE-1.pdf, id=281, 469.755pt x 361.35pt>
+File: 210431461_CSC8639_Dissertation_files/figure-latex/MAE-1.pdf Graphic file (type pdf)
+<use 210431461_CSC8639_Dissertation_files/figure-latex/MAE-1.pdf>
+Package pdftex.def Info: 210431461_CSC8639_Dissertation_files/figure-latex/MAE-1.pdf  used on input line 673.
+(pdftex.def)             Requested size: 469.75386pt x 361.34912pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[11 <./210431461_CSC8639_Dissertation_files/figure-latex/ApproxScale-1.pdf>]
 LaTeX Font Info:    Font shape `T1/lmtt/bx/n' in size <10> not available
-(Font)              Font shape `T1/lmtt/b/n' tried instead on input line 559.
-<210431461_CSC8639_Dissertation_files/figure-latex/fig2-1.pdf, id=231, 469.755pt x 325.215pt>
-File: 210431461_CSC8639_Dissertation_files/figure-latex/fig2-1.pdf Graphic file (type pdf)
-<use 210431461_CSC8639_Dissertation_files/figure-latex/fig2-1.pdf>
-Package pdftex.def Info: 210431461_CSC8639_Dissertation_files/figure-latex/fig2-1.pdf  used on input line 565.
-(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-[5
+(Font)              Font shape `T1/lmtt/b/n' tried instead on input line 712.
+LaTeX Font Info:    Trying to load font information for TS1+lmtt on input line 726.
+(c:/Users/Morgan/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/lm/ts1lmtt.fd
+File: ts1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
+)
+Package microtype Info: Loading generic protrusion settings for font family
+(microtype)             `lmtt' (encoding: TS1).
+(microtype)             For optimal results, create family-specific settings.
+(microtype)             See the microtype manual for details.
+Package microtype Info: Character `texttrademark ' is missing
+(microtype)             in font `TS1/lmtt/m/n/10'.
+(microtype)             Ignoring protrusion settings for this character.
+[12 <./210431461_CSC8639_Dissertation_files/figure-latex/MAE-1.pdf>]
+Overfull \hbox (4.8716pt too wide) in paragraph at lines 796--796
+[]|\T1/lmr/m/n/10 (-20) SC_FluctAnal_2_rsrangefit_50_1_logi_prop_r1|  
+ []
 
-{c:/Users/Morgan/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}{c:/Users/Morgan/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}{c:/Users/Morgan/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathex.enc}] [6 <./210431461_CSC8639_Dissertation_files/figure-latex/fig2-1.pdf>]
-Underfull \hbox (badness 10000) in paragraph at lines 709--709
+[13]
+<210431461_CSC8639_Dissertation_files/figure-latex/NthSensitivity-1.pdf, id=314, 469.755pt x 296.10625pt>
+File: 210431461_CSC8639_Dissertation_files/figure-latex/NthSensitivity-1.pdf Graphic file (type pdf)
+<use 210431461_CSC8639_Dissertation_files/figure-latex/NthSensitivity-1.pdf>
+Package pdftex.def Info: 210431461_CSC8639_Dissertation_files/figure-latex/NthSensitivity-1.pdf  used on input line 819.
+(pdftex.def)             Requested size: 469.75386pt x 296.10551pt.
+<210431461_CSC8639_Dissertation_files/figure-latex/PCSensitivity-1.pdf, id=315, 469.755pt x 361.35pt>
+File: 210431461_CSC8639_Dissertation_files/figure-latex/PCSensitivity-1.pdf Graphic file (type pdf)
+<use 210431461_CSC8639_Dissertation_files/figure-latex/PCSensitivity-1.pdf>
+Package pdftex.def Info: 210431461_CSC8639_Dissertation_files/figure-latex/PCSensitivity-1.pdf  used on input line 827.
+(pdftex.def)             Requested size: 469.75386pt x 361.34912pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[14 <./210431461_CSC8639_Dissertation_files/figure-latex/NthSensitivity-1.pdf>]
+<210431461_CSC8639_Dissertation_files/figure-latex/Heatmap-1.pdf, id=326, 469.755pt x 361.35pt>
+File: 210431461_CSC8639_Dissertation_files/figure-latex/Heatmap-1.pdf Graphic file (type pdf)
+<use 210431461_CSC8639_Dissertation_files/figure-latex/Heatmap-1.pdf>
+Package pdftex.def Info: 210431461_CSC8639_Dissertation_files/figure-latex/Heatmap-1.pdf  used on input line 843.
+(pdftex.def)             Requested size: 469.75386pt x 361.34912pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[15 <./210431461_CSC8639_Dissertation_files/figure-latex/PCSensitivity-1.pdf>]
+Underfull \hbox (badness 10000) in paragraph at lines 868--868
 []\T1/lmr/m/n/10 (+20) Cabinet Of-fice and Gov-ern-ment Dig-i-tal Ser-vice, ``Gov-ern-ment trans-for-ma-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 709--709
+Underfull \hbox (badness 10000) in paragraph at lines 868--868
 \T1/lmr/m/n/10 (+20) tion strat-egy: Bet-ter use of data.'' HM Gov-ern-ment; []$\T1/lmtt/m/n/10 https : / / www . gov . uk /
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 709--709
+Underfull \hbox (badness 10000) in paragraph at lines 868--868
 \T1/lmtt/m/n/10 government / publications / government-[]transformation-[]strategy-[]2017-[]to-[]2020 /
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 703--710
+Underfull \hbox (badness 10000) in paragraph at lines 862--869
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 711--718
+Underfull \hbox (badness 10000) in paragraph at lines 870--877
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 719--725
+Underfull \hbox (badness 10000) in paragraph at lines 878--884
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 732--732
+Underfull \hbox (badness 10000) in paragraph at lines 891--891
 []\T1/lmr/m/n/10 (+20) Central Dig-i-tal & Data Of-fice, ``Trans-form-ing for a dig-i-tal fu-ture: 2022
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 732--732
+Underfull \hbox (badness 10000) in paragraph at lines 891--891
 \T1/lmr/m/n/10 (+20) to 2025 roadmap for dig-i-tal and data.'' HM Gov-ern-ment; []$\T1/lmtt/m/n/10 https : / / www .
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 732--732
+Underfull \hbox (badness 10000) in paragraph at lines 891--891
 \T1/lmtt/m/n/10 gov . uk / government / publications / roadmap-[]for-[]digital-[]and-[]data-[]2022-[]to-[]2025 /
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 726--733
+Underfull \hbox (badness 10000) in paragraph at lines 885--892
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 738--738
+Underfull \hbox (badness 10000) in paragraph at lines 897--897
 []\T1/lmr/m/n/10 (+20) Centre for Data Ethics & In-no-va-tion, ``Ad-dress-ing trust in pub-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 738--738
+Underfull \hbox (badness 10000) in paragraph at lines 897--897
 \T1/lmr/m/n/10 (+20) lic sec-tor data use.'' []$\T1/lmtt/m/n/10 https : / / www . gov . uk / government / publications /
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 738--738
+Underfull \hbox (badness 10000) in paragraph at lines 897--897
 \T1/lmtt/m/n/10 cdei-[]publishes-[]its-[]first-[]report-[]on-[]public-[]sector-[]data-[]sharing /
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 734--739
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 745--745
-\T1/lmtt/m/n/10 / / analysisfunction . civilservice . gov . uk / learning-[]development / learning-[]pathways /
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 740--746
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 752--752
-\T1/lmtt/m/n/10 query = &topic = &updated = &fromDateDay = &fromDateMonth = &fromDateYear = &toDateDay =
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 747--753
-
- []
-
-[7]
-Underfull \hbox (badness 10000) in paragraph at lines 754--762
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 763--769
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 770--777
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 778--782
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 783--790
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 791--797
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 798--803
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 804--809
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 810--816
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 817--823
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 824--831
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 832--839
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 840--846
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 847--853
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 854--860
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 861--868
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 869--875
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 876--881
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 882--889
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 890--896
+Underfull \hbox (badness 10000) in paragraph at lines 893--898
 
  []
 
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[8]
-Underfull \hbox (badness 10000) in paragraph at lines 902--902
+[16 <./210431461_CSC8639_Dissertation_files/figure-latex/Heatmap-1.pdf>]
+Underfull \hbox (badness 10000) in paragraph at lines 904--904
+\T1/lmtt/m/n/10 / / analysisfunction . civilservice . gov . uk / learning-[]development / learning-[]pathways /
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 899--905
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 911--911
+\T1/lmtt/m/n/10 query = &topic = &updated = &fromDateDay = &fromDateMonth = &fromDateYear = &toDateDay =
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 906--912
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 913--921
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 922--928
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 929--936
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 937--941
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 942--949
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 950--956
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 957--962
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 963--968
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 969--975
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 976--982
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 983--990
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 991--998
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 999--1005
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1006--1012
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1013--1019
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1020--1027
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1028--1034
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1035--1040
+
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[17]
+Underfull \hbox (badness 10000) in paragraph at lines 1041--1048
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1049--1055
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1061--1061
 []\T1/lmr/m/n/10 (+20) HM Gov-ern-ment, ``Global britain in a com-pet-i-tive age: The in-te-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 902--902
+Underfull \hbox (badness 10000) in paragraph at lines 1061--1061
 \T1/lmr/m/n/10 (+20) grated re-view of se-cu-rity, de-fence, de-vel-op-ment and for-eign pol-icy.''
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 902--902
+Underfull \hbox (badness 10000) in paragraph at lines 1061--1061
 \T1/lmr/m/n/10 (+20) GOV.UK, 2021. Avail-able: []$\T1/lmtt/m/n/10 https : / / www . gov . uk / government / publications /
  []
 
 
-Overfull \hbox (138.94334pt too wide) in paragraph at lines 902--902
+Overfull \hbox (138.94334pt too wide) in paragraph at lines 1061--1061
 \T1/lmtt/m/n/10 global-[]britain-[]in-[]a-[]competitive-[]age-[]the-[]integrated-[]review-[]of-[]security-[]defence-[]development-[]and-[]foreign-[]policy /
  []
 
 
-Overfull \hbox (134.48087pt too wide) in paragraph at lines 902--902
+Overfull \hbox (134.48087pt too wide) in paragraph at lines 1061--1061
 \T1/lmtt/m/n/10 global-[]britain-[]in-[]a-[]competitive-[]age-[]the-[]integrated-[]review-[]of-[]security-[]defence-[]development-[]and-[]foreign-[]policy$[] 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 897--903
+Underfull \hbox (badness 10000) in paragraph at lines 1056--1062
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 904--913
+Underfull \hbox (badness 10000) in paragraph at lines 1063--1072
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 914--919
+Underfull \hbox (badness 10000) in paragraph at lines 1073--1078
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 920--926
+Underfull \hbox (badness 10000) in paragraph at lines 1079--1085
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 927--933
+Underfull \hbox (badness 10000) in paragraph at lines 1086--1092
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 934--940
+Underfull \hbox (badness 10000) in paragraph at lines 1093--1099
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 941--948
+Underfull \hbox (badness 10000) in paragraph at lines 1100--1107
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 949--956
+Underfull \hbox (badness 10000) in paragraph at lines 1108--1115
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 957--964
+Underfull \hbox (badness 10000) in paragraph at lines 1116--1123
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 965--971
+Underfull \hbox (badness 10000) in paragraph at lines 1124--1130
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1131--1136
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1137--1141
 
  []
 
 No file 210431461_CSC8639_Dissertation.bbl.
-[9] (./210431461_CSC8639_Dissertation.aux)
+[18] (./210431461_CSC8639_Dissertation.aux)
  ***********
 LaTeX2e <2023-06-01> patch level 1
 L3 programming layer <2023-08-03>
@@ -852,30 +959,24 @@ LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 LaTeX Warning: There were multiply-defined labels.
 
 Package rerunfilecheck Info: File `210431461_CSC8639_Dissertation.out' has not changed.
-(rerunfilecheck)             Checksum: 1F52986F82D855A0982CC91404570FD4;1886.
+(rerunfilecheck)             Checksum: C3A438856702951224B045358F06C15E;1713.
  ) 
 Here is how much of TeX's memory you used:
- 12584 strings out of 477147
- 204866 string characters out of 5811427
- 1950248 words of memory out of 5000000
- 33184 multiletter control sequences out of 15000+600000
- 616372 words of font info for 142 fonts, out of 8000000 for 9000
+ 12680 strings out of 477147
+ 210936 string characters out of 5811427
+ 1944248 words of memory out of 5000000
+ 33271 multiletter control sequences out of 15000+600000
+ 613213 words of font info for 147 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 75i,12n,79p,1027b,472s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 75i,12n,79p,1027b,562s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-pdfTeX warning (dest): name{ref-hadash2018estimate} has been referenced but does not exist, replaced by a fixed one
+pdfTeX warning (dest): name{ref-feature_book} has been referenced but does not exist, replaced by a fixed one
 
-
-pdfTeX warning (dest): name{ref-kour2014fast} has been referenced but does not exist, replaced by a fixed one
-
-
-pdfTeX warning (dest): name{ref-kour2014real} has been referenced but does not exist, replaced by a fixed one
-
-<c:/Users/Morgan/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmbx10.pfb><c:/Users/Morgan/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmbx12.pfb><c:/Users/Morgan/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmbxi10.pfb><c:/Users/Morgan/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmcsc10.pfb><c:/Users/Morgan/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmex10.pfb><c:/Users/Morgan/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi10.pfb><c:/Users/Morgan/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi5.pfb><c:/Users/Morgan/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi7.pfb><c:/Users/Morgan/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr10.pfb><c:/Users/Morgan/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr5.pfb><c:/Users/Morgan/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr7.pfb><c:/Users/Morgan/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmri10.pfb><c:/Users/Morgan/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmri7.pfb><c:/Users/Morgan/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy10.pfb><c:/Users/Morgan/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtk10.pfb><c:/Users/Morgan/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtt10.pfb>
-Output written on 210431461_CSC8639_Dissertation.pdf (9 pages, 324708 bytes).
+<c:/Users/Morgan/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmbx10.pfb><c:/Users/Morgan/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmbx12.pfb><c:/Users/Morgan/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmbxi10.pfb><c:/Users/Morgan/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmcsc10.pfb><c:/Users/Morgan/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmex10.pfb><c:/Users/Morgan/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi10.pfb><c:/Users/Morgan/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi5.pfb><c:/Users/Morgan/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi7.pfb><c:/Users/Morgan/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr10.pfb><c:/Users/Morgan/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr5.pfb><c:/Users/Morgan/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr7.pfb><c:/Users/Morgan/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmri10.pfb><c:/Users/Morgan/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy10.pfb><c:/Users/Morgan/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtk10.pfb><c:/Users/Morgan/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtt10.pfb><c:/Users/Morgan/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtti10.pfb>
+Output written on 210431461_CSC8639_Dissertation.pdf (18 pages, 444375 bytes).
 PDF statistics:
- 443 PDF objects out of 1000 (max. 8388607)
- 391 compressed objects within 4 object streams
- 87 named destinations out of 1000 (max. 500000)
- 31878 words of extra memory for PDF output out of 35830 (max. 10000000)
+ 516 PDF objects out of 1000 (max. 8388607)
+ 432 compressed objects within 5 object streams
+ 84 named destinations out of 1000 (max. 500000)
+ 30864 words of extra memory for PDF output out of 35830 (max. 10000000)
 
