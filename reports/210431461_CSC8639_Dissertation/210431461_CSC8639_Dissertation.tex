@@ -13,7 +13,7 @@
 \usepackage{microtype}      % microtypography
 \usepackage{graphicx}
 
-\title{Explaining time series downsampling through visualisation}
+\title{The Explainability of Time Series Downsampling}
 
 \author{
     Morgan Frodsham
@@ -43,13 +43,13 @@
 \newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
 \newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
 \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
-\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
 \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
 \newcommand{\BuiltInTok}[1]{#1}
 \newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
 \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
 \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
-\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
 \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
 \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
 \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
@@ -57,7 +57,7 @@
 \newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
 \newcommand{\ExtensionTok}[1]{#1}
 \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
-\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
 \newcommand{\ImportTok}[1]{#1}
 \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
 \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
@@ -66,7 +66,7 @@
 \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
 \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
 \newcommand{\RegionMarkerTok}[1]{#1}
-\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
 \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
 \newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
 \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
@@ -142,8 +142,8 @@ Enter the text of your abstract here.
 \hypertarget{introduction}{%
 \section{INTRODUCTION}\label{introduction}}
 
-The UK Government is committed to making data-driven decisions that
-engender public trust
+HM Government is committed to making data-driven decisions that engender
+public trust
 \protect\hyperlink{ref-data2017}{{[}1{]}}--\protect\hyperlink{ref-data2022}{{[}4{]}}.
 Data-driven decisions are considered to be ``more well-informed''
 \protect\hyperlink{ref-data2017}{{[}1{]}}, effective
@@ -154,10 +154,10 @@ of trust in government use of data
 \protect\hyperlink{ref-trust}{{[}5{]}}. This suggests that public trust
 in data-driven decisions goes beyond how the ``data complies with legal,
 regulatory and ethical obligations''
-\protect\hyperlink{ref-data2021}{{[}3{]}}. Transparency is needed for
-the UK public to have ``confidence and trust in how data, including
-personal data, is used'' \protect\hyperlink{ref-data2020}{{[}2{]}},
-\protect\hyperlink{ref-trust}{{[}5{]}}.
+\protect\hyperlink{ref-data2021}{{[}3{]}}. The UK public need to have
+``confidence and trust in how data, including personal data, is used''
+\protect\hyperlink{ref-data2020}{{[}2{]}}, and this requires
+transparency \protect\hyperlink{ref-trust}{{[}5{]}}.
 
 To make data-driven decisions, government decision-makers also need to
 trust how the data used (cite user research here). This means trusting
@@ -168,7 +168,7 @@ data practitioners have the opportunity to communicate the impact of the
 assumptions and choices they are making to support decision-makers in
 trusting the data informing their decisions.
 
-Time series data is used across the UK Government
+Time series data is used across HM Government
 \protect\hyperlink{ref-pathway}{{[}6{]}} to inform decision-makers
 across various domains \protect\hyperlink{ref-onstool}{{[}7{]}}. It is
 also widely generated and used by industry and research
@@ -182,11 +182,11 @@ sustainability ambitions \protect\hyperlink{ref-TVStore}{{[}8{]}},
 \protect\hyperlink{ref-Sveinn}{{[}10{]}},
 \protect\hyperlink{ref-Shift}{{[}11{]}}.
 
-Downsampling is an established value preserving data aggregation
-technique \protect\hyperlink{ref-downsampling}{{[}12{]}},
+Downsampling is an established technique
+\protect\hyperlink{ref-downsampling}{{[}12{]}},
 \protect\hyperlink{ref-sampling}{{[}13{]}} that involves selecting a
-representative subset of the time series data to preserve its shape
-while reducing the number of data points
+representative subset of data to preserve its original shape while
+reducing the number of data points
 \protect\hyperlink{ref-datapoint}{{[}9{]}},
 \protect\hyperlink{ref-MinMaxLTTB}{{[}14{]}}. This is a vital part of
 making voluminous time series understandable for human observation
@@ -231,9 +231,9 @@ This section provides an overview of previous related work to create a
 clear understanding of the most relevant fields of research and identify
 the gaps being addressed by the paper.
 
-\emph{Data Transparency}
+\#\#Data Transparency
 
-Technology transparency, ``including institutional data practices,'' is
+Technology transparency, ``including institutional data practices'', is
 sociopolitical in nature
 \protect\hyperlink{ref-political_transparency}{{[}17{]}}. There is a
 growing number of researchers reflecting on ``societal needs in terms of
@@ -263,7 +263,7 @@ practitioners should be encouraged to find tools, such as interactive
 visualisations \protect\hyperlink{ref-datapoint}{{[}9{]}}, that put
 agency into the hands of decision-makers.
 
-\emph{Time series visualisation}
+\#\#Time series visualisation
 
 Time series data is commonly visualised as a line graph
 \protect\hyperlink{ref-Sveinn}{{[}10{]}},
@@ -293,7 +293,7 @@ in this paper harnesses the capabilities of \texttt{imputeTS} and its
 `process' visualisations to help data practitioners communicate the
 impact of downsampling choices made in the data processing pipeline.
 
-\emph{Value Preserving Data Aggregation}
+\#\#Value Preserving Data Aggregation
 
 Technological innovation has generated unprecedented amount of time
 series data and this data continues to grow
@@ -301,16 +301,16 @@ series data and this data continues to grow
 \protect\hyperlink{ref-TVStore}{{[}8{]}},
 \protect\hyperlink{ref-storage}{{[}26{]}},
 \protect\hyperlink{ref-CatchUp}{{[}27{]}}. For example, tackling climate
-change is the UK Government's ``number one international
-\href{mailto:priority\%22@IR}{\nolinkurl{priority"@IR}}, yet climate
-simulations that help inform decision-makers generate tens of terabytes
-per second \protect\hyperlink{ref-TVStore}{{[}8{]}},
-\protect\hyperlink{ref-climate}{{[}28{]}}. Downsampling (value
+change is the UK Government's ``number one international priority''
+\protect\hyperlink{ref-IR}{{[}28{]}}, yet climate simulations that help
+inform decision-makers generate tens of terabytes per second
+\protect\hyperlink{ref-TVStore}{{[}8{]}},
+\protect\hyperlink{ref-climate}{{[}29{]}}. Downsampling (value
 preserving data aggregation) plays an important role in addressing how
 this voluminous data is processed, stored
 \protect\hyperlink{ref-TVStore}{{[}8{]}} and visualised
 \protect\hyperlink{ref-Sveinn}{{[}10{]}},
-\protect\hyperlink{ref-dashql}{{[}29{]}} by minimising computing
+\protect\hyperlink{ref-dashql}{{[}30{]}} by minimising computing
 resources needed \protect\hyperlink{ref-TVStore}{{[}8{]}}, reducing
 network latency, and improving rendering time
 \protect\hyperlink{ref-datapoint}{{[}9{]}},
@@ -321,7 +321,7 @@ aggregation) algorithms is provided in the table below:
 
 insert table \protect\hyperlink{ref-datapoint}{{[}9{]}} - EveryNth, also
 known as sampling or decimation, selects \emph{n\textsuperscript{th}}
-datapoint \protect\hyperlink{ref-EveryNth}{{[}30{]}} - percentage change
+datapoint \protect\hyperlink{ref-EveryNth}{{[}31{]}} - percentage change
 - Mode-Median Bucket. The bucket part in the algorithm name refers to
 the data being split up into buckets, each containing approximately
 equal number of data points. The algorithm then finds one data point
@@ -338,11 +338,11 @@ the line and the data points. - MinMax preserves the minimum and maximum
 of every data bucket \protect\hyperlink{ref-MinMaxLTTB}{{[}14{]}} -
 OM\textsuperscript{3} maintains minimum and maximum values at every time
 interval that is used to rasterize a pixel column in the display window
-\protect\hyperlink{ref-MinMaxOrdered}{{[}31{]}} - M4 combines EveryNth
+\protect\hyperlink{ref-MinMaxOrdered}{{[}32{]}} - M4 combines EveryNth
 and MinMax, selecting the first and last values of each data bucket as
 well as its minimum and maximum
-\protect\hyperlink{ref-dashql}{{[}29{]}},
-\protect\hyperlink{ref-M4}{{[}32{]}} - Longest line bucket
+\protect\hyperlink{ref-dashql}{{[}30{]}},
+\protect\hyperlink{ref-M4}{{[}33{]}} - Longest line bucket
 \protect\hyperlink{ref-Sveinn}{{[}10{]}} very similar to the MSEB
 algorithm but with some key differences. It starts off exactly the same,
 splitting the data points into buckets and calculating lines going
@@ -376,7 +376,7 @@ evaluation of downsampling approaches
 \protect\hyperlink{ref-datapoint}{{[}9{]}},
 \protect\hyperlink{ref-downsampling}{{[}12{]}}--\protect\hyperlink{ref-MinMaxLTTB}{{[}14{]}},
 \protect\hyperlink{ref-plotly}{{[}24{]}},
-\protect\hyperlink{ref-dashql}{{[}29{]}}--\protect\hyperlink{ref-MinMaxOrdered}{{[}31{]}}.
+\protect\hyperlink{ref-dashql}{{[}30{]}}--\protect\hyperlink{ref-MinMaxOrdered}{{[}32{]}}.
 These advances focus on the effectiveness of the algorithm in delivering
 downsampled data that represents the original data as accurately as
 possible. This is vital part of enabling and improving data-driven
@@ -385,29 +385,29 @@ their analysis of the data. Instead, the research set out in this paper
 aims to support data practitioners to communicate the impact of their
 downsampling choices for decision-makers.
 
-\emph{Time series feature analysis}
+\#\#Time series feature analysis
 
 The increasing size of modern time series data sets has also generated
 new research into the dynamical characteristics of time series
-\protect\hyperlink{ref-catch22}{{[}33{]}}. These characteristics are
+\protect\hyperlink{ref-catch22}{{[}34{]}}. These characteristics are
 often used to identify features that enable efficient clustering and
 classification of time series data, especially for machine learning. A
 comprehensive library of such features is the \emph{hctsa} (highly
 comparative time series analysis) toolbox. This shares the 4791 best
 performing features after computationally comparing thousands of
 features from across scientific time series analysis literature
-\protect\hyperlink{ref-fulcher2017}{{[}34{]}}.
+\protect\hyperlink{ref-fulcher2017}{{[}35{]}}.
 
 Utilising such a library, however, is computationally expensive
-\protect\hyperlink{ref-catch22}{{[}33{]}}. C. H. Lubba et. al have
+\protect\hyperlink{ref-catch22}{{[}34{]}}. C. H. Lubba et. al have
 attempted to address this by identified a subset of 22 features that are
 tailored to time series data mining tasks
-\protect\hyperlink{ref-bagnall}{{[}35{]}},
-\protect\hyperlink{ref-Rcatch22}{\textbf{Rcatch22?}}. Although further
-research is needed to evaluate the relative performance of different
-feature sets on different types of problems, \texttt{catch22} performs
-well against other feature libraries across 800 diverse real-world and
-model-generated time series \protect\hyperlink{ref-henderson}{{[}36{]}}.
+\protect\hyperlink{ref-catch22}{{[}34{]}},
+\protect\hyperlink{ref-bagnall}{{[}36{]}}. Although further research is
+needed to evaluate the relative performance of different feature sets on
+different types of problems, \texttt{catch22} performs well against
+other feature libraries across 800 diverse real-world and
+model-generated time series \protect\hyperlink{ref-henderson}{{[}37{]}}.
 
 Features used to classify time series data could provide a common
 framework by which to consistenly compare different downsampling
@@ -420,16 +420,37 @@ downsampling and create a visual tool for explaining this impact.
 
 \label{sec:headings}
 
+\begin{itemize}
+\tightlist
+\item
+  user research insights
+\end{itemize}
+
+\hypertarget{methodology}{%
+\section{METHODOLOGY}\label{methodology}}
+
+\label{sec:headings}
+
+\begin{itemize}
+\item
+  Two basic downsampling approaches applied Annotated Change Turing Data
+  sets
+\item
+  Used imputeTS to calculate number of nas, na gaps and remaining volume
+  of data as well as visualise gaps
+\item
+  Used imputTS to apply simple linear interpolation
+\item
+  Ran Rcatch22 over original downsampled and interpolated data
+\item
+  Calculate difference from original data to choose subselection
+\item
+  visualise variation of method over features
+\item
+  visualise variation of data loss over features
+\end{itemize}
+
 \onecolumn
-
-You can use directly LaTeX command or Markdown text.
-
-LaTeX command can be used to reference other section. See Section
-\ref{sec:headings}. However, you can also use \textbf{bookdown}
-extensions mechanism for this.
-
-\hypertarget{headings-second-level}{%
-\subsection{Headings: second level}\label{headings-second-level}}
 
 You can use equation in blocks
 
@@ -438,16 +459,6 @@ You can use equation in blocks
 \]
 
 But also inline i.e \(z=x+y\)
-
-\hypertarget{headings-third-level}{%
-\subsubsection{Headings: third level}\label{headings-third-level}}
-
-Another paragraph.
-
-\hypertarget{methodology}{%
-\section{METHODOLOGY}\label{methodology}}
-
-\label{sec:headings}
 
 \hypertarget{imputets}{%
 \subsection{ImputeTS}\label{imputets}}
@@ -591,16 +602,76 @@ You can also use R code for that.
 \end{Highlighting}
 \end{Shaded}
 
-\begin{longtable}[]{@{}lrrrrrrrrrrr@{}}
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 22\tabcolsep) * \real{0.2609}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 22\tabcolsep) * \real{0.0725}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 22\tabcolsep) * \real{0.0580}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 22\tabcolsep) * \real{0.0725}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 22\tabcolsep) * \real{0.0580}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 22\tabcolsep) * \real{0.0725}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 22\tabcolsep) * \real{0.0870}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 22\tabcolsep) * \real{0.0870}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 22\tabcolsep) * \real{0.0435}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 22\tabcolsep) * \real{0.0435}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 22\tabcolsep) * \real{0.0725}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 22\tabcolsep) * \real{0.0725}}@{}}
 \caption{Head of mtcars table}\tabularnewline
-\toprule
-& mpg & cyl & disp & hp & drat & wt & qsec & vs & am & gear & carb \\
-\midrule
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+mpg
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+cyl
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+disp
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+hp
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+drat
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+wt
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+qsec
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+vs
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+am
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+gear
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+carb
+\end{minipage} \\
+\midrule\noalign{}
 \endfirsthead
-\toprule
-& mpg & cyl & disp & hp & drat & wt & qsec & vs & am & gear & carb \\
-\midrule
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+mpg
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+cyl
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+disp
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+hp
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+drat
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+wt
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+qsec
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+vs
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+am
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+gear
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+carb
+\end{minipage} \\
+\midrule\noalign{}
 \endhead
+\bottomrule\noalign{}
+\endlastfoot
 Mazda RX4 & 21.0 & 6 & 160 & 110 & 3.90 & 2.620 & 16.46 & 0 & 1 & 4 &
 4 \\
 Mazda RX4 Wag & 21.0 & 6 & 160 & 110 & 3.90 & 2.875 & 17.02 & 0 & 1 & 4
@@ -612,7 +683,6 @@ Hornet 4 Drive & 21.4 & 6 & 258 & 110 & 3.08 & 3.215 & 19.44 & 1 & 0 & 3
 Hornet Sportabout & 18.7 & 8 & 360 & 175 & 3.15 & 3.440 & 17.02 & 0 & 0
 & 3 & 2 \\
 Valiant & 18.1 & 6 & 225 & 105 & 2.76 & 3.460 & 20.22 & 1 & 0 & 3 & 1 \\
-\bottomrule
 \end{longtable}
 
 \hypertarget{lists}{%
@@ -631,7 +701,7 @@ Valiant & 18.1 & 6 & 225 & 105 & 2.76 & 3.460 & 20.22 & 1 & 0 & 3 & 1 \\
 \hypertarget{refs}{}
 \begin{CSLReferences}{0}{0}
 \leavevmode\vadjust pre{\hypertarget{ref-data2017}{}}%
-\CSLLeftMargin{{[}1{]} }
+\CSLLeftMargin{{[}1{]} }%
 \CSLRightInline{Cabinet Office and Government Digital Service,
 {``Government transformation strategy: Better use of data.''} HM
 Government;
@@ -639,7 +709,7 @@ Government;
 2017.}
 
 \leavevmode\vadjust pre{\hypertarget{ref-data2020}{}}%
-\CSLLeftMargin{{[}2{]} }
+\CSLLeftMargin{{[}2{]} }%
 \CSLRightInline{Department for Digital, Culture, Media \& Sport and
 Department for Science, Innovation \& Technology, {``National data
 strategy.''} HM Government;
@@ -647,14 +717,14 @@ strategy.''} HM Government;
 2020.}
 
 \leavevmode\vadjust pre{\hypertarget{ref-data2021}{}}%
-\CSLLeftMargin{{[}3{]} }
+\CSLLeftMargin{{[}3{]} }%
 \CSLRightInline{M. of Defence, {``Data strategy for defence,''}
 \emph{GOV.UK}. HM Government;
 \url{https://www.gov.uk/government/publications/data-strategy-for-defence/data-strategy-for-defence},
 2021.}
 
 \leavevmode\vadjust pre{\hypertarget{ref-data2022}{}}%
-\CSLLeftMargin{{[}4{]} }
+\CSLLeftMargin{{[}4{]} }%
 \CSLRightInline{Central Digital \& Data Office, {``Transforming for a
 digital future: 2022 to 2025 roadmap for digital and data.''} HM
 Government;
@@ -662,27 +732,27 @@ Government;
 2022.}
 
 \leavevmode\vadjust pre{\hypertarget{ref-trust}{}}%
-\CSLLeftMargin{{[}5{]} }
+\CSLLeftMargin{{[}5{]} }%
 \CSLRightInline{Centre for Data Ethics \& Innovation, {``Addressing
 trust in public sector data use.''}
 \url{https://www.gov.uk/government/publications/cdei-publishes-its-first-report-on-public-sector-data-sharing/addressing-trust-in-public-sector-data-use\#introduction--context}.}
 
 \leavevmode\vadjust pre{\hypertarget{ref-pathway}{}}%
-\CSLLeftMargin{{[}6{]} }
+\CSLLeftMargin{{[}6{]} }%
 \CSLRightInline{Government Analysis Function, {``Types of data in
 government learning pathway.''}
 \url{https://analysisfunction.civilservice.gov.uk/learning-development/learning-pathways/types-of-data-in-government-learning-pathway/},
 2022.}
 
 \leavevmode\vadjust pre{\hypertarget{ref-onstool}{}}%
-\CSLLeftMargin{{[}7{]} }
+\CSLLeftMargin{{[}7{]} }%
 \CSLRightInline{Office for National Statistics, {``Time series
 explorer.''}
 \url{https://www.ons.gov.uk/timeseriestool?query=\&topic=\&updated=\&fromDateDay=\&fromDateMonth=\&fromDateYear=\&toDateDay=\&toDateMonth=\&toDateYear=\&size=50},
 Unknown.}
 
 \leavevmode\vadjust pre{\hypertarget{ref-TVStore}{}}%
-\CSLLeftMargin{{[}8{]} }
+\CSLLeftMargin{{[}8{]} }%
 \CSLRightInline{Y. An, Y. Su, Y. Zhu, and J. Wang, {``TVStore:
 Automatically bounding time series storage via time-varying
 compression,''} in \emph{Proceedings of the 20th USENIX conference on
@@ -691,14 +761,14 @@ technologies. Santa Clara, CA, USA: USENIX Association, 2022, pp.
 83--99.}
 
 \leavevmode\vadjust pre{\hypertarget{ref-datapoint}{}}%
-\CSLLeftMargin{{[}9{]} }
+\CSLLeftMargin{{[}9{]} }%
 \CSLRightInline{J. Donckt, J. Donckt, M. Rademaker, and S. Hoecke,
 {``Data point selection for line chart visualization: Methodological
 assessment and evidence-based guidelines.''} 2023. doi:
 \href{https://doi.org/10.48550/arXiv.2304.00900}{10.48550/arXiv.2304.00900}.}
 
 \leavevmode\vadjust pre{\hypertarget{ref-Sveinn}{}}%
-\CSLLeftMargin{{[}10{]} }
+\CSLLeftMargin{{[}10{]} }%
 \CSLRightInline{S. Steinarsson, {``Downsampling time series for visual
 representation.''} University of Iceland, Faculty of Industrial
 Engineering, Mechanical Engineering; Computer Science, School of
@@ -706,12 +776,12 @@ Engineering; Natural Sciences, University of Iceland, Reykjavik,
 Iceland, 2013.}
 
 \leavevmode\vadjust pre{\hypertarget{ref-Shift}{}}%
-\CSLLeftMargin{{[}11{]} }
+\CSLLeftMargin{{[}11{]} }%
 \CSLRightInline{The Shift Project, {``Implementing digital
 sufficiency,''} 2020.}
 
 \leavevmode\vadjust pre{\hypertarget{ref-downsampling}{}}%
-\CSLLeftMargin{{[}12{]} }
+\CSLLeftMargin{{[}12{]} }%
 \CSLRightInline{W. Aigner, S. Miksch, W. Muller, H. Schumann, and C.
 Tominski, {``Visual methods for analyzing time-oriented data,''}
 \emph{IEEE Transactions on Visualization and Computer Graphics}, vol.
@@ -719,40 +789,40 @@ Tominski, {``Visual methods for analyzing time-oriented data,''}
 \href{https://doi.org/10.1109/TVCG.2007.70415}{10.1109/TVCG.2007.70415}.}
 
 \leavevmode\vadjust pre{\hypertarget{ref-sampling}{}}%
-\CSLLeftMargin{{[}13{]} }
+\CSLLeftMargin{{[}13{]} }%
 \CSLRightInline{B. C. Kwon, J. Verma, P. J. Haas, and C. Demiralp,
 {``Sampling for scalable visual analytics,''} \emph{IEEE Computer
 Graphics and Applications}, vol. 37, no. 1, pp. 100--108, 2017, doi:
 \href{https://doi.org/10.1109/MCG.2017.6}{10.1109/MCG.2017.6}.}
 
 \leavevmode\vadjust pre{\hypertarget{ref-MinMaxLTTB}{}}%
-\CSLLeftMargin{{[}14{]} }
+\CSLLeftMargin{{[}14{]} }%
 \CSLRightInline{J. Donckt, J. Donckt, M. Rademaker, and S. Hoecke,
 {``MinMaxLTTB: Leveraging MinMax-preselection to scale LTTB.''} 2023.
 Available: \url{https://arxiv.org/abs/2305.00332}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-imputeTS_R}{}}%
-\CSLLeftMargin{{[}15{]} }
+\CSLLeftMargin{{[}15{]} }%
 \CSLRightInline{S. Moritz and T. Bartiz-Beielstein, {``imputeTS: Time
 series missing value imputation in r,''} vol. 9.1. R Journal, 2017. doi:
 \href{https://doi.org/10.32614/RJ-2017-009}{10.32614/RJ-2017-009}.}
 
 \leavevmode\vadjust pre{\hypertarget{ref-catch22_R}{}}%
-\CSLLeftMargin{{[}16{]} }
+\CSLLeftMargin{{[}16{]} }%
 \CSLRightInline{C. H. Lubba, B. Fulcher, T. Henderspn, B. Harris, O. r.
 TL, and O. Cliff, {``catch22: CAnonical time-series CHaracteristics.''}
 R Journal, 2022. doi:
 \href{https://doi.org/10.5281/zenodo.6673597}{10.5281/zenodo.6673597}.}
 
 \leavevmode\vadjust pre{\hypertarget{ref-political_transparency}{}}%
-\CSLLeftMargin{{[}17{]} }
+\CSLLeftMargin{{[}17{]} }%
 \CSLRightInline{K. E. Levy and D. M. Johns, {``When open data is a
 trojan horse: The weaponization of transparency in science and
 governance,''} \emph{Big Data \& Society}, vol. 3, no. 1, 2016, doi:
 \href{https://doi.org/10.1177/2053951715621568}{10.1177/2053951715621568}.}
 
 \leavevmode\vadjust pre{\hypertarget{ref-social_transparency}{}}%
-\CSLLeftMargin{{[}18{]} }
+\CSLLeftMargin{{[}18{]} }%
 \CSLRightInline{J. Bates, H. Kennedy, I. Medina Perea, S. Oman, and L.
 Pinney, {``Socially meaningful transparency in data-based systems:
 Reflections and proposals from practice,''} \emph{Journal of
@@ -760,7 +830,7 @@ Documentation}, vol. ahead--of--print, 2023, doi:
 \href{https://doi.org/10.1108/JD-01-2023-0006}{10.1108/JD-01-2023-0006}.}
 
 \leavevmode\vadjust pre{\hypertarget{ref-transparency_lack}{}}%
-\CSLLeftMargin{{[}19{]} }
+\CSLLeftMargin{{[}19{]} }%
 \CSLRightInline{M. Ananny and K. Crawford, {``Seeing without knowing:
 Limitations of the transparency ideal and its application to algorithmic
 accountability,''} \emph{New Media \& Society}, vol. 20, no. 3, pp.
@@ -768,28 +838,28 @@ accountability,''} \emph{New Media \& Society}, vol. 20, no. 3, pp.
 \href{https://doi.org/10.1177/1461444816676645}{10.1177/1461444816676645}.}
 
 \leavevmode\vadjust pre{\hypertarget{ref-digital_transparency}{}}%
-\CSLLeftMargin{{[}20{]} }
+\CSLLeftMargin{{[}20{]} }%
 \CSLRightInline{R. Matheus, M. Janssen, and T. Janowski, {``Design
 principles for creating digital transparency in government,''}
 \emph{Government Information Quarterly}, vol. 38, no. 1, 2021, doi:
 \url{https://doi.org/10.1016/j.giq.2020.101550}.}
 
 \leavevmode\vadjust pre{\hypertarget{ref-transparency_obfuscation}{}}%
-\CSLLeftMargin{{[}21{]} }
+\CSLLeftMargin{{[}21{]} }%
 \CSLRightInline{N. A. Draper and J. Turow, {``The corporate cultivation
 of digital resignation,''} \emph{New Media \& Society}, vol. 21, no. 8,
 pp. 1824--1839, 2019, doi:
 \href{https://doi.org/10.1177/1461444819833331}{10.1177/1461444819833331}.}
 
 \leavevmode\vadjust pre{\hypertarget{ref-transparency_fallacy}{}}%
-\CSLLeftMargin{{[}22{]} }
+\CSLLeftMargin{{[}22{]} }%
 \CSLRightInline{J. A. Obar, {``Sunlight alone is not a disinfectant:
 Consent and the futility of opening big data black boxes (without
 assistance),''} \emph{Big Data \& Society}, vol. 7, no. 1, 2020, doi:
 \href{https://doi.org/10.1177/2053951720935615}{10.1177/2053951720935615}.}
 
 \leavevmode\vadjust pre{\hypertarget{ref-timenotes}{}}%
-\CSLLeftMargin{{[}23{]} }
+\CSLLeftMargin{{[}23{]} }%
 \CSLRightInline{J. Walker, R. Borgo, and MW. Jones, {``TimeNotes: A
 study on effective chart visualization and interaction techniques for
 time-series data,''} \emph{IEEE Transactions on Visualization and
@@ -797,20 +867,20 @@ Computer Graphics}, vol. 22, 2016, doi:
 \href{https://doi.org/10.1109/TVCG.2015.2467751}{10.1109/TVCG.2015.2467751}.}
 
 \leavevmode\vadjust pre{\hypertarget{ref-plotly}{}}%
-\CSLLeftMargin{{[}24{]} }
+\CSLLeftMargin{{[}24{]} }%
 \CSLRightInline{J. Donckt, J. Donckt, E. Deprost, and S. Hoecke,
 {``Plotly-resampler: Effective visual analytics for large time
 series,''} \emph{IEEE Visualization and Visual Analytics}, 2022, doi:
 \href{https://doi.org/10.1109/VIS54862.2022.00013}{10.1109/VIS54862.2022.00013}.}
 
 \leavevmode\vadjust pre{\hypertarget{ref-imputeTS}{}}%
-\CSLLeftMargin{{[}25{]} }
+\CSLLeftMargin{{[}25{]} }%
 \CSLRightInline{S. Moritz and T. Bartiz-Beielstein, {``imputeTS: Time
 series missing value imputation in r.''} R Journal, 2017. Available:
 \url{https://cran.r-project.org/web/packages/imputeTS/vignettes/imputeTS-Time-Series-Missing-Value-Imputation-in-R.pdf}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-storage}{}}%
-\CSLLeftMargin{{[}26{]} }
+\CSLLeftMargin{{[}26{]} }%
 \CSLRightInline{A. Visheratin \emph{et al.}, {``Peregreen {\textendash}
 modular database for efficient storage of historical time series in
 cloud environments,''} in \emph{2020 USENIX annual technical conference
@@ -818,14 +888,21 @@ cloud environments,''} in \emph{2020 USENIX annual technical conference
 \url{https://www.usenix.org/conference/atc20/presentation/visheratin}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-CatchUp}{}}%
-\CSLLeftMargin{{[}27{]} }
+\CSLLeftMargin{{[}27{]} }%
 \CSLRightInline{T. Schlossnagle, J. Sheehy, and C. McCubbin,
 {``Always-on time-series database: Keeping up where there's no way to
 catch up,''} \emph{Commun. ACM}, vol. 64, no. 7, pp. 50--56, 2021,
 Available: \url{https://doi.org/10.1145/3442518}}
 
+\leavevmode\vadjust pre{\hypertarget{ref-IR}{}}%
+\CSLLeftMargin{{[}28{]} }%
+\CSLRightInline{HM Government, {``Global britain in a competitive age:
+The integrated review of security, defence, development and foreign
+policy.''} GOV.UK, 2021. Available:
+\url{https://www.gov.uk/government/publications/global-britain-in-a-competitive-age-the-integrated-review-of-security-defence-development-and-foreign-policy/global-britain-in-a-competitive-age-the-integrated-review-of-security-defence-development-and-foreign-policy}}
+
 \leavevmode\vadjust pre{\hypertarget{ref-climate}{}}%
-\CSLLeftMargin{{[}28{]} }
+\CSLLeftMargin{{[}29{]} }%
 \CSLRightInline{I. Foster \emph{et al.}, {``Computing just what you
 need: Online data analysis and reduction at extreme scales,''} in
 \emph{Euro-par 2017}, F. F. Rivera, T. F. Pena, and J. C. Cabaleiro,
@@ -835,34 +912,34 @@ Germany: Springer Verlag, 2017, pp. 3--19. doi:
 \href{https://doi.org/10.1007/978-3-319-64203-1_1}{10.1007/978-3-319-64203-1\_1}.}
 
 \leavevmode\vadjust pre{\hypertarget{ref-dashql}{}}%
-\CSLLeftMargin{{[}29{]} }
+\CSLLeftMargin{{[}30{]} }%
 \CSLRightInline{A. Kohn, D. Moritz, and T. Neumann, {``DashQL --
 complete analysis workflows with SQL.''} 2023. doi:
 \href{https://doi.org/10.48550/arXiv.2306.03714}{10.48550/arXiv.2306.03714}.}
 
 \leavevmode\vadjust pre{\hypertarget{ref-EveryNth}{}}%
-\CSLLeftMargin{{[}30{]} }
+\CSLLeftMargin{{[}31{]} }%
 \CSLRightInline{U. Jugel, Z. Jerzak, G. Hackenbroic, and V. Markl,
 {``VDDA: Automatic visualization-driven data aggregation in relational
 databases,''} \emph{The VLDB Journal}, vol. 25, 2016, doi:
 \href{https://doi.org/10.1007/s00778-015-0396-z}{10.1007/s00778-015-0396-z}.}
 
 \leavevmode\vadjust pre{\hypertarget{ref-MinMaxOrdered}{}}%
-\CSLLeftMargin{{[}31{]} }
+\CSLLeftMargin{{[}32{]} }%
 \CSLRightInline{W. Yunhai \emph{et al.}, {``OM3: An ordered multi-level
 min-max representation for interactive progressive visualization of time
 series,''} in \emph{Proc. ACM manag. data}, ACM, 2023. Available:
 \url{https://doi.org/10.1145/3589290}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-M4}{}}%
-\CSLLeftMargin{{[}32{]} }
+\CSLLeftMargin{{[}33{]} }%
 \CSLRightInline{U. Jugel, Z. Jerzak, G. Hackenbroich, and V. Markl,
 {``M4: A visualization-oriented time series data aggregation.
 Proceedings of the VLDB endowment,''} vol. 7, 2014, Available:
 \url{https://www.vldb.org/2014/program/http://www.vldb.org/pvldb/vol7/p797-jugel.pdf}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-catch22}{}}%
-\CSLLeftMargin{{[}33{]} }
+\CSLLeftMargin{{[}34{]} }%
 \CSLRightInline{C. H. Lubba, S. S. Sarab, P. Knaute, S. R. Schultz, B.
 D. Fulcher, and N. S. Jones, {``catch22: CAnonical time-series
 CHaracteristics,''} \emph{Data Mining and Knowledge Discovery}, vol. 33,
@@ -870,7 +947,7 @@ CHaracteristics,''} \emph{Data Mining and Knowledge Discovery}, vol. 33,
 \href{https://doi.org/10.1007/s10618-019-00647-x}{10.1007/s10618-019-00647-x}.}
 
 \leavevmode\vadjust pre{\hypertarget{ref-fulcher2017}{}}%
-\CSLLeftMargin{{[}34{]} }
+\CSLLeftMargin{{[}35{]} }%
 \CSLRightInline{B. D. Fulcher and N. S. Jones, {``Highly comparative
 feature-based time-series classification,''} \emph{IEEE Transactions on
 Knowledge and Data Engineering}, vol. 26, no. 12, pp. 3026--3037, 2014,
@@ -878,7 +955,7 @@ doi:
 \href{https://doi.org/10.1109/TKDE.2014.2316504}{10.1109/TKDE.2014.2316504}.}
 
 \leavevmode\vadjust pre{\hypertarget{ref-bagnall}{}}%
-\CSLLeftMargin{{[}35{]} }
+\CSLLeftMargin{{[}36{]} }%
 \CSLRightInline{A. Bagnall, J. Lines, A. Bostrom, J. Large, and E.
 Keogh, {``The great time series classification bake off: A review and
 experimental evaluation of recent algorithmic advances,''} \emph{Data
@@ -886,7 +963,7 @@ Mining and Knowledge Discovery}, vol. 31, 2017, doi:
 \href{https://doi.org/10.1007/s10618-016-0483-9}{10.1007/s10618-016-0483-9}.}
 
 \leavevmode\vadjust pre{\hypertarget{ref-henderson}{}}%
-\CSLLeftMargin{{[}36{]} }
+\CSLLeftMargin{{[}37{]} }%
 \CSLRightInline{T. Henderson and B. D. Fulcher, {``An empirical
 evaluation of time-series feature sets,''} in \emph{2021 international
 conference on data mining workshops (ICDMW)}, 2021, pp. 1032--1038. doi:

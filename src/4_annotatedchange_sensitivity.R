@@ -46,7 +46,7 @@ sensitivity_pc <- joined_df %>%
 
 # Join the sensitive datasets together
 sensitivity_joined <- left_join(sensitivity_nth, sensitivity_pc, by = "names")
-sensitivity_joined <- left_join(sensitivity_joined, sensitivity, by = "names")
+#sensitivity_joined <- left_join(sensitivity_joined, sensitivity, by = "names")
 
 # Get the top 10 most sensitive names
 top_ten <- head(sensitivity$names, 10)

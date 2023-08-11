@@ -1,3 +1,7 @@
+# Specify width and heights for plot outputting.
+F1_WIDTH = 20
+F1_HEIGHT = 8
+
 ## All datasets as line and point graphs
 #==
 
@@ -82,19 +86,26 @@ ggplot(sensitivity_joined_long, aes(x = StandardDeviation, y = names, fill = Met
 
 # Reshape sensitivity subset data to a long format
 subset_sensitivity_joined_long <- subset_sensitivity_joined %>%
-  pivot_longer(cols = c(everyNthSensitivity, PercentageChangeSensitivity, CombinedSensitivity), 
+  pivot_longer(cols = c(everyNthSensitivity, PercentageChangeSensitivity), 
                names_to = "Method", 
                values_to = "StandardDeviation")
 
 # Change the Method into a factor and set the levels
-subset_sensitivity_joined_long$Method <- factor(subset_sensitivity_joined_long$Method, levels = c("PercentageChangeSensitivity", "everyNthSensitivity", "CombinedSensitivity"))
+subset_sensitivity_joined_long$Method <- factor(subset_sensitivity_joined_long$Method, levels = c("PercentageChangeSensitivity", "everyNthSensitivity"))
 
+# Recode the names of the Methods
+subset_sensitivity_joined_long$Method <- recode(subset_sensitivity_joined_long$Method,  
+                                                "PercentageChangeSensitivity" = "Percentage Change", 
+                                                "everyNthSensitivity" = "EveryNth")
 # Recode the names of the Rcatch22 features
 subset_sensitivity_joined_long$names <- recode(subset_sensitivity_joined_long$names,  
                                                'CO_f1ecac' = "Autocorrelation_ApproxScale",
                                                'CO_FirstMin_ac' = "Autocorrelation_FirstMinimum",
                                                'SB_BinaryStats_mean_longstretch1' = "LongestSuccessivePeriod_AboveAverage",
                                                'PD_PeriodicityWang_th0_01' = "Autocorrelation_FirstPeak",
+                                               'DN_Mean' = 'Mean',
+                                               'DN_HistogramMode_10' = "HistogramBin10",
+                                               'DN_Spread_Std' = 'Spead',
                                                'CO_Embed2_Dist_tau_d_expfit_meandiff' = "DistributionExponentialFit_MeanAbsoluteError",
                                                'IN_AutoMutualInfoStats_40_gaussian_fmmi' = "Autocorrelation_Automutual",
                                                'SB_BinaryStats_diff_longstretch0' = "LongestSuccessivePeriod_SuccessiveDecreases")
@@ -107,14 +118,16 @@ subset_sensitivity_joined_long <- subset_sensitivity_joined_long %>%
 subset_sensitivity_joined_long$names <- factor(subset_sensitivity_joined_long$names, levels = unique(subset_sensitivity_joined_long$names))
 
 # Create a bar plot
-ggplot(subset_sensitivity_joined_long, aes(x = StandardDeviation, y = names, fill = Method)) +
+sensitive_subset_plot <- ggplot(subset_sensitivity_joined_long, aes(x = StandardDeviation, y = names, fill = Method)) +
   geom_bar(stat = "identity", position = position_dodge()) +
   theme_minimal() +
-  theme(legend.position = "top") +
-  labs(x = "Standard Deviation", y = "Feature", fill = "Method", title = "Standard Deviation of Most Sensitive Catch22 Features by Downsampling Method") +
-  scale_fill_brewer(palette = "Paired")
+  theme(text = element_text(size = 30), legend.position = "top") +
+  labs(x = "Standard Deviation", y = "Catch22 Feature", fill = "Method", title = "Standard Deviation of Most Sensitive Features") +
+  scale_fill_brewer(palette = "Paired") +
+  scale_x_continuous(limits = c(0, NA))
 
-
+# Use ggsave to save out the figure as a file.
+ggsave(here("~/Documents/MF MSc/downsampling_timeseries/graphs","sensitive_subset_plot.JPEG"), sensitive_subset_plot, width = F1_WIDTH, height=F1_HEIGHT)
 
 
 ## Heatmap of catch22 features
@@ -126,6 +139,9 @@ joined_df$names <- factor(joined_df$names, levels = unique(joined_df$names))
 # Convert "param" to a factor
 joined_df$param <- factor(joined_df$param, levels = unique(joined_df$param))
 
+# Recode the names of the Methods
+filtered_df$method <- recode(filtered_df$method,  
+                                                "PercentageChange" = "Percentage Change")
 # Recode the names of the Rcatch22 features
 filtered_df$names <- recode(filtered_df$names, 
                                         'CO_f1ecac' = "Autocorrelation_ApproxScale",
@@ -174,15 +190,20 @@ ggplot(joined_df, aes(x = as.numeric(vol), y = names, fill = scaled)) +
   facet_wrap(~ method, ncol = 1)
 
 # Create the heatmap showing scaled difference for most sensitive features across volume, one per method.
-ggplot(filtered_df, aes(x = as.numeric(vol), y = names, fill = scaled)) +
+data_volume_plot <- ggplot(filtered_df, aes(x = as.numeric(vol), y = names, fill = scaled)) +
   geom_tile() +
   scale_fill_gradient2(low = "#084594", high = "#eff3ff", mid = "#c6dbef",
                        midpoint = 0, limits = range(joined_df$scaled)) +
   scale_x_reverse() +
   theme_minimal() +
-  labs(x = "Volume of Data", y = "Features", fill = "Scaled Difference", title = "Scaled Difference of Most Sensitive Catch22 Features by Data Volume of Downsampling Method") +
-  theme(legend.position = "bottom") +
+  labs(x = "Volume of Data", y = "Catch22 Feature", fill = "Scaled Difference", title = "Scaled Difference of Sensitive Features by Volume") +
+  theme(text = element_text(size = 30), legend.position = "bottom") +
   facet_wrap(~ method, ncol = 1)
+
+# Use ggsave to save out the figure as a file.
+ggsave(here("~/Documents/MF MSc/downsampling_timeseries/graphs","data_volume_plot.JPEG"), data_volume_plot, width = F1_WIDTH, height=F1_HEIGHT)
+
+
 
 ## Line graps of catch22 features
 #=
@@ -197,6 +218,23 @@ filtered_df$dataset <- recode(filtered_df$dataset,
                               "df700" = "G", 
                               "df800a" = "H", 
                               "df800b" = "I")
+
+# Create the difference line graph for CO_FirstMin_ac
+CO_FirstMin_subset_plot <- ggplot(filtered_df %>%
+         filter(names == "Autocorrelation_FirstMinimum", dataset == c("A", "B")), 
+       aes(x = as.numeric(vol), y = scaled, color = method)) +
+  scale_color_brewer(palette = "Paired") +
+  geom_line(linewidth = 2) +
+  scale_x_reverse() +
+  theme_minimal() +
+  theme(text = element_text(size = 30), legend.position = "top") +
+  labs(x = "Volume of Data", y = "Scaled Difference", color = "Method", title = "The First Minimum of the Autocorrelation Function Scaled Difference across Volume") +
+  facet_wrap(~ dataset, ncol = 1)
+
+# Use ggsave to save out the figure as a file.
+ggsave(here("~/Documents/MF MSc/downsampling_timeseries/graphs","CO_FirstMin_subset_plot.JPEG"), CO_FirstMin_subset_plot, width = F1_WIDTH, height=F1_HEIGHT)
+
+
 
 # Create the difference line graph for CO_FirstMin_ac
 ggplot(filtered_df %>%

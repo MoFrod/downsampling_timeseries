@@ -33,7 +33,7 @@ knitr::opts_knit$set(root.dir= normalizePath('..'))
 
 ```{r ProjectTemplate, include = FALSE}
 library(ProjectTemplate)
-setwd("D:/Morgan/Documents/NCL MSc/final_project/mofrod_project")
+setwd("~/Documents/MF MSc/downsampling_timeseries")
 load.project()
 ```
 

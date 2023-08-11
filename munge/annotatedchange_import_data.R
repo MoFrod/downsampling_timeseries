@@ -6,7 +6,7 @@ library(imputeTS)
 
 
 # Set base path used for all file loading.
-BASE_PATH = "D:/Morgan/Documents/NCL MSc/final_project/mofrod_project/data/AnnotateChange"
+BASE_PATH = "~/Documents/MF MSc/downsampling_timeseries/data/AnnotateChange"
 
 # Load JSON files. These can be obtained from 
 f100 <- jsonlite::fromJSON(here(BASE_PATH,"demo_100.json"))
