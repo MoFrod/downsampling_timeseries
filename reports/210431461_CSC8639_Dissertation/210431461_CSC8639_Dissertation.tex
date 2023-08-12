@@ -119,22 +119,53 @@
 \newcommand{\CSLRightInline}[1]{\parbox[t]{\linewidth - \csllabelwidth}{#1}\break}
 \newcommand{\CSLIndent}[1]{\hspace{\cslhangindent}#1}
 
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{wrapfig}
+\usepackage{float}
+\usepackage{colortbl}
+\usepackage{pdflscape}
+\usepackage{tabu}
+\usepackage{threeparttable}
+\usepackage{threeparttablex}
+\usepackage[normalem]{ulem}
+\usepackage{makecell}
+\usepackage{xcolor}
 \begin{document}
 \maketitle
 
 
 \begin{abstract}
-Enter the text of your abstract here.
+Trusting data-driven decision-making goes beyond demonstrating
+comppliance with legal, regulatory and ethical obligations;
+decision-makers need to trust how the data is used. Handling, storing
+and visualising the volume of data being generated today requires data
+practitioners to make assumptions and processing choices that remain
+opaque to decision-makers. The research outlined by this paper explores
+decision-makers' trust in data, data pracitioners' experience of
+communicating data insights to decision-makers and a new visualisation
+methodology for explaining the impact of downsampling on high-volume
+time series data. It uniquely combines user research with R packages
+\texttt{imputeTS} \protect\hyperlink{ref-imputeTS_R}{{[}1{]}} and
+\texttt{Rcatch22} \protect\hyperlink{ref-catch22_R}{{[}2{]}} to identify
+and visualise time series features that are most sensitive to
+downsampling. It is hoped this will improve decision-makers' trust in
+data by helping data practitioners to create transparency in the data
+processing pipeline, communicate the impact of downsampling, and support
+conversations about which algorithms or parameters are most appropriate
+for particular decision-maker use cases.
 \end{abstract}
 
 \keywords{
-    blah
+    time series
    \and
-    blee
+    downsampling
    \and
-    bloo
+    decision-making
    \and
-    these are optional and can be removed
+    visualisation
   }
 
 \hypertarget{introduction}{%
@@ -142,20 +173,20 @@ Enter the text of your abstract here.
 
 HM Government is committed to making data-driven decisions that engender
 public trust
-\protect\hyperlink{ref-data2017}{{[}1{]}}--\protect\hyperlink{ref-data2022}{{[}4{]}}.
+\protect\hyperlink{ref-data2017}{{[}3{]}}--\protect\hyperlink{ref-data2022}{{[}6{]}}.
 Data-driven decisions are considered to be ``more well-informed''
-\protect\hyperlink{ref-data2017}{{[}1{]}}, effective
-\protect\hyperlink{ref-data2022}{{[}4{]}}, consistent
-\protect\hyperlink{ref-data2021}{{[}3{]}}, and better ``at scale''
-\protect\hyperlink{ref-data2020}{{[}2{]}}. Despite this, there is a lack
+\protect\hyperlink{ref-data2017}{{[}3{]}}, effective
+\protect\hyperlink{ref-data2022}{{[}6{]}}, consistent
+\protect\hyperlink{ref-data2021}{{[}5{]}}, and better ``at scale''
+\protect\hyperlink{ref-data2020}{{[}4{]}}. Despite this, there is a lack
 of trust in government use of data
-\protect\hyperlink{ref-trust}{{[}5{]}}. This suggests that public trust
+\protect\hyperlink{ref-trust}{{[}7{]}}. This suggests that public trust
 in data-driven decisions goes beyond how the ``data complies with legal,
 regulatory and ethical obligations''
-\protect\hyperlink{ref-data2021}{{[}3{]}}. The UK public need to have
+\protect\hyperlink{ref-data2021}{{[}5{]}}. The UK public need to have
 ``confidence and trust in how data, including personal data, is used''
-\protect\hyperlink{ref-data2020}{{[}2{]}}, and this requires
-transparency \protect\hyperlink{ref-trust}{{[}5{]}}.
+\protect\hyperlink{ref-data2020}{{[}4{]}}, and this requires
+transparency \protect\hyperlink{ref-trust}{{[}7{]}}.
 
 To make data-driven decisions, government decision-makers also need to
 trust how the data used (cite user research here). This means trusting
@@ -167,37 +198,38 @@ assumptions and choices they are making to support decision-makers in
 trusting the data informing their decisions.
 
 Time series data is used across HM Government
-\protect\hyperlink{ref-pathway}{{[}6{]}} to inform decision-makers
-across various domains \protect\hyperlink{ref-onstool}{{[}7{]}}. It is
+\protect\hyperlink{ref-pathway}{{[}8{]}} to inform decision-makers
+across various domains \protect\hyperlink{ref-onstool}{{[}9{]}}. It is
 also widely generated and used by industry and research
-\protect\hyperlink{ref-TVStore}{{[}8{]}}. The volume of time series data
-is continuously increasingly \protect\hyperlink{ref-datapoint}{{[}9{]}},
-posing significant challenges for handling and visualising this popular
-data type \protect\hyperlink{ref-TVStore}{{[}8{]}}. Data practitioners
-must utilise methods that reduce data volumes to align with limitations
-like processing time, computing costs, storage capabilities, and
-sustainability ambitions \protect\hyperlink{ref-TVStore}{{[}8{]}},
-\protect\hyperlink{ref-Sveinn}{{[}10{]}},
-\protect\hyperlink{ref-Shift}{{[}11{]}}.
+\protect\hyperlink{ref-TVStore}{{[}10{]}}. The volume of time series
+data is continuously increasingly
+\protect\hyperlink{ref-datapoint}{{[}11{]}}, posing significant
+challenges for handling and visualising this popular data type
+\protect\hyperlink{ref-TVStore}{{[}10{]}}. Data practitioners must
+utilise methods that reduce data volumes to align with limitations like
+processing time, computing costs, storage capabilities, and
+sustainability ambitions \protect\hyperlink{ref-TVStore}{{[}10{]}},
+\protect\hyperlink{ref-Sveinn}{{[}12{]}},
+\protect\hyperlink{ref-Shift}{{[}13{]}}.
 
 Downsampling is an established technique
-\protect\hyperlink{ref-downsampling}{{[}12{]}},
-\protect\hyperlink{ref-sampling}{{[}13{]}} that involves selecting a
+\protect\hyperlink{ref-downsampling}{{[}14{]}},
+\protect\hyperlink{ref-sampling}{{[}15{]}} that involves selecting a
 representative subset of data to preserve its original shape while
 reducing the number of data points
-\protect\hyperlink{ref-datapoint}{{[}9{]}},
-\protect\hyperlink{ref-MinMaxLTTB}{{[}14{]}}. This is a vital part of
+\protect\hyperlink{ref-datapoint}{{[}11{]}},
+\protect\hyperlink{ref-MinMaxLTTB}{{[}16{]}}. This is a vital part of
 making voluminous time series understandable for human observation
-\protect\hyperlink{ref-Sveinn}{{[}10{]}} and an essential step in many
+\protect\hyperlink{ref-Sveinn}{{[}12{]}} and an essential step in many
 time series database solutions
-\protect\hyperlink{ref-datapoint}{{[}9{]}}. However, little attention
+\protect\hyperlink{ref-datapoint}{{[}11{]}}. However, little attention
 has been devoted to how downsampling impacts decision-makers trust in
 the data.
 
 Despite widespread use, how to communicate the impact of downsampling
 algorithms on time series data remains also understudied
-\protect\hyperlink{ref-datapoint}{{[}9{]}},
-\protect\hyperlink{ref-Sveinn}{{[}10{]}}. Downsampling expands the
+\protect\hyperlink{ref-datapoint}{{[}11{]}},
+\protect\hyperlink{ref-Sveinn}{{[}12{]}}. Downsampling expands the
 boundaries of risk for decision-makers as data practitioners may not
 realise the significance of the data being discarded. Such choices
 throughout the data pipeline may have disproportionately larger
@@ -211,8 +243,8 @@ user research on the impact of downsampling on decision-makers' trust in
 data and suggests a visualisation methodology for communicating the
 impact of downsampling algorithms on time series. This methodology
 combines user research with R packages \texttt{imputeTS}
-\protect\hyperlink{ref-imputeTS_R}{{[}15{]}} and \texttt{Rcatch22}
-\protect\hyperlink{ref-catch22_R}{{[}16{]}} to identify and visualise
+\protect\hyperlink{ref-imputeTS_R}{{[}1{]}} and \texttt{Rcatch22}
+\protect\hyperlink{ref-catch22_R}{{[}2{]}} to identify and visualise
 time series features that are most sensitive to downsampling. It is
 hoped this will improve decision-makers' trust in data by helping data
 practitioners to create transparency in the data processing pipeline,
@@ -258,19 +290,19 @@ that data practitioners communicating the assumptions and choices made
 throughout the data processing pipeline with decision-makers is not
 likely to create trust in how the data is used. Instead, data
 practitioners should be encouraged to find tools, such as interactive
-visualisations \protect\hyperlink{ref-datapoint}{{[}9{]}}, that put
+visualisations \protect\hyperlink{ref-datapoint}{{[}11{]}}, that put
 agency into the hands of decision-makers.
 
 \textbf{2.2 Time series visualisation}
 
 Time series data is commonly visualised as a line graph
-\protect\hyperlink{ref-Sveinn}{{[}10{]}},
+\protect\hyperlink{ref-Sveinn}{{[}12{]}},
 \protect\hyperlink{ref-timenotes}{{[}23{]}}. Line graphs help the human
 eye to observe only the most important data points
-\protect\hyperlink{ref-Sveinn}{{[}10{]}} by convey the overall shape and
+\protect\hyperlink{ref-Sveinn}{{[}12{]}} by convey the overall shape and
 complexity of the time series data
-\protect\hyperlink{ref-datapoint}{{[}9{]}},
-\protect\hyperlink{ref-downsampling}{{[}12{]}}. The most effective time
+\protect\hyperlink{ref-datapoint}{{[}11{]}},
+\protect\hyperlink{ref-downsampling}{{[}14{]}}. The most effective time
 series visualisations are, however, interactive
 \protect\hyperlink{ref-timenotes}{{[}23{]}},
 \protect\hyperlink{ref-plotly}{{[}24{]}}, turning access into agency
@@ -283,7 +315,7 @@ However, this growing field of research does not extend to
 visualisations of choices and assumptions made during data processing
 pipline. Indeed, such visualisations are a side effect of the research.
 This dynamic is exemplified by the R package \texttt{imputeTS}
-\protect\hyperlink{ref-imputeTS_R}{{[}15{]}} where the impact of
+\protect\hyperlink{ref-imputeTS_R}{{[}1{]}} where the impact of
 imputation choices made by the user is only visualised to support the
 user through the complete process of replacing missing values in time
 series \protect\hyperlink{ref-imputeTS}{{[}25{]}}. The research set out
@@ -295,24 +327,24 @@ impact of downsampling choices made in the data processing pipeline.
 
 Technological innovation has generated unprecedented amount of time
 series data and this data continues to grow
-\protect\hyperlink{ref-data2020}{{[}2{]}},
-\protect\hyperlink{ref-TVStore}{{[}8{]}},
+\protect\hyperlink{ref-data2020}{{[}4{]}},
+\protect\hyperlink{ref-TVStore}{{[}10{]}},
 \protect\hyperlink{ref-storage}{{[}26{]}},
 \protect\hyperlink{ref-CatchUp}{{[}27{]}}. For example, tackling climate
 change is the UK Government's ``number one international priority''
 \protect\hyperlink{ref-IR}{{[}28{]}}, yet climate simulations that help
 inform decision-makers generate tens of terabytes per second
-\protect\hyperlink{ref-TVStore}{{[}8{]}},
+\protect\hyperlink{ref-TVStore}{{[}10{]}},
 \protect\hyperlink{ref-climate}{{[}29{]}}. Downsampling (value
 preserving data aggregation) plays an important role in addressing how
 this voluminous data is processed, stored
-\protect\hyperlink{ref-TVStore}{{[}8{]}} and visualised
-\protect\hyperlink{ref-Sveinn}{{[}10{]}},
+\protect\hyperlink{ref-TVStore}{{[}10{]}} and visualised
+\protect\hyperlink{ref-Sveinn}{{[}12{]}},
 \protect\hyperlink{ref-dashql}{{[}30{]}} by minimising computing
-resources needed \protect\hyperlink{ref-TVStore}{{[}8{]}}, reducing
+resources needed \protect\hyperlink{ref-TVStore}{{[}10{]}}, reducing
 network latency, and improving rendering time
-\protect\hyperlink{ref-datapoint}{{[}9{]}},
-\protect\hyperlink{ref-MinMaxLTTB}{{[}14{]}}.
+\protect\hyperlink{ref-datapoint}{{[}11{]}},
+\protect\hyperlink{ref-MinMaxLTTB}{{[}16{]}}.
 
 An overview of commonly used downsampling (value preserving data
 aggregation) algorithms is provided in the table below:
@@ -362,23 +394,24 @@ MinMaxLTTB & Preselects data using MinMax before applying Largest
 Triangle Three Buckets. \\
 \end{longtable}
 
-\protect\hyperlink{ref-M4}{{[}32{]}}
+\protect\hyperlink{ref-datapoint}{{[}11{]}},
+\protect\hyperlink{ref-Sveinn}{{[}12{]}},
+\protect\hyperlink{ref-MinMaxLTTB}{{[}16{]}},
+\protect\hyperlink{ref-dashql}{{[}30{]}}--\protect\hyperlink{ref-M4}{{[}33{]}}
 
 Data practitioners have made recent advances in the performance and
 evaluation of downsampling approaches
-\protect\hyperlink{ref-datapoint}{{[}9{]}},
-\protect\hyperlink{ref-downsampling}{{[}12{]}}--\protect\hyperlink{ref-MinMaxLTTB}{{[}14{]}},
+\protect\hyperlink{ref-datapoint}{{[}11{]}},
+\protect\hyperlink{ref-downsampling}{{[}14{]}}--\protect\hyperlink{ref-MinMaxLTTB}{{[}16{]}},
 \protect\hyperlink{ref-plotly}{{[}24{]}},
-\protect\hyperlink{ref-dashql}{{[}30{]}},
-\protect\hyperlink{ref-EveryNth}{{[}31{]}},
-\protect\hyperlink{ref-MinMaxOrdered}{{[}33{]}}. These advances focus on
-the effectiveness of the algorithm in delivering downsampled data that
-represents the original data as accurately as possible. This is vital
-part of enabling and improving data-driven decision-making, but is
-focused on supporting data practitioners in their analysis of the data.
-Instead, the research set out in this paper aims to support data
-practitioners to communicate the impact of their downsampling choices
-for decision-makers.
+\protect\hyperlink{ref-dashql}{{[}30{]}}--\protect\hyperlink{ref-MinMaxOrdered}{{[}32{]}}.
+These advances focus on the effectiveness of the algorithm in delivering
+downsampled data that represents the original data as accurately as
+possible. This is vital part of enabling and improving data-driven
+decision-making, but is focused on supporting data practitioners in
+their analysis of the data. Instead, the research set out in this paper
+aims to support data practitioners to communicate the impact of their
+downsampling choices for decision-makers.
 
 \textbf{2.4 Time series feature analysis}
 
@@ -415,16 +448,101 @@ downsampling and create a visual tool for explaining this impact.
 
 \label{sec:headings}
 
+The motivation for this research is grounded in the author's experience
+as a UK Civil Servant new to the domain of data science. Personal
+experience suggested that data practitioners found it difficult to
+communicate the impact of assumptions, choices and limitations of the
+data processing pipeline to decision-makers without an analytically
+background; in parallel, decision-makers appeared to desire greater
+clarity of how the data practitioner had generated the data insights in
+order to make data-driven decisions. To better understand this dynamic,
+and test the assumptions of the author, sixteen government officials
+were interviewed: nine decision-makers and seven data practitioners.
+
+\textbf{3.1 Decision-makers}
+
 \begin{itemize}
 \tightlist
 \item
-  user research insights
+  summary of what was done
+\item
+  top themes
+\item
+  example diagram
+\item
+  summarise how this informed research design
+\item
+\item
+\item
+\item
+\item
+\item
+\item
+\item
+\item
+\item
+\item
+\item
+\item
+\item
+\item
+\item
+\item
+\item
+\item
+\item
+\item
+\item
+\item
+\item
+\end{itemize}
+
+\textbf{3.2 Data Practitioners}
+
+\begin{itemize}
+\tightlist
+\item
+  summary of what was done
+\item
+  top themes
+\item
+  example diagram
+\item
+  summarise how this informed research design
+\item
+\item
+\item
+\item
+\item
+\item
+\item
+\item
+\item
+\item
+\item
+\item
+\item
+\item
+\item
+\item
+\item
+\item
+\item
+\item
+\item
+\item
+\item
+\item
 \end{itemize}
 
 \hypertarget{methodology}{%
 \section{METHODOLOGY}\label{methodology}}
 
 \label{sec:headings}
+
+This section provides an overview of process used to develop the work
+outlined by this paper and highlight key decisions in the research
+design.
 
 \textbf{4.1 Data}
 
@@ -465,7 +583,7 @@ creating parameters 1 to 50 for each downsampling algorithm and
 for investigation; 450 for each downsampling algorithm.
 
 The R package \texttt{imputeTS}
-\protect\hyperlink{ref-imputeTS_R}{{[}15{]}} is applied to the time
+\protect\hyperlink{ref-imputeTS_R}{{[}1{]}} is applied to the time
 series to obtain the data volume, number of missing values (NAs) and
 number of gaps. This is important to understand the effect of each
 downsampling algorithm across the 900 time series. Data volume provides
@@ -486,7 +604,7 @@ time series for parameters 1 to 50 and each downsampling method.
 
 The values for each catch22 time series feature
 \protect\hyperlink{ref-catch22}{{[}34{]}} is calculated by the
-\texttt{Rcatch22} package \protect\hyperlink{ref-catch22_R}{{[}16{]}}.
+\texttt{Rcatch22} package \protect\hyperlink{ref-catch22_R}{{[}2{]}}.
 This is applied to each of the nine original synthetic time series and
 900 imputed time series. The difference between the original and imputed
 time series feature values is calculated and scaled to investigate the
@@ -511,60 +629,344 @@ practitioners for decision-makers.
 
 \label{sec:headings}
 
+This section provides an overview of results achieved from the research
+outlined in section IV; the limitations of these results and avenues for
+further investigation are highlighted to help contextualise these
+findings.
+
 \textbf{5.1 Downsampling Sensitivity}
 
-Across the 900 time series, there apppear to be catch22 time series
-features that more impacted by downsampling than others. The analysis
-set out in Annex A suggests that seven of the features are most senstive
-to downsampling. These features are visualised by the bar graph below:
+There appear to be seven catch22 features that deviate most across the
+900 imputed time series. Due to their high deviation across the imputed
+time series, these seven features are considered to be more sensitive to
+the impacts of downsampling than the other 15. The standard deviation of
+all 22 features is shared in Annex A. To demonstrate the sensitivity of
+the seven features, the ten features with the highest standard deviation
+across all the imputed time series in the bar graph below.
 
 \includegraphics{210431461_CSC8639_Dissertation_files/figure-latex/CombinedSensitivity-1.pdf}
 
-This visualisation highlights that approximately half of the catch22
-time series features are noticeably impacted by both downsampling
-algorithms. The \emph{EveryNth} algorithm impacts more features than
+This visualisation highlights the \emph{EveryNth} algorithm appears to
+impact features more than the \emph{Percentage Change} algorithm.
+Initial analysis suggests that this is likely to be because, in the 50
+parameters created for this research, the \emph{EveryNth} algorithm
+discards more data, more quickly. It would be beneficial to explore this
+dynamic further, creating parameters beyond 50 until the
+\emph{Percentage Change} algorithm discards the same volume of data.
+
+The standard deviation of the seven most sensitive catch22 features is
+presented in the table below. This table includes the standard deviation
+of these features for the \emph{EveryNth} algorithm
+(`everyNthSensitivity'), the \emph{Percentage Change} algorithm
+(`PercentageChangeSensitivity'), and the combined standard deviation
+(`CombinedSensitivity').
+
+\begin{table}[!h]
+
+\caption{\label{tab:unnamed-chunk-2}Standard Deviation of the Seven Most Sensitive Catch22 Features}
+\centering
+\begin{tabular}[t]{l|r|r|r}
+\hline
+Feature & everyNthSensitivity & PercentageChangeSensitivity & CombinedSensitivity\\
+\hline
+Autocorr\_FirstMinimum & 2.5639294 & 0.4181318 & 2.5253400\\
+LongestPeriod\_Decreases & 2.5778227 & 0.5711553 & 2.0901832\\
+LongestPeriod\_AboveAverage & 1.7389139 & 0.6524714 & 1.7545755\\
+Autocorr\_Automutual & 1.3808674 & 0.3736266 & 1.3890246\\
+Autocorr\_FirstPeak & 1.1844657 & 0.3954080 & 0.9515096\\
+Autocorr\_ApproxScale & 0.7661026 & 0.3713025 & 0.7172823\\
+DistributionExponentialFit\_MAE & 0.3440829 & 0.0437543 & 0.3605538\\
+\hline
+\end{tabular}
+\end{table}
+
+The combined sensitivity was used to identify the seven catch22 features
+that appear to be most sensitive. The table suggests that the first
+minimum of the autocorrelation function (`Autocorr\_FirstMinimum' or
+`CO\_FirstMin\_ac') is most sensitive across both of the algorithms;
+that the catch22 feature measuring the longest sequence of successive
+steps that decrease (`LongestPeriod\_Decrease' or
+`SB\_BinaryStats\_diff\_longstretch0') is most sensitive to the
+\emph{EveryNth} algorithm; and, the longest sequence of successive
+values greater than the mean (`LongestPeriod\_AboveAverage' or
+`SB\_BinaryStats\_mean\_longstretch1') is most sensitive to the
+\emph{Percentage Change} algorithm.
+
+These results suggest that it may be possible to communicate the impact
+of downsampling through the algorithms imapct on catch22 features.
+However, standard deviation is a limited measure that suggests, rather
+than confirms sensitivity to the impacts of downsampling algorithms. To
+understand why these features are particularly sensitive, further
+investigation into the performance of the seven features on the 900
+imputed time series is needed.
+
+\textbf{5.2 Downsampling Impact}
+
+Identifying that seven catch22 features apppear to be more sensitive to
+the impacts of downsampling will help communicate the impact of
+downsampling algorithms. The difference between the values of catch22
+features for the nine original time series and 900 imputes time series
+is a measure of impact. The heapmap below visualises this difference,
+scaled, for the seven most senstive features across each of the 50
+parameters.
+
+\includegraphics{210431461_CSC8639_Dissertation_files/figure-latex/Heatmap_param-1.pdf}
+
+This visualisation suggests that the approximate scale of
+autocorrelation (`Autocorr\_ApproxScale' or `CO\_f1ecac') and the
+longest sequence of successive values greater than the mean
+(`LongestPeriod\_AboveAverage' or `SB\_BinaryStats\_mean\_longstretch1')
+are the first catch22 features to be impacted by the downsampling
+algorithms. Interestingly, this visualisation also demonstrates that the
+catch22 features that are impacted by both downsampling algorithms tend
+to increase in comparison the original feature values. This dynamic
+warrants further investigation.
+
+However, the parameters prevent a like-for-like comparison of the two
+downsampling algorithms as \emph{EveryNth} discards data more quickly
+than \emph{Percentage Change}. The heatmap below also visualises the
+scaled difference between the values of the original catch22 features
+and the imputed time series, but across the volume of data retained by
+the downsampling algorithms before \texttt{imputeTS} imputed the missing
+values.
+
+\includegraphics{210431461_CSC8639_Dissertation_files/figure-latex/Heatmap_vol-1.pdf}
+
+This visualisation demonstrates that data volume retained by the
+downsampling algorithms creates acute differences, especially when less
+than 20 data points remained after \emph{EveryNth} is applied.
+Interestingly, the impact of \emph{Percentage Change} appears to be
+inconsistent; there are some retained data volumes where
+\texttt{Autocorr\_ApproxScale} and \texttt{LongestPeriod\_AboveAverage}
+do not appear to be impacted by \emph{Percentage Change} even though
+larger retained data volumes appear to be impacted. This dynamic
+warrants further investigation.
+
+It is not possible, however, to understand the impact of both
+downsampling algorithms from this visualisation. The \emph{Percentage
+Change} algorithm needs to be applied for more than 50 parameters so
+that it discards volumes of data comparable to the \emph{EveryNth}
+algorithm. Despite this, the heatmap visualisation of downsampling
+impact holds potential; it suggests that, with the same volume of data,
+the downsampling algorithms impact the catch22 features differently.
+
+\textbf{5.3 Feature Variation}
+
+The impact of both downsampling algorithms on the most sensitive
+features varies across different time series types. This is exemplified
+by the catch22 feature `Autocorr\_FirstMinimum' (`CO\_FirstMin\_ac'):
+the first minimum of the autocorrelation function
+(`Autocorr\_FirstMinimum' or `CO\_FirstMin\_ac'. This feature has the
+highest combined standard deviation across the 900 imputed time series
+represents ``the number of steps into the future at which a value of the
+time series at the current point and that future point remain
+substantially (\textgreater1/e) correlated''
+\protect\hyperlink{ref-feature_book}{\textbf{feature\_book?}}. The line
+graphs below highlight how this feature changes over the time series
+interpolated from different volumes of data after both downsampling
+algorithms are applied. The difference between the catch22 feature value
+of the original and imputed time series has been scaled for better
+comparisons.
+
+\includegraphics{210431461_CSC8639_Dissertation_files/figure-latex/FirstMinimum-1.pdf}
+
+The visualisations present the impact of discarding data for both
+downsampling algorithms; the volume of data retained by \emph{Percentage
+Change} algorithm varies by the type of time series whereas the volume
+of data retained by the \emph{EveryNth} algorithm trends towards zero.
+
+This variation across time series types also suggests that different
+catch22 features may be more or less sensitive to downsampling for
+different time series types. This dynamic is invesitgated by the line
+graphs below, which plot the scaled difference of the six most sensitive
+catch22 features for time series `500'. Time series `500' was selected
+as more data is discarded by the \emph{Percentage Change} algorithm,
+offering a better comparison.
+
+\includegraphics{210431461_CSC8639_Dissertation_files/figure-latex/Catch22Variation-1.pdf}
+This visualisation highlights that, although `Autocorr\_FirstMinimum' is
+identified as the most sensitive across both downsampling algorithms,
+`Autocorr\_Automutual' might better indicate the impact for time series
+`500'. `Autocorr\_Automutual' is the minimum of the automutual
+information function (`Autocorr\_Automutual' or
+`IN\_AutoMutualInfoStats\_40\_gaussian\_fmmi'); this catch22 feature
+outputs a measure of ``autocorrelation in the time series, as the
+minimum of the automutual information function''
+\protect\hyperlink{ref-feature_book}{\textbf{feature\_book?}}.
+
+Variation of the most sensitive catch22 time series features is shared
+in Annex {[}{]}. It would be beneficial to investigate this dynamic
+further as it may offer data practitioners method for identifying
+features that best indicate the preservation of a time series after
+downsampling is applied.
+
+\hypertarget{future-work}{%
+\section{FUTURE WORK}\label{future-work}}
+
+\label{sec:headings}
+
+The data pipeline developed by C. H. Lubba et. al could be used to
+generate other subsets of time series features for distinct tasks in any
+domain. This is likely to be important for highly specialised tasks or
+domains.
+
+Highlight in text: - The values of catch22 features appear to increase
+as data is discarded. It would be beneficial to explore this dynamic
+further; - he \emph{EveryNth} algorithm impacts more features than
 \emph{Percentage Change}; this is likely to be because more data is
 discarded by the former algorithm than the latter in the 50 parameters
 explored by this research. It would be beneficial to explore this
 difference with further iterations of \emph{Percentage Change}
 downsampling across the time series to understand its impact after more
-data is discarded. For parameters 1 to 50, the different impacts of the
-two downsampling algorithms on the ten most sensitive features for each
-time series are presented in Annex B.
+data is discarded.
 
-The values of catch22 features appear to increase as data is discarded.
-It would be beneficial to explore this dynamic further; the analysis on
-this dynamic conducted as part of this research is presented in Annex C.
-The \emph{EveryNth} algorithm discards more data, more quickly, by
-comparison to \emph{Percentage Change} algorithm. This creates acute
-differences in the imputed time series which are discussed in the next
-section.
+\hypertarget{conclusion}{%
+\section{CONCLUSION}\label{conclusion}}
 
-\textbf{5.2 Feature Variation}
+\label{sec:headings}
 
-\emph{5.2a First Minimum of the Autocorrelation Function}
+\hypertarget{references}{%
+\section{REFERENCES}\label{references}}
 
-The catch22 feature with the highest standard deviation across the 900
-time series is the first minimum of the autocorrelation function
-(`Autocorr\_FirstMinimum' or `CO\_FirstMin\_ac'. This feature represents
-``the number of steps into the future at which a value of the time
-series at the current point and that future point remain substantially
-(\textgreater1/e) correlated''
-\protect\hyperlink{ref-feature_book}{\textbf{feature\_book?}}. The line
-graphs below highlight how this feature changes over the time series
-interpolated from different volumes of data after both downsampling
-algorithms were applied. The difference between the catch22 feature
-value of the original and imputed time series has been scaled for better
-comparisons.
+\label{sec:headings}
 
-\includegraphics{210431461_CSC8639_Dissertation_files/figure-latex/FirstMinimum-1.pdf}
+\hypertarget{annex-a-sensitivity-of-catch22-features}{%
+\section{Annex A: Sensitivity of Catch22
+Features}\label{annex-a-sensitivity-of-catch22-features}}
 
-The visualisation clearly presents the impact of discarding data in
-downsampling algorithms. The volume of data retained by \emph{Percentage
-Change} algorithm varies by the type of time series whereas the volume
-of data retained by the \emph{EveryNth} algorithm ends close to zero for
-all the time series with significant difference observable when the
-remaining data volume is below 25.
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Reshape sensitivity subset data to a long format}
+\NormalTok{subset\_sensitivity\_joined\_long }\OtherTok{\textless{}{-}}\NormalTok{ subset\_sensitivity\_joined }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{pivot\_longer}\NormalTok{(}\AttributeTok{cols =} \FunctionTok{c}\NormalTok{(everyNthSensitivity, PercentageChangeSensitivity), }
+               \AttributeTok{names\_to =} \StringTok{"Method"}\NormalTok{, }
+               \AttributeTok{values\_to =} \StringTok{"StandardDeviation"}\NormalTok{)}
+
+\CommentTok{\# Change the Method into a factor and set the levels}
+\NormalTok{subset\_sensitivity\_joined\_long}\SpecialCharTok{$}\NormalTok{Method }\OtherTok{\textless{}{-}} \FunctionTok{factor}\NormalTok{(subset\_sensitivity\_joined\_long}\SpecialCharTok{$}\NormalTok{Method, }\AttributeTok{levels =} \FunctionTok{c}\NormalTok{(}\StringTok{"PercentageChangeSensitivity"}\NormalTok{, }\StringTok{"everyNthSensitivity"}\NormalTok{))}
+
+\CommentTok{\# Recode the names of the Methods}
+\NormalTok{subset\_sensitivity\_joined\_long}\SpecialCharTok{$}\NormalTok{Method }\OtherTok{\textless{}{-}} \FunctionTok{recode}\NormalTok{(subset\_sensitivity\_joined\_long}\SpecialCharTok{$}\NormalTok{Method,  }
+                                                \StringTok{"PercentageChangeSensitivity"} \OtherTok{=} \StringTok{"Percentage Change"}\NormalTok{, }
+                                                \StringTok{"everyNthSensitivity"} \OtherTok{=} \StringTok{"EveryNth"}\NormalTok{)}
+\CommentTok{\# Recode the names of the Rcatch22 features}
+\NormalTok{subset\_sensitivity\_joined\_long}\SpecialCharTok{$}\NormalTok{names }\OtherTok{\textless{}{-}} \FunctionTok{recode}\NormalTok{(subset\_sensitivity\_joined\_long}\SpecialCharTok{$}\NormalTok{names,  }
+                                               \StringTok{\textquotesingle{}CO\_f1ecac\textquotesingle{}} \OtherTok{=} \StringTok{"Autocorrelation\_ApproxScale"}\NormalTok{,}
+                                               \StringTok{\textquotesingle{}CO\_FirstMin\_ac\textquotesingle{}} \OtherTok{=} \StringTok{"Autocorrelation\_FirstMinimum"}\NormalTok{,}
+                                               \StringTok{\textquotesingle{}SB\_BinaryStats\_mean\_longstretch1\textquotesingle{}} \OtherTok{=} \StringTok{"LongestSuccessivePeriod\_AboveAverage"}\NormalTok{,}
+                                               \StringTok{\textquotesingle{}PD\_PeriodicityWang\_th0\_01\textquotesingle{}} \OtherTok{=} \StringTok{"Autocorrelation\_FirstPeak"}\NormalTok{,}
+                                               \StringTok{\textquotesingle{}DN\_Mean\textquotesingle{}} \OtherTok{=} \StringTok{\textquotesingle{}Mean\textquotesingle{}}\NormalTok{,}
+                                               \StringTok{\textquotesingle{}DN\_HistogramMode\_10\textquotesingle{}} \OtherTok{=} \StringTok{"HistogramBin10"}\NormalTok{,}
+                                               \StringTok{\textquotesingle{}DN\_Spread\_Std\textquotesingle{}} \OtherTok{=} \StringTok{\textquotesingle{}Spead\textquotesingle{}}\NormalTok{,}
+                                               \StringTok{\textquotesingle{}CO\_Embed2\_Dist\_tau\_d\_expfit\_meandiff\textquotesingle{}} \OtherTok{=} \StringTok{"DistributionExponentialFit\_MeanAbsoluteError"}\NormalTok{,}
+                                               \StringTok{\textquotesingle{}IN\_AutoMutualInfoStats\_40\_gaussian\_fmmi\textquotesingle{}} \OtherTok{=} \StringTok{"Autocorrelation\_Automutual"}\NormalTok{,}
+                                               \StringTok{\textquotesingle{}SB\_BinaryStats\_diff\_longstretch0\textquotesingle{}} \OtherTok{=} \StringTok{"LongestSuccessivePeriod\_SuccessiveDecreases"}\NormalTok{)}
+
+\CommentTok{\# Create a bar plot}
+\NormalTok{sensitive\_subset\_plot }\OtherTok{\textless{}{-}} \FunctionTok{ggplot}\NormalTok{(subset\_sensitivity\_joined\_long, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ StandardDeviation, }\AttributeTok{y =}\NormalTok{ names, }\AttributeTok{fill =}\NormalTok{ Method)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_bar}\NormalTok{(}\AttributeTok{stat =} \StringTok{"identity"}\NormalTok{, }\AttributeTok{position =} \FunctionTok{position\_dodge}\NormalTok{()) }\SpecialCharTok{+}
+  \FunctionTok{theme\_minimal}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{theme}\NormalTok{(}\AttributeTok{text =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{size =} \DecValTok{30}\NormalTok{), }\AttributeTok{legend.position =} \StringTok{"top"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{x =} \StringTok{"Standard Deviation"}\NormalTok{, }\AttributeTok{y =} \StringTok{"Catch22 Feature"}\NormalTok{, }\AttributeTok{fill =} \StringTok{"Method"}\NormalTok{, }\AttributeTok{title =} \StringTok{"Standard Deviation of Most Sensitive Features"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{scale\_fill\_brewer}\NormalTok{(}\AttributeTok{palette =} \StringTok{"Paired"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{scale\_x\_continuous}\NormalTok{(}\AttributeTok{limits =} \FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\ConstantTok{NA}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{knitr}\SpecialCharTok{::}\FunctionTok{kable}\NormalTok{((sensitivity\_joined), }\AttributeTok{caption =} \StringTok{"Sensitivity of Catch22 Features to EveryNth and Percentage Change Downsampling"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{table}
+
+\caption{\label{tab:unnamed-chunk-4}Sensitivity of Catch22 Features to EveryNth and Percentage Change Downsampling}
+\centering
+\begin{tabular}[t]{l|r|r}
+\hline
+names & everyNthSensitivity & PercentageChangeSensitivity\\
+\hline
+SB\_BinaryStats\_diff\_longstretch0 & 2.5778227 & 0.5711553\\
+\hline
+CO\_FirstMin\_ac & 2.5639294 & 0.4181318\\
+\hline
+SB\_BinaryStats\_mean\_longstretch1 & 1.7389139 & 0.6524714\\
+\hline
+IN\_AutoMutualInfoStats\_40\_gaussian\_fmmi & 1.3808674 & 0.3736266\\
+\hline
+PD\_PeriodicityWang\_th0\_01 & 1.1844657 & 0.3954080\\
+\hline
+CO\_f1ecac & 0.7661026 & 0.3713025\\
+\hline
+CO\_Embed2\_Dist\_tau\_d\_expfit\_meandiff & 0.3440829 & 0.0437543\\
+\hline
+DN\_Spread\_Std & 0.1985249 & 0.0455823\\
+\hline
+DN\_Mean & 0.1572628 & 0.0227554\\
+\hline
+DN\_HistogramMode\_10 & 0.1013119 & 0.0822124\\
+\hline
+DN\_HistogramMode\_5 & 0.0869504 & 0.0647597\\
+\hline
+SP\_Summaries\_welch\_rect\_centroid & 0.0654187 & 0.0025698\\
+\hline
+FC\_LocalSimple\_mean1\_tauresrat & 0.0436216 & 0.0218936\\
+\hline
+DN\_OutlierInclude\_n\_001\_mdrmd & 0.0434259 & 0.0050690\\
+\hline
+SC\_FluctAnal\_2\_rsrangefit\_50\_1\_logi\_prop\_r1 & 0.0432552 & 0.0277534\\
+\hline
+CO\_trev\_1\_num & 0.0425513 & 0.0130514\\
+\hline
+FC\_LocalSimple\_mean3\_stderr & 0.0384460 & 0.0049473\\
+\hline
+DN\_OutlierInclude\_p\_001\_mdrmd & 0.0349796 & 0.0138568\\
+\hline
+SB\_MotifThree\_quantile\_hh & 0.0340103 & 0.0139764\\
+\hline
+SP\_Summaries\_welch\_rect\_area\_5\_1 & 0.0326959 & 0.0038222\\
+\hline
+CO\_HistogramAMI\_even\_2\_5 & 0.0315734 & 0.0134047\\
+\hline
+MD\_hrv\_classic\_pnn40 & 0.0241202 & 0.0102366\\
+\hline
+SC\_FluctAnal\_2\_dfa\_50\_1\_2\_logi\_prop\_r1 & 0.0224893 & 0.0087991\\
+\hline
+SB\_TransitionMatrix\_3ac\_sumdiagcov & 0.0053928 & 0.0037061\\
+\hline
+\end{tabular}
+\end{table}
+
+\hypertarget{annex-b-top-ten-most-sensitive-catch22-features}{%
+\section{Annex B: Top Ten Most Sensitive Catch22
+Features}\label{annex-b-top-ten-most-sensitive-catch22-features}}
+
+The ten features most impacted by both downsampling algorithms are
+selected for further investigation. The bar graph below visualises the
+standard deviation of the \emph{EveryNth} algorithm for these features
+across all the parameters for each of the nine synthetic time series.
+
+\includegraphics{210431461_CSC8639_Dissertation_files/figure-latex/NthSensitivity-1.pdf}
+
+The visualisation above highlights that the impact of downsampling on
+each catch22 feature is different for each time series type. This holds
+true for the \emph{Percentage Change} algorithm too. The bar graph below
+visualises the standard deviation for the same ten features across all
+the parameters for each of the nine synthetic time series.
+
+\includegraphics{210431461_CSC8639_Dissertation_files/figure-latex/PCSensitivity-1.pdf}
+
+Interestingly, the impact of \emph{Percentage Change} on many of these
+features is acute despite the spread of standard deviation being
+smaller. For example\ldots{} {[}ADD OBSERVATION{]}
+
+\hypertarget{annex-c-data-volume-vs.-downsampling-parameters}{%
+\section{Annex C: Data Volume vs.~Downsampling
+Parameters}\label{annex-c-data-volume-vs.-downsampling-parameters}}
+
+\hypertarget{annex-d-feature-variation}{%
+\section{Annex D: Feature Variation}\label{annex-d-feature-variation}}
 
 Line graphs of the original time series are provided in Annex D to
 support comparison. The original time series `100' and `200' are
@@ -672,195 +1074,23 @@ distances''
 
 \includegraphics{210431461_CSC8639_Dissertation_files/figure-latex/MAE-1.pdf}
 
-\hypertarget{future-work}{%
-\section{FUTURE WORK}\label{future-work}}
-
-\label{sec:headings}
-
-The data pipeline developed by C. H. Lubba et. al could be used to
-generate other subsets of time series features for distinct tasks in any
-domain. This is likely to be important for highly specialised tasks or
-domains.
-
-Highlight in text: - The values of catch22 features appear to increase
-as data is discarded. It would be beneficial to explore this dynamic
-further; - he \emph{EveryNth} algorithm impacts more features than
-\emph{Percentage Change}; this is likely to be because more data is
-discarded by the former algorithm than the latter in the 50 parameters
-explored by this research. It would be beneficial to explore this
-difference with further iterations of \emph{Percentage Change}
-downsampling across the time series to understand its impact after more
-data is discarded.
-
-\hypertarget{conclusion}{%
-\section{CONCLUSION}\label{conclusion}}
-
-\label{sec:headings}
-
-\hypertarget{references}{%
-\section{REFERENCES}\label{references}}
-
-\label{sec:headings}
-
-\hypertarget{annex-a-sensitivity-of-catch22-features}{%
-\section{Annex A: Sensitivity of Catch22
-Features}\label{annex-a-sensitivity-of-catch22-features}}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{\# Reshape sensitivity subset data to a long format}
-\NormalTok{subset\_sensitivity\_joined\_long }\OtherTok{\textless{}{-}}\NormalTok{ subset\_sensitivity\_joined }\SpecialCharTok{\%\textgreater{}\%}
-  \FunctionTok{pivot\_longer}\NormalTok{(}\AttributeTok{cols =} \FunctionTok{c}\NormalTok{(everyNthSensitivity, PercentageChangeSensitivity), }
-               \AttributeTok{names\_to =} \StringTok{"Method"}\NormalTok{, }
-               \AttributeTok{values\_to =} \StringTok{"StandardDeviation"}\NormalTok{)}
-
-\CommentTok{\# Change the Method into a factor and set the levels}
-\NormalTok{subset\_sensitivity\_joined\_long}\SpecialCharTok{$}\NormalTok{Method }\OtherTok{\textless{}{-}} \FunctionTok{factor}\NormalTok{(subset\_sensitivity\_joined\_long}\SpecialCharTok{$}\NormalTok{Method, }\AttributeTok{levels =} \FunctionTok{c}\NormalTok{(}\StringTok{"PercentageChangeSensitivity"}\NormalTok{, }\StringTok{"everyNthSensitivity"}\NormalTok{))}
-
-\CommentTok{\# Recode the names of the Methods}
-\NormalTok{subset\_sensitivity\_joined\_long}\SpecialCharTok{$}\NormalTok{Method }\OtherTok{\textless{}{-}} \FunctionTok{recode}\NormalTok{(subset\_sensitivity\_joined\_long}\SpecialCharTok{$}\NormalTok{Method,  }
-                                                \StringTok{"PercentageChangeSensitivity"} \OtherTok{=} \StringTok{"Percentage Change"}\NormalTok{, }
-                                                \StringTok{"everyNthSensitivity"} \OtherTok{=} \StringTok{"EveryNth"}\NormalTok{)}
-\CommentTok{\# Recode the names of the Rcatch22 features}
-\NormalTok{subset\_sensitivity\_joined\_long}\SpecialCharTok{$}\NormalTok{names }\OtherTok{\textless{}{-}} \FunctionTok{recode}\NormalTok{(subset\_sensitivity\_joined\_long}\SpecialCharTok{$}\NormalTok{names,  }
-                                               \StringTok{\textquotesingle{}CO\_f1ecac\textquotesingle{}} \OtherTok{=} \StringTok{"Autocorrelation\_ApproxScale"}\NormalTok{,}
-                                               \StringTok{\textquotesingle{}CO\_FirstMin\_ac\textquotesingle{}} \OtherTok{=} \StringTok{"Autocorrelation\_FirstMinimum"}\NormalTok{,}
-                                               \StringTok{\textquotesingle{}SB\_BinaryStats\_mean\_longstretch1\textquotesingle{}} \OtherTok{=} \StringTok{"LongestSuccessivePeriod\_AboveAverage"}\NormalTok{,}
-                                               \StringTok{\textquotesingle{}PD\_PeriodicityWang\_th0\_01\textquotesingle{}} \OtherTok{=} \StringTok{"Autocorrelation\_FirstPeak"}\NormalTok{,}
-                                               \StringTok{\textquotesingle{}DN\_Mean\textquotesingle{}} \OtherTok{=} \StringTok{\textquotesingle{}Mean\textquotesingle{}}\NormalTok{,}
-                                               \StringTok{\textquotesingle{}DN\_HistogramMode\_10\textquotesingle{}} \OtherTok{=} \StringTok{"HistogramBin10"}\NormalTok{,}
-                                               \StringTok{\textquotesingle{}DN\_Spread\_Std\textquotesingle{}} \OtherTok{=} \StringTok{\textquotesingle{}Spead\textquotesingle{}}\NormalTok{,}
-                                               \StringTok{\textquotesingle{}CO\_Embed2\_Dist\_tau\_d\_expfit\_meandiff\textquotesingle{}} \OtherTok{=} \StringTok{"DistributionExponentialFit\_MeanAbsoluteError"}\NormalTok{,}
-                                               \StringTok{\textquotesingle{}IN\_AutoMutualInfoStats\_40\_gaussian\_fmmi\textquotesingle{}} \OtherTok{=} \StringTok{"Autocorrelation\_Automutual"}\NormalTok{,}
-                                               \StringTok{\textquotesingle{}SB\_BinaryStats\_diff\_longstretch0\textquotesingle{}} \OtherTok{=} \StringTok{"LongestSuccessivePeriod\_SuccessiveDecreases"}\NormalTok{)}
-
-\CommentTok{\# Create a bar plot}
-\NormalTok{sensitive\_subset\_plot }\OtherTok{\textless{}{-}} \FunctionTok{ggplot}\NormalTok{(subset\_sensitivity\_joined\_long, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ StandardDeviation, }\AttributeTok{y =}\NormalTok{ names, }\AttributeTok{fill =}\NormalTok{ Method)) }\SpecialCharTok{+}
-  \FunctionTok{geom\_bar}\NormalTok{(}\AttributeTok{stat =} \StringTok{"identity"}\NormalTok{, }\AttributeTok{position =} \FunctionTok{position\_dodge}\NormalTok{()) }\SpecialCharTok{+}
-  \FunctionTok{theme\_minimal}\NormalTok{() }\SpecialCharTok{+}
-  \FunctionTok{theme}\NormalTok{(}\AttributeTok{text =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{size =} \DecValTok{30}\NormalTok{), }\AttributeTok{legend.position =} \StringTok{"top"}\NormalTok{) }\SpecialCharTok{+}
-  \FunctionTok{labs}\NormalTok{(}\AttributeTok{x =} \StringTok{"Standard Deviation"}\NormalTok{, }\AttributeTok{y =} \StringTok{"Catch22 Feature"}\NormalTok{, }\AttributeTok{fill =} \StringTok{"Method"}\NormalTok{, }\AttributeTok{title =} \StringTok{"Standard Deviation of Most Sensitive Features"}\NormalTok{) }\SpecialCharTok{+}
-  \FunctionTok{scale\_fill\_brewer}\NormalTok{(}\AttributeTok{palette =} \StringTok{"Paired"}\NormalTok{) }\SpecialCharTok{+}
-  \FunctionTok{scale\_x\_continuous}\NormalTok{(}\AttributeTok{limits =} \FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\ConstantTok{NA}\NormalTok{))}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{knitr}\SpecialCharTok{::}\FunctionTok{kable}\NormalTok{((sensitivity\_joined), }\AttributeTok{caption =} \StringTok{"Sensitivity of Catch22 Features to EveryNth and Percentage Change Downsampling"}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{longtable}[]{@{}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.4783}}
-  >{\raggedleft\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.2174}}
-  >{\raggedleft\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.3043}}@{}}
-\caption{Sensitivity of Catch22 Features to EveryNth and Percentage
-Change Downsampling}\tabularnewline
-\toprule\noalign{}
-\begin{minipage}[b]{\linewidth}\raggedright
-names
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
-everyNthSensitivity
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
-PercentageChangeSensitivity
-\end{minipage} \\
-\midrule\noalign{}
-\endfirsthead
-\toprule\noalign{}
-\begin{minipage}[b]{\linewidth}\raggedright
-names
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
-everyNthSensitivity
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
-PercentageChangeSensitivity
-\end{minipage} \\
-\midrule\noalign{}
-\endhead
-\bottomrule\noalign{}
-\endlastfoot
-SB\_BinaryStats\_diff\_longstretch0 & 2.5778227 & 0.5711553 \\
-CO\_FirstMin\_ac & 2.5639294 & 0.4181318 \\
-SB\_BinaryStats\_mean\_longstretch1 & 1.7389139 & 0.6524714 \\
-IN\_AutoMutualInfoStats\_40\_gaussian\_fmmi & 1.3808674 & 0.3736266 \\
-PD\_PeriodicityWang\_th0\_01 & 1.1844657 & 0.3954080 \\
-CO\_f1ecac & 0.7661026 & 0.3713025 \\
-CO\_Embed2\_Dist\_tau\_d\_expfit\_meandiff & 0.3440829 & 0.0437543 \\
-DN\_Spread\_Std & 0.1985249 & 0.0455823 \\
-DN\_Mean & 0.1572628 & 0.0227554 \\
-DN\_HistogramMode\_10 & 0.1013119 & 0.0822124 \\
-DN\_HistogramMode\_5 & 0.0869504 & 0.0647597 \\
-SP\_Summaries\_welch\_rect\_centroid & 0.0654187 & 0.0025698 \\
-FC\_LocalSimple\_mean1\_tauresrat & 0.0436216 & 0.0218936 \\
-DN\_OutlierInclude\_n\_001\_mdrmd & 0.0434259 & 0.0050690 \\
-SC\_FluctAnal\_2\_rsrangefit\_50\_1\_logi\_prop\_r1 & 0.0432552 &
-0.0277534 \\
-CO\_trev\_1\_num & 0.0425513 & 0.0130514 \\
-FC\_LocalSimple\_mean3\_stderr & 0.0384460 & 0.0049473 \\
-DN\_OutlierInclude\_p\_001\_mdrmd & 0.0349796 & 0.0138568 \\
-SB\_MotifThree\_quantile\_hh & 0.0340103 & 0.0139764 \\
-SP\_Summaries\_welch\_rect\_area\_5\_1 & 0.0326959 & 0.0038222 \\
-CO\_HistogramAMI\_even\_2\_5 & 0.0315734 & 0.0134047 \\
-MD\_hrv\_classic\_pnn40 & 0.0241202 & 0.0102366 \\
-SC\_FluctAnal\_2\_dfa\_50\_1\_2\_logi\_prop\_r1 & 0.0224893 &
-0.0087991 \\
-SB\_TransitionMatrix\_3ac\_sumdiagcov & 0.0053928 & 0.0037061 \\
-\end{longtable}
-
-\hypertarget{annex-b-top-ten-most-sensitive-catch22-features}{%
-\section{Annex B: Top Ten Most Sensitive Catch22
-Features}\label{annex-b-top-ten-most-sensitive-catch22-features}}
-
-The ten features most impacted by both downsampling algorithms are
-selected for further investigation. The bar graph below visualises the
-standard deviation of the \emph{EveryNth} algorithm for these features
-across all the parameters for each of the nine synthetic time series.
-
-\includegraphics{210431461_CSC8639_Dissertation_files/figure-latex/NthSensitivity-1.pdf}
-
-The visualisation above highlights that the impact of downsampling on
-each catch22 feature is different for each time series type. This holds
-true for the \emph{Percentage Change} algorithm too. The bar graph below
-visualises the standard deviation for the same ten features across all
-the parameters for each of the nine synthetic time series.
-
-\includegraphics{210431461_CSC8639_Dissertation_files/figure-latex/PCSensitivity-1.pdf}
-
-Interestingly, the impact of \emph{Percentage Change} on many of these
-features is acute despite the spread of standard deviation being
-smaller. For example\ldots{} {[}ADD OBSERVATION{]}
-
-\hypertarget{annex-c-data-volume-vs.-downsampling-parameters}{%
-\section{Annex C: Data Volume vs.~Downsampling
-Parameters}\label{annex-c-data-volume-vs.-downsampling-parameters}}
-
-To better compare this impact, the heatmap below visualises the scaled
-difference between the original and imputed time series by the data
-volume remaining after each downsampling algorithm is applied. Annex B
-shares this graph with downsampling parameter instead of data volume to
-explain why data volume was chosen.
-
-\includegraphics{210431461_CSC8639_Dissertation_files/figure-latex/Heatmap-1.pdf}
-
-Interestingly, this visualisation demonstrated that the catch22 features
-that are impacted by both downsampling algorithms tend to increase in
-comparison the original feature values. The visualisation emphasises how
-quickly \emph{EveryNth} discards data by comparison to \emph{Percentage
-Change}. This creates acute differences in the imputed time series
-created when less than 20 data points remained after \emph{EveryNth} is
-applied. For both downsampling algorithms, the `Autocorr\_ApproxScale'
-and `LongestPeriod\_AboveAverage' appear to be the first features to be
-impacted. {[}EXPLAIN FEATURES{]}. The impact on both features appears to
-be inconsistent when \emph{Percentage Change} is applied before linear
-interpolation. For example, the are data volumes where
-\texttt{Autocorr\_ApproxScale} and \texttt{LongestPeriod\_AboveAverage}
-do not appear to be impacted by \emph{Percentage Change} when higher
-date volumes appear to be impacted.
-
 \hypertarget{refs}{}
 \begin{CSLReferences}{0}{0}
-\leavevmode\vadjust pre{\hypertarget{ref-data2017}{}}%
+\leavevmode\vadjust pre{\hypertarget{ref-imputeTS_R}{}}%
 \CSLLeftMargin{{[}1{]} }%
+\CSLRightInline{S. Moritz and T. Bartiz-Beielstein, {``imputeTS: Time
+series missing value imputation in r,''} vol. 9.1. R Journal, 2017. doi:
+\href{https://doi.org/10.32614/RJ-2017-009}{10.32614/RJ-2017-009}.}
+
+\leavevmode\vadjust pre{\hypertarget{ref-catch22_R}{}}%
+\CSLLeftMargin{{[}2{]} }%
+\CSLRightInline{C. H. Lubba, B. Fulcher, T. Henderspn, B. Harris, O. r.
+TL, and O. Cliff, {``catch22: CAnonical time-series CHaracteristics.''}
+R Journal, 2022. doi:
+\href{https://doi.org/10.5281/zenodo.6673597}{10.5281/zenodo.6673597}.}
+
+\leavevmode\vadjust pre{\hypertarget{ref-data2017}{}}%
+\CSLLeftMargin{{[}3{]} }%
 \CSLRightInline{Cabinet Office and Government Digital Service,
 {``Government transformation strategy: Better use of data.''} HM
 Government;
@@ -868,7 +1098,7 @@ Government;
 2017.}
 
 \leavevmode\vadjust pre{\hypertarget{ref-data2020}{}}%
-\CSLLeftMargin{{[}2{]} }%
+\CSLLeftMargin{{[}4{]} }%
 \CSLRightInline{Department for Digital, Culture, Media \& Sport and
 Department for Science, Innovation \& Technology, {``National data
 strategy.''} HM Government;
@@ -876,14 +1106,14 @@ strategy.''} HM Government;
 2020.}
 
 \leavevmode\vadjust pre{\hypertarget{ref-data2021}{}}%
-\CSLLeftMargin{{[}3{]} }%
+\CSLLeftMargin{{[}5{]} }%
 \CSLRightInline{M. of Defence, {``Data strategy for defence,''}
 \emph{GOV.UK}. HM Government;
 \url{https://www.gov.uk/government/publications/data-strategy-for-defence/data-strategy-for-defence},
 2021.}
 
 \leavevmode\vadjust pre{\hypertarget{ref-data2022}{}}%
-\CSLLeftMargin{{[}4{]} }%
+\CSLLeftMargin{{[}6{]} }%
 \CSLRightInline{Central Digital \& Data Office, {``Transforming for a
 digital future: 2022 to 2025 roadmap for digital and data.''} HM
 Government;
@@ -891,27 +1121,27 @@ Government;
 2022.}
 
 \leavevmode\vadjust pre{\hypertarget{ref-trust}{}}%
-\CSLLeftMargin{{[}5{]} }%
+\CSLLeftMargin{{[}7{]} }%
 \CSLRightInline{Centre for Data Ethics \& Innovation, {``Addressing
 trust in public sector data use.''}
 \url{https://www.gov.uk/government/publications/cdei-publishes-its-first-report-on-public-sector-data-sharing/addressing-trust-in-public-sector-data-use\#introduction--context}.}
 
 \leavevmode\vadjust pre{\hypertarget{ref-pathway}{}}%
-\CSLLeftMargin{{[}6{]} }%
+\CSLLeftMargin{{[}8{]} }%
 \CSLRightInline{Government Analysis Function, {``Types of data in
 government learning pathway.''}
 \url{https://analysisfunction.civilservice.gov.uk/learning-development/learning-pathways/types-of-data-in-government-learning-pathway/},
 2022.}
 
 \leavevmode\vadjust pre{\hypertarget{ref-onstool}{}}%
-\CSLLeftMargin{{[}7{]} }%
+\CSLLeftMargin{{[}9{]} }%
 \CSLRightInline{Office for National Statistics, {``Time series
 explorer.''}
 \url{https://www.ons.gov.uk/timeseriestool?query=\&topic=\&updated=\&fromDateDay=\&fromDateMonth=\&fromDateYear=\&toDateDay=\&toDateMonth=\&toDateYear=\&size=50},
 Unknown.}
 
 \leavevmode\vadjust pre{\hypertarget{ref-TVStore}{}}%
-\CSLLeftMargin{{[}8{]} }%
+\CSLLeftMargin{{[}10{]} }%
 \CSLRightInline{Y. An, Y. Su, Y. Zhu, and J. Wang, {``TVStore:
 Automatically bounding time series storage via time-varying
 compression,''} in \emph{Proceedings of the 20th USENIX conference on
@@ -920,14 +1150,14 @@ technologies. Santa Clara, CA, USA: USENIX Association, 2022, pp.
 83--99.}
 
 \leavevmode\vadjust pre{\hypertarget{ref-datapoint}{}}%
-\CSLLeftMargin{{[}9{]} }%
+\CSLLeftMargin{{[}11{]} }%
 \CSLRightInline{J. Donckt, J. Donckt, M. Rademaker, and S. Hoecke,
 {``Data point selection for line chart visualization: Methodological
 assessment and evidence-based guidelines.''} 2023. doi:
 \href{https://doi.org/10.48550/arXiv.2304.00900}{10.48550/arXiv.2304.00900}.}
 
 \leavevmode\vadjust pre{\hypertarget{ref-Sveinn}{}}%
-\CSLLeftMargin{{[}10{]} }%
+\CSLLeftMargin{{[}12{]} }%
 \CSLRightInline{S. Steinarsson, {``Downsampling time series for visual
 representation.''} University of Iceland, Faculty of Industrial
 Engineering, Mechanical Engineering; Computer Science, School of
@@ -935,12 +1165,12 @@ Engineering; Natural Sciences, University of Iceland, Reykjavik,
 Iceland, 2013.}
 
 \leavevmode\vadjust pre{\hypertarget{ref-Shift}{}}%
-\CSLLeftMargin{{[}11{]} }%
+\CSLLeftMargin{{[}13{]} }%
 \CSLRightInline{The Shift Project, {``Implementing digital
 sufficiency,''} 2020.}
 
 \leavevmode\vadjust pre{\hypertarget{ref-downsampling}{}}%
-\CSLLeftMargin{{[}12{]} }%
+\CSLLeftMargin{{[}14{]} }%
 \CSLRightInline{W. Aigner, S. Miksch, W. Muller, H. Schumann, and C.
 Tominski, {``Visual methods for analyzing time-oriented data,''}
 \emph{IEEE Transactions on Visualization and Computer Graphics}, vol.
@@ -948,30 +1178,17 @@ Tominski, {``Visual methods for analyzing time-oriented data,''}
 \href{https://doi.org/10.1109/TVCG.2007.70415}{10.1109/TVCG.2007.70415}.}
 
 \leavevmode\vadjust pre{\hypertarget{ref-sampling}{}}%
-\CSLLeftMargin{{[}13{]} }%
+\CSLLeftMargin{{[}15{]} }%
 \CSLRightInline{B. C. Kwon, J. Verma, P. J. Haas, and C. Demiralp,
 {``Sampling for scalable visual analytics,''} \emph{IEEE Computer
 Graphics and Applications}, vol. 37, no. 1, pp. 100--108, 2017, doi:
 \href{https://doi.org/10.1109/MCG.2017.6}{10.1109/MCG.2017.6}.}
 
 \leavevmode\vadjust pre{\hypertarget{ref-MinMaxLTTB}{}}%
-\CSLLeftMargin{{[}14{]} }%
+\CSLLeftMargin{{[}16{]} }%
 \CSLRightInline{J. Donckt, J. Donckt, M. Rademaker, and S. Hoecke,
 {``MinMaxLTTB: Leveraging MinMax-preselection to scale LTTB.''} 2023.
 Available: \url{https://arxiv.org/abs/2305.00332}}
-
-\leavevmode\vadjust pre{\hypertarget{ref-imputeTS_R}{}}%
-\CSLLeftMargin{{[}15{]} }%
-\CSLRightInline{S. Moritz and T. Bartiz-Beielstein, {``imputeTS: Time
-series missing value imputation in r,''} vol. 9.1. R Journal, 2017. doi:
-\href{https://doi.org/10.32614/RJ-2017-009}{10.32614/RJ-2017-009}.}
-
-\leavevmode\vadjust pre{\hypertarget{ref-catch22_R}{}}%
-\CSLLeftMargin{{[}16{]} }%
-\CSLRightInline{C. H. Lubba, B. Fulcher, T. Henderspn, B. Harris, O. r.
-TL, and O. Cliff, {``catch22: CAnonical time-series CHaracteristics.''}
-R Journal, 2022. doi:
-\href{https://doi.org/10.5281/zenodo.6673597}{10.5281/zenodo.6673597}.}
 
 \leavevmode\vadjust pre{\hypertarget{ref-political_transparency}{}}%
 \CSLLeftMargin{{[}17{]} }%
@@ -1083,19 +1300,19 @@ complete analysis workflows with SQL.''} 2023. doi:
 databases,''} \emph{The VLDB Journal}, vol. 25, 2016, doi:
 \href{https://doi.org/10.1007/s00778-015-0396-z}{10.1007/s00778-015-0396-z}.}
 
-\leavevmode\vadjust pre{\hypertarget{ref-M4}{}}%
-\CSLLeftMargin{{[}32{]} }%
-\CSLRightInline{U. Jugel, Z. Jerzak, G. Hackenbroich, and V. Markl,
-{``M4: A visualization-oriented time series data aggregation.
-Proceedings of the VLDB endowment,''} vol. 7, 2014, Available:
-\url{https://www.vldb.org/2014/program/http://www.vldb.org/pvldb/vol7/p797-jugel.pdf}}
-
 \leavevmode\vadjust pre{\hypertarget{ref-MinMaxOrdered}{}}%
-\CSLLeftMargin{{[}33{]} }%
+\CSLLeftMargin{{[}32{]} }%
 \CSLRightInline{W. Yunhai \emph{et al.}, {``OM3: An ordered multi-level
 min-max representation for interactive progressive visualization of time
 series,''} in \emph{Proc. ACM manag. data}, ACM, 2023. Available:
 \url{https://doi.org/10.1145/3589290}}
+
+\leavevmode\vadjust pre{\hypertarget{ref-M4}{}}%
+\CSLLeftMargin{{[}33{]} }%
+\CSLRightInline{U. Jugel, Z. Jerzak, G. Hackenbroich, and V. Markl,
+{``M4: A visualization-oriented time series data aggregation.
+Proceedings of the VLDB endowment,''} vol. 7, 2014, Available:
+\url{https://www.vldb.org/2014/program/http://www.vldb.org/pvldb/vol7/p797-jugel.pdf}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-catch22}{}}%
 \CSLLeftMargin{{[}34{]} }%

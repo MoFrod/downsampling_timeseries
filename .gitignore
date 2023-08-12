@@ -4,3 +4,4 @@
 venv/
 *.pptx
 document_cleaning_script.py
+*__pycache__*

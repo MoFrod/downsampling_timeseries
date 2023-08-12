@@ -54,13 +54,24 @@ all_sensitivity<- left_join(sensitivity_joined, sensitivity, by = "names") %>%
 # Get the top 10 most sensitive names
 top_ten <- head(sensitivity$names, 10)
 
+
 # Filter the sensitivity data to only include these names
 subset_sensitivity_joined <- sensitivity_joined %>% 
   filter(names %in% top_ten)
 
-# Filter all the data to only include these names
+# Get the top 7 most sensitive names
+top_seven <- head(sensitivity$names,7)
+
+# Get the top 6 most sensitive names
+top_six <- head(sensitivity$names, 6)
+
+# Filter all the data to only include top 10 names
 filtered_df <- joined_df %>% 
   filter(names %in% top_ten)
+
+# Filter all the data to only include top 6 names
+subset_filtered_df <- joined_df %>% 
+  filter(names %in% top_six)
 
 ## Further investigation to sensitivity
 #=
