@@ -424,3 +424,17 @@ ggplot(filtered_df %>%
   theme(plot.title = element_text(hjust = -0.15), legend.position = "top", legend.justification = c(-0.14, 1)) +
   labs(x = "Volume of Data", y = "Scaled Difference", color = "Method", title = "Mean Absolute Error of an Exponential Fit Scaled Difference across Data Volume") +
   facet_wrap(~ dataset, ncol = 3)
+
+
+
+# Create the difference line graph for df100
+ggplot(subset_filtered_df %>%
+         filter(dataset == "df100"),
+       aes(x = as.numeric(vol), y = scaled, color = method)) +
+  scale_color_brewer(palette = "Paired") +
+  geom_line(linewidth = 1) +
+  scale_x_reverse() +
+  theme_minimal() +
+  theme(plot.title = element_text(hjust = -0.15), legend.position = "top", legend.justification = c(-0.14, 1)) +
+  labs(x = "Volume of Data", y = "Scaled Difference", color = "Method", title = "Variation of Catch22 Features") +
+  facet_wrap(~names, ncol = 3)
