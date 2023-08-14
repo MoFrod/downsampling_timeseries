@@ -136,69 +136,85 @@ regulatory and ethical obligations''
 \protect\hyperlink{ref-data2020}{{[}4{]}}, and this requires
 transparency \protect\hyperlink{ref-trust}{{[}7{]}}.
 
-To make data-driven decisions, government decision-makers also need to
-trust how the data used (cite user research here). This means trusting
-which data points are selected, how this data collected and stored, and
-the capability of data practitioners to understand the quality, insights
-and limitations of it. At every stage of the data processing pipeline,
-data practitioners have the opportunity to communicate the impact of the
-assumptions and choices they are making to support decision-makers in
-trusting the data informing their decisions.
+To make data-driven decisions, it is likely that government
+decision-makers also need transparency of how the data used to trust it.
+This means trusting which data points are selected, how this data
+collected and stored, and the capability of data practitioners to
+understand the quality, insights and limitations of it. At every stage
+of the data processing pipeline, data practitioners have the opportunity
+to communicate the data impact of the assumptions and choices they are
+making. This could not only support decision-makers in trusting the data
+informing their decisions, but also help decision-makers understand the
+limitations of the data and thresholds at which the data insights can be
+relied upon for each decision.
 
-Time series data is used across HM Government
-\protect\hyperlink{ref-pathway}{{[}8{]}} to inform decision-makers
-across various domains \protect\hyperlink{ref-onstool}{{[}9{]}}. It is
-also widely generated and used by industry and research
-\protect\hyperlink{ref-TVStore}{{[}10{]}}. The volume of time series
+The research outlined in this paper explores this dynamic with a two
+pronged approach. User research with sixteen UK Civil Servants
+investigates what decision-makers need to trust the data insights they
+are presented with, and how data practitioners assess and communicate
+the trustworthiness of the data. These insights are combined with
+analysis of how to explain the impact of downsampling algorithms on time
+series data without detailing extensive statistical evidence.
+
+Downsampling involves selecting a representative subset of data to
+preserve its original shape while reducing the number of data points
+\protect\hyperlink{ref-datapoint}{{[}8{]}},
+\protect\hyperlink{ref-MinMaxLTTB}{{[}9{]}}. Time series data is used
+across HM Government \protect\hyperlink{ref-pathway}{{[}10{]}} to inform
+decision-makers across various domains
+\protect\hyperlink{ref-onstool}{{[}11{]}}; it is also widely generated
+and used by industry and research
+\protect\hyperlink{ref-TVStore}{{[}12{]}}. The volume of time series
 data is continuously increasingly
-\protect\hyperlink{ref-datapoint}{{[}11{]}}, posing significant
+\protect\hyperlink{ref-datapoint}{{[}8{]}}, posing significant
 challenges for handling and visualising this popular data type
-\protect\hyperlink{ref-TVStore}{{[}10{]}}. Data practitioners must
-utilise methods that reduce data volumes to align with limitations like
-processing time, computing costs, storage capabilities, and
-sustainability ambitions \protect\hyperlink{ref-TVStore}{{[}10{]}},
-\protect\hyperlink{ref-Sveinn}{{[}12{]}},
-\protect\hyperlink{ref-Shift}{{[}13{]}}.
+\protect\hyperlink{ref-TVStore}{{[}12{]}}.
 
+Data practitioners must utilise methods that reduce data volumes to
+align with limitations like processing time, computing costs, storage
+capabilities, and sustainability ambitions
+\protect\hyperlink{ref-TVStore}{{[}12{]}}--\protect\hyperlink{ref-Shift}{{[}14{]}}.
 Downsampling is an established technique
-\protect\hyperlink{ref-downsampling}{{[}14{]}},
-\protect\hyperlink{ref-sampling}{{[}15{]}} that involves selecting a
-representative subset of data to preserve its original shape while
-reducing the number of data points
-\protect\hyperlink{ref-datapoint}{{[}11{]}},
-\protect\hyperlink{ref-MinMaxLTTB}{{[}16{]}}. This is a vital part of
-making voluminous time series understandable for human observation
-\protect\hyperlink{ref-Sveinn}{{[}12{]}} and an essential step in many
+\protect\hyperlink{ref-downsampling}{{[}15{]}},
+\protect\hyperlink{ref-sampling}{{[}16{]}} for this, and is a vital part
+of making voluminous time series understandable for human observation
+\protect\hyperlink{ref-Sveinn}{{[}13{]}} and an essential step in many
 time series database solutions
-\protect\hyperlink{ref-datapoint}{{[}11{]}}. However, little attention
+\protect\hyperlink{ref-datapoint}{{[}8{]}}. However, little attention
 has been devoted to how downsampling impacts decision-makers trust in
-the data.
+the data and how to communicate the impact of downsampling algorithms on
+time series data remains also understudied
+\protect\hyperlink{ref-datapoint}{{[}8{]}},
+\protect\hyperlink{ref-Sveinn}{{[}13{]}}.
 
-Despite widespread use, how to communicate the impact of downsampling
-algorithms on time series data remains also understudied
-\protect\hyperlink{ref-datapoint}{{[}11{]}},
-\protect\hyperlink{ref-Sveinn}{{[}12{]}}. Downsampling expands the
-boundaries of risk for decision-makers as data practitioners may not
-realise the significance of the data being discarded. Such choices
-throughout the data pipeline may have disproportionately larger
-consequences later as their ramifications for future decisions are not
-fully understood by all. It is important, therefore, that data
-practitioners are able to communicate the impact of choices made
-throughout the data pipeline.
+Downsampling is an important part of how time series data is used and a
+technical issue that, this research posits, whose impact is important
+for decision-makers to understand. Downsampling expands the boundaries
+of risk for decision-makers as data practitioners may not realise the
+significance of the data being discarded. For example, a decision-maker
+may be looking at analysis of CO\_2 levels on an open-plan office floor
+to decide on how many officials can work in the office each day
+post-Coivd. Different downsampling algorithms preserve different data
+points, which could change the threshold of risk for the decision-maker.
+In complex decisions, such Choices throughout the data pipeline may have
+disproportionately larger consequences later as their future
+ramifications are unlikely to be fully understood. It is important,
+therefore, that data practitioners are able to communicate the impact of
+choices made throughout the data pipeline.
 
-To address these challenges, this paper shares initial insights from
-user research on the impact of downsampling on decision-makers' trust in
-data and suggests a visualisation methodology for communicating the
-impact of downsampling algorithms on time series. This methodology
-combines user research with R packages \texttt{imputeTS}
-\protect\hyperlink{ref-imputeTS_R}{{[}1{]}} and \texttt{Rcatch22}
-\protect\hyperlink{ref-catch22_R}{{[}2{]}} to identify and visualise
-time series features that are most sensitive to downsampling. It is
-hoped this will improve decision-makers' trust in data by helping data
-practitioners to create transparency in the data processing pipeline,
-communicate the impact of downsampling, and support conversations about
+This paper shares initial insights from user research on
+decision-makers' trust in data and suggests a visualisation methodology
+for communicating the impact of downsampling algorithms on time series.
+This methodology combines user research insights with R packages
+\texttt{imputeTS} \protect\hyperlink{ref-imputeTS_R}{{[}1{]}} and
+\texttt{Rcatch22} \protect\hyperlink{ref-catch22_R}{{[}2{]}} to identify
+time series features that are most sensitive to downsampling and
+visualise the impact of different downsampling algorithms on these
+features. It is hoped this will improve how data practitioners
+communicate the impact of downsampling, support conversations about
 which algorithms or parameters are most appropriate for particular
-decision-maker use cases.
+decision-maker use cases, and increase decision-makers' trust in data by
+creating transparency in the data processing pipeline,.
 
 \hypertarget{related-work}{%
 \section{RELATED WORK}\label{related-work}}
@@ -207,9 +223,9 @@ This section provides an overview of previous related work to create a
 clear understanding of the most relevant fields of research and identify
 the gaps being addressed by the paper.
 
-\textbf{2.1 Data Transparency}
+\textbf{2.1 Data transparency}
 
-Technology transparency, ``including institutional data practices'', is
+Technology transparency, ``including institutional data practices,'' is
 sociopolitical in nature
 \protect\hyperlink{ref-political_transparency}{{[}17{]}}. There is a
 growing number of researchers reflecting on ``societal needs in terms of
@@ -236,19 +252,19 @@ that data practitioners communicating the assumptions and choices made
 throughout the data processing pipeline with decision-makers is not
 likely to create trust in how the data is used. Instead, data
 practitioners should be encouraged to find tools, such as interactive
-visualisations \protect\hyperlink{ref-datapoint}{{[}11{]}}, that put
+visualisations \protect\hyperlink{ref-datapoint}{{[}8{]}}, that put
 agency into the hands of decision-makers.
 
 \textbf{2.2 Time series visualisation}
 
 Time series data is commonly visualised as a line graph
-\protect\hyperlink{ref-Sveinn}{{[}12{]}},
+\protect\hyperlink{ref-Sveinn}{{[}13{]}},
 \protect\hyperlink{ref-timenotes}{{[}23{]}}. Line graphs help the human
 eye to observe only the most important data points
-\protect\hyperlink{ref-Sveinn}{{[}12{]}} by convey the overall shape and
+\protect\hyperlink{ref-Sveinn}{{[}13{]}} by convey the overall shape and
 complexity of the time series data
-\protect\hyperlink{ref-datapoint}{{[}11{]}},
-\protect\hyperlink{ref-downsampling}{{[}14{]}}. The most effective time
+\protect\hyperlink{ref-datapoint}{{[}8{]}},
+\protect\hyperlink{ref-downsampling}{{[}15{]}}. The most effective time
 series visualisations are, however, interactive
 \protect\hyperlink{ref-timenotes}{{[}23{]}},
 \protect\hyperlink{ref-plotly}{{[}24{]}}, turning access into agency
@@ -269,35 +285,35 @@ in this paper harnesses the capabilities of \texttt{imputeTS} and its
 `process' visualisations to help data practitioners communicate the
 impact of downsampling choices made in the data processing pipeline.
 
-\textbf{2.3 Value Preserving Data Aggregation}
+\textbf{2.3 Value preserving data aggregation}
 
 Technological innovation has generated unprecedented amount of time
 series data and this data continues to grow
 \protect\hyperlink{ref-data2020}{{[}4{]}},
-\protect\hyperlink{ref-TVStore}{{[}10{]}},
+\protect\hyperlink{ref-TVStore}{{[}12{]}},
 \protect\hyperlink{ref-storage}{{[}26{]}},
 \protect\hyperlink{ref-CatchUp}{{[}27{]}}. For example, tackling climate
 change is the UK Government's ``number one international priority''
 \protect\hyperlink{ref-IR}{{[}28{]}}, yet climate simulations that help
 inform decision-makers generate tens of terabytes per second
-\protect\hyperlink{ref-TVStore}{{[}10{]}},
+\protect\hyperlink{ref-TVStore}{{[}12{]}},
 \protect\hyperlink{ref-climate}{{[}29{]}}. Value preserving data
 aggregation (a subset of downsampling) algorithms play an important role
 in addressing how this voluminous data is processed, stored
-\protect\hyperlink{ref-TVStore}{{[}10{]}} and visualised
-\protect\hyperlink{ref-Sveinn}{{[}12{]}},
+\protect\hyperlink{ref-TVStore}{{[}12{]}} and visualised
+\protect\hyperlink{ref-Sveinn}{{[}13{]}},
 \protect\hyperlink{ref-dashql}{{[}30{]}} by minimising computing
-resources needed \protect\hyperlink{ref-TVStore}{{[}10{]}}, reducing
+resources needed \protect\hyperlink{ref-TVStore}{{[}12{]}}, reducing
 network latency, and improving rendering time
-\protect\hyperlink{ref-datapoint}{{[}11{]}},
-\protect\hyperlink{ref-MinMaxLTTB}{{[}16{]}}.
+\protect\hyperlink{ref-datapoint}{{[}8{]}},
+\protect\hyperlink{ref-MinMaxLTTB}{{[}9{]}}.
 
 Value preserving data aggregation algorithms preserve the original data
 points that aim to be most representative of the original data. Examples
 of these algorithms are provided in the table below
-\protect\hyperlink{ref-datapoint}{{[}11{]}},
-\protect\hyperlink{ref-Sveinn}{{[}12{]}},
-\protect\hyperlink{ref-MinMaxLTTB}{{[}16{]}},
+\protect\hyperlink{ref-datapoint}{{[}8{]}},
+\protect\hyperlink{ref-MinMaxLTTB}{{[}9{]}},
+\protect\hyperlink{ref-Sveinn}{{[}13{]}},
 \protect\hyperlink{ref-dashql}{{[}30{]}}--\protect\hyperlink{ref-M4}{{[}33{]}}:
 
 \begin{table}[H]
@@ -312,19 +328,19 @@ EveryNth & Selects every nth data point.\\
 \hline
 Percentage Change & Selects every data point beyond a specified percentage of the previous data point\\
 \hline
-Mode-Median Bucket & Finds mode or median within equally sized data buckets for selection.\\
+Mode-Median Bucket & Selects mode or median within equally sized data buckets.\\
 \hline
-Min-Std-Error-Bucket & Uses standard error of the estimate (SEE) in linear regression to select data points.\\
+Min-Std-Error-Bucket & Selects data points with standard error of the estimate (SEE) in linear regression.\\
 \hline
-MinMax & Preserves minimum and maximum data point of each data bucket.\\
+MinMax & Preserves minimum and maximum data points in each data bucket.\\
 \hline
 OM3 & Maintains the minimum and maximum data points at every time interval for rasterizing.\\
 \hline
-M4 & Combines EveryNth and MinMax, selecting the first and last as well as the minimum and maximum data points\\
+M4 & Selects the first and last as well as the minimum and maximum data points\\
 \hline
-Longest-Line Bucket & Calculates line length (euclidean distance) instead of standard error between buckets.\\
+Longest-Line Bucket & Calculates line length (euclidean distance) between data buckets.\\
 \hline
-Largest Triangle Three Bucket (LTTB) & The data point that forms the largest triangular surface between the previously selected data point and the average value of the next data bucket.\\
+Largest Triangle Three Bucket (LTTB) & Calculates the largest triangular surface between the previously selected data point and the average value of the next data bucket.\\
 \hline
 MinMaxLTTB & Preselects data points using MinMax before applying Largest Triangle Three Buckets.\\
 \hline
@@ -335,8 +351,10 @@ EveryNth & Selects every nth data point.\\
 
 Data practitioners have made recent advances in the performance and
 evaluation of downsampling approaches
-\protect\hyperlink{ref-datapoint}{{[}11{]}},
-\protect\hyperlink{ref-downsampling}{{[}14{]}}--\protect\hyperlink{ref-MinMaxLTTB}{{[}16{]}},
+\protect\hyperlink{ref-datapoint}{{[}8{]}},
+\protect\hyperlink{ref-MinMaxLTTB}{{[}9{]}},
+\protect\hyperlink{ref-downsampling}{{[}15{]}},
+\protect\hyperlink{ref-sampling}{{[}16{]}},
 \protect\hyperlink{ref-plotly}{{[}24{]}},
 \protect\hyperlink{ref-dashql}{{[}30{]}}--\protect\hyperlink{ref-MinMaxOrdered}{{[}32{]}}.
 These advances focus on the effectiveness of the algorithm in delivering
@@ -380,169 +398,232 @@ downsampling and create a visual tool for explaining this impact.
 \hypertarget{user-research}{%
 \section{USER RESEARCH}\label{user-research}}
 
-User research in the form of interviews contributes to testing the
-assumptions underpinning this research and helps inform the design
-decisions made for the research methodology. The same interview script
-is used for all decision-makers and data practitioners, respectively;
-follow-up questions vary to support the flow of each interview.
 One-to-one virtual interviews with 16 UK Civil Servants (nine
 decision-makers and seven data practitioners) highlight the importance
 of transparency in enabling data-driven decision-making across
-government.
+government. This user research utilises the same interview script for
+all decision-makers and data practitioners, respectively. Follow-up
+questions vary to support the flow of each interview and unpack the
+participants' responses. The interviews are recorded and transcribed on
+MS teams for later analysis.
 
-Qualitative analysis combined with keyword extracting using natural
-language processing is used to analyse the user research; the key themes
-are similar for both decision-makers and data practitioners.
-Transparency of data provenance, collection, and analysis pipeline is
-desired to understand the data reliability, repeatability, and quality.
-This is best communicated through engaging conversations and interactive
-visualisations; both decision-makers and data practitioners emphasised
-the importance of communicating the story behind data, its assumptions,
-and how the data changes through time.
+Qualitative thematic analysis combined with natural language processing
+keyword extraction is used to identify the the key points of each
+interview, which are similar for both decision-makers and data
+practitioners. Transparency of data provenance, collection, and analysis
+pipeline is desired by decision-makers to understand the reliability,
+repeatability, and quality of the data they're presented with. All the
+decision-makers and data-practitioners shared that this is best
+communicated through engaging conversations and interactive
+visualisations; they both emphasised the importance of communicating the
+story behind data, its assumptions, and how the data changes through
+time. Everyone interviewed acknowledged that this is difficult to
+achieve and how to do this better is a topic of live debate.
 
 Insights from this user research indicate that there is a spectrum of
-transparency desired for decisions. This spectrum depends on the
-question being informed by the data; it's complexity, importance and
-potential impact. To trust the data informing data-driven decisions,
-decision-makers and data practitioners repeatedly requested transparency
-of the data context, source and limitations as well as an assessment of
-overall confidence in the data.
+transparency that decision-makers desire for decisions. This spectrum
+depends on the question being addressed by the data; it's complexity,
+importance and potential impact. To trust the data informing data-driven
+decisions, decision-makers and data practitioners repeatedly requested
+transparency of the data context, source and limitations as well as an
+assessment of overall confidence in the data.
 
-Below is an example of the key themes from anonymised decision-maker and
-data-practitioner interviews shared as a concept map. All the interview
-concept maps are shared in Annex A. Only summative content from these
-interviews is presented in compliance with the consent forms shared with
-the user research participants.
+Decision-makers shared difficulties in developing correct views of ``how
+much they can trust the data'' they're seeing. They addressed their
+desire for more emphasis on the ``metadata and how to appropriately
+describe the level of uncertainty and provenance of the data'' to help
+ensure the data is being applied to the context it was collected for.
+They shared the importance of understanding if ``there is anything that
+is baked into what is being provided'' in order to trust the data and,
+how the source of this trust changes as data practitioners become
+decision-makers because they rarely see the raw data and so ``have to
+have an understanding of what preprocessing has been done, because it
+almost always has been {[}done{]}.'' Decision-makers shared that
+visualisations are important for conveying ``specific insights that
+simply looking at numbers can't get over'' and emphasised that if
+analysts ``clearly explain what the limitations are and and and
+rigorously presented that, then I'll trust {[}the analysis{]} more.''
 
-\vspace{-1cm}
-
-\includegraphics{210431461_CSC8639_Dissertation_files/figure-latex/ConceptMapExample-1.pdf}
-\vspace{-1cm}
-
-{[}Go through and collect quotes from those who gave permission{]}
+\hypertarget{is-there-space-for-a-data-practitioner-version}{%
+\subsection{{[}IS THERE SPACE FOR A DATA PRACTITIONER
+VERSION?{]}}\label{is-there-space-for-a-data-practitioner-version}}
 
 \begin{itemize}
 \tightlist
 \item
 \item
-\item
-\item
 \end{itemize}
 
-\hypertarget{methodology}{%
-\section{METHODOLOGY}\label{methodology}}
+Below concept maps outlining the key themes from anonymised
+decision-maker and data-practitioner interviews are shared as examples.
+All the interview concept maps are shared in Annex A. Only summative
+content from these interviews is presented in compliance with the
+consent forms shared with the user research participants.
 
-This section provides an overview of process used to develop the work
-outlined by this paper; highlighting methodology decisions of, and
-justifications for, the research design.
+\vspace{-1.5cm}
+
+\includegraphics{210431461_CSC8639_Dissertation_files/figure-latex/ConceptMapExample-1.pdf}
+\vspace{-1.5cm}
+
+The findings from this user research indicate that decision-makers need
+transparency of how the data is used to trust the insights informing
+data-driven decisions. This suggests that endeavors to create greater
+transparency in data pipelines, such as the research outlined in the
+subsequent sections of this paper, are worthy of further study. It also
+suggests that evaluating the objectivity and quality of data sources as
+well as mechanisms to develop common descriptions of data insight
+confidence-levels are potential avenues for data science to have greater
+policy impact.
+
+It is important to note that, like many interview studies
+\protect\hyperlink{ref-futzing}{{[}38{]}}, the findings of this user
+research is limited; the sample of participants is not drawn from the
+overall population. The participants have been selected by reaching out
+to relevant individuals in the researcher's professional network, and
+this introduces bias. However, given the consistency of insights from
+the user research participants, further interviews with a wider, random
+subset of the population would be beneficial.
+
+\hypertarget{analysis-methodology}{%
+\section{ANALYSIS METHODOLOGY}\label{analysis-methodology}}
+
+This section outlines the analysis design undertaken to explain the
+impact of downsampling algorithms on time series data without detailing
+extensive statistical evidence; the decisions, justifications and
+limitations of this methodology are shared.
 
 \textbf{4.1 Data}
 
-The research outlined by this report starts with the eight demonstrative
-time series shared by the Alan Turing Institute
-\texttt{Annotated\ Change} GitHub repository
-\protect\hyperlink{ref-ATIChangePoint}{{[}38{]}}. The demonstrative time
-series are synthetic with known change points that provide examples of
-different types of time series. These synthetic time series (demo\_100,
-demo\_200, demo\_300, demo\_400, demo\_500, demo\_600, demo\_700,
-demo\_800) support change point annotators annotate real-world data sets
-for the \texttt{Turing\ Change\ Point\ Dataset}
-\protect\hyperlink{ref-ATIChangePoint}{{[}38{]}}. Nine synthetic time
-series are used for this research as the eighth
-\texttt{Annotated\ Change} demonstrative time series (demo\_800) is
-multivate and split in two (800A and 800B) for this research to enable
-better comparison.
+The eight Alan Turing Institute \texttt{Annotated\ Change}
+\protect\hyperlink{ref-ATIChangePoint}{{[}39{]}} synthetic time series
+are selected for initial analysis. There is an inherent limitation in
+using synthetic time series for analysis because the data has been
+generated for a different purpose. However, these time series have been
+choices because they are previously cleaned time series from a reputable
+institution with known change points that are designed to provide
+examples of different types of time series. These synthetic time series
+(demo\_100, demo\_200, demo\_300, demo\_400, demo\_500, demo\_600,
+demo\_700, demo\_800) are used for demonstration to support change point
+annotators annotate real-world data sets for the
+\texttt{Turing\ Change\ Point\ Dataset}
+\protect\hyperlink{ref-ATIChangePoint}{{[}39{]}}. The eighth
+\texttt{Annotated\ Change} synthetic time series (demo\_800) is
+multivariate and split in two (800A and 800B) to create nine synthetic
+time series for this research and enable better comparison.
 
 \textbf{4.2 Downsampling}
 
 These nine synthetic time series are imported into \texttt{RStudio} from
 JSON scripts and two downsampling algorithms are applied to all with
 the\texttt{Jettison\ MVP\ Code}
-\protect\hyperlink{ref-Jettison}{{[}39{]}}. These simple algorithms are
-chosen to provide initial insights into the impacts of downsampling with
-minimally complex code; the algorithm \emph{EveryNth} selects every
-other data point and \emph{Percentage Change} selects every data point
-that has greater than one per cent difference between the last
-transmitted and newest values.
+\protect\hyperlink{ref-Jettison}{{[}40{]}}. This enables initial
+insights into the impacts of downsampling with minimally complex code.
+The two algorithms used by the \texttt{Jettison\ MVP\ Code}
+\protect\hyperlink{ref-Jettison}{{[}40{]}} are \emph{EveryNth}, which
+selects every other data point, and \emph{Percentage Change}, which
+selects every data point that has greater than one per cent difference
+between the last transmitted and newest values.
 
 {[}SHOULD I ADD AN EQUATION HERE FOR THE ALGORITHMS?{]}
 
 \[
 \xi _{ij}(t)=P(x_{t}=i,x_{t+1}=j|y,v,w;\theta)= {\frac {\alpha _{i}(t)a^{w_t}_{ij}\beta _{j}(t+1)b^{v_{t+1}}_{j}(y_{t+1})}{\sum _{i=1}^{N} \sum _{j=1}^{N} \alpha _{i}(t)a^{w_t}_{ij}\beta _{j}(t+1)b^{v_{t+1}}_{j}(y_{t+1})}}
-\] These algorithms are applied iteratively across each time series,
-creating parameters 1 to 50 for each downsampling algorithm and
+\] The \texttt{Jettison\ MVP\ Code}
+\protect\hyperlink{ref-Jettison}{{[}40{]}} applies these algorithms
+iteratively across each of the nine synthetic time series. This creates
+parameters 1 to 50 for each downsampling algorithm and
 \texttt{Annotated\ Change} time series. There are now 900 time series
 for investigation; 450 for each downsampling algorithm.
 
 The R package \texttt{imputeTS}
-\protect\hyperlink{ref-imputeTS_R}{{[}1{]}} is applied to the time
-series to obtain the data volume, number of missing values (NAs) and
-number of gaps. This is important to understand the effect of each
-downsampling algorithm across the 900 time series. Data volume provides
-a common variable for comparison because the effect of each downsampling
-algorithm is unevenly distributed across the 50 parameters. For example,
+\protect\hyperlink{ref-imputeTS_R}{{[}1{]}} is applied to all 900 time
+series to obtain the remaining data volume after downsampling, number of
+missing values (NAs), and number of gaps in the time series. This is
+important to understand the effect of each downsampling algorithm.
+Initial analysis highlights that the effect of each downsampling
+algorithm is unevenly distributed across the 50 parameters; for example,
 \emph{EveryNth} discards data more quickly than \emph{Percentage Change}
-so comparing the time series for each parameter is insufficient.
+so comparing the time series for each parameter is insufficient. The
+remaining data volume, therefore, provides a common variable that
+enables like-for-like comparison between the downsampling algorithms and
+their impact.
 
-The missing values for each of the 900 time series are then replaced by
-the \texttt{imputeTS} linear interpolation function. This is a simple
+The missing values for each of the 900 time series are replaced by the
+\texttt{imputeTS} linear interpolation function. This is a simple
 imputation algorithm that returns each time series to its original
-length, enabling a better comparison of the impact of downsampling.
-{[}DO I NEED TO EXPLAIN MORE THAN THIS?{]} For each
+length by using curve fitting to create new data points between the
+remaining data points. {[}DO I NEED TO EXPLAIN MORE THAN THIS?{]} The
+selection of this simple imputation function may limit the findings of
+this analysis, but returning the time series to their original length
+enables a like-for-like comparison of downsampling impact. For each
 \texttt{Annotated\ Change} synthetic time series there is now an imputed
-time series for parameters 1 to 50 and each downsampling method.
+time series for parameters 1 to 50 and each downsampling algorithm.
 
 \textbf{4.3 Features}
 
-The values for each catch22 time series feature
-\protect\hyperlink{ref-catch22}{{[}34{]}} is calculated by the
-\texttt{Rcatch22} package \protect\hyperlink{ref-catch22_R}{{[}2{]}}.
-This is applied to each of the nine original synthetic time series and
-900 imputed time series. The difference between the original and imputed
-time series feature values is calculated and scaled to investigate the
-impact of downsampling on these catch22 features. The standard deviation
-across the time series for each catch22 feature is calculated to
-indicate whether some features are more sensitive to downsampling.
+The \texttt{Rcatch22} package \protect\hyperlink{ref-catch22_R}{{[}2{]}}
+enables the computation of a value for each of the catch22 time series
+features \protect\hyperlink{ref-catch22}{{[}34{]}}. Values for the 22
+time series features are calculated for each of the nine original
+synthetic time series and 900 imputed time series. The difference
+between the original and imputed time series feature values is
+calculated and that difference scaled to accurately compare how the
+downsampling algorithms impact these catch22 features. The standard
+deviation across the 900 imputed time series for each catch22 feature is
+also calculated to indicate the sensitivity of each time series feature
+to downsampling. The catch22 features are considered to be more
+sensitive if the standard deviation across the 900 imputed time series
+is higher.
+
+The application of catch22 features in this way is potentially limited;
+the time series features reflect characteristics that help cluster and
+classify different time series. Further analysis is needed to confirm
+whether features sensitive to downsampling are applicable to all time
+series types.
 
 \textbf{4.4 Visualisation}
 
 Combining \texttt{imputeTS} and \texttt{Rcatch22} in this way unstudied;
 initial visual analysis to observe the impact of downsampling on catch22
 features is conducted utilising bar and line graphs alongside heatmaps.
-All the decision-makers who were interviewed as part of this research
-emphaised the importance of visualisation in data-driven decision-making
-and data transparency. In line with this, different approaches to
-visualising the impact of downsampling are tried to explore how best the
-impact of downsampling could be visually communicated by data
-practitioners for decision-makers.
+All the decision-makers who were interviewed as part of the
+aforementioned user research emphaised the importance of visualisation
+in data transparency and data-driven decision-making. In line with this,
+different approaches to visualising the impact of downsampling are tried
+to explore how best the impact of downsampling could be visually
+communicated by data practitioners for decision-makers. However, the
+visualisations created by this research are under-developed; useability
+research needs to be conducted with decision-makers and data
+practitoners to ensure the visualisations meet the aim of this research.
 
 \hypertarget{results-and-evaluation}{%
 \section{RESULTS AND EVALUATION}\label{results-and-evaluation}}
 
-This section provides an overview of results achieved from the research
-outlined in section IV; the limitations of these results and avenues for
-further investigation are highlighted to help contextualise these
-findings.
+The results of the chosen analysis methodology are shared in this
+section with a discussion of their the limitations and potential avenues
+for further investigation.
 
-\textbf{5.1 Downsampling Sensitivity}
+\textbf{5.1 Downsampling sensitivity}
 
-There appear to be seven catch22 features that deviate most across the
-900 imputed time series. Due to their high deviation across the imputed
-time series, these seven features are considered to be more sensitive to
-the impacts of downsampling than the other 15. The standard deviation of
-all 22 features is shared in Annex A. To demonstrate the sensitivity of
-the seven features, the ten features with the highest standard deviation
-across all the imputed time series in the bar graph below.
+Seven catch22 features appear to a wider dispersion across the 900
+imputed time series than the other 15 features. These seven features are
+considered to be more sensitive to the impacts of downsampling. To
+demonstrate the sensitivity of the seven features, the ten features with
+the highest standard deviation across all the imputed time series in the
+bar graph below. The standard deviation of all 22 features is shared in
+Annex B.
 
 \includegraphics{210431461_CSC8639_Dissertation_files/figure-latex/CombinedSensitivity-1.pdf}
 
-This visualisation highlights the \emph{EveryNth} algorithm appears to
-impact features more than the \emph{Percentage Change} algorithm.
-Initial analysis suggests that this is likely to be because, in the 50
-parameters created for this research, the \emph{EveryNth} algorithm
-discards more data, more quickly. It would be beneficial to explore this
-dynamic further, creating parameters beyond 50 until the
-\emph{Percentage Change} algorithm discards the same volume of data.
+This visualisation suggests that the \emph{EveryNth} algorithm impacts
+the catch22 time series features more than the \emph{Percentage Change}
+algorithm. Initial analysis indicates that this is because the
+\emph{EveryNth} algorithm discards more data, more quickly in the 50
+parameters of downsampling. The sensitivity of these features to the
+\emph{Percentage Change} is limited by the number of parameted used for
+this research. It would be beneficial to investigate the impact of
+\emph{Percentag Change} further by creating downsampling parameters
+beyond 50 until the same volume of data is discarded by both algorithms.
 
 The standard deviation of the seven most sensitive catch22 features is
 presented in the table below. This table includes the standard deviation
@@ -578,10 +659,10 @@ DistributionExponentialFit\_MAE & 0.3440829 & 0.0437543 & 0.3605538\\
 
 \vspace{0cm}
 
-The combined sensitivity was used to identify the seven catch22 features
-that appear to be most sensitive. The table suggests that the first
-minimum of the autocorrelation function (`Autocorr\_FirstMinimum' or
-`CO\_FirstMin\_ac') is most sensitive across both of the algorithms;
+The combined standard deviation is used to identify the seven catch22
+features that appear to be most sensitive. The table suggests that the
+first minimum of the autocorrelation function (`Autocorr\_FirstMinimum'
+or `CO\_FirstMin\_ac') is most sensitive across both of the algorithms;
 that the catch22 feature measuring the longest sequence of successive
 steps that decrease (`LongestPeriod\_Decrease' or
 `SB\_BinaryStats\_diff\_longstretch0') is most sensitive to the
@@ -591,21 +672,22 @@ values greater than the mean (`LongestPeriod\_AboveAverage' or
 \emph{Percentage Change} algorithm.
 
 These results suggest that it may be possible to communicate the impact
-of downsampling through the algorithms imapct on catch22 features.
-However, standard deviation is a limited measure that suggests, rather
-than confirms sensitivity to the impacts of downsampling algorithms. To
-understand why these features are particularly sensitive, further
-investigation into the performance of the seven features on the 900
-imputed time series is needed.
+of downsampling via the sensitivity of the catch22 features. However,
+standard deviation is a limited measure that suggests, rather than
+confirms, sensitivity to the impacts of downsampling algorithms. Further
+statistical analysis is needed to confirm that the changes in the
+features is directly caused by the impact of downsampling.
 
 \textbf{5.2 Downsampling Impact}
 
-Identifying that seven catch22 features apppear to be more sensitive to
-the impacts of downsampling will help communicate the impact of
-downsampling algorithms. The difference between the values of catch22
+Identifying that seven catch22 features appear to be more sensitive to
+the impacts of downsampling enables data pratitioners to evaluate and
+communicate the impact of different downsampling algorithms without deep
+statistical analysis. The difference between the values of catch22
 features for the nine original time series and 900 imputes time series
-is a measure of impact. The heapmap below visualises this difference,
-scaled, for the seven most senstive features across each of the 50
+is used to measure the impact of downsampling. The heapmap below
+visualises this difference, scaled, for the seven most sensitive catch22
+features across the 900 imputed time series and each of the 50
 parameters.
 
 \includegraphics{210431461_CSC8639_Dissertation_files/figure-latex/Heatmap_param-1.pdf}
@@ -654,7 +736,7 @@ The impact of both downsampling algorithms on the most sensitive
 features varies across different time series types. This is exemplified
 by the catch22 feature `Autocorr\_FirstMinimum' (`CO\_FirstMin\_ac'):
 the first minimum of the autocorrelation function
-(`Autocorr\_FirstMinimum' or `CO\_FirstMin\_ac'. This feature has the
+(`Autocorr\_FirstMinimum' or `CO\_FirstMin\_ac.' This feature has the
 highest combined standard deviation across the 900 imputed time series
 represents ``the number of steps into the future at which a value of the
 time series at the current point and that future point remain
@@ -677,14 +759,14 @@ This variation across time series types also suggests that different
 catch22 features may be more or less sensitive to downsampling for
 different time series types. This dynamic is invesitgated by the line
 graphs below, which plot the scaled difference of the six most sensitive
-catch22 features for time series `500'. Time series `500' was selected
+catch22 features for time series `500.' Time series `500' was selected
 as more data is discarded by the \emph{Percentage Change} algorithm,
 offering a better comparison.
 
 The visualisation below highlights that, although
 `Autocorr\_FirstMinimum' is identified as the most sensitive across both
 downsampling algorithms, `Autocorr\_Automutual' might better indicate
-the impact for time series `500'. `Autocorr\_Automutual' is the minimum
+the impact for time series `500.' `Autocorr\_Automutual' is the minimum
 of the automutual information function (`Autocorr\_Automutual' or
 `IN\_AutoMutualInfoStats\_40\_gaussian\_fmmi'); this catch22 feature
 outputs a measure of ``autocorrelation in the time series, as the
@@ -765,20 +847,20 @@ and the impact of these thresholds for decisions and data storage.
 \hypertarget{refs}{}
 \begin{CSLReferences}{0}{0}
 \leavevmode\vadjust pre{\hypertarget{ref-imputeTS_R}{}}%
-\CSLLeftMargin{{[}1{]} }%
+\CSLLeftMargin{{[}1{]} }
 \CSLRightInline{S. Moritz and T. Bartiz-Beielstein, {``imputeTS: Time
 series missing value imputation in r,''} vol. 9.1. R Journal, 2017. doi:
 \href{https://doi.org/10.32614/RJ-2017-009}{10.32614/RJ-2017-009}.}
 
 \leavevmode\vadjust pre{\hypertarget{ref-catch22_R}{}}%
-\CSLLeftMargin{{[}2{]} }%
+\CSLLeftMargin{{[}2{]} }
 \CSLRightInline{C. H. Lubba, B. Fulcher, T. Henderspn, B. Harris, O. r.
 TL, and O. Cliff, {``catch22: CAnonical time-series CHaracteristics.''}
 R Journal, 2022. doi:
 \href{https://doi.org/10.5281/zenodo.6673597}{10.5281/zenodo.6673597}.}
 
 \leavevmode\vadjust pre{\hypertarget{ref-data2017}{}}%
-\CSLLeftMargin{{[}3{]} }%
+\CSLLeftMargin{{[}3{]} }
 \CSLRightInline{Cabinet Office and Government Digital Service,
 {``Government transformation strategy: Better use of data.''} HM
 Government;
@@ -786,7 +868,7 @@ Government;
 2017.}
 
 \leavevmode\vadjust pre{\hypertarget{ref-data2020}{}}%
-\CSLLeftMargin{{[}4{]} }%
+\CSLLeftMargin{{[}4{]} }
 \CSLRightInline{Department for Digital, Culture, Media \& Sport and
 Department for Science, Innovation \& Technology, {``National data
 strategy.''} HM Government;
@@ -794,14 +876,14 @@ strategy.''} HM Government;
 2020.}
 
 \leavevmode\vadjust pre{\hypertarget{ref-data2021}{}}%
-\CSLLeftMargin{{[}5{]} }%
+\CSLLeftMargin{{[}5{]} }
 \CSLRightInline{M. of Defence, {``Data strategy for defence,''}
 \emph{GOV.UK}. HM Government;
 \url{https://www.gov.uk/government/publications/data-strategy-for-defence/data-strategy-for-defence},
 2021.}
 
 \leavevmode\vadjust pre{\hypertarget{ref-data2022}{}}%
-\CSLLeftMargin{{[}6{]} }%
+\CSLLeftMargin{{[}6{]} }
 \CSLRightInline{Central Digital \& Data Office, {``Transforming for a
 digital future: 2022 to 2025 roadmap for digital and data.''} HM
 Government;
@@ -809,27 +891,40 @@ Government;
 2022.}
 
 \leavevmode\vadjust pre{\hypertarget{ref-trust}{}}%
-\CSLLeftMargin{{[}7{]} }%
+\CSLLeftMargin{{[}7{]} }
 \CSLRightInline{Centre for Data Ethics \& Innovation, {``Addressing
 trust in public sector data use.''}
 \url{https://www.gov.uk/government/publications/cdei-publishes-its-first-report-on-public-sector-data-sharing/addressing-trust-in-public-sector-data-use\#introduction--context}.}
 
+\leavevmode\vadjust pre{\hypertarget{ref-datapoint}{}}%
+\CSLLeftMargin{{[}8{]} }
+\CSLRightInline{J. Donckt, J. Donckt, M. Rademaker, and S. Hoecke,
+{``Data point selection for line chart visualization: Methodological
+assessment and evidence-based guidelines.''} 2023. doi:
+\href{https://doi.org/10.48550/arXiv.2304.00900}{10.48550/arXiv.2304.00900}.}
+
+\leavevmode\vadjust pre{\hypertarget{ref-MinMaxLTTB}{}}%
+\CSLLeftMargin{{[}9{]} }
+\CSLRightInline{J. Donckt, J. Donckt, M. Rademaker, and S. Hoecke,
+{``MinMaxLTTB: Leveraging MinMax-preselection to scale LTTB.''} 2023.
+Available: \url{https://arxiv.org/abs/2305.00332}}
+
 \leavevmode\vadjust pre{\hypertarget{ref-pathway}{}}%
-\CSLLeftMargin{{[}8{]} }%
+\CSLLeftMargin{{[}10{]} }
 \CSLRightInline{Government Analysis Function, {``Types of data in
 government learning pathway.''}
 \url{https://analysisfunction.civilservice.gov.uk/learning-development/learning-pathways/types-of-data-in-government-learning-pathway/},
 2022.}
 
 \leavevmode\vadjust pre{\hypertarget{ref-onstool}{}}%
-\CSLLeftMargin{{[}9{]} }%
+\CSLLeftMargin{{[}11{]} }
 \CSLRightInline{Office for National Statistics, {``Time series
 explorer.''}
 \url{https://www.ons.gov.uk/timeseriestool?query=\&topic=\&updated=\&fromDateDay=\&fromDateMonth=\&fromDateYear=\&toDateDay=\&toDateMonth=\&toDateYear=\&size=50},
 Unknown.}
 
 \leavevmode\vadjust pre{\hypertarget{ref-TVStore}{}}%
-\CSLLeftMargin{{[}10{]} }%
+\CSLLeftMargin{{[}12{]} }
 \CSLRightInline{Y. An, Y. Su, Y. Zhu, and J. Wang, {``TVStore:
 Automatically bounding time series storage via time-varying
 compression,''} in \emph{Proceedings of the 20th USENIX conference on
@@ -837,15 +932,8 @@ file and storage technologies}, in USENIX conference on file and STorage
 technologies. Santa Clara, CA, USA: USENIX Association, 2022, pp.
 83--99.}
 
-\leavevmode\vadjust pre{\hypertarget{ref-datapoint}{}}%
-\CSLLeftMargin{{[}11{]} }%
-\CSLRightInline{J. Donckt, J. Donckt, M. Rademaker, and S. Hoecke,
-{``Data point selection for line chart visualization: Methodological
-assessment and evidence-based guidelines.''} 2023. doi:
-\href{https://doi.org/10.48550/arXiv.2304.00900}{10.48550/arXiv.2304.00900}.}
-
 \leavevmode\vadjust pre{\hypertarget{ref-Sveinn}{}}%
-\CSLLeftMargin{{[}12{]} }%
+\CSLLeftMargin{{[}13{]} }
 \CSLRightInline{S. Steinarsson, {``Downsampling time series for visual
 representation.''} University of Iceland, Faculty of Industrial
 Engineering, Mechanical Engineering; Computer Science, School of
@@ -853,12 +941,12 @@ Engineering; Natural Sciences, University of Iceland, Reykjavik,
 Iceland, 2013.}
 
 \leavevmode\vadjust pre{\hypertarget{ref-Shift}{}}%
-\CSLLeftMargin{{[}13{]} }%
+\CSLLeftMargin{{[}14{]} }
 \CSLRightInline{The Shift Project, {``Implementing digital
 sufficiency,''} 2020.}
 
 \leavevmode\vadjust pre{\hypertarget{ref-downsampling}{}}%
-\CSLLeftMargin{{[}14{]} }%
+\CSLLeftMargin{{[}15{]} }
 \CSLRightInline{W. Aigner, S. Miksch, W. Muller, H. Schumann, and C.
 Tominski, {``Visual methods for analyzing time-oriented data,''}
 \emph{IEEE Transactions on Visualization and Computer Graphics}, vol.
@@ -866,27 +954,21 @@ Tominski, {``Visual methods for analyzing time-oriented data,''}
 \href{https://doi.org/10.1109/TVCG.2007.70415}{10.1109/TVCG.2007.70415}.}
 
 \leavevmode\vadjust pre{\hypertarget{ref-sampling}{}}%
-\CSLLeftMargin{{[}15{]} }%
+\CSLLeftMargin{{[}16{]} }
 \CSLRightInline{B. C. Kwon, J. Verma, P. J. Haas, and C. Demiralp,
 {``Sampling for scalable visual analytics,''} \emph{IEEE Computer
 Graphics and Applications}, vol. 37, no. 1, pp. 100--108, 2017, doi:
 \href{https://doi.org/10.1109/MCG.2017.6}{10.1109/MCG.2017.6}.}
 
-\leavevmode\vadjust pre{\hypertarget{ref-MinMaxLTTB}{}}%
-\CSLLeftMargin{{[}16{]} }%
-\CSLRightInline{J. Donckt, J. Donckt, M. Rademaker, and S. Hoecke,
-{``MinMaxLTTB: Leveraging MinMax-preselection to scale LTTB.''} 2023.
-Available: \url{https://arxiv.org/abs/2305.00332}}
-
 \leavevmode\vadjust pre{\hypertarget{ref-political_transparency}{}}%
-\CSLLeftMargin{{[}17{]} }%
+\CSLLeftMargin{{[}17{]} }
 \CSLRightInline{K. E. Levy and D. M. Johns, {``When open data is a
 trojan horse: The weaponization of transparency in science and
 governance,''} \emph{Big Data \& Society}, vol. 3, no. 1, 2016, doi:
 \href{https://doi.org/10.1177/2053951715621568}{10.1177/2053951715621568}.}
 
 \leavevmode\vadjust pre{\hypertarget{ref-social_transparency}{}}%
-\CSLLeftMargin{{[}18{]} }%
+\CSLLeftMargin{{[}18{]} }
 \CSLRightInline{J. Bates, H. Kennedy, I. Medina Perea, S. Oman, and L.
 Pinney, {``Socially meaningful transparency in data-based systems:
 Reflections and proposals from practice,''} \emph{Journal of
@@ -894,7 +976,7 @@ Documentation}, vol. ahead--of--print, 2023, doi:
 \href{https://doi.org/10.1108/JD-01-2023-0006}{10.1108/JD-01-2023-0006}.}
 
 \leavevmode\vadjust pre{\hypertarget{ref-transparency_lack}{}}%
-\CSLLeftMargin{{[}19{]} }%
+\CSLLeftMargin{{[}19{]} }
 \CSLRightInline{M. Ananny and K. Crawford, {``Seeing without knowing:
 Limitations of the transparency ideal and its application to algorithmic
 accountability,''} \emph{New Media \& Society}, vol. 20, no. 3, pp.
@@ -902,28 +984,28 @@ accountability,''} \emph{New Media \& Society}, vol. 20, no. 3, pp.
 \href{https://doi.org/10.1177/1461444816676645}{10.1177/1461444816676645}.}
 
 \leavevmode\vadjust pre{\hypertarget{ref-digital_transparency}{}}%
-\CSLLeftMargin{{[}20{]} }%
+\CSLLeftMargin{{[}20{]} }
 \CSLRightInline{R. Matheus, M. Janssen, and T. Janowski, {``Design
 principles for creating digital transparency in government,''}
 \emph{Government Information Quarterly}, vol. 38, no. 1, 2021, doi:
 \url{https://doi.org/10.1016/j.giq.2020.101550}.}
 
 \leavevmode\vadjust pre{\hypertarget{ref-transparency_obfuscation}{}}%
-\CSLLeftMargin{{[}21{]} }%
+\CSLLeftMargin{{[}21{]} }
 \CSLRightInline{N. A. Draper and J. Turow, {``The corporate cultivation
 of digital resignation,''} \emph{New Media \& Society}, vol. 21, no. 8,
 pp. 1824--1839, 2019, doi:
 \href{https://doi.org/10.1177/1461444819833331}{10.1177/1461444819833331}.}
 
 \leavevmode\vadjust pre{\hypertarget{ref-transparency_fallacy}{}}%
-\CSLLeftMargin{{[}22{]} }%
+\CSLLeftMargin{{[}22{]} }
 \CSLRightInline{J. A. Obar, {``Sunlight alone is not a disinfectant:
 Consent and the futility of opening big data black boxes (without
 assistance),''} \emph{Big Data \& Society}, vol. 7, no. 1, 2020, doi:
 \href{https://doi.org/10.1177/2053951720935615}{10.1177/2053951720935615}.}
 
 \leavevmode\vadjust pre{\hypertarget{ref-timenotes}{}}%
-\CSLLeftMargin{{[}23{]} }%
+\CSLLeftMargin{{[}23{]} }
 \CSLRightInline{J. Walker, R. Borgo, and MW. Jones, {``TimeNotes: A
 study on effective chart visualization and interaction techniques for
 time-series data,''} \emph{IEEE Transactions on Visualization and
@@ -931,20 +1013,20 @@ Computer Graphics}, vol. 22, 2016, doi:
 \href{https://doi.org/10.1109/TVCG.2015.2467751}{10.1109/TVCG.2015.2467751}.}
 
 \leavevmode\vadjust pre{\hypertarget{ref-plotly}{}}%
-\CSLLeftMargin{{[}24{]} }%
+\CSLLeftMargin{{[}24{]} }
 \CSLRightInline{J. Donckt, J. Donckt, E. Deprost, and S. Hoecke,
 {``Plotly-resampler: Effective visual analytics for large time
 series,''} \emph{IEEE Visualization and Visual Analytics}, 2022, doi:
 \href{https://doi.org/10.1109/VIS54862.2022.00013}{10.1109/VIS54862.2022.00013}.}
 
 \leavevmode\vadjust pre{\hypertarget{ref-imputeTS}{}}%
-\CSLLeftMargin{{[}25{]} }%
+\CSLLeftMargin{{[}25{]} }
 \CSLRightInline{S. Moritz and T. Bartiz-Beielstein, {``imputeTS: Time
 series missing value imputation in r.''} R Journal, 2017. Available:
 \url{https://cran.r-project.org/web/packages/imputeTS/vignettes/imputeTS-Time-Series-Missing-Value-Imputation-in-R.pdf}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-storage}{}}%
-\CSLLeftMargin{{[}26{]} }%
+\CSLLeftMargin{{[}26{]} }
 \CSLRightInline{A. Visheratin \emph{et al.}, {``Peregreen {\textendash}
 modular database for efficient storage of historical time series in
 cloud environments,''} in \emph{2020 USENIX annual technical conference
@@ -952,21 +1034,21 @@ cloud environments,''} in \emph{2020 USENIX annual technical conference
 \url{https://www.usenix.org/conference/atc20/presentation/visheratin}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-CatchUp}{}}%
-\CSLLeftMargin{{[}27{]} }%
+\CSLLeftMargin{{[}27{]} }
 \CSLRightInline{T. Schlossnagle, J. Sheehy, and C. McCubbin,
 {``Always-on time-series database: Keeping up where there's no way to
 catch up,''} \emph{Commun. ACM}, vol. 64, no. 7, pp. 50--56, 2021,
 Available: \url{https://doi.org/10.1145/3442518}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-IR}{}}%
-\CSLLeftMargin{{[}28{]} }%
+\CSLLeftMargin{{[}28{]} }
 \CSLRightInline{HM Government, {``Global britain in a competitive age:
 The integrated review of security, defence, development and foreign
 policy.''} GOV.UK, 2021. Available:
 \url{https://www.gov.uk/government/publications/global-britain-in-a-competitive-age-the-integrated-review-of-security-defence-development-and-foreign-policy/global-britain-in-a-competitive-age-the-integrated-review-of-security-defence-development-and-foreign-policy}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-climate}{}}%
-\CSLLeftMargin{{[}29{]} }%
+\CSLLeftMargin{{[}29{]} }
 \CSLRightInline{I. Foster \emph{et al.}, {``Computing just what you
 need: Online data analysis and reduction at extreme scales,''} in
 \emph{Euro-par 2017}, F. F. Rivera, T. F. Pena, and J. C. Cabaleiro,
@@ -976,34 +1058,34 @@ Germany: Springer Verlag, 2017, pp. 3--19. doi:
 \href{https://doi.org/10.1007/978-3-319-64203-1_1}{10.1007/978-3-319-64203-1\_1}.}
 
 \leavevmode\vadjust pre{\hypertarget{ref-dashql}{}}%
-\CSLLeftMargin{{[}30{]} }%
+\CSLLeftMargin{{[}30{]} }
 \CSLRightInline{A. Kohn, D. Moritz, and T. Neumann, {``DashQL --
 complete analysis workflows with SQL.''} 2023. doi:
 \href{https://doi.org/10.48550/arXiv.2306.03714}{10.48550/arXiv.2306.03714}.}
 
 \leavevmode\vadjust pre{\hypertarget{ref-EveryNth}{}}%
-\CSLLeftMargin{{[}31{]} }%
+\CSLLeftMargin{{[}31{]} }
 \CSLRightInline{U. Jugel, Z. Jerzak, G. Hackenbroic, and V. Markl,
 {``VDDA: Automatic visualization-driven data aggregation in relational
 databases,''} \emph{The VLDB Journal}, vol. 25, 2016, doi:
 \href{https://doi.org/10.1007/s00778-015-0396-z}{10.1007/s00778-015-0396-z}.}
 
 \leavevmode\vadjust pre{\hypertarget{ref-MinMaxOrdered}{}}%
-\CSLLeftMargin{{[}32{]} }%
+\CSLLeftMargin{{[}32{]} }
 \CSLRightInline{W. Yunhai \emph{et al.}, {``OM3: An ordered multi-level
 min-max representation for interactive progressive visualization of time
 series,''} in \emph{Proc. ACM manag. data}, ACM, 2023. Available:
 \url{https://doi.org/10.1145/3589290}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-M4}{}}%
-\CSLLeftMargin{{[}33{]} }%
+\CSLLeftMargin{{[}33{]} }
 \CSLRightInline{U. Jugel, Z. Jerzak, G. Hackenbroich, and V. Markl,
 {``M4: A visualization-oriented time series data aggregation.
 Proceedings of the VLDB endowment,''} vol. 7, 2014, Available:
 \url{https://www.vldb.org/2014/program/http://www.vldb.org/pvldb/vol7/p797-jugel.pdf}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-catch22}{}}%
-\CSLLeftMargin{{[}34{]} }%
+\CSLLeftMargin{{[}34{]} }
 \CSLRightInline{C. H. Lubba, S. S. Sarab, P. Knaute, S. R. Schultz, B.
 D. Fulcher, and N. S. Jones, {``catch22: CAnonical time-series
 CHaracteristics,''} \emph{Data Mining and Knowledge Discovery}, vol. 33,
@@ -1011,7 +1093,7 @@ CHaracteristics,''} \emph{Data Mining and Knowledge Discovery}, vol. 33,
 \href{https://doi.org/10.1007/s10618-019-00647-x}{10.1007/s10618-019-00647-x}.}
 
 \leavevmode\vadjust pre{\hypertarget{ref-fulcher2017}{}}%
-\CSLLeftMargin{{[}35{]} }%
+\CSLLeftMargin{{[}35{]} }
 \CSLRightInline{B. D. Fulcher and N. S. Jones, {``Highly comparative
 feature-based time-series classification,''} \emph{IEEE Transactions on
 Knowledge and Data Engineering}, vol. 26, no. 12, pp. 3026--3037, 2014,
@@ -1019,7 +1101,7 @@ doi:
 \href{https://doi.org/10.1109/TKDE.2014.2316504}{10.1109/TKDE.2014.2316504}.}
 
 \leavevmode\vadjust pre{\hypertarget{ref-bagnall}{}}%
-\CSLLeftMargin{{[}36{]} }%
+\CSLLeftMargin{{[}36{]} }
 \CSLRightInline{A. Bagnall, J. Lines, A. Bostrom, J. Large, and E.
 Keogh, {``The great time series classification bake off: A review and
 experimental evaluation of recent algorithmic advances,''} \emph{Data
@@ -1027,20 +1109,29 @@ Mining and Knowledge Discovery}, vol. 31, 2017, doi:
 \href{https://doi.org/10.1007/s10618-016-0483-9}{10.1007/s10618-016-0483-9}.}
 
 \leavevmode\vadjust pre{\hypertarget{ref-henderson}{}}%
-\CSLLeftMargin{{[}37{]} }%
+\CSLLeftMargin{{[}37{]} }
 \CSLRightInline{T. Henderson and B. D. Fulcher, {``An empirical
 evaluation of time-series feature sets,''} in \emph{2021 international
 conference on data mining workshops (ICDMW)}, 2021, pp. 1032--1038. doi:
 \href{https://doi.org/10.1109/ICDMW53433.2021.00134}{10.1109/ICDMW53433.2021.00134}.}
 
+\leavevmode\vadjust pre{\hypertarget{ref-futzing}{}}%
+\CSLLeftMargin{{[}38{]} }
+\CSLRightInline{S. Alspaugh, N. Zokaei, A. Liu, C. Jin, and M. A.
+Hearst, {``Futzing and moseying: Interviews with professional data
+analysts on exploration practices,''} \emph{IEEE Transactions on
+Visualization and Computer Graphics}, vol. 25, no. 1, pp. 22--31, 2019,
+doi:
+\href{https://doi.org/10.1109/TVCG.2018.2865040}{10.1109/TVCG.2018.2865040}.}
+
 \leavevmode\vadjust pre{\hypertarget{ref-ATIChangePoint}{}}%
-\CSLLeftMargin{{[}38{]} }%
+\CSLLeftMargin{{[}39{]} }
 \CSLRightInline{G. J. J. van den Burg and C. K. I. Williams, {``An
 evaluation of change point detection algorithms.''} 2022. doi:
 \href{https://doi.org/10.48550/arXiv.2003.06222}{10.48550/arXiv.2003.06222}.}
 
 \leavevmode\vadjust pre{\hypertarget{ref-Jettison}{}}%
-\CSLLeftMargin{{[}39{]} }%
+\CSLLeftMargin{{[}40{]} }
 \CSLRightInline{M. F. et. al, {``Jettison MVP code.''} 2023. Available:
 \url{https://github.com/MattForshaw/Jettison/tree/main/MVPCode}}
 

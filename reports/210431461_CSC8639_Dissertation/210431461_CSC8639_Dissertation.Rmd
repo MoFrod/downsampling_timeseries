@@ -34,7 +34,7 @@ knitr::opts_knit$set(root.dir= normalizePath('..'))
 
 ```{r ProjectTemplate, include = FALSE}
 library(ProjectTemplate)
-setwd("~/Documents/MF MSc/downsampling_timeseries")
+setwd("D:/Morgan/Documents/NCL MSc/final_project/mofrod_project")
 load.project()
 ```
 
@@ -42,21 +42,23 @@ load.project()
 
 HM Government is committed to making data-driven decisions that engender public trust [@data2017; @data2020; @data2021; @data2022]. Data-driven decisions are considered to be "more well-informed" @data2017, effective @data2022, consistent @data2021, and better "at scale" @data2020. Despite this, there is a lack of trust in government use of data @trust. This suggests that public trust in data-driven decisions goes beyond how the "data complies with legal, regulatory and ethical obligations" @data2021. The UK public need to have "confidence and trust in how data, including personal data, is used" @data2020, and this requires transparency @trust. 
 
-To make data-driven decisions, government decision-makers also need to trust how the data used (cite user research here). This means trusting which data points are selected, how this data collected and stored, and the capability of data practitioners to understand the quality, insights and limitations of it. At every stage of the data processing pipeline, data practitioners have the opportunity to communicate the impact of the assumptions and choices they are making to support decision-makers in trusting the data informing their decisions.
+To make data-driven decisions, it is likely that government decision-makers also need transparency of how the data used to trust it. This means trusting which data points are selected, how this data collected and stored, and the capability of data practitioners to understand the quality, insights and limitations of it. At every stage of the data processing pipeline, data practitioners have the opportunity to communicate the data impact of the assumptions and choices they are making. This could not only support decision-makers in trusting the data informing their decisions, but also help decision-makers understand the limitations of the data and thresholds at which the data insights can be relied upon for each decision.
 
-Time series data is used across HM Government @pathway to inform decision-makers across various domains @onstool. It is also widely generated and used by industry and research @TVStore. The volume of time series data is continuously increasingly @datapoint, posing significant challenges for handling and visualising this popular data type @TVStore. Data practitioners must utilise methods that reduce data volumes to align with limitations like processing time, computing costs, storage capabilities, and sustainability ambitions [@Sveinn; @TVStore; @Shift].  
+The research outlined in this paper explores this dynamic with a two pronged approach. User research with sixteen UK Civil Servants investigates what decision-makers need to trust the data insights they are presented with, and how data practitioners assess and communicate the trustworthiness of the data. These insights are combined with analysis of how to explain the impact of downsampling algorithms on time series data without detailing extensive statistical evidence. 
 
-Downsampling is an established technique [@downsampling; @sampling] that involves selecting a representative subset of data to preserve its original shape while reducing the number of data points [@datapoint; @MinMaxLTTB]. This is a vital part of making voluminous time series understandable for human observation @Sveinn and an essential step in many time series database solutions @datapoint. However, little attention has been devoted to how downsampling impacts decision-makers trust in the data.
+Downsampling involves selecting a representative subset of data to preserve its original shape while reducing the number of data points [@datapoint; @MinMaxLTTB]. Time series data is used across HM Government @pathway to inform decision-makers across various domains @onstool; it is also widely generated and used by industry and research @TVStore. The volume of time series data is continuously increasingly @datapoint, posing significant challenges for handling and visualising this popular data type @TVStore. 
 
-Despite widespread use, how to communicate the impact of downsampling algorithms on time series data remains also understudied [@Sveinn; @datapoint]. Downsampling expands the boundaries of risk for decision-makers as data practitioners may not realise the significance of the data being discarded. Such choices throughout the data pipeline may have disproportionately larger consequences later as their ramifications for future decisions are not fully understood by all. It is important, therefore, that data practitioners are able to communicate the impact of choices made throughout the data pipeline.
+Data practitioners must utilise methods that reduce data volumes to align with limitations like processing time, computing costs, storage capabilities, and sustainability ambitions [@Sveinn; @TVStore; @Shift]. Downsampling is an established technique [@downsampling; @sampling] for this, and is a vital part of making voluminous time series understandable for human observation @Sveinn and an essential step in many time series database solutions @datapoint. However, little attention has been devoted to how downsampling impacts decision-makers trust in the data and how to communicate the impact of downsampling algorithms on time series data remains also understudied [@Sveinn; @datapoint]. 
 
-To address these challenges, this paper shares initial insights from user research on the impact of downsampling on decision-makers' trust in data and suggests a visualisation methodology for communicating the impact of downsampling algorithms on time series. This methodology combines user research with R packages `imputeTS` @imputeTS_R and `Rcatch22` @catch22_R to identify and visualise time series features that are most sensitive to downsampling. It is hoped this will improve decision-makers' trust in data by helping data practitioners to create transparency in the data processing pipeline, communicate the impact of downsampling, and support conversations about which algorithms or parameters are most appropriate for particular decision-maker use cases. 
+Downsampling is an important part of how time series data is used and a technical issue that, this research posits, whose impact is important for decision-makers to understand. Downsampling expands the boundaries of risk for decision-makers as data practitioners may not realise the significance of the data being discarded. For example, a decision-maker may be looking at analysis of CO_2 levels on an open-plan office floor to decide on how many officials can work in the office each day post-Coivd. Different downsampling algorithms preserve different data points, which could change the threshold of risk for the decision-maker. In complex decisions, such Choices throughout the data pipeline may have disproportionately larger consequences later as their future ramifications are unlikely to be fully understood. It is important, therefore, that data practitioners are able to communicate the impact of choices made throughout the data pipeline.
+
+This paper shares initial insights from user research on decision-makers' trust in data and suggests a visualisation methodology for communicating the impact of downsampling algorithms on time series. This methodology combines user research insights with R packages `imputeTS` @imputeTS_R and `Rcatch22` @catch22_R to identify time series features that are most sensitive to downsampling and visualise the impact of different downsampling algorithms on these features. It is hoped this will improve how data practitioners communicate the impact of downsampling, support conversations about which algorithms or parameters are most appropriate for particular decision-maker use cases, and increase decision-makers' trust in data by creating transparency in the data processing pipeline,. 
 
 # RELATED WORK
 
 This section provides an overview of previous related work to create a clear understanding of the most relevant fields of research and identify the gaps being addressed by the paper.
 
-**2.1 Data Transparency** 
+**2.1 Data transparency**
 
 Technology transparency, "including institutional data practices", is sociopolitical in nature @political_transparency. There is a growing number of researchers reflecting on "societal needs in terms of what is made transparent, for whom, how, when and in what ways, and, crucially, who decides" @social_transparency. 
 
@@ -70,7 +72,7 @@ Time series data is commonly visualised as a line graph [@Sveinn; @timenotes]. L
 
 However, this growing field of research does not extend to visualisations of choices and assumptions made during data processing pipline. Indeed, such visualisations are a side effect of the research. This dynamic is exemplified by the R package `imputeTS` @imputeTS_R where the impact of imputation choices made by the user is only visualised to support the user through the complete process of replacing missing values in time series @imputeTS. The research set out in this paper harnesses the capabilities of `imputeTS` and its 'process' visualisations to help data practitioners communicate the impact of downsampling choices made in the data processing pipeline.
 
-**2.3 Value Preserving Data Aggregation**
+**2.3 Value preserving data aggregation**
 
 Technological innovation has generated unprecedented amount of time series data and this data continues to grow [@data2020; @TVStore; @storage; @CatchUp]. For example, tackling climate change is the UK Government's "number one international priority" @IR, yet climate simulations that help inform decision-makers generate tens of terabytes per second [@TVStore; @climate]. Value preserving data aggregation (a subset of downsampling) algorithms play an important role in addressing how this voluminous data is processed, stored @TVStore and visualised [@Sveinn; @dashql] by minimising computing resources needed @TVStore, reducing network latency, and improving rendering time [@MinMaxLTTB; @datapoint]. 
 
@@ -84,13 +86,13 @@ table_content <- matrix(
   c(
     "EveryNth", "Selects every nth data point.",
     "Percentage Change", "Selects every data point beyond a specified percentage of the previous data point",
-    "Mode-Median Bucket", "Finds mode or median within equally sized data buckets for selection.",
-    "Min-Std-Error-Bucket", "Uses standard error of the estimate (SEE) in linear regression to select data points.",
-    "MinMax", "Preserves minimum and maximum data point of each data bucket.",
+    "Mode-Median Bucket", "Selects mode or median within equally sized data buckets.",
+    "Min-Std-Error-Bucket", "Selects data points with standard error of the estimate (SEE) in linear regression.",
+    "MinMax", "Preserves minimum and maximum data points in each data bucket.",
     "OM3", "Maintains the minimum and maximum data points at every time interval for rasterizing.",
-    "M4", "Combines EveryNth and MinMax, selecting the first and last as well as the minimum and maximum data points",
-    "Longest-Line Bucket", "Calculates line length (euclidean distance) instead of standard error between buckets.",
-    "Largest Triangle Three Bucket (LTTB)", "The data point that forms the largest triangular surface between the previously selected data point and the average value of the next data bucket.",
+    "M4", "Selects the first and last as well as the minimum and maximum data points",
+    "Longest-Line Bucket", "Calculates line length (euclidean distance) between data buckets.",
+    "Largest Triangle Three Bucket (LTTB)", "Calculates the largest triangular surface between the previously selected data point and the average value of the next data bucket.",
     "MinMaxLTTB", "Preselects data points using MinMax before applying Largest Triangle Three Buckets."
   ), nrow = 11, byrow = TRUE
 )
@@ -117,13 +119,20 @@ Features used to classify time series data could provide a common framework by w
 
 # USER RESEARCH
 
-User research in the form of interviews contributes to testing the assumptions underpinning this research and helps inform the design decisions made for the research methodology. The same interview script is used for all decision-makers and data practitioners, respectively; follow-up questions vary to support the flow of each interview. One-to-one virtual interviews with 16 UK Civil Servants (nine decision-makers and seven data practitioners) highlight the importance of transparency in enabling data-driven decision-making across government.
+One-to-one virtual interviews with 16 UK Civil Servants (nine decision-makers and seven data practitioners) highlight the importance of transparency in enabling data-driven decision-making across government. This user research utilises the same interview script for all decision-makers and data practitioners, respectively. Follow-up questions vary to support the flow of each interview and unpack the participants' responses. The interviews are recorded and transcribed on MS teams for later analysis. 
 
-Qualitative analysis combined with keyword extracting using natural language processing is used to analyse the user research; the key themes are similar for both decision-makers and data practitioners. Transparency of data provenance, collection, and analysis pipeline is desired to understand the data reliability, repeatability, and quality. This is best communicated through engaging conversations and interactive visualisations; both decision-makers and data practitioners emphasised the importance of communicating the story behind data, its assumptions, and how the data changes through time.  
+Qualitative thematic analysis combined with natural language processing keyword extraction is used to identify the the key points of each interview, which are similar for both decision-makers and data practitioners. Transparency of data provenance, collection, and analysis pipeline is desired by decision-makers to understand the reliability, repeatability, and quality of the data they're presented with. All the decision-makers and data-practitioners shared that this is best communicated through engaging conversations and interactive visualisations; they both emphasised the importance of communicating the story behind data, its assumptions, and how the data changes through time. Everyone interviewed acknowledged that this is difficult to achieve and how to do this better is a topic of live debate. 
 
-Insights from this user research indicate that there is a spectrum of transparency desired for decisions. This spectrum depends on the question being informed by the data; it's complexity, importance and potential impact. To trust the data informing data-driven decisions, decision-makers and data practitioners repeatedly requested transparency of the data context, source and limitations as well as an assessment of overall confidence in the data.  
+Insights from this user research indicate that there is a spectrum of transparency that decision-makers desire for decisions. This spectrum depends on the question being addressed by the data; it's complexity, importance and potential impact. To trust the data informing data-driven decisions, decision-makers and data practitioners repeatedly requested transparency of the data context, source and limitations as well as an assessment of overall confidence in the data.  
 
-Below is an example of the key themes from anonymised decision-maker and data-practitioner interviews shared as a concept map. All the interview concept maps are shared in Annex A. Only summative content from these interviews is presented in compliance with the consent forms shared with the user research participants.
+Decision-makers shared difficulties in developing correct views of "how much they can trust the data" they're seeing. They addressed their desire for more emphasis on the "metadata and how to appropriately describe the level of uncertainty and provenance of the data" to help ensure the data is  being applied to the context it was collected for. They shared the importance of understanding if "there is anything that is baked into what is being provided" in order to trust the data and, how the source of this trust changes as data practitioners become decision-makers because they rarely see the raw data and so "have to have an understanding of what preprocessing has been done, because it almost always has been [done]". Decision-makers shared that visualisations are important for conveying "specific insights that simply looking at numbers can't get over" and emphasised that if analysts "clearly explain what the limitations are and and and rigorously presented that, then I'll trust [the analysis] more".
+
+[IS THERE SPACE FOR A DATA PRACTITIONER VERSION?]
+- 
+- 
+- 
+
+Below concept maps outlining the key themes from anonymised decision-maker and data-practitioner interviews are shared as examples. All the interview concept maps are shared in Annex A. Only summative content from these interviews is presented in compliance with the consent forms shared with the user research participants.
 
 \vspace{-1.5cm}
 
@@ -133,8 +142,8 @@ library(grid)
 library(magick)
 
 # Define the paths to maps
-image1 <- "~/Documents/MF MSc/downsampling_timeseries/graphs/userresearch/Decision-maker 9_ Concept Map.png"
-image2 <- "~/Documents/MF MSc/downsampling_timeseries/graphs/userresearch/Data Practitioner 7_ Concept Map.png"
+image1 <- "D:/Morgan/Documents/NCL MSc/final_project/mofrod_project/graphs/userresearch/Decision-maker 9_ Concept Map.png"
+image2 <- "D:/Morgan/Documents/NCL MSc/final_project/mofrod_project/graphs/userresearch/Data Practitioner 7_ Concept Map.png"
 
 # Read the images
 img1 <- image_read(image1)
@@ -154,51 +163,51 @@ grid.arrange(img1_grob, img2_grob, ncol = 2)
 ```
 \vspace{-1.5cm}
 
-[Go through and collect quotes from those who gave permission]
+The findings from this user research indicate that decision-makers need transparency of how the data is used to trust the insights informing data-driven decisions. This suggests that endeavors to create greater transparency in data pipelines, such as the research outlined in the subsequent sections of this paper, are worthy of further study. It also suggests that evaluating the objectivity and quality of data sources as well as mechanisms to develop common descriptions of data insight confidence-levels are potential avenues for data science to have greater policy impact.
 
-- 
-- 
-- 
-- 
+It is important to note that, like many interview studies @futzing, the findings of this user research is limited; the sample of participants is not drawn from the overall population. The participants have been selected by reaching out to relevant individuals in the researcher's professional network, and this introduces bias. However, given the consistency of insights from the user research participants, further interviews with a wider, random subset of the population would be beneficial.
 
-# METHODOLOGY
+# ANALYSIS METHODOLOGY
 
-This section provides an overview of process used to develop the work outlined by this paper; highlighting methodology decisions of, and justifications for, the research design.
+This section outlines the analysis design undertaken to explain the impact of downsampling algorithms on time series data without detailing extensive statistical evidence; the decisions, justifications and limitations of this methodology are shared. 
 
 **4.1 Data**
 
-The research outlined by this report starts with the eight demonstrative time series shared by the Alan Turing Institute `Annotated Change` GitHub repository @ATIChangePoint. The demonstrative time series are synthetic with known change points that provide examples of different types of time series. These synthetic time series (demo_100, demo_200, demo_300, demo_400, demo_500, demo_600, demo_700, demo_800) support change point annotators annotate real-world data sets for the `Turing Change Point Dataset` @ATIChangePoint. Nine synthetic time series are used for this research as the eighth `Annotated Change` demonstrative time series (demo_800) is multivate and split in two (800A and 800B) for this research to enable better comparison. 
+The eight Alan Turing Institute `Annotated Change`  @ATIChangePoint synthetic time series are selected for initial analysis. There is an inherent limitation in using synthetic time series for analysis because the data has been generated for a different purpose. However, these time series have been choices because they are previously cleaned time series from a reputable institution with known change points that are designed to provide examples of different types of time series. These synthetic time series (demo_100, demo_200, demo_300, demo_400, demo_500, demo_600, demo_700, demo_800) are used for demonstration to support change point annotators annotate real-world data sets for the `Turing Change Point Dataset` @ATIChangePoint. The eighth `Annotated Change` synthetic time series (demo_800) is multivariate and split in two (800A and 800B) to create nine synthetic time series for this research and enable better comparison. 
+
 
 **4.2 Downsampling**
 
-These nine synthetic time series are imported into `RStudio` from JSON scripts and two downsampling algorithms are applied to all with the`Jettison MVP Code` @Jettison. These simple algorithms are chosen to provide initial insights into the impacts of downsampling with minimally complex code; the algorithm *EveryNth* selects every other data point and *Percentage Change* selects every data point that has greater than one per cent difference between the last transmitted and newest values. 
+These nine synthetic time series are imported into `RStudio` from JSON scripts and two downsampling algorithms are applied to all with the`Jettison MVP Code` @Jettison. This enables initial insights into the impacts of downsampling with minimally complex code. The two algorithms used by the `Jettison MVP Code` @Jettison are *EveryNth*, which selects every other data point, and *Percentage Change*, which selects every data point that has greater than one per cent difference between the last transmitted and newest values. 
 
 [SHOULD I ADD AN EQUATION HERE FOR THE ALGORITHMS?]
 
 $$
 \xi _{ij}(t)=P(x_{t}=i,x_{t+1}=j|y,v,w;\theta)= {\frac {\alpha _{i}(t)a^{w_t}_{ij}\beta _{j}(t+1)b^{v_{t+1}}_{j}(y_{t+1})}{\sum _{i=1}^{N} \sum _{j=1}^{N} \alpha _{i}(t)a^{w_t}_{ij}\beta _{j}(t+1)b^{v_{t+1}}_{j}(y_{t+1})}}
 $$
-These algorithms are applied iteratively across each time series, creating parameters 1 to 50 for each downsampling algorithm and `Annotated Change` time series. There are now 900 time series for investigation; 450 for each downsampling algorithm.
+The `Jettison MVP Code` @Jettison applies these algorithms iteratively across each of the nine synthetic time series. This creates parameters 1 to 50 for each downsampling algorithm and `Annotated Change` time series. There are now 900 time series for investigation; 450 for each downsampling algorithm.
 
-The R package `imputeTS` @imputeTS_R is applied to the time series to obtain the data volume, number of missing values (NAs) and number of gaps. This is important to understand the effect of each downsampling algorithm across the 900 time series. Data volume provides a common variable for comparison because the effect of each downsampling algorithm is unevenly distributed across the 50 parameters. For example, *EveryNth* discards data more quickly than *Percentage Change* so comparing the time series for each parameter is insufficient.
+The R package `imputeTS` @imputeTS_R is applied to all 900 time series to obtain the remaining data volume after downsampling, number of missing values (NAs), and number of gaps in the time series. This is important to understand the effect of each downsampling algorithm. Initial analysis highlights that the effect of each downsampling algorithm is unevenly distributed across the 50 parameters; for example, *EveryNth* discards data more quickly than *Percentage Change* so comparing the time series for each parameter is insufficient. The remaining data volume, therefore, provides a common variable that enables like-for-like comparison between the downsampling algorithms and their impact.
 
-The missing values for each of the 900 time series are then replaced by the `imputeTS` linear interpolation function. This is a simple imputation algorithm that  returns each time series to its original length, enabling a better comparison of the impact of downsampling. [DO I NEED TO EXPLAIN MORE THAN THIS?] For each `Annotated Change` synthetic time series there is now an imputed time series for parameters 1 to 50 and each downsampling method.
+The missing values for each of the 900 time series are replaced by the `imputeTS` linear interpolation function. This is a simple imputation algorithm that returns each time series to its original length by using curve fitting to create new data points between the remaining data points. [DO I NEED TO EXPLAIN MORE THAN THIS?] The selection of this simple imputation function may limit the findings of this analysis, but returning the time series to their original length enables a like-for-like comparison of downsampling impact. For each `Annotated Change` synthetic time series there is now an imputed time series for parameters 1 to 50 and each downsampling algorithm.
 
 **4.3 Features**
 
-The values for each catch22 time series feature @catch22 is calculated by the `Rcatch22` package @catch22_R. This is applied to each of the nine original synthetic time series and 900 imputed time series. The difference between the original and imputed time series feature values is calculated and scaled to investigate the impact of downsampling on these catch22 features. The standard deviation across the time series for each catch22 feature is calculated to indicate whether some features are more sensitive to downsampling. 
+The `Rcatch22` package @catch22_R enables the computation of a value for each of the catch22 time series features @catch22. Values for the 22 time series features are calculated for each of the nine original synthetic time series and 900 imputed time series. The difference between the original and imputed time series feature values is calculated and that difference scaled to accurately compare how the downsampling algorithms impact these catch22 features. The standard deviation across the 900 imputed time series for each catch22 feature is also calculated to indicate the sensitivity of each time series feature to downsampling. The catch22 features are considered to be more sensitive if the standard deviation across the 900 imputed time series is higher. 
+
+The application of catch22 features in this way is potentially limited; the time series features reflect characteristics that help cluster and classify different time series. Further analysis is needed to confirm whether features sensitive to downsampling are applicable to all time series types. 
 
 **4.4 Visualisation**
 
-Combining `imputeTS` and `Rcatch22` in this way unstudied; initial visual analysis to observe the impact of downsampling on catch22 features is conducted utilising bar and line graphs alongside heatmaps. All the decision-makers who were interviewed as part of this research emphaised the importance of visualisation in data-driven decision-making and data transparency. In line with this, different approaches to visualising the impact of downsampling are tried to explore how best the impact of downsampling could be visually communicated by data practitioners for decision-makers.
+Combining `imputeTS` and `Rcatch22` in this way unstudied; initial visual analysis to observe the impact of downsampling on catch22 features is conducted utilising bar and line graphs alongside heatmaps. All the decision-makers who were interviewed as part of the aforementioned user research emphaised the importance of visualisation in data transparency and data-driven decision-making. In line with this, different approaches to visualising the impact of downsampling are tried to explore how best the impact of downsampling could be visually communicated by data practitioners for decision-makers. However, the visualisations created by this research are under-developed; useability research needs to be conducted with decision-makers and data practitoners to ensure the visualisations meet the aim of this research.
 
 # RESULTS AND EVALUATION
 
-This section provides an overview of results achieved from the research outlined in section IV; the limitations of these results and avenues for further investigation are highlighted to help contextualise these findings.
+The results of the chosen analysis methodology are shared in this section with a discussion of their the limitations and potential avenues for further investigation.
 
-**5.1 Downsampling Sensitivity**
+**5.1 Downsampling sensitivity**
 
-There appear to be seven catch22 features that deviate most across the 900 imputed time series. Due to their high deviation across the imputed time series, these seven features are considered to be more sensitive to the impacts of downsampling than the other 15. The standard deviation of all 22 features is shared in Annex A. To demonstrate the sensitivity of the seven features, the ten features with the highest standard deviation across all the imputed time series in the bar graph below. 
+Seven catch22 features appear to a wider dispersion across the 900 imputed time series than the other 15 features. These seven features are considered to be more sensitive to the impacts of downsampling. To demonstrate the sensitivity of the seven features, the ten features with the highest standard deviation across all the imputed time series in the bar graph below. The standard deviation of all 22 features is shared in Annex B.  
 
 ```{r CombinedSensitivity, echo=FALSE, message=FALSE, warning=FALSE, fig.height=4.1, fig.with=3}
 # Reshape sensitivity subset data to a long format
@@ -241,12 +250,12 @@ subset_sensitivity_joined_long$names <- factor(subset_sensitivity_joined_long$na
 ggplot(subset_sensitivity_joined_long, aes(x = StandardDeviation, y = names, fill = Method)) +
   geom_bar(stat = "identity", position = position_dodge()) +
   theme_minimal() +
-  theme(text = element_text(family = "Times"), plot.title = element_text(hjust = -0.15), legend.position = "top", legend.justification = c(-0.14, 1)) +
+  theme(text = element_text(family = "Times"), plot.title = element_text(hjust = -0.45), legend.position = "top", legend.justification = c(-0.4, 1)) +
   labs(x = "Standard Deviation", y = "Catch 22 Feature", fill = "Method", title = "Standard Deviation of Sensitive Catch22 Features") +
   scale_fill_brewer(palette = "Paired")
 ```
 
-This visualisation highlights the *EveryNth* algorithm appears to impact features more than the *Percentage Change* algorithm. Initial analysis suggests that this is likely to be because, in the 50 parameters created for this research, the *EveryNth* algorithm discards more data, more quickly. It would be beneficial to explore this dynamic further, creating parameters beyond 50 until the *Percentage Change* algorithm discards the same volume of data.
+This visualisation suggests that the *EveryNth* algorithm impacts the catch22 time series features more than the *Percentage Change* algorithm. Initial analysis indicates that this is because the *EveryNth* algorithm discards more data, more quickly in the 50 parameters of downsampling. The sensitivity of these features to the *Percentage Change* is limited by the number of parameted used for this research. It would be beneficial to investigate the impact of *Percentag Change* further by creating downsampling parameters beyond 50 until the same volume of data is discarded by both algorithms.
 
 The standard deviation of the seven most sensitive catch22 features is presented in the table below. This table includes the standard deviation of these features for the *EveryNth* algorithm ('everyNthSensitivity'), the *Percentage Change* algorithm ('PercentageChangeSensitivity'), and the combined standard deviation ('CombinedSensitivity'). 
 
@@ -275,13 +284,13 @@ knitr::kable((all_sensitivity), caption = "Standard Deviation of the Seven Most 
 
 \vspace{0cm}
 
-The combined sensitivity was used to identify the seven catch22 features that appear to be most sensitive. The table suggests that the first minimum of the autocorrelation function ('Autocorr_FirstMinimum' or 'CO_FirstMin_ac') is most sensitive across both of the algorithms; that the catch22 feature measuring the longest sequence of successive steps that decrease ('LongestPeriod_Decrease' or 'SB_BinaryStats_diff_longstretch0') is most sensitive to the *EveryNth* algorithm; and, the longest sequence of successive values greater than the mean ('LongestPeriod_AboveAverage' or 'SB_BinaryStats_mean_longstretch1') is most sensitive to the *Percentage Change* algorithm. 
+The combined standard deviation is used to identify the seven catch22 features that appear to be most sensitive. The table suggests that the first minimum of the autocorrelation function ('Autocorr_FirstMinimum' or 'CO_FirstMin_ac') is most sensitive across both of the algorithms; that the catch22 feature measuring the longest sequence of successive steps that decrease ('LongestPeriod_Decrease' or 'SB_BinaryStats_diff_longstretch0') is most sensitive to the *EveryNth* algorithm; and, the longest sequence of successive values greater than the mean ('LongestPeriod_AboveAverage' or 'SB_BinaryStats_mean_longstretch1') is most sensitive to the *Percentage Change* algorithm. 
 
-These results suggest that it may be possible to communicate the impact of downsampling through the algorithms imapct on catch22 features. However, standard deviation is a limited measure that suggests, rather than confirms sensitivity to the impacts of downsampling algorithms. To understand why these features are particularly sensitive, further investigation into the performance of the seven features on the 900 imputed time series is needed.   
+These results suggest that it may be possible to communicate the impact of downsampling via the sensitivity of the catch22 features. However, standard deviation is a limited measure that suggests, rather than confirms, sensitivity to the impacts of downsampling algorithms. Further statistical analysis is needed to confirm that the changes in the features is directly caused by the impact of downsampling.   
 
 **5.2 Downsampling Impact**
 
-Identifying that seven catch22 features apppear to be more sensitive to the impacts of downsampling will help communicate the impact of downsampling algorithms. The difference between the values of catch22 features for the nine original time series and 900 imputes time series is a measure of impact. The heapmap below visualises this difference, scaled, for the seven most senstive features across each of the 50 parameters. 
+Identifying that seven catch22 features appear to be more sensitive to the impacts of downsampling enables data pratitioners to evaluate and communicate the impact of different downsampling algorithms without deep statistical analysis. The difference between the values of catch22 features for the nine original time series and 900 imputes time series is used to measure the impact of downsampling. The heapmap below visualises this difference, scaled, for the seven most sensitive catch22 features across the 900 imputed time series and each of the 50 parameters. 
 
 ```{r Heatmap_param, echo=FALSE, message=FALSE, warning=FALSE, fig.height=5, fig.with=3}
 # Recode the names of the Methods
