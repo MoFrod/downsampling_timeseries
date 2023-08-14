@@ -1,39 +1,7 @@
-# mofrod_project
+# downsampling_timeseries
 
-Welcome to ProjectTemplate!
+Welcome!
 
-This file introduces you to ProjectTemplate, but you should eventually replace
-the contents of this file with an introduction to your project. People who
-work with your data in the future will thank you for it, including your future
-self.
+Trusting data-driven decision-making goes beyond demonstrating comppliance with legal, regulatory and ethical obligations; decision-makers need to trust how the data is used. Handling, storing and visualising the volume of data being generated today requires data practitioners to make assumptions and processing choices that remain opaque to decisionmakers. The research explores decision-makers’ trust in data, data pracitioners’ experience of communicating data insights to decision-makers and a new visualisation methodology for explaining the impact of downsampling on high-volume time series data. It uniquely combines user research with R packages imputeTS and Rcatch22 to identify and visualise time series features that are most sensitive to downsampling. It is hoped this will improve decision-makers’ trust in data by helping data practitioners to create transparency in the data processing pipeline, communicate the impact of downsampling, and support conversations about which algorithms or parameters are most appropriate for particular decision-maker use cases
 
-ProjectTemplate is an R package that helps you organize your statistical
-analysis projects. Since you're reading this file, we'll assume that you've
-already called `create.project()` to set up this project and all of its
-contents.
-
-To load your new project, you'll first need to `setwd()` into the directory
-where this README file is located. Then you need to run the following two
-lines of R code:
-
-	library('ProjectTemplate')
-	load.project()
-
-After you enter the second line of code, you'll see a series of automated
-messages as ProjectTemplate goes about doing its work. This work involves:
-* Reading in the global configuration file contained in `config`.
-* Loading any R packages you listed in the configuration file.
-* Reading in any datasets stored in `data` or `cache`.
-* Preprocessing your data using the files in the `munge` directory.
-
-Once that's done, you can execute any code you'd like. For every analysis
-you create, we'd recommend putting a separate file in the `src` directory.
-If the files start with the two lines mentioned above:
-
-	library('ProjectTemplate')
-	load.project()
-
-You'll have access to all of your data, already fully preprocessed, and
-all of the libraries you want to use.
-
-For more details about ProjectTemplate, see http://projecttemplate.net
+To load this new project, open the Rmarkdown called DIssertation in the reports folder. Run the report with CRTL + ALT + R, and everything should be set up for you!
