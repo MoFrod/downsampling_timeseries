@@ -226,7 +226,7 @@ Combining `imputeTS` @imputeTS_R and `Rcatch22` @catch22_R in this way is unstud
 
 # RESULTS AND EVALUATION
 
-\vspace{-0.38cm}
+\vspace{-0.4cm}
 
 This section shares the results of this research with a discussion of their the limitations and potential avenues for further investigation; these results are presented in three themes: downsampling sensitivity, downsampling impact, and feature variation.
 
@@ -284,7 +284,9 @@ Figure 2 suggests that the *EveryNth* algorithm impacts the catch22 time series 
 
 The standard deviation of the seven most sensitive catch22 features is presented in the table below. This table includes the standard deviation of these features for the *EveryNth* algorithm ('everyNth'), the *Percentage Change* algorithm ('PercentageChange'), and the combined standard deviation ('Combined'). 
 
-```{r echo=FALSE, message=FALSE, warning=FALSE, paged.print=FALSE, fig.height=2, fig.width=3}
+\vspace{-0.2cm}
+
+```{r echo=FALSE, message=FALSE, warning=FALSE, paged.print=FALSE, results = 'asis'}
 
 # results = 'asis'
 
@@ -313,7 +315,7 @@ knitr::kable((all_sensitivity), caption = "Standard Deviation of the Seven Most 
   kable_styling("striped", latex_options = "HOLD_position")
 ```
 
-\vspace{-0.5cm}
+\vspace{-3.5cm}
 
 The combined standard deviation is used to identify the seven catch22 features that appear to be most sensitive. Table 2 suggests that the first minimum of the autocorrelation function ('Autocorr_FirstMinimum' or 'CO_FirstMin_ac') is most sensitive across both of the algorithms; that the catch22 feature measuring the longest sequence of successive steps that decrease ('LongestPeriod_Decrease' or 'SB_BinaryStats_diff_longstretch0') is most sensitive to the *EveryNth* algorithm; and, the longest sequence of successive values greater than the mean ('LongestPeriod_AboveAverage' or 'SB_BinaryStats_mean_longstretch1') is most sensitive to the *Percentage Change* algorithm. 
 
@@ -355,7 +357,7 @@ ggplot(filtered_df, aes(x = as.numeric(param), y = names, fill = scaled)) +
                        midpoint = 0, limits = range(joined_df$scaled)) +
   theme_minimal() +
   labs(x = "Parameter", y = "Features", fill = "Scaled Difference", title = "Figure 3: Scaled Difference of Sensitive Features by Parameter") +
-  theme(text = element_text(family = "Times"), plot.title = element_text(hjust = 5), legend.position = "top", legend.justification = c(-0.98, 1)) +
+  theme(text = element_text(family = "Times"), plot.title = element_text(hjust = 15), legend.position = "top", legend.justification = c(-0.98, 1)) +
   facet_wrap(~ method, ncol = 1)
 
 ```
@@ -373,7 +375,7 @@ ggplot(filtered_df, aes(x = as.numeric(vol), y = names, fill = scaled)) +
   scale_x_reverse() +
   theme_minimal() +
   labs(x = "Volume of Data", y = "Catch22 Feature", fill = "Scaled Difference", title = "Figure 4: Scaled Difference of Sensitive Features by Volume") +
-  theme(text = element_text(family = "Times"), plot.title = element_text(hjust = 5), legend.position = "top", legend.justification = c(-0.98, 1)) +
+  theme(text = element_text(family = "Times"), plot.title = element_text(hjust = -51), legend.position = "top", legend.justification = c(-0.98, 1)) +
   facet_wrap(~ method, ncol = 1)
 ```
 
@@ -383,6 +385,7 @@ Downsampling can perturb the the statistical properties [ADD REFERENCE] and visu
 
 It is not possible, however, to understand the impact of both downsampling algorithms from this visualisation. The *Percentage Change* algorithm needs to be applied for more than 50 parameters so that it discards volumes of data comparable to the *EveryNth* algorithm. Despite this, the heatmap visualisation of downsampling impact holds potential; figure 4 suggests that, with the same volume of data, the downsampling algorithms impact the catch22 features differently.  
 
+\newpage
 
 **5.3 Feature Variation**
 
@@ -432,13 +435,13 @@ ggplot(filtered_df %>%
   geom_line(linewidth = 0.5) +
   scale_x_reverse() +
   theme_minimal() +
-  theme(text = element_text(family = "Times"), plot.title = element_text(hjust = -0.05), legend.position = "top", legend.justification = c(-0.04, 1)) +
+  theme(text = element_text(family = "Times"), plot.title = element_text(hjust = -0.6), legend.position = "top", legend.justification = c(-0.04, 1)) +
   labs(x = "Volume of Data", y = "Scaled Difference", color = "Method", title = "Figure 5: Variation of the First Minimum of the Autocorrelation Function") +
   facet_wrap(~ dataset, ncol = 3)
 
 ```
 
-Figure 5 presents the impact of discarding data for both downsampling algorithms; the volume of data retained by the *Percentage Change* algorithm varies by the type of time series whereas the volume of data retained by the *EveryNth* algorithm trends towards zero. The line graphs presented in figure 5 highlight how different downsampling algorithms may more or less preserve the integrity of different time series. For example, time series '100', '200' and '600' appear to be more impacted by the *Percentage Change* algorithm. How the most sensitive catch22 time series features vary across the different time series types is shared in Annex D
+Figure 5 presents the impact of discarding data for both downsampling algorithms; the volume of data retained by the *Percentage Change* algorithm varies by the type of time series whereas the volume of data retained by the *EveryNth* algorithm trends towards zero. The line graphs presented in figure 5 highlight how different downsampling algorithms may more or less preserve the integrity of different time series. For example, time series '100', '200' and '600' appear to be more impacted by the *Percentage Change* algorithm. How the most sensitive catch22 time series features vary across the different time series types is shared in Annex D.
 
 This variation of downsampling algorithms across time series types causes the author to question whether the downsampling sensitivity of catch22 features may vary across time series type too. An example of this dynamic is visualised by the line graphs below in figure 6, which plot the scaled difference of the six most sensitive catch22 features for time series '500'. Time series '500' was selected as more data is discarded by the *Percentage Change* algorithm, offering a better comparison.
 
@@ -483,7 +486,7 @@ ggplot(subset_filtered_df %>%
   geom_line(linewidth = 0.5) +
   scale_x_reverse() +
   theme_minimal() +
-  theme(text = element_text(family = "Times"), plot.title = element_text(hjust = -0.08), legend.position = "top", legend.justification = c(-0.04, 1)) +
+  theme(text = element_text(family = "Times"), plot.title = element_text(hjust = -0.3), legend.position = "top", legend.justification = c(-0.04, 1)) +
   labs(x = "Volume of Data", y = "Scaled Difference", color = "Method", title = "Figure 6: Variation of Catch22 Features: Time Series 500") +
   facet_wrap(~ names, ncol = 3)
 
