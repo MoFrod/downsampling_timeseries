@@ -7,7 +7,7 @@ authors:
     location: Newcastle upon Tyne, UK
     email: M.C.M.Frodsham2@newcastle.ac.uk
 abstract: |
-  Trusting data-driven decision-making goes beyond demonstrating compliance with legal, regulatory and ethical obligations; decision-makers need to trust how the data is used. Handling, storing and visualising the volume of data being generated today requires data practitioners to make assumptions and processing choices that remain opaque to decision-makers. Downsampling is an established technique to select a representative subset of time series data that preserve the original data shape while reducing the number of data points in the time series. The research outlined by this paper explores decision-makers' trust in data, data practitioners' experience of communicating data insights to decision-makers and a new visualisation methodology for explaining the impact of downsampling on high-volume time series data. It uniquely combines user research insights with analysis of time series features for 900 imputed time series to identify and visualise the features that are most sensitive to downsampling. It is hoped this will improve decision-makers' trust in data by helping data practitioners to create transparency in the data processing pipeline, communicate the impact of downsampling, and support conversations about which algorithms or parameters are most appropriate for particular decision-maker use cases.
+  Trusting data-driven decision-making goes beyond demonstrating compliance with legal, regulatory and ethical obligations; decision-makers need to trust how the data is used. Handling, storing and visualising the volume of data being generated today requires data practitioners to make assumptions and processing choices that remain opaque to decision-makers. Downsampling is an established technique to select a representative subset of time series data that preserve the original data shape while reducing the number of data points in the time series. The research outlined by this paper explores decision-makers' trust in data, data practitioners' experience of communicating data insights to decision-makers and a new visualisation methodology for explaining the impact of downsampling on high-volume time series data. It uniquely combines user research insights from interviews with 16 UK Civil Servants with analysis of time series features for 900 imputed time series to identify and visualise the features that are most sensitive to downsampling. This research shows the potential for improving decision-makers' trust in data by helping data practitioners to create transparency in the data processing pipeline, communicate the impact of downsampling, and support conversations about which algorithms or parameters are most appropriate for particular decision-maker use cases.
   
 keywords:
   - time series
@@ -43,9 +43,9 @@ The research outlined in this paper explores this dynamic with a two pronged app
 
 Downsampling involves selecting a representative subset of data to preserve its original shape while reducing the number of data points [@datapoint; @MinMaxLTTB]. Time series data is used across HM Government @pathway to inform decision-makers across various domains @onstool; it is also widely generated and used by industry and research @TVStore. The volume of time series data is continuously increasingly @datapoint, posing significant challenges for handling and visualising this popular data type @TVStore. 
 
-Data practitioners must utilise methods that reduce data volumes to align with limitations like processing time, computing costs, storage capabilities, and sustainability ambitions [@Sveinn; @TVStore; @Shift]. Downsampling is an established technique [@downsampling; @sampling] for this, and is a vital part of making voluminous time series understandable for human observation @Sveinn and an essential step in many time series database solutions @datapoint. However, little attention has been devoted to how downsampling impacts decision-makers trust in the data and how to communicate the impact of downsampling algorithms on time series data remains also understudied [@Sveinn; @datapoint]. 
+Data practitioners must utilise methods that reduce the quantity of data (data volume) to align with limitations like processing time, computing costs, storage capabilities, and sustainability ambitions [@Sveinn; @TVStore; @Shift]. Downsampling is an established technique [@downsampling; @sampling] for this, and is a vital part of making voluminous time series understandable for human observation @Sveinn and an essential step in many time series database solutions @datapoint. However, little attention has been devoted to how downsampling impacts decision-makers trust in the data and how to communicate the impact of downsampling algorithms on time series data remains also understudied [@Sveinn; @datapoint]. 
 
-Downsampling is an important part of how time series data is used and a technical issue that, this research posits, whose impact is important for decision-makers to understand. Downsampling expands the boundaries of risk for decision-makers as data practitioners may not realise the significance of the data being discarded. For example, a decision-maker may be looking at analysis of $CO_2$ levels on an open-plan office floor to decide on how many officials can work in the office each day post-Covid. Different downsampling algorithms preserve different data points, which could change the threshold of risk for the decision-maker. In complex decisions, such Choices throughout the data pipeline may have disproportionately larger consequences later as their future ramifications are unlikely to be fully understood. It is important, therefore, that data practitioners are able to communicate the impact of choices made throughout the data pipeline.
+Downsampling is an important part of how time series data is used and a technical issue that, this research posits, whose impact is important for decision-makers to understand. Downsampling expands the boundaries of risk for decision-makers as data practitioners may not realise the significance of the data being discarded. For example, it is time and computing resource intensive to transport the terabytes of data generated daily by offshore oil platforms @CISCO without data discarding techniques like downsampling @TVStore. It is vital for decision-makers of their safety and productivity to have this information as quickly as possible and to understand how the discarded data limits the insights they are considering. Equally, a decision-maker may be looking at analysis of $CO_2$ levels on an open-plan office floor to decide on how many officials can work in the office each day post-Covid. Different downsampling algorithms preserve different data points [@Sveinn; @datapoint; @MinMaxLTTB], which could change the threshold of risk for the decision-maker. In complex decisions, such Choices throughout the data pipeline may have disproportionately larger consequences later as their future ramifications are unlikely to be fully understood @challenger. It is important, therefore, that data practitioners are able to communicate the impact of choices made throughout the data pipeline.
 
 This paper shares initial insights from user research on decision-makers' trust in data and suggests a visualisation methodology for communicating the impact of downsampling algorithms on time series. This methodology combines user research insights with R packages `imputeTS` @imputeTS_R and `Rcatch22` @catch22_R to identify time series features that are most sensitive to downsampling and visualise the impact of different downsampling algorithms on these features. It is hoped this will improve how data practitioners communicate the impact of downsampling, support conversations about which algorithms or parameters are most appropriate for particular decision-maker use cases, and increase decision-makers' trust in data by creating transparency in the data processing pipeline. 
 
@@ -65,7 +65,7 @@ Meaningful transparency is only realised when the information is provided with t
 
 **2.2 Time series visualisation**
 
-Time series data is commonly visualised as a line graph [@Sveinn; @timenotes]. Line graphs help the human eye to observe only the most important data points @Sveinn by conveying the overall shape and complexity of the time series data [@downsampling; @datapoint]. The most effective time series visualisations are, however, interactive [@timenotes; @plotly], turning access into agency @transparency_fallacy by allowing the user to access details on demand. Evaluation of time series visualisation is, therefore, a growing field of research [@Sveinn, @timenotes; @datapoint]. 
+Time series data is commonly visualised as a line graph [@Sveinn; @timenotes; @timetuner]. Line graphs help the human eye to observe only the most important data points @Sveinn by conveying the overall shape and complexity of the time series data [@downsampling; @datapoint]. The most effective time series visualisations are, however, interactive [@timenotes; @plotly; @timetuner], turning access into agency @transparency_fallacy by allowing the user to access details on demand. Evaluation of time series visualisation is, therefore, a growing field of research [@Sveinn, @timenotes; @datapoint]. 
 
 However, this growing field of research does not extend to visualisations of choices and assumptions made during data processing pipeline. Indeed, such visualisations are a side effect of the research. This dynamic is exemplified by the R package `imputeTS` @imputeTS_R where the impact of imputation choices made by the user is only visualised to support the user through the complete process of replacing missing values in time series @imputeTS. The research set out in this paper harnesses the capabilities of `imputeTS` and its 'process' visualisations to help data practitioners communicate the impact of downsampling choices made in the data processing pipeline.
 
@@ -74,7 +74,7 @@ However, this growing field of research does not extend to visualisations of cho
 
 Technological innovation has generated unprecedented amount of time series data and this data continues to grow [@data2020; @TVStore; @storage; @CatchUp]. For example, tackling climate change is the UK Government's *"number one international priority"* @IR, yet climate simulations that help inform decision-makers generate tens of terabytes per second [@TVStore; @climate]. Value preserving data aggregation (a subset of downsampling) algorithms play an important role in addressing how this voluminous data is processed, stored @TVStore and visualised [@Sveinn; @dashql] by minimising computing resources needed @TVStore, reducing network latency, and improving rendering time [@MinMaxLTTB; @datapoint]. 
 
-Value preserving data aggregation algorithms preserve the original data points that aim to be most representative of the original data. Examples of these algorithms are provided in the table below [@datapoint; @EveryNth; @Sveinn; @MinMaxLTTB; @MinMaxOrdered; @M4; @dashql]:
+Value preserving data aggregation algorithms preserve the original data points that aim to be most representative of the original data. This research utilises two of the simplest algorithms: *EveryNth* @EveryNth and *Percentage Change* @boxcar. Descriptions of value preserving data aggregation algorithms are provided in the table below [@datapoint; @EveryNth; @Sveinn; @MinMaxLTTB; @MinMaxOrdered; @M4; @dashql; @boxcar]:
 
 \renewcommand{\arraystretch}{1.5}
 
@@ -89,10 +89,10 @@ table_content <- matrix(
     "Mode-Median Bucket", "Selects mode or median within equally sized data buckets.",
     "Min-Std-Error-Bucket", "Selects data points with standard error of the estimate (SEE) in linear regression.",
     "MinMax", "Preserves minimum and maximum data points in each data bucket.",
-    "OM3", "Maintains the minimum and maximum data points at every time interval for rasterizing.",
     "M4", "Selects the first and last as well as the minimum and maximum data points",
-    "Longest-Line Bucket", "Calculates line length (euclidean distance) between data buckets.",
-    "Largest Triangle Three Bucket (LTTB)", "Calculates the largest triangular surface between the previously selected data point and the average value of the next data bucket.",
+    "Longest-Line Bucket", "Calculates line length (euclidean distance) between data buckets and selects one point per bucket which forms the longest total
+line length through all the buckets.",
+    "Largest Triangle Three Bucket (LTTB)", "Calculates the largest triangular surface between the previously selected data point and the average value of the next data bucket to select the highest point.",
     "MinMaxLTTB", "Preselects data points using MinMax before applying Largest Triangle Three Buckets."
   ), nrow = 10, byrow = TRUE
 )
@@ -110,9 +110,7 @@ knitr::kable(table_content, caption = "Example Downsampling Algorithms") %>%
 
 ```
 
-Data practitioners have made recent advances in the performance and evaluation of downsampling approaches [@downsampling; @sampling; @EveryNth; @MinMaxOrdered; @MinMaxLTTB; @dashql; @datapoint; @plotly]. These advances focus on the effectiveness of the algorithm in delivering downsampled data that represents the original data as accurately as possible. This is vital part of enabling and improving data-driven decision-making, but is focused on supporting data practitioners in their analysis of the data. Instead, the research set out in this paper aims to support data practitioners to communicate the impact of their downsampling choices for decision-makers.
-
-\newpage
+Data practitioners have made recent advances in the performance and evaluation of downsampling approaches [@downsampling; @sampling; @EveryNth; @MinMaxOrdered; @MinMaxLTTB; @dashql; @datapoint; @plotly; @boxcar]. These advances focus on the effectiveness of the algorithm in delivering downsampled data that represents the original data as accurately as possible. This is vital part of enabling and improving data-driven decision-making, but is focused on supporting data practitioners in their analysis of the data. Instead, the research set out in this paper aims to support data practitioners to communicate the impact of their downsampling choices for decision-makers.
 
 **2.4 Time series feature analysis**
 
@@ -129,11 +127,11 @@ Interviews with 16 UK Civil Servants (nine decision-makers and seven data practi
 
 **3.1 Design**
 
-User research produced over 16 hours of recorded and transcribed interviews with decision-makers and data practitioners. This interviews are hosted virtually on MS Teams, instead of in-person, to enable recording and transcription; this creates the potential to move beyond qualitative thematic analysis and implement alternative techniques, such as natural language processing. Interviews are selected over surveys because concepts like transparency and trust are complex and nuanced. One-to-one interviews are selected instead of focus groups to minimise authority bias and potential groupthink. 
+User research produced over 16 hours of recorded and transcribed interviews with decision-makers and data practitioners (demonstrated in Annex A). This interviews are hosted virtually on MS Teams, instead of in-person, to enable recording and transcription; this creates the potential to move beyond qualitative thematic analysis and implement alternative techniques, such as natural language processing. Interviews are selected over surveys because concepts like transparency and trust are complex and nuanced. One-to-one interviews are selected instead of focus groups to minimise authority bias and potential groupthink. 
 
 Like many interview studies @futzing, the participants for this user research are selected by reaching out to relevant individuals in the researcher's professional network. This introduces bias as the sample of participants is neither representative nor drawn from the overall population. To mitigate any further bias, this user research utilises the same interview script for all decision-makers and data practitioners, respectively. Follow-up questions vary to support the flow of each interview and unpack the participants' responses. The interviews are recorded and transcribed on MS Teams for later analysis. 
 
-Qualitative analysis is conduced on the content of each interview to understand the themes and reflective quotes. This is combined with natural language processing keyword extraction. The python libraries `docx` and `nltk` are used to import and clean the interviews; capitalisation, 'stopwords', and words with three or fewer letters are removed [ADD REFERENCE]. Interviews are anonymised as the time stamps, interviewer name and participant name are removed; content from the interview is also removed so that the natural language processing is only conducted on the participant responses. Limited natural language is then applied by tokenizing remaining words and creating a count for each unique word. These counts alongside the qualitative thematic analysis inform concept maps which aim to show the relationship between the key themes and key words. 
+Qualitative analysis is conduced on the content of each interview to understand the themes and reflective quotes. This is combined with natural language processing keyword extraction. The python libraries `docx` and `nltk` are used to import and clean the interviews; capitalisation, 'stopwords', and words with three or fewer letters are removed @jono. Interviews are anonymised as the time stamps, interviewer name and participant name are removed; content from the interview is also removed so that the natural language processing is only conducted on the participant responses. Limited natural language is then applied by tokenizing remaining words and creating a count for each unique word. These counts alongside the qualitative thematic analysis inform concept maps which aim to show the relationship between the key themes and key words. 
 
 
 **3.2 Insights**
@@ -144,7 +142,7 @@ Insights from this user research indicate that there is a spectrum of transparen
 
 Decision-makers shared difficulties in developing correct views of *"how much they can trust the data"*. They addressed their desire for more emphasis on the *"metadata and how to appropriately describe the level of uncertainty and provenance of the data"* to help ensure the data is  being applied to the context it was collected for. They shared the importance of understanding if *"there is anything that is baked into what is being provided"* in order to trust the data and, how the source of this trust changes as data practitioners become decision-makers because they rarely see the raw data and so *"have to have an understanding of what preprocessing has been done, because it almost always has been [done]"*. Decision-makers shared that visualisations are important for conveying *"specific insights that simply looking at numbers can't get over"* and emphasised that if analysts *"clearly explain what the limitations are and and and rigorously presented that, then I'll trust [the analysis] more"*.
 
-Below Figure 1 shares example concept maps outlining the key themes from two anonymised decision-maker and data-practitioner interviews. All the interview concept maps are shared in Annex A. Only summative content from these interviews is presented in compliance with the consent forms shared with the user research participants.
+Below Figure 1 shares example concept maps outlining the key themes from two anonymised decision-maker and data-practitioner interviews. All the interview concept maps are shared in Annex B. Only summative content from these interviews is presented in compliance with the consent forms shared with the user research participants.
 
 
 
@@ -204,13 +202,13 @@ The eight Alan Turing Institute `Annotated Change`  @ATIChangePoint synthetic ti
 
 **4.2 Downsampling**
 
-These nine synthetic time series are imported into `RStudio` from JSON scripts and two downsampling algorithms are applied to all with the`Jettison MVP Code` @Jettison. This enables initial insights into the impacts of downsampling with minimally complex code. The two algorithms used by the `Jettison MVP Code` @Jettison are *EveryNth*, which selects every other data point, and *Percentage Change*, which selects every data point that has greater than one per cent difference between the last transmitted and newest values. 
+These nine synthetic time series are imported into `RStudio` from JSON scripts and two downsampling algorithms are applied to all with the `Jettison MVP Code` @Jettison. This enables initial insights into the impacts of downsampling with minimally complex code. The two algorithms used by the `Jettison MVP Code` @Jettison are *EveryNth*, which selects every other data point, and *Percentage Change*, which selects every data point that has greater than one per cent difference between the last transmitted and newest values. 
 
 The `Jettison MVP Code` @Jettison applies these algorithms iteratively across each of the nine synthetic time series. This creates parameters 1 to 50 for each downsampling algorithm and `Annotated Change` time series. There are now 900 time series for investigation; 450 for each downsampling algorithm.
 
 The R package `imputeTS` @imputeTS_R is applied to all 900 time series to obtain the remaining data volume after downsampling, number of missing values (NAs), and number of gaps in the time series. This is important to understand the effect of each downsampling algorithm. Initial analysis highlights that the effect of each downsampling algorithm is unevenly distributed across the 50 parameters; for example, *EveryNth* discards data more quickly than *Percentage Change* so comparing the time series for each parameter is insufficient. The remaining data volume, therefore, provides a common variable that enables like-for-like comparison between the downsampling algorithms and their impact.
 
-The missing values for each of the 900 time series are replaced by the `imputeTS` linear interpolation function. This is a simple imputation algorithm that returns each time series to its original length and is a commonly used approach to present line graphs [ADD REFERENCE]. The selection of this simple imputation function may limit the findings of this analysis, but returning the time series to their original length enables a like-for-like comparison of downsampling impact. For each `Annotated Change` synthetic time series there is now an imputed time series for parameters 1 to 50 and each downsampling algorithm.
+The missing values for each of the 900 time series are replaced by the `imputeTS` linear interpolation function. This is a simple imputation algorithm that returns each time series to its original length and is a commonly used approach to present line graphs @compressiontech. The selection of this simple imputation function may limit the findings of this analysis, but returning the time series to their original length enables a like-for-like comparison of downsampling impact. For each `Annotated Change` synthetic time series there is now an imputed time series for parameters 1 to 50 and each downsampling algorithm.
 
 
 **4.3 Features**
@@ -232,7 +230,7 @@ This section shares the results of this research with a discussion of their the 
 
 **5.1 Downsampling sensitivity**
 
-Seven catch22 features appear to show a wider dispersion across the 900 imputed time series than the other 15 features. These seven features are considered to be more sensitive to the impacts of downsampling. To demonstrate the sensitivity of these seven features, features with the highest standard deviation across all the imputed time series are visualised in the bar graph below. The standard deviation of all 22 features is shared in Annex B.  
+Seven catch22 features appear to show a wider dispersion across the 900 imputed time series than the other 15 features. These seven features are considered to be more sensitive to the impacts of downsampling. To demonstrate the sensitivity of these seven features, features with the highest standard deviation across all the imputed time series are visualised in the bar graph below. The standard deviation of all 22 features is shared in Annex C.  
 
 ```{r CombinedSensitivity, echo=FALSE, message=FALSE, warning=FALSE, fig.height=4.1, fig.with=3}
 # Reshape sensitivity subset data to a long format
@@ -381,7 +379,7 @@ ggplot(filtered_df, aes(x = as.numeric(vol), y = names, fill = scaled)) +
 
 Figure 4 demonstrates that data volume retained by the downsampling algorithms creates acute differences, especially when less than 20 data points remained after *EveryNth* is applied. Interestingly, the impact of *Percentage Change* appears to be inconsistent; there are some retained data volumes where `Autocorr_ApproxScale` and `LongestPeriod_AboveAverage` do not appear to be impacted by *Percentage Change* even though larger retained data volumes appear to be impacted; this dynamic warrants further investigation. 
 
-Downsampling can perturb the the statistical properties [ADD REFERENCE] and visual perception [ADD REFERENCE] of the data. Catch2 features are statistical properties of time series. It is likely that some of these statistical properties will be more or less effected by downsampling because downsampling algorithms preserve different data points from the original time series. A full table of the statistical properties represented by each catch22 feature is shared in Annex C.
+Downsampling can perturb the the statistical properties @ATIChangePoint and visual perception @graphsampling of the data. Catch2 features are statistical properties of time series. It is likely that some of these statistical properties will be more or less effected by downsampling because downsampling algorithms preserve different data points from the original time series. A full table of the statistical properties represented by each catch22 feature is shared in Annex D.
 
 It is not possible, however, to understand the impact of both downsampling algorithms from this visualisation. The *Percentage Change* algorithm needs to be applied for more than 50 parameters so that it discards volumes of data comparable to the *EveryNth* algorithm. Despite this, the heatmap visualisation of downsampling impact holds potential; figure 4 suggests that, with the same volume of data, the downsampling algorithms impact the catch22 features differently.  
 
@@ -389,7 +387,7 @@ It is not possible, however, to understand the impact of both downsampling algor
 
 **5.3 Feature Variation**
 
-The impact of both downsampling algorithms on the most sensitive features appears to vary across different time series types. This is exemplified by the catch22 feature 'Autocorr_FirstMinimum' ('CO_FirstMin_ac'): the first minimum of the autocorrelation function ('Autocorr_FirstMinimum' or 'CO_FirstMin_ac'. This feature has the highest combined standard deviation across the 900 imputed time series represents *"the number of steps into the future at which a value of the time series at the current point and that future point remain substantially (>1/e) correlated"* @feature_book. The line graphs below highlight how this feature changes over the time series interpolated from different volumes of data after both downsampling algorithms are applied. The differences between the catch22 feature value of the original and imputed time series has been scaled for better comparisons. 
+The impact of both downsampling algorithms on the most sensitive features appears to vary across different time series types. This is exemplified by the catch22 feature 'Autocorr_FirstMinimum' ('CO_FirstMin_ac'): the first minimum of the autocorrelation function ('Autocorr_FirstMinimum' or 'CO_FirstMin_ac'. This feature has the highest combined standard deviation across the 900 imputed time series represents *"the number of steps into the future at which a value of the time series at the current point and that future point remain substantially (>1/e) correlated"* @feature_book. The line graphs below shares the differences between the catch22 feature value of the original time series and the 50 time series imputed from these after downsampling; these differences are scaled for better comparisons. The title of each line graph refers to the original nine synthetic time series (for example, '100', '200', and '300').
 
 ```{r FirstMinimum, echo=FALSE, message=FALSE, warning=FALSE, fig.height=5, fig.with=3}
 # Recode the names of the methods
@@ -441,7 +439,7 @@ ggplot(filtered_df %>%
 
 ```
 
-Figure 5 presents the impact of discarding data for both downsampling algorithms; the volume of data retained by the *Percentage Change* algorithm varies by the type of time series whereas the volume of data retained by the *EveryNth* algorithm trends towards zero. The line graphs presented in figure 5 highlight how different downsampling algorithms may more or less preserve the integrity of different time series. For example, time series '100', '200' and '600' appear to be more impacted by the *Percentage Change* algorithm. How the most sensitive catch22 time series features vary across the different time series types is shared in Annex D.
+Figure 5 presents the impact of discarding data for both downsampling algorithms; the volume of data retained by the *Percentage Change* algorithm varies by the type of time series whereas the volume of data retained by the *EveryNth* algorithm trends towards zero. The line graphs presented in figure 5 highlight how different downsampling algorithms may more or less preserve the integrity of different time series. For example, time series '100', '200' and '600' appear to be more impacted by the *Percentage Change* algorithm. How the most sensitive catch22 time series features vary across the different time series types is shared in Annex E.
 
 This variation of downsampling algorithms across time series types causes the author to question whether the downsampling sensitivity of catch22 features may vary across time series type too. An example of this dynamic is visualised by the line graphs below in figure 6, which plot the scaled difference of the six most sensitive catch22 features for time series '500'. Time series '500' was selected as more data is discarded by the *Percentage Change* algorithm, offering a better comparison.
 
@@ -478,7 +476,7 @@ subset_filtered_df$dataset <- recode(subset_filtered_df$dataset,
                               "df800a" = "800A", 
                               "df800b" = "800B")
 
-# Create the difference line graph for df100
+# Create the difference line graph for 500
 ggplot(subset_filtered_df %>%
          filter(dataset == "500"), 
        aes(x = as.numeric(vol), y = scaled, color = method)) +
@@ -494,35 +492,7 @@ ggplot(subset_filtered_df %>%
 
 Figure 6 highlights that, although 'Autocorr_FirstMinimum' is identified as the most sensitive across both downsampling algorithms, 'Autocorr_Automutual' might better indicate the impact for time series '500'. 'Autocorr_Automutual' is the minimum of the automutual information function ('Autocorr_Automutual' or 'IN_AutoMutualInfoStats_40_gaussian_fmmi'); this catch22 feature outputs a measure of "autocorrelation in the time series, as the minimum of the automutual information function" @feature_book. 
 
-A comparison of the most senstive features for each time series type is shared in Annex E. It would be beneficial to explore this further as this variation may offer data practitioners a method for identifying subsets of features that best indicate the preservation of different time series.
-
-# FUTURE WORK
-
-There are many avenues for future work to better understand the findings, and address the limitations, of this research. 
-
-
-**6.1 User research**
-
-Additional analysis on the transcripts and recordings of the user research would be beneficial. For example, using other natural language processing techniques, such as topic modelling, to better identify the connections between the key themes identified. It would also be helpful to conduct user research with a wider group of decision-makers and data practitioner to develop statistically significant findings for the UK Government.
-
-Usability research with decision-makers and data practitioners would also beneficial. Usability would contribute to the refinement of visualisations so that they better communicate the impact of downsampling on different time series. How these visualisations perturb the decision-makers' and data practitioners' perception of downsampling impact is an important avenue of further investigation.
-
-
-**6.2 Downsampling Sensitivity**
-
-It would be beneficial to use the data pipeline developed by C. H. Lubba et. al @catch22 to generate other subsets of time series features for distinct tasks in different domains. Examining the downsampling sensitivity of new subsets of catch22 features is likely to generate the information needed to understand why certain features are more sensitive to downsampling across different types of time series. 
-
-
-**6.3 Downsampling Impact**
-
-Further iterations of dowsampling on the synthetic time series used in this research is an important to address the limitation of this research. These iterations will enable a better comparison of the *EveryNth* and *Percentage Change* algorithms. Equally, repeating the analysis methodology of this research for other downsampling algorithms, such as LTTB, as well as applying utilising the real-world time series shared by the Alan Turing Change Point Data set will allow a more indept investigation into the impact of downsampling. 
-
-These avenues of future work are also vital for generating the information needed to fully realise the ambitions of this research - developing comparative visualisations to better communicate the impact of downsampling on time series. These visualisations should also be evaluated with users through usability research.
-
-
-**6.4 Feature Variation**
-
-Combined, the future work to better understand downsampling impact and sensitivity could enable the development of thresholds and benchmarks for downsampling impact variation across time series features and types. This avenue of further investiation could enable the most relevant and sensitive time series features to be embedded for proactive downsampling that reduces the demand on computing resources. For example, embedding the most sensitive features in smart sensors monitoring a particular type of time series would enable downsampling at the point of collection, reducing demand on computing resources for storage. Such tailoring of downsampling could also facilitate more nuanced discussions between decision-makers and data practitioners on the thresholds of downsampling for different decision types to ensure that insights from downsampled data are used within the bounds of their limitations.
+A comparison of the most senstive features for each time series type is shared in Annex F. It would be beneficial to explore this further as this variation may offer data practitioners a method for identifying subsets of features that best indicate the preservation of different time series.
 
 # CONCLUSION
 
@@ -534,6 +504,648 @@ There are seven catch22 time series features @catch22 that appear to be more sen
 
 The varying sensitivity of catch22 features to different downsampling algorithms is previously unstudied; this research offers a new visualisation methodology for data practitioners to communicate the impact of downsampling on different decisions and create meaningful transparency about the downsampling choices they are making throughout the data processing pipeline. This could help decision-makers to trust the data informing their decisions, supporting decision-makers to understand the limitations of the data available and the thresholds at which the data insights can or cannot be relied upon for each decision. 
 
+# FUTURE WORK
+
+There are many avenues for future work to better understand the findings, and address the limitations, of this research. 
+
+
+**6.1 User research**
+
+Additional analysis on the transcripts and recordings of the user research would be beneficial. For example, using other natural language processing techniques, such as topic modelling, to better identify the connections between the key themes identified. It would also be helpful to conduct user research with a wider, more representative group of decision-makers and data practitioner to develop statistically significant findings for the UK Government.
+
+Usability research with decision-makers and data practitioners would also beneficial. Usability would contribute to the refinement of visualisations so that they better communicate the impact of downsampling on different time series. How these visualisations perturb the decision-makers' and data practitioners' perception of downsampling impact is an important avenue of further investigation @graphsampling.
+
+
+**6.2 Downsampling Sensitivity**
+
+It would be beneficial to use the data pipeline developed by C. H. Lubba et. al @catch22 to generate other subsets of time series features for distinct tasks in different domains. Examining the downsampling sensitivity of new subsets of catch22 features is likely to generate the information needed to understand why certain features are more sensitive to downsampling across different types of time series. It could also be interesting to explore the impact of data discarding techniques, such as downsampling, through classifications of missing data. These include missing completely at random, missing at random, and missing not at random @missingdata. Such classifications may offer alternative features for evaluating and visualising the impact of discarding data.
+
+
+**6.3 Downsampling Impact**
+
+Further iterations of dowsampling on the synthetic time series used in this research is an important to address the limitation of this research. These iterations will enable a better comparison of the *EveryNth* and *Percentage Change* algorithms. Equally, repeating the analysis methodology of this research for other downsampling algorithms, such as LTTB, [@Sveinn; @MinMaxLTTB; @MinMaxOrdered;] as well as applying utilising the real-world time series shared by the `Alan Turing Change Point Dataset` @ATIChangePoint set will allow a deeper investigation into the impact of downsampling. 
+
+These avenues of future work are also vital for generating the information needed to fully realise the ambitions of this research - developing comparative visualisations to better communicate the impact of downsampling on time series. These visualisations should also be evaluated with users through usability research @graphsampling.
+
+
+**6.4 Feature Variation**
+
+Combined, the future work to better understand downsampling impact and sensitivity could enable the development of thresholds and benchmarks for downsampling impact variation across time series features and types. This avenue of further investigation could enable the most relevant and sensitive time series features to be embedded for proactive downsampling that reduces the demand on computing resources. For example, embedding the most sensitive features in smart sensors monitoring a particular type of time series would enable downsampling at the point of collection, reducing demand on computing resources for storage. Such tailoring of downsampling could also facilitate more nuanced discussions between decision-makers and data practitioners on the thresholds of downsampling for different decision types to ensure that insights from downsampled data are used within the bounds of their limitations.
+
+\newpage
+
+# Annex A: Acknowledgement of User Research
+
+In line with the user research consent forms, the transcripts and unprocessed findings cannot be shared here. The email confirmation from Matthew Forshaw (MSc Thesis Supervisor) acknowledges the user research conducted. 
+
+```{r, echo=FALSE, out.width="100%"}
+
+# Define the paths to maps
+image3 <- "D:/Morgan/Documents/NCL MSc/final_project/mofrod_project/docs/Supervisor_Confirmation.png"
+
+# Read the images
+img3 <- image_read(image3)
+
+# Convert images to raster
+img3_raster <- as.raster(img3)
+
+# Convert raster to grobs
+img3_grob <- rasterGrob(img3_raster)
+
+# Arrange the images side by side
+grid.arrange(img3_grob)
+
+```
+\newpage
+
+# Annex B: User Research Concept Maps
+
+Key word counts alongside the qualitative thematic analysis inform concept maps which aim to show the relationship between the key themes and key words. The concept maps for each decision-maker and data practitioner are shared in this section.
+
+```{r, echo=FALSE, fig.height=4.1, fig.with=3}
+
+# Define the paths to maps
+image4 <- "D:/Morgan/Documents/NCL MSc/final_project/mofrod_project/graphs/userresearch/Decision-maker 1_ Concept Map.png"
+
+# Read the images
+img4 <- image_read(image4)
+
+# Convert images to raster
+img4_raster <- as.raster(img4)
+
+# Convert raster to grobs
+img4_grob <- rasterGrob(img4_raster)
+
+# Arrange the images side by side
+grid.arrange(img4_grob)
+
+```
+
+```{r, echo=FALSE, fig.height=4.1, fig.with=3}
+
+# Define the paths to maps
+image5 <- "D:/Morgan/Documents/NCL MSc/final_project/mofrod_project/graphs/userresearch/Decision-maker 2_ Concept Map.png"
+
+# Read the images
+img5 <- image_read(image5)
+
+# Convert images to raster
+img5_raster <- as.raster(img5)
+
+# Convert raster to grobs
+img5_grob <- rasterGrob(img5_raster)
+
+# Arrange the images side by side
+grid.arrange(img5_grob)
+
+```
+
+```{r, echo=FALSE, fig.height=4.1, fig.with=3}
+
+# Define the paths to maps
+image6 <- "D:/Morgan/Documents/NCL MSc/final_project/mofrod_project/graphs/userresearch/Decision-maker 3_ Concept Map.png"
+
+# Read the images
+img6 <- image_read(image6)
+
+# Convert images to raster
+img6_raster <- as.raster(img6)
+
+# Convert raster to grobs
+img6_grob <- rasterGrob(img6_raster)
+
+# Arrange the images side by side
+grid.arrange(img6_grob)
+
+```
+
+```{r, echo=FALSE, fig.height=4.1, fig.with=3}
+
+# Define the paths to maps
+image7 <- "D:/Morgan/Documents/NCL MSc/final_project/mofrod_project/graphs/userresearch/Decision-maker 4_ Concept Map.png"
+
+# Read the images
+img7 <- image_read(image7)
+
+# Convert images to raster
+img7_raster <- as.raster(img7)
+
+# Convert raster to grobs
+img7_grob <- rasterGrob(img7_raster)
+
+# Arrange the images side by side
+grid.arrange(img7_grob)
+
+```
+
+```{r, echo=FALSE, fig.height=4.1, fig.with=3}
+
+# Define the paths to maps
+image8 <- "D:/Morgan/Documents/NCL MSc/final_project/mofrod_project/graphs/userresearch/Decision-maker 5_ Concept Map.png"
+
+# Read the images
+img8 <- image_read(image8)
+
+# Convert images to raster
+img8_raster <- as.raster(img8)
+
+# Convert raster to grobs
+img8_grob <- rasterGrob(img8_raster)
+
+# Arrange the images side by side
+grid.arrange(img8_grob)
+
+```
+
+```{r, echo=FALSE, fig.height=4.1, fig.with=3}
+
+# Define the paths to maps
+image9 <- "D:/Morgan/Documents/NCL MSc/final_project/mofrod_project/graphs/userresearch/Decision-maker 6_ Concept Map.png"
+
+# Read the images
+img9 <- image_read(image9)
+
+# Convert images to raster
+img9_raster <- as.raster(img9)
+
+# Convert raster to grobs
+img9_grob <- rasterGrob(img9_raster)
+
+# Arrange the images side by side
+grid.arrange(img9_grob)
+
+```
+
+```{r, echo=FALSE, fig.height=4.1, fig.with=3}
+
+# Define the paths to maps
+image10 <- "D:/Morgan/Documents/NCL MSc/final_project/mofrod_project/graphs/userresearch/Decision-maker 7_ Concept Map.png"
+
+# Read the images
+img10 <- image_read(image10)
+
+# Convert images to raster
+img10_raster <- as.raster(img10)
+
+# Convert raster to grobs
+img10_grob <- rasterGrob(img10_raster)
+
+# Arrange the images side by side
+grid.arrange(img10_grob)
+
+```
+
+```{r, echo=FALSE, fig.height=4.1, fig.with=3}
+
+# Define the paths to maps
+image11 <- "D:/Morgan/Documents/NCL MSc/final_project/mofrod_project/graphs/userresearch/Decision-maker 8_ Concept Map.png"
+
+# Read the images
+img11 <- image_read(image11)
+
+# Convert images to raster
+img11_raster <- as.raster(img11)
+
+# Convert raster to grobs
+img11_grob <- rasterGrob(img11_raster)
+
+# Arrange the images side by side
+grid.arrange(img11_grob)
+
+```
+
+```{r, echo=FALSE, fig.height=4.1, fig.with=3}
+
+# Define the paths to maps
+image12 <- "D:/Morgan/Documents/NCL MSc/final_project/mofrod_project/graphs/userresearch/Decision-maker 9_ Concept Map.png"
+
+# Read the images
+img12 <- image_read(image12)
+
+# Convert images to raster
+img12_raster <- as.raster(img12)
+
+# Convert raster to grobs
+img12_grob <- rasterGrob(img12_raster)
+
+# Arrange the images side by side
+grid.arrange(img12_grob)
+
+```
+
+```{r, echo=FALSE, fig.height=4.1, fig.with=3}
+
+# Define the paths to maps
+image13 <- "D:/Morgan/Documents/NCL MSc/final_project/mofrod_project/graphs/userresearch/Data Practitioner 1_ Concept Map.png"
+
+# Read the images
+img13 <- image_read(image13)
+
+# Convert images to raster
+img13_raster <- as.raster(img13)
+
+# Convert raster to grobs
+img13_grob <- rasterGrob(img13_raster)
+
+# Arrange the images side by side
+grid.arrange(img13_grob)
+
+```
+
+```{r, echo=FALSE, fig.height=4.1, fig.with=3}
+
+# Define the paths to maps
+image14 <- "D:/Morgan/Documents/NCL MSc/final_project/mofrod_project/graphs/userresearch/Data Practitioner 2_ Concept Map.png"
+
+# Read the images
+img14 <- image_read(image14)
+
+# Convert images to raster
+img14_raster <- as.raster(img14)
+
+# Convert raster to grobs
+img14_grob <- rasterGrob(img14_raster)
+
+# Arrange the images side by side
+grid.arrange(img14_grob)
+
+```
+
+```{r, echo=FALSE,  fig.height=4.1, fig.with=3}
+
+# Define the paths to maps
+image15 <- "D:/Morgan/Documents/NCL MSc/final_project/mofrod_project/graphs/userresearch/Data Practitioner 3_ Concept Map.png"
+
+# Read the images
+img15 <- image_read(image15)
+
+# Convert images to raster
+img15_raster <- as.raster(img15)
+
+# Convert raster to grobs
+img15_grob <- rasterGrob(img15_raster)
+
+# Arrange the images side by side
+grid.arrange(img15_grob)
+
+```
+
+```{r, echo=FALSE, fig.height=4.1, fig.with=3}
+
+# Define the paths to maps
+image16 <- "D:/Morgan/Documents/NCL MSc/final_project/mofrod_project/graphs/userresearch/Data Practitioner 4_ Concept Map.png"
+
+# Read the images
+img16 <- image_read(image16)
+
+# Convert images to raster
+img16_raster <- as.raster(img16)
+
+# Convert raster to grobs
+img16_grob <- rasterGrob(img16_raster)
+
+# Arrange the images side by side
+grid.arrange(img16_grob)
+
+```
+
+```{r, echo=FALSE, fig.height=4.1, fig.with=3}
+
+# Define the paths to maps
+image17 <- "D:/Morgan/Documents/NCL MSc/final_project/mofrod_project/graphs/userresearch/Data Practitioner 5_ Concept Map.png"
+
+# Read the images
+img17 <- image_read(image17)
+
+# Convert images to raster
+img17_raster <- as.raster(img17)
+
+# Convert raster to grobs
+img17_grob <- rasterGrob(img17_raster)
+
+# Arrange the images side by side
+grid.arrange(img17_grob)
+
+```
+
+```{r, echo=FALSE, fig.height=4.1, fig.with=3}
+
+# Define the paths to maps
+image18 <- "D:/Morgan/Documents/NCL MSc/final_project/mofrod_project/graphs/userresearch/Data Practitioner 6_ Concept Map.png"
+
+# Read the images
+img18 <- image_read(image18)
+
+# Convert images to raster
+img18_raster <- as.raster(img18)
+
+# Convert raster to grobs
+img18_grob <- rasterGrob(img18_raster)
+
+# Arrange the images side by side
+grid.arrange(img18_grob)
+
+```
+
+```{r, echo=FALSE, fig.height=4.1, fig.with=3}
+
+# Define the paths to maps
+image19 <- "D:/Morgan/Documents/NCL MSc/final_project/mofrod_project/graphs/userresearch/Data Practitioner 7_ Concept Map.png"
+
+# Read the images
+img19 <- image_read(image19)
+
+# Convert images to raster
+img19_raster <- as.raster(img19)
+
+# Convert raster to grobs
+img19_grob <- rasterGrob(img19_raster)
+
+# Arrange the images side by side
+grid.arrange(img19_grob)
+
+```
+
+\newpage
+# Annex C: Standard Deviation (to be updated)
+
+\newpage
+# Annex D: The Statistical Properties of Catch22 Features
+
+\newpage
+# Annex E: Variation of Catch22 Features across Time Series Types
+
+```{r FirstMinimum2, echo=FALSE, message=FALSE, warning=FALSE, fig.height=5, fig.with=3}
+
+# Create the difference line graph for CO_FirstMin_ac
+ggplot(filtered_df %>%
+         filter(names == "Autocorr_FirstMinimum"), 
+       aes(x = as.numeric(vol), y = scaled, color = method)) +
+  scale_color_brewer(palette = "Paired") +
+  geom_line(linewidth = 0.5) +
+  scale_x_reverse() +
+  theme_minimal() +
+  theme(text = element_text(family = "Times"), plot.title = element_text(hjust = -0.6), legend.position = "top", legend.justification = c(-0.04, 1)) +
+  labs(x = "Volume of Data", y = "Scaled Difference", color = "Method", title = "Figure 5: Variation of the First Minimum of the Autocorrelation Function") +
+  facet_wrap(~ dataset, ncol = 3)
+
+```
+Line graphs of the original time series are provided in Annex D to support comparison. The original time series '100' and '200' are similarly shaped, with '100' trending upwards and '200' experiencing a noticeable drop towards the end of the time series. In the line graphs below, it is observable that '100' and '200' are similarly impacted by *EveryNth* and *Percentage Change*, respectively. The impact of *Percentage Change* is more acute and variable than for the other time series. 
+
+The original time series '300' and '400' are similarly shaped, with significant peaks and troughs that start earlier for '400'. This is likely to account for why *Percentage Change* retains more data, causing a negible impact on the catch22 feature for these time series. The time series '500' and '600' are particularly distinct with some obvious outliers in '500' and a gradual trend upwards for '600'. More data is discarded by the *Percentage Change* algorithm for these time series than any of the others. Interestingly, '600' appears to be the only time series for which the scaled difference between the original and imputed catch22 feature values trends positively. 
+
+The remaining original time series '700', '800A' and '800B' are distinct, but have similar slow-varying oscillation. This is mirrored by the impacts of *EveryNth* and *Percentage Change*. The scaled difference of the catch22 feature for the *EveryNth* algorithm in '700' has the widest spread of three and *Percentage Change* appears to retain more data than in '800A' and '800B'. Again, this is likley to be because the changes in the peaks and troughs are more acute in the original data.
+
+*5.2b Longest Sequence of Successive Steps that Decrease*
+
+The feature with the second highest standard deviation across the 900 time series is the longest sequence of successive steps that decrease ('LongestPeriod_Decrease' or 'SB_BinaryStats_diff_longstretch0'). This catch22 feature "calculates the longest sequence of successive steps in the time series that decrease" @feature_book.
+
+```{r LongestDecrease, echo=FALSE, message=FALSE, warning=FALSE, fig.height=5, fig.with=3}
+# Create the scaled difference line graph for SB_BinaryStats_diff_longstretch0
+ggplot(filtered_df %>%
+         filter(names == "LongestPeriod_Decreases"), 
+       aes(x = as.numeric(vol), y = scaled, color = method)) +
+  scale_color_brewer(palette = "Paired") +
+  geom_line(linewidth = 0.5) +
+  scale_x_reverse() +
+  theme_minimal() +
+  theme(text = element_text(family = "Times"), plot.title = element_text(hjust = -0.6), legend.position = "top", legend.justification = c(-0.04, 1)) +
+  labs(x = "Volume of Data", y = "Scaled Difference", color = "Method", title = "Variation of the Longest Sequence of Successive Steps that Decrease") +
+  facet_wrap(~ dataset, ncol = 3)
+
+```
+
+*5.2c Longest Sequence of Successive Values Greater than the Mean*
+
+The feature with the third highest standard deviation across the 900 time series is the longest sequence of successive values greater than the mean ('LongestPeriod_AboveAverage' or 'SB_BinaryStats_mean_longstretch1'). This catch22 feature "calculates the longest successive period of above average values" @feature_book.
+
+```{r LongestGreater, echo=FALSE, message=FALSE, warning=FALSE, fig.height=5, fig.with=3}
+# Create the line graph for SB_BinaryStats_mean_longstretch1
+ggplot(filtered_df %>%
+         filter(names == "LongestPeriod_AboveAverage"), 
+       aes(x = as.numeric(vol), y = scaled, color = method)) +
+  scale_color_brewer(palette = "Paired") +
+  geom_line(linewidth = 0.5) +
+  scale_x_reverse() +
+  theme_minimal() +
+  theme(text = element_text(family = "Times"), plot.title = element_text(hjust = -0.6), legend.position = "top", legend.justification = c(-0.04, 1)) +
+  labs(x = "Volume of Data", y = "Scaled Difference", color = "Method", title = "Variation of the Longest Sequence of Successive Values Greater than the Mean") +
+  facet_wrap(~ dataset, ncol = 3)
+```
+
+*5.2d Minimum of the Automutual Information Function*
+
+The feature with the fourth highest standard deviation across the 900 time series is the minimum of the automutual information function ('Autocorr_Automutual' or 'IN_AutoMutualInfoStats_40_gaussian_fmmi'). This catch22 feature outputs a measure of "autocorrelation in the time series, as the minimum of the automutual information function" @feature_book.
+
+```{r AutoMutalFunction, echo=FALSE, message=FALSE, warning=FALSE, fig.height=5, fig.with=3}
+# Create the difference line graph for IN_AutoMutualInfoStats_40_gaussian_fmmi
+ggplot(filtered_df %>%
+         filter(names == "Autocorr_Automutual"), 
+       aes(x = as.numeric(vol), y = difference, color = method)) +
+  scale_color_brewer(palette = "Paired") +
+  geom_line(linewidth = 0.5) +
+  scale_x_reverse() +
+  theme_minimal() +
+  theme(text = element_text(family = "Times"), plot.title = element_text(hjust = -0.6), legend.position = "top", legend.justification = c(-0.04, 1)) +
+  labs(x = "Volume of Data", y = "Scaled Difference", color = "Method", title = "Variation of the Minimum of the Automutual Information Function") +
+  facet_wrap(~ dataset, ncol = 3)
+
+```
+
+*5.2e First Peak in the Autocorrelation Function*
+
+The feature with the fifth highest standard deviation across the 900 time series is the first peak in the autocorrelation function ('Autocorr_FirstPeak' or 'PD_PeriodicityWang_th0_01'). This catch22 feature "returns the first peak in the autocorrelation function satisfying a set of conditions (after detrending the time series using a single-knot cubic regression spline)" @feature_book. In general, the feature returns higher values for slower time series oscillation.
+
+
+```{r FirstPeak, echo=FALSE, message=FALSE, warning=FALSE, fig.height=5, fig.with=3}
+# Create the difference line graph for PD_PeriodicityWang_th0_01 
+ggplot(filtered_df %>%
+         filter(names == "Autocorr_FirstPeak"), 
+       aes(x = as.numeric(vol), y = difference, color = method)) +
+  scale_color_brewer(palette = "Paired") +
+  geom_line(linewidth = 0.5) +
+  scale_x_reverse() +
+  theme_minimal() +
+  theme(text = element_text(family = "Times"), plot.title = element_text(hjust = -0.6), legend.position = "top", legend.justification = c(-0.04, 1)) +
+  labs(x = "Volume of Data", y = "Scaled Difference", color = "Method", title = "Variation of the First Peak in the Autocorrelation Function") +
+  facet_wrap(~ dataset, ncol = 3)
+```
+
+*5.2f Approximate Scale of Autocorrelation*
+
+The feature with the sixth highest standard deviation across the 900 time series is the approximate scale of autocorrelation ('Autocorr_ApproxScale' or 'CO_f1ecac'). This catch22 feature "computes the first 1/e crossing of the autocorrelation function of the time series" @feature_book. It is similar to the first minimum of the autocorrelation function.
+
+```{r ApproxScale, echo=FALSE, message=FALSE, warning=FALSE, fig.height=5, fig.with=3}
+# Create the difference line graph for CO_f1ecac
+ggplot(filtered_df %>%
+         filter(names == "Autocorr_ApproxScale"), 
+       aes(x = as.numeric(vol), y = difference, color = method)) +
+  scale_color_brewer(palette = "Paired") +
+  geom_line(linewidth = 0.5) +
+  scale_x_reverse() +
+  theme_minimal() +
+  theme(text = element_text(family = "Times"), plot.title = element_text(hjust = -0.6), legend.position = "top", legend.justification = c(-0.04, 1)) +
+  labs(x = "Volume of Data", y = "Scaled Difference", color = "Method", title = "Variation of the Approximate Scale of Autocorrelation") +
+  facet_wrap(~ dataset, ncol = 3)
+```
+
+*5.2g Mean Absolute Error of an Exponential Fit*
+
+The feature with the seventh highest standard deviation across the 900 time series is the approximate scale of autocorrelation ('DistributionExponentialFit_MAE' or 'CO_Embed2_Dist_tau_d_expfit_meandiff'). This catch22 feature outputs the mean absolute error of an exponential fit to a distribution which is calculated by representing "the time series in a two-dimensional time-delay embedding space (using a time delay equal to the first zero-crossing of the autocorrelation function)... [then computing the] successive distances between points in this 2D embedding space and analyzes the probability distribution of these distances" @feature_book. 
+
+```{r MAE, echo=FALSE, message=FALSE, warning=FALSE, fig.height=5, fig.with=3}
+# Create the difference line graph for CO_Embed2_Dist_tau_d_expfit_meandiff
+ggplot(filtered_df %>%
+         filter(names == "DistributionExponentialFit_MAE"), 
+       aes(x = as.numeric(vol), y = difference, color = method)) +
+  scale_color_brewer(palette = "Paired") +
+  geom_line(linewidth = 0.5) +
+  scale_x_reverse() +
+  theme_minimal() +
+  theme(text = element_text(family = "Times"), plot.title = element_text(hjust = -0.6), legend.position = "top", legend.justification = c(-0.04, 1)) +
+  labs(x = "Volume of Data", y = "Scaled Difference", color = "Method", title = "Variation of the Mean Absolute Error of an Exponential Fit") +
+  facet_wrap(~ dataset, ncol = 3)
+```
+
+\newpage
+# Annex F: Most Sensitive Catch22 Features for each Time Series Type
+
+```{r Catch22Variation100, echo=FALSE, message=FALSE, warning=FALSE, fig.height=4.1, fig.with=3}
+
+# Create the difference line graph for 100
+ggplot(subset_filtered_df %>%
+         filter(dataset == "100"), 
+       aes(x = as.numeric(vol), y = scaled, color = method)) +
+  scale_color_brewer(palette = "Paired") +
+  geom_line(linewidth = 0.5) +
+  scale_x_reverse() +
+  theme_minimal() +
+  theme(text = element_text(family = "Times"), plot.title = element_text(hjust = -0.3), legend.position = "top", legend.justification = c(-0.04, 1)) +
+  labs(x = "Volume of Data", y = "Scaled Difference", color = "Method", title = "Figure 6: Variation of Catch22 Features: Time Series 100") +
+  facet_wrap(~ names, ncol = 3)
+```
+
+```{r Catch22Variation200, echo=FALSE, message=FALSE, warning=FALSE, fig.height=4.1, fig.with=3}
+
+# Create the difference line graph for 200
+ggplot(subset_filtered_df %>%
+         filter(dataset == "200"), 
+       aes(x = as.numeric(vol), y = scaled, color = method)) +
+  scale_color_brewer(palette = "Paired") +
+  geom_line(linewidth = 0.5) +
+  scale_x_reverse() +
+  theme_minimal() +
+  theme(text = element_text(family = "Times"), plot.title = element_text(hjust = -0.3), legend.position = "top", legend.justification = c(-0.04, 1)) +
+  labs(x = "Volume of Data", y = "Scaled Difference", color = "Method", title = "Figure 6: Variation of Catch22 Features: Time Series 200") +
+  facet_wrap(~ names, ncol = 3)
+```
+
+```{r Catch22Variation300, echo=FALSE, message=FALSE, warning=FALSE, fig.height=4.1, fig.with=3}
+
+# Create the difference line graph for 300
+ggplot(subset_filtered_df %>%
+         filter(dataset == "300"), 
+       aes(x = as.numeric(vol), y = scaled, color = method)) +
+  scale_color_brewer(palette = "Paired") +
+  geom_line(linewidth = 0.5) +
+  scale_x_reverse() +
+  theme_minimal() +
+  theme(text = element_text(family = "Times"), plot.title = element_text(hjust = -0.3), legend.position = "top", legend.justification = c(-0.04, 1)) +
+  labs(x = "Volume of Data", y = "Scaled Difference", color = "Method", title = "Figure 6: Variation of Catch22 Features: Time Series 300") +
+  facet_wrap(~ names, ncol = 3)
+```
+
+```{r Catch22Variation400, echo=FALSE, message=FALSE, warning=FALSE, fig.height=4.1, fig.with=3}
+
+# Create the difference line graph for 400
+ggplot(subset_filtered_df %>%
+         filter(dataset == "400"), 
+       aes(x = as.numeric(vol), y = scaled, color = method)) +
+  scale_color_brewer(palette = "Paired") +
+  geom_line(linewidth = 0.5) +
+  scale_x_reverse() +
+  theme_minimal() +
+  theme(text = element_text(family = "Times"), plot.title = element_text(hjust = -0.3), legend.position = "top", legend.justification = c(-0.04, 1)) +
+  labs(x = "Volume of Data", y = "Scaled Difference", color = "Method", title = "Figure 6: Variation of Catch22 Features: Time Series 400") +
+  facet_wrap(~ names, ncol = 3)
+```
+
+```{r Catch22Variation500, echo=FALSE, message=FALSE, warning=FALSE, fig.height=4.1, fig.with=3}
+
+# Create the difference line graph for 500
+ggplot(subset_filtered_df %>%
+         filter(dataset == "500"), 
+       aes(x = as.numeric(vol), y = scaled, color = method)) +
+  scale_color_brewer(palette = "Paired") +
+  geom_line(linewidth = 0.5) +
+  scale_x_reverse() +
+  theme_minimal() +
+  theme(text = element_text(family = "Times"), plot.title = element_text(hjust = -0.3), legend.position = "top", legend.justification = c(-0.04, 1)) +
+  labs(x = "Volume of Data", y = "Scaled Difference", color = "Method", title = "Figure 6: Variation of Catch22 Features: Time Series 500") +
+  facet_wrap(~ names, ncol = 3)
+```
+
+```{r Catch22Variation600, echo=FALSE, message=FALSE, warning=FALSE, fig.height=4.1, fig.with=3}
+
+# Create the difference line graph for 600
+ggplot(subset_filtered_df %>%
+         filter(dataset == "600"), 
+       aes(x = as.numeric(vol), y = scaled, color = method)) +
+  scale_color_brewer(palette = "Paired") +
+  geom_line(linewidth = 0.5) +
+  scale_x_reverse() +
+  theme_minimal() +
+  theme(text = element_text(family = "Times"), plot.title = element_text(hjust = -0.3), legend.position = "top", legend.justification = c(-0.04, 1)) +
+  labs(x = "Volume of Data", y = "Scaled Difference", color = "Method", title = "Figure 6: Variation of Catch22 Features: Time Series 600") +
+  facet_wrap(~ names, ncol = 3)
+```
+
+```{r Catch22Variation700, echo=FALSE, message=FALSE, warning=FALSE, fig.height=4.1, fig.with=3}
+
+# Create the difference line graph for 700
+ggplot(subset_filtered_df %>%
+         filter(dataset == "700"), 
+       aes(x = as.numeric(vol), y = scaled, color = method)) +
+  scale_color_brewer(palette = "Paired") +
+  geom_line(linewidth = 0.5) +
+  scale_x_reverse() +
+  theme_minimal() +
+  theme(text = element_text(family = "Times"), plot.title = element_text(hjust = -0.3), legend.position = "top", legend.justification = c(-0.04, 1)) +
+  labs(x = "Volume of Data", y = "Scaled Difference", color = "Method", title = "Figure 6: Variation of Catch22 Features: Time Series 700") +
+  facet_wrap(~ names, ncol = 3)
+```
+
+```{r Catch22Variation800A, echo=FALSE, message=FALSE, warning=FALSE, fig.height=4.1, fig.with=3}
+
+# Create the difference line graph for 800A
+ggplot(subset_filtered_df %>%
+         filter(dataset == "800A"), 
+       aes(x = as.numeric(vol), y = scaled, color = method)) +
+  scale_color_brewer(palette = "Paired") +
+  geom_line(linewidth = 0.5) +
+  scale_x_reverse() +
+  theme_minimal() +
+  theme(text = element_text(family = "Times"), plot.title = element_text(hjust = -0.3), legend.position = "top", legend.justification = c(-0.04, 1)) +
+  labs(x = "Volume of Data", y = "Scaled Difference", color = "Method", title = "Figure 6: Variation of Catch22 Features: Time Series 800A") +
+  facet_wrap(~ names, ncol = 3)
+```
+
+```{r Catch22Variation800B, echo=FALSE, message=FALSE, warning=FALSE, fig.height=4.1, fig.with=3}
+
+# Create the difference line graph for 800B
+ggplot(subset_filtered_df %>%
+         filter(dataset == "800B"), 
+       aes(x = as.numeric(vol), y = scaled, color = method)) +
+  scale_color_brewer(palette = "Paired") +
+  geom_line(linewidth = 0.5) +
+  scale_x_reverse() +
+  theme_minimal() +
+  theme(text = element_text(family = "Times"), plot.title = element_text(hjust = -0.3), legend.position = "top", legend.justification = c(-0.04, 1)) +
+  labs(x = "Volume of Data", y = "Scaled Difference", color = "Method", title = "Figure 6: Variation of Catch22 Features: Time Series 800B") +
+  facet_wrap(~ names, ncol = 3)
+```
+
+\newpage
 # REFERENCES
 
 

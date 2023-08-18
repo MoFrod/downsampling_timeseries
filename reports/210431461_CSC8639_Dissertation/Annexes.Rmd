@@ -3,7 +3,7 @@ title: "R Notebook"
 output: pdf
 ---
 
-# Annex A: Sensitivity of Catch22 Features
+# Annex Sensitivity of Catch22 Features
 
 ```{r}
 # Reshape sensitivity subset data to a long format
@@ -46,7 +46,7 @@ sensitive_subset_plot <- ggplot(subset_sensitivity_joined_long, aes(x = Standard
 knitr::kable((sensitivity_joined), caption = "Sensitivity of Catch22 Features to EveryNth and Percentage Change Downsampling")
 ```
 
-# Annex B: Top Ten Most Sensitive Catch22 Features
+# Annex Top Ten Most Sensitive Catch22 Features
 
 The ten features most impacted by both downsampling algorithms are selected for further investigation. The bar graph below visualises the standard deviation of the *EveryNth* algorithm for these features across all the parameters for each of the nine synthetic time series.
 
@@ -141,123 +141,3 @@ ggplot(sensitivity_ts_PC, aes(x = sensitivity, y = names, fill = dataset)) +
 
 Interestingly, the impact of *Percentage Change* on many of these features is acute despite the spread of standard deviation being smaller. For example... [ADD OBSERVATION]
 
-# Annex C: Data Volume vs. Downsampling Parameters
-
-# Annex D: Feature Variation
-
-Line graphs of the original time series are provided in Annex D to support comparison. The original time series '100' and '200' are similarly shaped, with '100' trending upwards and '200' experiencing a noticeable drop towards the end of the time series. In the line graphs below, it is observable that '100' and '200' are similarly impacted by *EveryNth* and *Percentage Change*, respectively. The impact of *Percentage Change* is more acute and variable than for the other time series. 
-
-The original time series '300' and '400' are similarly shaped, with significant peaks and troughs that start earlier for '400'. This is likely to account for why *Percentage Change* retains more data, causing a negible impact on the catch22 feature for these time series. The time series '500' and '600' are particularly distinct with some obvious outliers in '500' and a gradual trend upwards for '600'. More data is discarded by the *Percentage Change* algorithm for these time series than any of the others. Interestingly, '600' appears to be the only time series for which the scaled difference between the original and imputed catch22 feature values trends positively. 
-
-The remaining original time series '700', '800A' and '800B' are distinct, but have similar slow-varying oscillation. This is mirrored by the impacts of *EveryNth* and *Percentage Change*. The scaled difference of the catch22 feature for the *EveryNth* algorithm in '700' has the widest spread of three and *Percentage Change* appears to retain more data than in '800A' and '800B'. Again, this is likley to be because the changes in the peaks and troughs are more acute in the original data.
-
-*5.2b Longest Sequence of Successive Steps that Decrease*
-
-The feature with the second highest standard deviation across the 900 time series is the longest sequence of successive steps that decrease ('LongestPeriod_Decrease' or 'SB_BinaryStats_diff_longstretch0'). This catch22 feature "calculates the longest sequence of successive steps in the time series that decrease" @feature_book.
-
-```{r LongestDecrease, echo=FALSE, message=FALSE, warning=FALSE, fig.height=5, fig.with=3}
-# Create the scaled difference line graph for SB_BinaryStats_diff_longstretch0
-ggplot(filtered_df %>%
-         filter(names == "LongestPeriod_Decreases"), 
-       aes(x = as.numeric(vol), y = scaled, color = method)) +
-  scale_color_brewer(palette = "Paired") +
-  geom_line(linewidth = 0.5) +
-  scale_x_reverse() +
-  theme_minimal() +
-  theme(plot.title = element_text(hjust = -0.15), legend.position = "top", legend.justification = c(-0.14, 1)) +
-  labs(x = "Volume of Data", y = "Scaled Difference", color = "Method", title = "Longest Sequence of Successive Steps that Decrease") +
-  facet_wrap(~ dataset, ncol = 3)
-
-```
-
-*5.2c Longest Sequence of Successive Values Greater than the Mean*
-
-The feature with the third highest standard deviation across the 900 time series is the longest sequence of successive values greater than the mean ('LongestPeriod_AboveAverage' or 'SB_BinaryStats_mean_longstretch1'). This catch22 feature "calculates the longest successive period of above average values" @feature_book.
-
-```{r LongestGreater, echo=FALSE, message=FALSE, warning=FALSE, fig.height=5, fig.with=3}
-# Create the line graph for SB_BinaryStats_mean_longstretch1
-ggplot(filtered_df %>%
-         filter(names == "LongestPeriod_AboveAverage"), 
-       aes(x = as.numeric(vol), y = scaled, color = method)) +
-  scale_color_brewer(palette = "Paired") +
-  geom_line(linewidth = 0.5) +
-  scale_x_reverse() +
-  theme_minimal() +
-  theme(plot.title = element_text(hjust = -0.15), legend.position = "top", legend.justification = c(-0.14, 1)) +
-  labs(x = "Volume of Data", y = "Scaled Difference", color = "Method", title = "Longest Sequence of Successive Values Greater than the Mean") +
-  facet_wrap(~ dataset, ncol = 3)
-```
-
-*5.2d Minimum of the Automutual Information Function*
-
-The feature with the fourth highest standard deviation across the 900 time series is the minimum of the automutual information function ('Autocorr_Automutual' or 'IN_AutoMutualInfoStats_40_gaussian_fmmi'). This catch22 feature outputs a measure of "autocorrelation in the time series, as the minimum of the automutual information function" @feature_book.
-
-```{r AutoMutalFunction, echo=FALSE, message=FALSE, warning=FALSE, fig.height=5, fig.with=3}
-# Create the difference line graph for IN_AutoMutualInfoStats_40_gaussian_fmmi
-ggplot(filtered_df %>%
-         filter(names == "Autocorr_Automutual"), 
-       aes(x = as.numeric(vol), y = difference, color = method)) +
-  scale_color_brewer(palette = "Paired") +
-  geom_line(linewidth = 0.5) +
-  scale_x_reverse() +
-  theme_minimal() +
-  theme(plot.title = element_text(hjust = -0.15), legend.position = "top", legend.justification = c(-0.14, 1)) +
-  labs(x = "Volume of Data", y = "Scaled Difference", color = "Method", title = "Minimum of the Automutual Information Function") +
-  facet_wrap(~ dataset, ncol = 3)
-
-```
-
-*5.2e First Peak in the Autocorrelation Function*
-
-The feature with the fifth highest standard deviation across the 900 time series is the first peak in the autocorrelation function ('Autocorr_FirstPeak' or 'PD_PeriodicityWang_th0_01'). This catch22 feature "returns the first peak in the autocorrelation function satisfying a set of conditions (after detrending the time series using a single-knot cubic regression spline)" @feature_book. In general, the feature returns higher values for slower time series oscillation.
-
-
-```{r FirstPeak, echo=FALSE, message=FALSE, warning=FALSE, fig.height=5, fig.with=3}
-# Create the difference line graph for PD_PeriodicityWang_th0_01 
-ggplot(filtered_df %>%
-         filter(names == "Autocorr_FirstPeak"), 
-       aes(x = as.numeric(vol), y = difference, color = method)) +
-  scale_color_brewer(palette = "Paired") +
-  geom_line(linewidth = 0.5) +
-  scale_x_reverse() +
-  theme_minimal() +
-  theme(plot.title = element_text(hjust = -0.15), legend.position = "top", legend.justification = c(-0.14, 1)) +
-  labs(x = "Volume of Data", y = "Scaled Difference", color = "Method", title = "First Peak in the Autocorrelation Function") +
-  facet_wrap(~ dataset, ncol = 3)
-```
-
-*5.2f Approximate Scale of Autocorrelation*
-
-The feature with the sixth highest standard deviation across the 900 time series is the approximate scale of autocorrelation ('Autocorr_ApproxScale' or 'CO_f1ecac'). This catch22 feature "computes the first 1/e crossing of the autocorrelation function of the time series" @feature_book. It is similar to the first minimum of the autocorrelation function.
-
-```{r ApproxScale, echo=FALSE, message=FALSE, warning=FALSE, fig.height=5, fig.with=3}
-# Create the difference line graph for CO_f1ecac
-ggplot(filtered_df %>%
-         filter(names == "Autocorr_ApproxScale"), 
-       aes(x = as.numeric(vol), y = difference, color = method)) +
-  scale_color_brewer(palette = "Paired") +
-  geom_line(linewidth = 0.5) +
-  scale_x_reverse() +
-  theme_minimal() +
-  theme(plot.title = element_text(hjust = -0.15), legend.position = "top", legend.justification = c(-0.14, 1)) +
-  labs(x = "Volume of Data", y = "Scaled Difference", color = "Method", title = "Approximate Scale of Autocorrelation") +
-  facet_wrap(~ dataset, ncol = 3)
-```
-
-*5.2g Mean Absolute Error of an Exponential Fit*
-
-The feature with the seventh highest standard deviation across the 900 time series is the approximate scale of autocorrelation ('DistributionExponentialFit_MAE' or 'CO_Embed2_Dist_tau_d_expfit_meandiff'). This catch22 feature outputs the mean absolute error of an exponential fit to a distribution which is calculated by representing "the time series in a two-dimensional time-delay embedding space (using a time delay equal to the first zero-crossing of the autocorrelation function)... [then computing the] successive distances between points in this 2D embedding space and analyzes the probability distribution of these distances" @feature_book. 
-
-```{r MAE, echo=FALSE, message=FALSE, warning=FALSE, fig.height=5, fig.with=3}
-# Create the difference line graph for CO_Embed2_Dist_tau_d_expfit_meandiff
-ggplot(filtered_df %>%
-         filter(names == "DistributionExponentialFit_MAE"), 
-       aes(x = as.numeric(vol), y = difference, color = method)) +
-  scale_color_brewer(palette = "Paired") +
-  geom_line(linewidth = 0.5) +
-  scale_x_reverse() +
-  theme_minimal() +
-  theme(plot.title = element_text(hjust = -0.15), legend.position = "top", legend.justification = c(-0.14, 1)) +
-  labs(x = "Volume of Data", y = "Scaled Difference", color = "Method", title = "Mean Absolute Error of an Exponential Fit") +
-  facet_wrap(~ dataset, ncol = 3)
-```
