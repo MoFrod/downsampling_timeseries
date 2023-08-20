@@ -89,7 +89,7 @@ technique to select a representative subset of time series data that
 preserves the original data shape while reducing the number of data
 points in the time series. The research outlined by this paper explores
 decision-makers' trust in data, data practitioners' experience of
-communicating data insights to decision-makers and a new visualisation
+communicating data insights to decision-makers, and a new visualisation
 methodology for explaining the impact of downsampling on high-volume
 time series data. It combines user research insights from interviews
 with 16 UK Civil Servants with analysis of time series features for 900
@@ -186,13 +186,13 @@ techniques like downsampling \protect\hyperlink{ref-TVStore}{{[}10{]}}.
 For decision-makers of platform safety and productivity, it is vital to
 have this information as quickly as possible and understand how the
 discarded data limits the insights they are considering. It is also
-important a decision-maker looking at analysis of \(CO_2\) levels on an
-open-plan office floor to decide how many officials can work in the
-office each day post-Covid. Different downsampling algorithms preserve
-different data points \protect\hyperlink{ref-datapoint}{{[}6{]}},
+important for decision-makers looking at analysis of \(CO_2\) levels on
+an open-plan office floor to decide how many officials can work in the
+office each day post-Covid. Downsampling algorithms preserve different
+data points \protect\hyperlink{ref-datapoint}{{[}6{]}},
 \protect\hyperlink{ref-MinMaxLTTB}{{[}7{]}},
 \protect\hyperlink{ref-Sveinn}{{[}11{]}}, which could change the risk
-threshold for the decision-maker. In complex decisions, such Choices
+threshold for the decision-maker. In complex decisions, such choices
 throughout the data pipeline may have cumulative or disproportionately
 larger consequences later as their future ramifications are unlikely to
 be fully understood \protect\hyperlink{ref-challenger}{{[}16{]}}. It is
@@ -236,8 +236,9 @@ make it accountable''} and, therefore, to change it
 \protect\hyperlink{ref-transparency_lack}{{[}21{]}}. However, without
 sufficient agency to explore the information being shared, seeing a
 phenomenon often results in information overload that obfuscates or
-diverts \protect\hyperlink{ref-transparency_obfuscation}{{[}22{]}}.
-Without agency, transparency is increasingly considered to be a fallacy
+diverts attention
+\protect\hyperlink{ref-transparency_obfuscation}{{[}22{]}}. Without
+agency, transparency is increasingly considered to be a fallacy
 \protect\hyperlink{ref-transparency_fallacy}{{[}23{]}}.
 
 Meaningful transparency is only realised when the information is
@@ -344,7 +345,7 @@ line length through all the buckets.\\
 \hline
 Largest Triangle Three Bucket (LTTB) & Calculates the largest triangular surface between the previously selected data point and the average value of the next data bucket to select the highest point.\\
 \hline
-MinMaxLTTB & Preselects data points using MinMax before applying Largest Triangle Three Buckets.\\
+MinMaxLTTB & Preselects data points using MinMax before applying LTTB.\\
 \hline
 \end{tabular}
 \end{table}
@@ -386,15 +387,15 @@ series data mining tasks \protect\hyperlink{ref-catch22}{{[}38{]}},
 \protect\hyperlink{ref-bagnall}{{[}40{]}}, which are shared in the
 \texttt{Rcatch22} R package. Although further research is needed to
 evaluate the relative performance of different feature sets on different
-types of problems, the `catch22' features performs well against other
-feature libraries across 800 diverse real-world and model-generated time
-series \protect\hyperlink{ref-henderson}{{[}41{]}}.
+types of problems, the \texttt{catch22} features performs well against
+other feature libraries across 800 diverse real-world and
+model-generated time series \protect\hyperlink{ref-henderson}{{[}41{]}}.
 
 Features used to classify time series data could provide a common
 framework by which to consistently compare different downsampling
 algorithms and parameters. The research set out in this paper utilises
 the \texttt{Rcatch22} subset of features to explore impact of
-downsampling and create a visual tool for explaining this impact.
+downsampling and create a visual process for explaining this impact.
 
 \hypertarget{user-research}{%
 \section{USER RESEARCH}\label{user-research}}
@@ -407,8 +408,8 @@ the user research is designed and the key insights it generated.
 \textbf{3.1 Design}
 
 User research produced over 16 hours of recorded and transcribed
-interviews with decision-makers and data practitioners (these outputs
-are confirmed in Annex A). These interviews are hosted virtually on MS
+interviews with decision-makers and data practitioners (the outputs are
+confirmed in Annex A). These interviews are hosted virtually on MS
 Teams, instead of in-person, to enable recording and transcription; this
 creates the potential to move beyond qualitative thematic analysis and
 implement alternative techniques, such as natural language processing.
@@ -425,8 +426,8 @@ nor drawn from the overall population. This could engender confirmation,
 false consensus and group think biases as these participants are likely
 to operate in the same professional bubble, which would skew the
 insights generated by this user research. To mitigate further biases,
-two interview scripts used; one for all decision-makers and the other
-for all data practitioners. However, it is important to note that
+two interview scripts are used; one for all decision-makers and the
+other for all data practitioners. However, it is important to note that
 follow-up questions vary to ease the flow of each interview and help
 participants to share further detail in their responses.
 
@@ -448,10 +449,10 @@ and words.
 
 \textbf{3.2 Insights}
 
-Transparency of data provenance, collection, and analysis pipeline is
-clearly desired by decision-makers to understand the reliability,
+Transparency of data provenance, collection, and the analysis pipeline
+is clearly desired by decision-makers to understand the reliability,
 repeatability, and quality of the data they're presented with. All
-inerviewed decision-makers and data-practitioners shared that this is
+interviewed decision-makers and data-practitioners shared that this is
 best communicated through engaging conversations and interactive
 visualisations. Both decision-makers and data practitioners emphasised
 the importance of communicating the story behind data, its assumptions,
@@ -467,10 +468,10 @@ decision-makers and data practitioners repeatedly request transparency
 of the data context, source and limitations as well as an assessment of
 overall confidence in the data.
 
-Quotes from the interviews highlight that decision-makers find it
-difficult to develop the correct views of \emph{``how much they can
-trust the data''}. They address their desire for more emphasis on the
-\emph{``metadata and how to appropriately describe the level of
+Quotes from the decision-maker interviews highlight that decision-makers
+find it difficult to develop the correct views of \emph{``how much they
+can trust the data''}. They address their desire for more emphasis on
+the \emph{``metadata and how to appropriately describe the level of
 uncertainty and provenance of the data''} to help ensure the data is
 being applied to the context it was collected for. They share the
 importance of understanding if \emph{``there is anything that is baked
@@ -508,7 +509,7 @@ It is important to reiterate that the findings of this user research are
 limited and, potentially, biased. Given the consistency of insights from
 the user research participants, it is clear that further interviews with
 a wider, random subset of the decision-maker and data practitioner
-populations in UK Government would be beneficial.
+populations in HM Government would be beneficial.
 
 \hypertarget{analysis-methodology}{%
 \section{ANALYSIS METHODOLOGY}\label{analysis-methodology}}
@@ -545,9 +546,9 @@ with the \texttt{Jettison\ MVP\ Code}
 insights into the impacts of downsampling with minimally complex code.
 The two algorithms used by the \texttt{Jettison\ MVP\ Code}
 \protect\hyperlink{ref-Jettison}{{[}46{]}} are \emph{EveryNth}, which
-selects every other data point, and \emph{Percentage Change}, which
-selects every data point that has greater than 1\% difference between
-the last transmitted and newest values.
+selects every \(n^th\) data point, and \emph{Percentage Change}, which
+selects every data point that has greater than \(n\) percent difference
+between the last transmitted and newest values.
 
 The \texttt{Jettison\ MVP\ Code}
 \protect\hyperlink{ref-Jettison}{{[}46{]}} applies these algorithms
@@ -587,21 +588,22 @@ value for each of the \texttt{catch22} time series features
 \protect\hyperlink{ref-catch22}{{[}38{]}}. Values for the 24 time series
 features are calculated for each of the nine original time series and
 900 imputed time series. The difference between the original and imputed
-feature values is calculated and that difference scaled, dividing by the
-standard deviation with the \texttt{scale()} R function, to accurately
-compare how the downsampling algorithms impact these \texttt{catch22}
-features. The coefficient of variation across the 900 imputed time
-series for each \texttt{catch22} feature is also calculated to indicate
-and compare the sensitivity of each feature to downsampling. The
-\texttt{catch22} features are considered to be more sensitive if their
-coefficient of variation across the 900 imputed time series is higher.
+feature values is calculated and that difference is scaled, dividing by
+the standard deviation with the \texttt{scale()} R function, to
+accurately compare how the downsampling algorithms impact these
+\texttt{catch22} features. The coefficient of variation across the 900
+imputed time series for each \texttt{catch22} feature is also calculated
+to indicate and compare the sensitivity of each feature to downsampling.
+The \texttt{catch22} features are considered to be more sensitive if
+their coefficient of variation across the 900 imputed time series is
+higher.
 
 It is important to note that the \texttt{catch22} time series features
-are selected to reflect characteristics that help cluster and classify
-different time series, not selected for their impact on downsampling.
-This feature analysis design could be taken further by investigating
-whether features sensitive to downsampling are equally applicable to all
-time series types.
+reflect characteristics that help cluster and classify different time
+series, they are not selected for their impact on downsampling. This
+analysis could be taken further by statistically investigating whether
+features sensitive to downsampling are equally applicable to all time
+series types.
 
 \textbf{4.4 Visualisation}
 
@@ -644,15 +646,15 @@ E.
 \includegraphics{210431461_CSC8639_Dissertation_files/figure-latex/CombinedSensitivity-1.pdf}
 
 Figure 2 suggests that the \emph{Percentage Change} algorithm impacts
-the \texttt{catch22} time series features more than the algorithm. This
-is surprising as the \emph{EveryNth} algorithm discards more data, more
-quickly, in the 50 parameters of downsampling. The sensitivity of these
-features to the \emph{Percentage Change} is worthy of further
-statistical analysis to understand why it impacts the feature's
-coefficient of variation values more. It would also be beneficial to
-investigate the impact of \emph{Percentage Change} further by creating
-downsampling parameters beyond 50 until the same volume of data is
-discarded by both algorithms.
+the \texttt{catch22} time series features more than the \emph{EveryNth}
+algorithm. This is surprising as the \emph{EveryNth} algorithm discards
+more data, more quickly, in the 50 parameters of downsampling. The
+sensitivity of these features to the \emph{Percentage Change} algorithm
+is worthy of further statistical analysis to understand why it impacts
+the feature's coefficient of variation values more. It would also be
+beneficial to investigate the impact of \emph{Percentage Change} further
+by creating downsampling parameters beyond 50 until the same volume of
+data is discarded by both algorithms.
 
 The coefficient of variation values for the seven most sensitive
 \texttt{catch22} features, rounded to to two deciamal points, are
@@ -687,18 +689,11 @@ DistributionExponentialFit\_MAE & 0.79 & 0.18 & 0.74\\
 
 The combined absolute coefficient of variation values are used to
 identify the seven \texttt{catch22} features that appear to be most
-sensitive. Table 2 shows that the mean absolute error of an exponential
-fit to a probability distribution
-\protect\hyperlink{ref-feature_book}{{[}48{]}}
-(\texttt{DistributionExponentialFit\_MAE} or
-\texttt{CO\_Embed2\_Dist\_tau\_d\_expfit\_meandiff}) has the highest
-combined sensitivity. The longest sequence of successive steps that
-decrease (\texttt{LongestPeriod\_Decrease} or
-\texttt{SB\_BinaryStats\_diff\_longstretch0}) is most sensitive to the
-the \emph{Percentage Change} algorithm. The \texttt{catch22} feature
-measuring the first minimum of the autocorrelation function
-(\texttt{Autocorr\_FirstMinimum} or \texttt{CO\_FirstMin\_ac}) is most
-sensitive to the \emph{EveryNth} algorithm.
+sensitive. Table 2 shows that the longest sequence of successive steps
+that decrease \protect\hyperlink{ref-feature_book}{{[}48{]}}
+(\texttt{LongestPeriod\_Decrease} or
+\texttt{SB\_BinaryStats\_diff\_longstretch0}) has the highest combined
+sensitivity.
 
 These results indicate that it may be possible to communicate the impact
 of downsampling via the sensitivity of the \texttt{catch22} features.
@@ -728,23 +723,24 @@ sequence of successive values greater than the mean
 (\texttt{LongestPeriod\_AboveAverage} or
 \texttt{SB\_BinaryStats\_mean\_longstretch1}) are the first
 \texttt{catch22} features to be impacted by the downsampling algorithms.
-Interestingly, Figure 3 also demonstrates that the features values
+Interestingly, Figure 3 also demonstrates that the feature values
 impacted by both downsampling algorithms tend to increase in comparison
 the original values. This warrants further investigation.
 
 However, the parameters prevent a like-for-like comparison of the two
 downsampling algorithms as \emph{EveryNth} discards data more quickly
-than \emph{Percentage Change}. Figure 4 below also visualises the scaled
-difference between the values of the original \texttt{catch22} features
-and the imputed time series, but across the volume of data retained by
-the downsampling algorithms before \texttt{imputeTS}
-\protect\hyperlink{ref-imputeTS_R}{{[}17{]}} imputes the missing values.
+than \emph{Percentage Change}. Figure 4 on the next page also visualises
+the scaled difference between the values of the original
+\texttt{catch22} features and the imputed time series, but across the
+volume of data retained by the downsampling algorithms before
+\texttt{imputeTS} \protect\hyperlink{ref-imputeTS_R}{{[}17{]}} imputes
+the missing values.
 
 \includegraphics{210431461_CSC8639_Dissertation_files/figure-latex/Heatmap_vol-1.pdf}
 
 Figure 4 demonstrates that data volume retained by the downsampling
 algorithms creates acute differences, especially when fewer than 20 data
-points remained after \emph{EveryNth} is applied. However we cannot
+points remain after \emph{EveryNth} is applied. However we cannot
 conclude that thre is a significant difference between the algorithms
 over and above the volume of data remaining without further
 investigation. Interestingly, the impact of \emph{Percentage Change}
@@ -756,7 +752,7 @@ further investigation.
 
 Downsampling can perturb the statistical properties
 \protect\hyperlink{ref-ATIChangePoint}{{[}45{]}} and visual perception
-\protect\hyperlink{ref-graphsampling}{{[}49{]}} of the data.
+\protect\hyperlink{ref-graphsampling}{{[}49{]}} of data.
 \texttt{Catch22} features are statistical properties of time series. It
 is likely that some of these statistical properties will be more or less
 affected by downsampling because downsampling algorithms preserve
@@ -779,11 +775,11 @@ The impact of both downsampling algorithms on the most sensitive
 features appears to vary across different time series types. This is
 exemplified by the \texttt{catch22} feature
 \texttt{LongestPeriod\_Decreases}
-(\texttt{SB\_BinaryStats\_diff\_longstretch0}), which \emph{``calculates
-the longest sequence of successive steps in the time series that
-decrease''} \protect\hyperlink{ref-feature_book}{{[}48{]}}. The feature
-has the highest coefficient of variation across the 900 time series; the
-line graphs in Figure 5 below share the differences between the
+(\texttt{SB\_BinaryStats\_diff\_longstretch0}), which calculates the
+longest sequence of successive steps in the time series that decrease
+\protect\hyperlink{ref-feature_book}{{[}48{]}}. The feature has the
+highest coefficient of variation across the 900 time series; the line
+graphs in Figure 5 below share the differences between the
 \texttt{catch22} feature value of the original time series and the 50
 time series imputed from these after downsampling; these differences are
 scaled for better comparisons. The title of each line graph refers to
@@ -798,10 +794,10 @@ algorithm varies by the type of time series whereas the volume of data
 retained by the \emph{EveryNth} algorithm trends towards zero. The line
 graphs presented in Figure 5 highlight how different downsampling
 algorithms may more or less preserve the integrity of different time
-series. For example, time series `300' and `500' appear to be more
-impacted by the Percentage Change algorithm than other time series. How
-the most sensitive \texttt{catch22} time series features vary across the
-different time series types is shared in Annex G.
+series. For example, time series `100,' `300,' `500' and `800B' appear
+to be more impacted by the Percentage Change algorithm than other time
+series. How the most sensitive \texttt{catch22} time series features
+vary across the different time series types is shared in Annex G.
 
 This variation of downsampling algorithms across time series types
 causes the author to question whether the downsampling sensitivity of
@@ -812,9 +808,9 @@ sensitive \texttt{catch22} features for time series `500.' Time series
 `500' was selected as more data is discarded by the \emph{Percentage
 Change} algorithm, offering a better comparison.
 
-Figure 6 highlights that, although \texttt{LongestPeriod\_Decrease} is
-identified as the most sensitive across both downsampling algorithms,
-\texttt{Autocorr\_Automutual}
+Figure 6 on the next page highlights that, although
+\texttt{LongestPeriod\_Decrease} is identified as the most sensitive
+across both downsampling algorithms, \texttt{Autocorr\_Automutual}
 (\texttt{IN\_AutoMutualInfoStats\_40\_gaussian\_fmmi}) might better
 indicate the impact for time series `500.' \texttt{Autocorr\_Automutual}
 is the minimum of the automutual information function; this
@@ -835,10 +831,10 @@ algorithm has the opposite impact on
 algorithm.
 
 A comparison of the most sensitive features for each time series type is
-shared in Annex H. It would be beneficial to explore this further as
-this variation may offer data practitioners a method for identifying
-subsets of features that best indicate the preservation of different
-time series.
+shared in Annex H. It would be beneficial to explore this further as the
+variation may offer data practitioners a method for identifying subsets
+of features that best indicate the preservation of different time
+series.
 
 \hypertarget{conclusion}{%
 \section{CONCLUSION}\label{conclusion}}
@@ -872,16 +868,17 @@ There are seven \texttt{catch22} time series features
 sensitive to the impacts of downsampling. \texttt{Catch22} features are
 statistical properties of time series so they are more or less affected
 by downsampling depending on which data points are preserved from the
-original time series. The impact of the \emph{everyNth} and
+original time series. The impact of the \emph{EveryNth} and
 \emph{Percentage Change} downsampling algorithms on the most sensitive
 features appears to vary across different time series types. The
 downsampling sensitivity of \texttt{catch22} features also appears to
-vary across time series. These results suggest that different subsets of
-\texttt{catch22} features could be selected to best indicate the
+differ across time series. These results suggest that different subsets
+of \texttt{catch22} features could be selected to best indicate the
 preservation of time series after downsampling. Tailored subsets of
 features enable data practitioners to design and build interactive
-visualisations for decision-makers to explore the limitations of the
-data they are considering.
+visualisations that create transparency of the data processing pipeline
+for decision-makers to explore the limitations of the data they are
+considering.
 
 The varying sensitivity of \texttt{catch22} features to different
 downsampling algorithms is previously unstudied. This research offers a
@@ -936,21 +933,20 @@ discarding data.
 Further iterations of downsampling on the synthetic time series used in
 this research is an important step to address the limitation of this
 research. These iterations will enable a better comparison of the
-\emph{EveryNth} and \emph{Percentage Change}. Equally, repeating the
-analysis methodology of this research for other downsampling algorithms,
-such as LTTB \protect\hyperlink{ref-MinMaxLTTB}{{[}7{]}},
+\emph{EveryNth} and \emph{Percentage Change} algorithms. Equally,
+repeating the analysis methodology of this research for other
+downsampling algorithms, such as LTTB
+\protect\hyperlink{ref-MinMaxLTTB}{{[}7{]}},
 \protect\hyperlink{ref-Sveinn}{{[}11{]}},
 \protect\hyperlink{ref-MinMaxOrdered}{{[}36{]}}, as well as applying
-utilising the real-world time series shared by the
+this method to the real-world time series shared by the
 \texttt{Alan\ Turing\ Change\ Point\ Dataset}
 \protect\hyperlink{ref-ATIChangePoint}{{[}45{]}} set will allow a deeper
 investigation into the impact of downsampling. These avenues of future
 work are also vital for generating the information needed to fully
 realise the ambitions of this research - developing comparative and
 interactive visualisations to better communicate the impact of
-downsampling on time series. These visualisations should also be
-evaluated with users through usability research
-\protect\hyperlink{ref-graphsampling}{{[}49{]}}.
+downsampling on time series.
 
 \textbf{6.4 Feature Variation}
 
@@ -1062,8 +1058,8 @@ Maps}\label{annex-c-user-research-concept-maps}}
 
 Key word counts alongside the qualitative thematic analysis inform
 concept maps which visualise the key themes and key words. The concept
-maps for each decision-maker and data practitioner are shared in this
-section.
+maps for each decision-maker and data practitioner interview are shared
+in this section.
 
 \includegraphics{210431461_CSC8639_Dissertation_files/figure-latex/unnamed-chunk-4-1.pdf}
 
@@ -1106,7 +1102,7 @@ Series}\label{annex-d-original-nine-synthetic-time-series}}
 \vspace{-0.4cm}
 
 Each line plot in Figure 24 below visualises one of the nine original
-synthetic time series from the Alan Turing Institute
+synthetic time series from the Alan Turing Institute data set
 \protect\hyperlink{ref-ATIChangePoint}{{[}45{]}}.
 
 \includegraphics{210431461_CSC8639_Dissertation_files/figure-latex/unnamed-chunk-20-1.pdf}
@@ -1211,9 +1207,8 @@ investigation to understand why would be beneficial.
 across Time Series
 Types}{Annex G: Variation of Catch22 Features across Time Series Types}}\label{annex-g-variation-of-catch22-features-across-time-series-types}}
 
-Figure 26 presents feature with the highest coefficient of variation
-across the 900 time series is the longest sequence of successive steps
-that decrease (\texttt{LongestPeriod\_Decreases} or
+Figure 26 presents the feature with the highest coefficient of variation
+across the 900 time series (\texttt{LongestPeriod\_Decreases} or
 \texttt{SB\_BinaryStats\_diff\_longstretch0}). This catch22 feature
 \emph{``calculates the longest sequence of successive steps in the time
 series that decrease''} \protect\hyperlink{ref-feature_book}{{[}48{]}}.
@@ -1224,11 +1219,10 @@ Initial visual analysis suggests that time series `100,' `300,' and
 
 \newpage
 
-Figure 27 presents feature with the second highest coefficient of
-variation is the longest sequence of successive steps that decrease
-(\texttt{Autocorr\_FirstMinimum} or \texttt{CO\_FirstMin\_ac}). This
-catch22 feature represents \emph{``calculates the longest sequence of
-successive steps in the time series that decrease''}
+Figure 27 presents the feature with the second highest coefficient of
+variation (\texttt{Autocorr\_FirstMinimum} or
+\texttt{CO\_FirstMin\_ac}). This catch22 feature \emph{``calculates the
+longest sequence of successive steps in the time series that decrease''}
 \protect\hyperlink{ref-feature_book}{{[}48{]}}. Initial visual analysis
 suggests that time series `100,' `200' and `500' are more affected by
 this feature.
@@ -1238,8 +1232,7 @@ this feature.
 \newpage
 
 Figure 28 presents the feature with the third highest coefficient of
-variation is the minimum of the automutual information function
-(\texttt{Autocorr\_Automutual} or
+variation (\texttt{Autocorr\_Automutual} or
 \texttt{IN\_AutoMutualInfoStats\_40\_gaussian\_fmmi}). This catch22
 feature outputs a measure of \emph{``autocorrelation in the time series,
 as the minimum of the automutual information function''}
@@ -1252,8 +1245,7 @@ affected by this feature.
 \newpage
 
 Figure 29 presents the feature with the fourth highest coefficient of
-variation is the longest sequence of successive values greater than the
-mean (\texttt{LongestPeriod\_AboveAverage} or
+variation (\texttt{LongestPeriod\_AboveAverage} or
 \texttt{SB\_BinaryStats\_mean\_longstretch1}). This catch22 feature
 \emph{``calculates the longest successive period of above average
 values''} \protect\hyperlink{ref-feature_book}{{[}48{]}}. Initial visual
@@ -1265,10 +1257,9 @@ affected by this feature.
 \newpage
 
 Figure 30 presents the feature with the fifth highest coefficient of
-variation is the approximate scale of autocorrelation
-(\texttt{Autocorr\_ApproxScale} or \texttt{CO\_f1ecac}). This catch22
-feature \emph{``computes the first 1/e crossing of the autocorrelation
-function of the time series''}
+variation (\texttt{Autocorr\_ApproxScale} or \texttt{CO\_f1ecac}). This
+catch22 feature \emph{``computes the first 1/e crossing of the
+autocorrelation function of the time series''}
 \protect\hyperlink{ref-feature_book}{{[}48{]}}. It is similar to the
 first minimum of the autocorrelation function. Initial visual analysis
 suggests that time series `100,' `200,' `500,' `800A' and `800B' are
@@ -1279,23 +1270,22 @@ more affected by this feature.
 \newpage
 
 Figure 31 presents the feature with the sixth highest coefficient of
-variation is the first peak in the autocorrelation function
-(\texttt{Autocorr\_FirstPeak} or \texttt{PD\_PeriodicityWang\_th0\_01}).
-This catch22 feature \emph{``returns the first peak in the
-autocorrelation function satisfying a set of conditions (after
-detrending the time series using a single-knot cubic regression
-spline)''} \protect\hyperlink{ref-feature_book}{{[}48{]}}. In general,
-the feature returns higher values for slower time series oscillation.
-Initial visual analysis suggests that time series `100,' `200' and `500'
-are more affected by this feature.
+variation (\texttt{Autocorr\_FirstPeak} or
+\texttt{PD\_PeriodicityWang\_th0\_01}). This catch22 feature
+\emph{``returns the first peak in the autocorrelation function
+satisfying a set of conditions (after detrending the time series using a
+single-knot cubic regression spline)''}
+\protect\hyperlink{ref-feature_book}{{[}48{]}}. In general, the feature
+returns higher values for slower time series oscillation. Initial visual
+analysis suggests that time series `100,' `200' and `500' are more
+affected by this feature.
 
 \includegraphics{210431461_CSC8639_Dissertation_files/figure-latex/FirstPeak-1.pdf}
 
 \newpage
 
 Figure 32 presents the feature with the seventh highest coefficient of
-variation is the mean absolute error of an exponential fit to a
-probability distribution (\texttt{DistributionExponentialFit\_MAE} or
+variation (\texttt{DistributionExponentialFit\_MAE} or
 \texttt{CO\_Embed2\_Dist\_tau\_d\_expfit\_meandiff}). To calculate the
 mean absolute error, this catch22 feature \emph{``represents the time
 series in a two-dimensional time-delay embedding space\ldots{} It then
@@ -1314,7 +1304,7 @@ feature.
 Features for each Time Series
 Type}{Annex H: Most Sensitive Catch22 Features for each Time Series Type}}\label{annex-h-most-sensitive-catch22-features-for-each-time-series-type}}
 
-Figure 33 visualises how the six most sensitive features for time series
+Figure 33 visualises the six most sensitive features for time series
 100. Initial visual analysis suggests that
 \texttt{Autocorr\_FirstMinimum}, \texttt{Autocorr\_FirstPeak} and
 \texttt{LongestPeriod\_Decreases} may best indicate the impact of
@@ -1324,27 +1314,27 @@ downsampling for this time series.
 
 \newpage
 
-Figure 34 visualises how the six most sensitive features for time series
+Figure 34 visualises the six most sensitive features for time series
 200. \texttt{Autocorr\_Automutual}, \texttt{Autocorr\_FirstMinimum},
 \texttt{Autocorr\_FirstPeak} and \texttt{LongestPeriod\_AboveAverage}
 may best indicate the impact of downsampling for this time series.
 
 \includegraphics{210431461_CSC8639_Dissertation_files/figure-latex/Catch22Variation200-1.pdf}
 
-Figure 35 visualises how the six most sensitive features for time series
+Figure 35 visualises the six most sensitive features for time series
 300. \texttt{Autocorr\_FirstPeak}, \texttt{LongestPeriod\_AboveAverage}
 and \texttt{LongestPeriod\_Decreases} may best indicate the impact of
 downsampling for this time series.
 
 \includegraphics{210431461_CSC8639_Dissertation_files/figure-latex/Catch22Variation300-1.pdf}
 
-Figure 36 visualises how the six most sensitive features for time series
+Figure 36 visualises the six most sensitive features for time series
 400. \texttt{Autocorr\_FirstPeak} and \texttt{LongestPeriod\_Decreases}
 may best indicate the impact of downsampling for this time series.
 
 \includegraphics{210431461_CSC8639_Dissertation_files/figure-latex/Catch22Variation400-1.pdf}
 
-Figure 37 visualises how the six most sensitive features for time series
+Figure 37 visualises the six most sensitive features for time series
 500. \texttt{Autocorr\_Automutual}, \texttt{Autocorr\_FirstMinimum}, and
 \texttt{Autocorr\_FirstPeak} may best indicate the impact of
 downsampling for this time series.
@@ -1353,13 +1343,13 @@ downsampling for this time series.
 
 \newpage
 
-Figure 38 visualises how the six most sensitive features for time series
+Figure 38 visualises the six most sensitive features for time series
 600. \texttt{Autocorr\_Automutual} and \texttt{Autocorr\_FirstMinimum}
 may best indicate the impact of downsampling for this time series.
 
 \includegraphics{210431461_CSC8639_Dissertation_files/figure-latex/Catch22Variation600-1.pdf}
 
-Figure 39 visualises how the six most sensitive features for time series
+Figure 39 visualises the six most sensitive features for time series
 700. \texttt{LongestPeriod\_AboveAverage} and
 \texttt{LongestPeriod\_Decreases} may best indicate the impact of
 downsampling for this time series.
@@ -1368,14 +1358,14 @@ downsampling for this time series.
 
 \newpage
 
-Figure 40 visualises how the six most sensitive features for time series
+Figure 40 visualises the six most sensitive features for time series
 800A. \texttt{Autocorr\_ApproxScale} and
 \texttt{LongestPeriod\_Decreases} may best indicate the impact of
 downsampling for this time series.
 
 \includegraphics{210431461_CSC8639_Dissertation_files/figure-latex/Catch22Variation800A-1.pdf}
 
-Figure 41 visualises how the six most sensitive features for time series
+Figure 41 visualises the six most sensitive features for time series
 800A. \texttt{Autocorr\_ApproxScale}, \texttt{Autocorr\_FirstMinimum},
 \texttt{LongestPeriod\_AboveAverage} and
 \texttt{LongestPeriod\_Decreses} may best indicate the impact of

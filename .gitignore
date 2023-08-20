@@ -1,6 +1,9 @@
 
 *.Rhistory
 *.RData
+*.RDataTmp1
+*.RDataTmp2
+*.RDataTmp3
 venv/
 *.pptx
 document_cleaning_script.py
