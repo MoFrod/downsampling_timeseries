@@ -442,8 +442,9 @@ text data from the interviewer is also removed so that natural language
 processing is only conducted on participant responses. Limited natural
 language processing is then applied by tokenising the remaining words
 and counting the number of each unique word. These word counts alongside
-the qualitative thematic analysis inform concept maps which aim to show
-the key themes and words.
+the qualitative thematic analysis inform concept maps
+\protect\hyperlink{ref-GPT}{{[}44{]}} which aim to show the key themes
+and words.
 
 \textbf{3.2 Insights}
 
@@ -481,11 +482,12 @@ almost always has been {[}done{]}''}. Decision-makers share that
 visualisations are important for conveying \emph{``specific insights
 that simply looking at numbers can't get over''} and emphasise that if
 analysts \emph{``clearly explain what the limitations are and rigorously
-present that, then I'll trust {[}the analysis{]} more''}.
+present that, then I'll trust {[}the analysis{]} more''}. Quotes from
+data practitioner interviews are shared in Annex B.
 
 Figure 1 below shares example concept maps outlining the key themes from
 two anonymised decision-maker and data-practitioner interviews. All the
-interview concept maps are shared in Annex B; only summative content
+interview concept maps are shared in Annex C; only summative content
 from these interviews is presented in compliance with the consent forms
 shared with the user research participants.
 
@@ -518,7 +520,7 @@ without extensive statistical evidence.
 \textbf{4.1 Data}
 
 The eight Alan Turing Institute \texttt{Annotated\ Change}
-\protect\hyperlink{ref-ATIChangePoint}{{[}44{]}} synthetic time series
+\protect\hyperlink{ref-ATIChangePoint}{{[}45{]}} synthetic time series
 are selected for initial analysis. These are selected because they are
 cleaned time series from a reputable institution with known change
 points that are designed to provide examples of different types of time
@@ -528,27 +530,27 @@ purpose. These synthetic time series (`100,' `200,' `300,' `400,' `500,'
 `600,' `700,' `800') are used in demonstrations to support change point
 annotators annotate real-world data sets for the
 \texttt{Turing\ Change\ Point\ Data\ set}
-\protect\hyperlink{ref-ATIChangePoint}{{[}44{]}}. The eighth
+\protect\hyperlink{ref-ATIChangePoint}{{[}45{]}}. The eighth
 \texttt{Annotated\ Change} synthetic time series (`800') is multivariate
 and thus split in two (`800A' and `800B') to create nine synthetic time
 series for this research and enable better comparison. The nine time
-series are visualised in Annex C.
+series are visualised in Annex D.
 
 \textbf{4.2 Downsampling}
 
 These synthetic time series are imported into \texttt{RStudio} from
 \texttt{JSON} scripts and two downsampling algorithms are applied to all
 with the \texttt{Jettison\ MVP\ Code}
-\protect\hyperlink{ref-Jettison}{{[}45{]}}. This enables initial
+\protect\hyperlink{ref-Jettison}{{[}46{]}}. This enables initial
 insights into the impacts of downsampling with minimally complex code.
 The two algorithms used by the \texttt{Jettison\ MVP\ Code}
-\protect\hyperlink{ref-Jettison}{{[}45{]}} are \emph{EveryNth}, which
+\protect\hyperlink{ref-Jettison}{{[}46{]}} are \emph{EveryNth}, which
 selects every other data point, and \emph{Percentage Change}, which
 selects every data point that has greater than 1\% difference between
 the last transmitted and newest values.
 
 The \texttt{Jettison\ MVP\ Code}
-\protect\hyperlink{ref-Jettison}{{[}45{]}} applies these algorithms
+\protect\hyperlink{ref-Jettison}{{[}46{]}} applies these algorithms
 iteratively across each of the nine synthetic time series. This creates
 parameters 1 to 50 for each downsampling algorithm and
 \texttt{Annotated\ Change} time series. There are now 900 time series
@@ -571,7 +573,7 @@ The missing values for each of the 900 time series are replaced by the
 \texttt{imputeTS} linear interpolation function. This is a simple
 imputation algorithm that returns each time series to its original
 length and is a commonly used approach to present line graphs
-\protect\hyperlink{ref-compressiontech}{{[}46{]}}. Returning the time
+\protect\hyperlink{ref-compressiontech}{{[}47{]}}. Returning the time
 series to their original length enables a like-for-like comparison of
 downsampling impact. For each \texttt{Annotated\ Change} synthetic time
 series, there is now an imputed time series for parameters 1 to 50 and
@@ -586,13 +588,13 @@ value for each of the \texttt{catch22} time series features
 features are calculated for each of the nine original time series and
 900 imputed time series. The difference between the original and imputed
 feature values is calculated and that difference scaled, dividing by the
-standard deviation, to accurately compare how the downsampling
-algorithms impact these \texttt{catch22} features. The coefficient of
-variation across the 900 imputed time series for each \texttt{catch22}
-feature is also calculated to indicate the sensitivity of each feature
-to downsampling. The \texttt{catch22} features are considered to be more
-sensitive if the standard deviation across the 900 imputed time series
-is higher.
+standard deviation with the \texttt{scale()} R function, to accurately
+compare how the downsampling algorithms impact these \texttt{catch22}
+features. The coefficient of variation across the 900 imputed time
+series for each \texttt{catch22} feature is also calculated to indicate
+and compare the sensitivity of each feature to downsampling. The
+\texttt{catch22} features are considered to be more sensitive if their
+coefficient of variation across the 900 imputed time series is higher.
 
 It is important to note that the \texttt{catch22} time series features
 are selected to reflect characteristics that help cluster and classify
@@ -637,7 +639,7 @@ demonstrate the sensitivity of these seven features, features with the
 highest absolute coefficient of variation values across all the imputed
 time series are visualised in the bar graph below. The absolute
 coefficient of variation values for all 24 features is shared in Annex
-D.
+E.
 
 \includegraphics{210431461_CSC8639_Dissertation_files/figure-latex/CombinedSensitivity-1.pdf}
 
@@ -687,7 +689,7 @@ The combined absolute coefficient of variation values are used to
 identify the seven \texttt{catch22} features that appear to be most
 sensitive. Table 2 shows that the mean absolute error of an exponential
 fit to a probability distribution
-\protect\hyperlink{ref-feature_book}{{[}47{]}}
+\protect\hyperlink{ref-feature_book}{{[}48{]}}
 (\texttt{DistributionExponentialFit\_MAE} or
 \texttt{CO\_Embed2\_Dist\_tau\_d\_expfit\_meandiff}) has the highest
 combined sensitivity. The longest sequence of successive steps that
@@ -753,14 +755,14 @@ larger retained data volumes appear to be impacted. This also warrants
 further investigation.
 
 Downsampling can perturb the statistical properties
-\protect\hyperlink{ref-ATIChangePoint}{{[}44{]}} and visual perception
-\protect\hyperlink{ref-graphsampling}{{[}48{]}} of the data.
+\protect\hyperlink{ref-ATIChangePoint}{{[}45{]}} and visual perception
+\protect\hyperlink{ref-graphsampling}{{[}49{]}} of the data.
 \texttt{Catch22} features are statistical properties of time series. It
 is likely that some of these statistical properties will be more or less
 affected by downsampling because downsampling algorithms preserve
 different data points from the original time series. A full table of the
 statistical properties represented by each \texttt{catch22} feature is
-shared in Annex E.
+shared in Annex F.
 
 It is not possible, however, to understand the impact of both
 downsampling algorithms from this visualisation. The \emph{Percentage
@@ -779,7 +781,7 @@ exemplified by the \texttt{catch22} feature
 \texttt{LongestPeriod\_Decreases}
 (\texttt{SB\_BinaryStats\_diff\_longstretch0}), which \emph{``calculates
 the longest sequence of successive steps in the time series that
-decrease''} \protect\hyperlink{ref-feature_book}{{[}47{]}}. The feature
+decrease''} \protect\hyperlink{ref-feature_book}{{[}48{]}}. The feature
 has the highest coefficient of variation across the 900 time series; the
 line graphs in Figure 5 below share the differences between the
 \texttt{catch22} feature value of the original time series and the 50
@@ -799,7 +801,7 @@ algorithms may more or less preserve the integrity of different time
 series. For example, time series `300' and `500' appear to be more
 impacted by the Percentage Change algorithm than other time series. How
 the most sensitive \texttt{catch22} time series features vary across the
-different time series types is shared in Annex F.
+different time series types is shared in Annex G.
 
 This variation of downsampling algorithms across time series types
 causes the author to question whether the downsampling sensitivity of
@@ -818,7 +820,7 @@ indicate the impact for time series `500.' \texttt{Autocorr\_Automutual}
 is the minimum of the automutual information function; this
 \texttt{catch22} feature outputs a measure of \emph{``autocorrelation in
 the time series, as the minimum of the automutual information
-function''} \protect\hyperlink{ref-feature_book}{{[}47{]}}.
+function''} \protect\hyperlink{ref-feature_book}{{[}48{]}}.
 \texttt{Autocorr\_FirstMinimum} (\texttt{CO\_FirstMin\_ac}) and
 \texttt{Autocorr\_FirstPeak} (\texttt{PD\_PeriodicityWang\_th0\_01})
 also seem to show early impacts of the \emph{Percentage Change}
@@ -833,7 +835,7 @@ algorithm has the opposite impact on
 algorithm.
 
 A comparison of the most sensitive features for each time series type is
-shared in Annex G. It would be beneficial to explore this further as
+shared in Annex H. It would be beneficial to explore this further as
 this variation may offer data practitioners a method for identifying
 subsets of features that best indicate the preservation of different
 time series.
@@ -848,8 +850,8 @@ volume, addressing limitations like processing time, computing costs,
 storage capabilities and sustainability ambitions
 \protect\hyperlink{ref-TVStore}{{[}10{]}}--\protect\hyperlink{ref-Shift}{{[}12{]}}.
 However, downsampling can perturb the statistical properties
-\protect\hyperlink{ref-ATIChangePoint}{{[}44{]}} and visual perception
-\protect\hyperlink{ref-graphsampling}{{[}48{]}} of time series,
+\protect\hyperlink{ref-ATIChangePoint}{{[}45{]}} and visual perception
+\protect\hyperlink{ref-graphsampling}{{[}49{]}} of time series,
 potentially impacting the insights that inform data-driven decisions.
 
 Interviews with 16 UK Civil Servants (nine decision-makers and seven
@@ -912,7 +914,7 @@ communicate the impact of downsampling on different time series. How
 these visualisations perturb the decision-makers' and data
 practitioners' perception of downsampling impact is an important avenue
 of further investigation
-\protect\hyperlink{ref-graphsampling}{{[}48{]}}.
+\protect\hyperlink{ref-graphsampling}{{[}49{]}}.
 
 \textbf{6.2 Downsampling Sensitivity}
 
@@ -941,14 +943,14 @@ such as LTTB \protect\hyperlink{ref-MinMaxLTTB}{{[}7{]}},
 \protect\hyperlink{ref-MinMaxOrdered}{{[}36{]}}, as well as applying
 utilising the real-world time series shared by the
 \texttt{Alan\ Turing\ Change\ Point\ Dataset}
-\protect\hyperlink{ref-ATIChangePoint}{{[}44{]}} set will allow a deeper
+\protect\hyperlink{ref-ATIChangePoint}{{[}45{]}} set will allow a deeper
 investigation into the impact of downsampling. These avenues of future
 work are also vital for generating the information needed to fully
 realise the ambitions of this research - developing comparative and
 interactive visualisations to better communicate the impact of
 downsampling on time series. These visualisations should also be
 evaluated with users through usability research
-\protect\hyperlink{ref-graphsampling}{{[}48{]}}.
+\protect\hyperlink{ref-graphsampling}{{[}49{]}}.
 
 \textbf{6.4 Feature Variation}
 
@@ -980,9 +982,81 @@ acknowledging the user research conducted.
 \includegraphics[width=1\linewidth]{210431461_CSC8639_Dissertation_files/figure-latex/unnamed-chunk-3-1}
 \newpage
 
-\hypertarget{annex-b-user-research-concept-maps}{%
-\section{Annex B: User Research Concept
-Maps}\label{annex-b-user-research-concept-maps}}
+\hypertarget{annex-b-data-pracitioner-quotes}{%
+\section{Annex B: Data Pracitioner
+Quotes}\label{annex-b-data-pracitioner-quotes}}
+
+Interesting (anonymised) quotes that highlight the sentiment of data
+practitioners from user research interviews are shared below:
+
+\begin{itemize}
+\item
+  \emph{``You come at it from a particular viewpoint with your
+  particular expertise, somebody with different background, somebody
+  with different expertise might come at the problem in a different
+  way.''}
+\item
+  \emph{``\ldots my impression is that a lot of people make decisions
+  from data without actually understanding what that data represents or
+  simultaneously, and what the theoretical assumptions on our data and
+  data collection is.''}
+\item
+  \emph{``\ldots getting the point across of how downsampling and other
+  techniques effects that data getting that balance right of explaining
+  the assumptions and explaining what what's been done without getting
+  in the technical details\ldots{}''}
+\item
+  \emph{``I would probably think about the impact of the decision and
+  that would inform me about whether I'm comfortable making a decision
+  on that with that data.''}
+\item
+  \emph{``\ldots we have to understand what things you may think of the
+  data tells you, but it doesn't actually tell you because that's where
+  you often get caught out.''}
+\item
+  \emph{``\ldots making the assumption of what people how people will
+  think the data will be interpreted versus how you can interpret the
+  data is a really, really useful because you go, OK, people gonna want
+  to say this about this data, but this is what actually sets.''}
+\item
+  \emph{``\ldots if you have done the due diligence, generally decision
+  makers trust you to do the due diligence.''}
+\item
+  \emph{``The best that you can say in general is that you have to
+  understand what the information requirement is and what the
+  information processing is that happens, and then you can make an
+  estimate of the effect that downsampling, or indeed any information
+  reduction technique has on the on the decision.''}
+\item
+  \emph{``\ldots ensure that people are thinking about what the
+  processes that they are going through in order to make the decision,
+  not so, not just taking the recommendation but actually understanding
+  how it's got there and where the data came from and how that was
+  achieved.''}
+\item
+  \emph{``I think {[}helping decision-makers trust data{]} is quite
+  dependent on the personality of who you're dealing with at the time
+  and what they're willing to kind of expose of their own understanding
+  and lack of understanding or motivation.''}
+\item
+  \emph{``Data is collected for a purpose then being used for another
+  purpose and they might not exactly map on top of one another, which I
+  think is quite challenging. Often we end up getting data that was
+  collected by somebody else for something else, and we've got to
+  shoehorn it into what we are interested in.''}
+\item
+  \emph{``I haven't engaged with stakeholders on a level like that to
+  understand whether they are aware of the impacts of decisions like
+  that on any end results and how much of a difference that can
+  make\ldots{} but it is very much a stakeholder problem because it
+  impacts what you will get out of it.''}
+\end{itemize}
+
+\newpage
+
+\hypertarget{annex-c-user-research-concept-maps}{%
+\section{Annex C: User Research Concept
+Maps}\label{annex-c-user-research-concept-maps}}
 
 \vspace{-0.4cm}
 
@@ -1025,24 +1099,24 @@ section.
 
 \newpage
 
-\hypertarget{annex-c-original-nine-synthetic-time-series}{%
-\section{Annex c: Original Nine Synthetic Time
-Series}\label{annex-c-original-nine-synthetic-time-series}}
+\hypertarget{annex-d-original-nine-synthetic-time-series}{%
+\section{Annex D: Original Nine Synthetic Time
+Series}\label{annex-d-original-nine-synthetic-time-series}}
 
 \vspace{-0.4cm}
 
 Each line plot in Figure 24 below visualises one of the nine original
 synthetic time series from the Alan Turing Institute
-\protect\hyperlink{ref-ATIChangePoint}{{[}44{]}}.
+\protect\hyperlink{ref-ATIChangePoint}{{[}45{]}}.
 
 \includegraphics{210431461_CSC8639_Dissertation_files/figure-latex/unnamed-chunk-20-1.pdf}
 
 \newpage
 
-\hypertarget{annex-d-coefficient-of-variation-for-all-catch22-features}{%
-\section{\texorpdfstring{Annex D: Coefficient of Variation for all
+\hypertarget{annex-e-coefficient-of-variation-for-all-catch22-features}{%
+\section{\texorpdfstring{Annex E: Coefficient of Variation for all
 \texttt{Catch22}
-Features}{Annex D: Coefficient of Variation for all Catch22 Features}}\label{annex-d-coefficient-of-variation-for-all-catch22-features}}
+Features}{Annex E: Coefficient of Variation for all Catch22 Features}}\label{annex-e-coefficient-of-variation-for-all-catch22-features}}
 
 \vspace{-0.3cm}
 
@@ -1051,23 +1125,15 @@ each \texttt{catch22} time series feature.
 
 \includegraphics{210431461_CSC8639_Dissertation_files/figure-latex/unnamed-chunk-21-1.pdf}
 
-\newpage
-
-\hypertarget{annex-e-the-statistical-properties-of-catch22-features}{%
-\section{\texorpdfstring{Annex E: The Statistical Properties of
+\hypertarget{annex-f-the-statistical-properties-of-catch22-features}{%
+\section{\texorpdfstring{Annex F: The Statistical Properties of
 \texttt{Catch22}
-Features}{Annex E: The Statistical Properties of Catch22 Features}}\label{annex-e-the-statistical-properties-of-catch22-features}}
-
-\vspace{-2.8cm}
-
-Table 3 provides an overview of the \texttt{catch22} features and their
-statistical properties \protect\hyperlink{ref-feature_book}{{[}47{]}}.
+Features}{Annex F: The Statistical Properties of Catch22 Features}}\label{annex-f-the-statistical-properties-of-catch22-features}}
 
 \renewcommand{\arraystretch}{1.5}
-
 \begin{table}[H]
 
-\caption{\label{tab:unnamed-chunk-22}Catch22 Feature Overview}
+\caption{\label{tab:unnamed-chunk-22}Catch22 Feature Overview [47]}
 \centering
 \begin{tabular}[t]{>{\raggedright\arraybackslash}p{0.7in}|>{\raggedright\arraybackslash}p{2.1in}|>{\raggedright\arraybackslash}p{2.1in}|>{\raggedright\arraybackslash}p{1in}}
 \hline
@@ -1101,16 +1167,16 @@ Symbolic & SB\_BinaryStats\_mean\_ longstretch1 & LongestPeriod\_AboveAverage & 
 \hline
 Symbolic & SB\_BinaryStats\_diff\_ longstretch0 & LongestPeriod\_SuccessiveDecreases & Longest stretch of decreasing values\\
 \hline
-Symbolic & SB\_MotifThree\_quantile\_hh & ThreeSymbolProbability\_Entropy & Entropy of successive pairs in symbolized series\\
-\hline
 \end{tabular}
 \end{table}
 
 \begin{table}[H]
 
-\caption{\label{tab:unnamed-chunk-23}Catch22 Feature Overview Continued: }
+\caption{\label{tab:unnamed-chunk-23}Catch22 Feature Overview Continued [47]}
 \centering
 \begin{tabular}[t]{>{\raggedright\arraybackslash}p{0.7in}|>{\raggedright\arraybackslash}p{2.3in}|>{\raggedright\arraybackslash}p{2.1in}|>{\raggedright\arraybackslash}p{1in}}
+\hline
+Symbolic & SB\_MotifThree\_quantile\_hh & ThreeSymbolProbability\_Entropy & Entropy of successive pairs in symbolized series\\
 \hline
 Symbolic & SB\_TransitionMatrix\_3ac\_sumdiagcov & Transition\_Column-wiseVariances & Transition matrix column variance\\
 \hline
@@ -1120,7 +1186,7 @@ Non-linear autocorrelation & CO\_trev\_1\_num & CubeDifference\_Average & Time r
 \hline
 Non-linear autocorrelation & IN\_AutoMutualInfoStats\_40\_ gaussian\_fmmi & Autocorr\_Automutual & First minimum of the AMI function\\
 \hline
-Self-affine scaling & SC\_FluctAnal\_2\_rsrange<U+FB01>t\_50\_1\_logi\_ prop\_r1 & LogarithmicTimescaleFluctuation & Rescaled range fluctuation analysis (low-scale scaling)\\
+Self-affine scaling & SC\_FluctAnal\_2\_rsrangefit\_50\_1\_ logi\_prop\_r1 & LogarithmicTimescaleFluctuation & Rescaled range fluctuation analysis (low-scale scaling)\\
 \hline
 Self-affine scaling & SC\_FluctAnal\_2\_dfa\_50\_1\_2\_logi\_ prop\_r1 & DetrendedTimescaleFluctuation & Detrended fluctuation analysis (low-scale scaling)\\
 \hline
@@ -1140,30 +1206,36 @@ investigation to understand why would be beneficial.
 
 \newpage
 
-\hypertarget{annex-f-variation-of-catch22-features-across-time-series-types}{%
-\section{\texorpdfstring{Annex F: Variation of \texttt{Catch22} Features
+\hypertarget{annex-g-variation-of-catch22-features-across-time-series-types}{%
+\section{\texorpdfstring{Annex G: Variation of \texttt{Catch22} Features
 across Time Series
-Types}{Annex F: Variation of Catch22 Features across Time Series Types}}\label{annex-f-variation-of-catch22-features-across-time-series-types}}
-
-\vspace{-0.4cm}
+Types}{Annex G: Variation of Catch22 Features across Time Series Types}}\label{annex-g-variation-of-catch22-features-across-time-series-types}}
 
 Figure 26 presents feature with the highest coefficient of variation
 across the 900 time series is the longest sequence of successive steps
 that decrease (\texttt{LongestPeriod\_Decreases} or
 \texttt{SB\_BinaryStats\_diff\_longstretch0}). This catch22 feature
 \emph{``calculates the longest sequence of successive steps in the time
-series that decrease''} \protect\hyperlink{ref-feature_book}{{[}47{]}}.
+series that decrease''} \protect\hyperlink{ref-feature_book}{{[}48{]}}.
+Initial visual analysis suggests that time series `100,' `300,' and
+`500' are most affected by this feature.
 
 \includegraphics{210431461_CSC8639_Dissertation_files/figure-latex/LongestDecrease-1.pdf}
+
+\newpage
 
 Figure 27 presents feature with the second highest coefficient of
 variation is the longest sequence of successive steps that decrease
 (\texttt{Autocorr\_FirstMinimum} or \texttt{CO\_FirstMin\_ac}). This
 catch22 feature represents \emph{``calculates the longest sequence of
 successive steps in the time series that decrease''}
-\protect\hyperlink{ref-feature_book}{{[}47{]}}.
+\protect\hyperlink{ref-feature_book}{{[}48{]}}. Initial visual analysis
+suggests that time series `100,' `200' and `500' are more affected by
+this feature.
 
 \includegraphics{210431461_CSC8639_Dissertation_files/figure-latex/FirstMinimum2-1.pdf}
+
+\newpage
 
 Figure 28 presents the feature with the third highest coefficient of
 variation is the minimum of the automutual information function
@@ -1171,28 +1243,40 @@ variation is the minimum of the automutual information function
 \texttt{IN\_AutoMutualInfoStats\_40\_gaussian\_fmmi}). This catch22
 feature outputs a measure of \emph{``autocorrelation in the time series,
 as the minimum of the automutual information function''}
-\protect\hyperlink{ref-feature_book}{{[}47{]}}.
+\protect\hyperlink{ref-feature_book}{{[}48{]}}. Initial visual analysis
+suggests that time series `100,' `200,' `500,' and `600' are more
+affected by this feature.
 
 \includegraphics{210431461_CSC8639_Dissertation_files/figure-latex/AutoMutalFunction-1.pdf}
+
+\newpage
 
 Figure 29 presents the feature with the fourth highest coefficient of
 variation is the longest sequence of successive values greater than the
 mean (\texttt{LongestPeriod\_AboveAverage} or
 \texttt{SB\_BinaryStats\_mean\_longstretch1}). This catch22 feature
 \emph{``calculates the longest successive period of above average
-values''} \protect\hyperlink{ref-feature_book}{{[}47{]}}.
+values''} \protect\hyperlink{ref-feature_book}{{[}48{]}}. Initial visual
+analysis suggests that time series `200,' `500,' and `800B' are more
+affected by this feature.
 
 \includegraphics{210431461_CSC8639_Dissertation_files/figure-latex/LongestGreater-1.pdf}
+
+\newpage
 
 Figure 30 presents the feature with the fifth highest coefficient of
 variation is the approximate scale of autocorrelation
 (\texttt{Autocorr\_ApproxScale} or \texttt{CO\_f1ecac}). This catch22
 feature \emph{``computes the first 1/e crossing of the autocorrelation
 function of the time series''}
-\protect\hyperlink{ref-feature_book}{{[}47{]}}. It is similar to the
-first minimum of the autocorrelation function.
+\protect\hyperlink{ref-feature_book}{{[}48{]}}. It is similar to the
+first minimum of the autocorrelation function. Initial visual analysis
+suggests that time series `100,' `200,' `500,' `800A' and `800B' are
+more affected by this feature.
 
 \includegraphics{210431461_CSC8639_Dissertation_files/figure-latex/ApproxScale-1.pdf}
+
+\newpage
 
 Figure 31 presents the feature with the sixth highest coefficient of
 variation is the first peak in the autocorrelation function
@@ -1200,10 +1284,14 @@ variation is the first peak in the autocorrelation function
 This catch22 feature \emph{``returns the first peak in the
 autocorrelation function satisfying a set of conditions (after
 detrending the time series using a single-knot cubic regression
-spline)''} \protect\hyperlink{ref-feature_book}{{[}47{]}}. In general,
+spline)''} \protect\hyperlink{ref-feature_book}{{[}48{]}}. In general,
 the feature returns higher values for slower time series oscillation.
+Initial visual analysis suggests that time series `100,' `200' and `500'
+are more affected by this feature.
 
 \includegraphics{210431461_CSC8639_Dissertation_files/figure-latex/FirstPeak-1.pdf}
+
+\newpage
 
 Figure 32 presents the feature with the seventh highest coefficient of
 variation is the mean absolute error of an exponential fit to a
@@ -1213,32 +1301,85 @@ mean absolute error, this catch22 feature \emph{``represents the time
 series in a two-dimensional time-delay embedding space\ldots{} It then
 computes successive distances between points in this 2D embedding space
 and analyzes the probability distribution of these distances''}
-\protect\hyperlink{ref-feature_book}{{[}47{]}}.
+\protect\hyperlink{ref-feature_book}{{[}48{]}}. Initial visual analysis
+suggests that time series `600' and `800' are more affected by this
+feature.
 
 \includegraphics{210431461_CSC8639_Dissertation_files/figure-latex/MAE-1.pdf}
 
 \newpage
 
-\hypertarget{annex-g-most-sensitive-catch22-features-for-each-time-series-type}{%
-\section{\texorpdfstring{Annex G: Most Sensitive \texttt{Catch22}
+\hypertarget{annex-h-most-sensitive-catch22-features-for-each-time-series-type}{%
+\section{\texorpdfstring{Annex H: Most Sensitive \texttt{Catch22}
 Features for each Time Series
-Type}{Annex G: Most Sensitive Catch22 Features for each Time Series Type}}\label{annex-g-most-sensitive-catch22-features-for-each-time-series-type}}
+Type}{Annex H: Most Sensitive Catch22 Features for each Time Series Type}}\label{annex-h-most-sensitive-catch22-features-for-each-time-series-type}}
+
+Figure 33 visualises how the six most sensitive features for time series
+100. Initial visual analysis suggests that
+\texttt{Autocorr\_FirstMinimum}, \texttt{Autocorr\_FirstPeak} and
+\texttt{LongestPeriod\_Decreases} may best indicate the impact of
+downsampling for this time series.
 
 \includegraphics{210431461_CSC8639_Dissertation_files/figure-latex/Catch22Variation100-1.pdf}
 
+\newpage
+
+Figure 34 visualises how the six most sensitive features for time series
+200. \texttt{Autocorr\_Automutual}, \texttt{Autocorr\_FirstMinimum},
+\texttt{Autocorr\_FirstPeak} and \texttt{LongestPeriod\_AboveAverage}
+may best indicate the impact of downsampling for this time series.
+
 \includegraphics{210431461_CSC8639_Dissertation_files/figure-latex/Catch22Variation200-1.pdf}
+
+Figure 35 visualises how the six most sensitive features for time series
+300. \texttt{Autocorr\_FirstPeak}, \texttt{LongestPeriod\_AboveAverage}
+and \texttt{LongestPeriod\_Decreases} may best indicate the impact of
+downsampling for this time series.
 
 \includegraphics{210431461_CSC8639_Dissertation_files/figure-latex/Catch22Variation300-1.pdf}
 
+Figure 36 visualises how the six most sensitive features for time series
+400. \texttt{Autocorr\_FirstPeak} and \texttt{LongestPeriod\_Decreases}
+may best indicate the impact of downsampling for this time series.
+
 \includegraphics{210431461_CSC8639_Dissertation_files/figure-latex/Catch22Variation400-1.pdf}
+
+Figure 37 visualises how the six most sensitive features for time series
+500. \texttt{Autocorr\_Automutual}, \texttt{Autocorr\_FirstMinimum}, and
+\texttt{Autocorr\_FirstPeak} may best indicate the impact of
+downsampling for this time series.
 
 \includegraphics{210431461_CSC8639_Dissertation_files/figure-latex/Catch22Variation500-1.pdf}
 
+\newpage
+
+Figure 38 visualises how the six most sensitive features for time series
+600. \texttt{Autocorr\_Automutual} and \texttt{Autocorr\_FirstMinimum}
+may best indicate the impact of downsampling for this time series.
+
 \includegraphics{210431461_CSC8639_Dissertation_files/figure-latex/Catch22Variation600-1.pdf}
+
+Figure 39 visualises how the six most sensitive features for time series
+700. \texttt{LongestPeriod\_AboveAverage} and
+\texttt{LongestPeriod\_Decreases} may best indicate the impact of
+downsampling for this time series.
 
 \includegraphics{210431461_CSC8639_Dissertation_files/figure-latex/Catch22Variation700-1.pdf}
 
+\newpage
+
+Figure 40 visualises how the six most sensitive features for time series
+800A. \texttt{Autocorr\_ApproxScale} and
+\texttt{LongestPeriod\_Decreases} may best indicate the impact of
+downsampling for this time series.
+
 \includegraphics{210431461_CSC8639_Dissertation_files/figure-latex/Catch22Variation800A-1.pdf}
+
+Figure 41 visualises how the six most sensitive features for time series
+800A. \texttt{Autocorr\_ApproxScale}, \texttt{Autocorr\_FirstMinimum},
+\texttt{LongestPeriod\_AboveAverage} and
+\texttt{LongestPeriod\_Decreses} may best indicate the impact of
+downsampling for this time series.
 
 \includegraphics{210431461_CSC8639_Dissertation_files/figure-latex/Catch22Variation800B-1.pdf}
 
@@ -1564,8 +1705,13 @@ doi:
 /url{https://github.com/MoFrod/downsampling\_timeseries/commits/main},
 2023.}
 
-\leavevmode\vadjust pre{\hypertarget{ref-ATIChangePoint}{}}%
+\leavevmode\vadjust pre{\hypertarget{ref-GPT}{}}%
 \CSLLeftMargin{{[}44{]} }
+\CSLRightInline{OpenAI, {``ChatGPT 4: CodeInterpreter,''} vol. "August
+3". 2023.}
+
+\leavevmode\vadjust pre{\hypertarget{ref-ATIChangePoint}{}}%
+\CSLLeftMargin{{[}45{]} }
 \CSLRightInline{G. J. J. van den Burg and C. K. I. Williams, {``An
 evaluation of change point detection algorithms.''}
 \url{https://github.com/alan-turing-institute/AnnotateChange}, 2022.
@@ -1573,12 +1719,12 @@ doi:
 \href{https://doi.org/10.48550/arXiv.2003.06222}{10.48550/arXiv.2003.06222}.}
 
 \leavevmode\vadjust pre{\hypertarget{ref-Jettison}{}}%
-\CSLLeftMargin{{[}45{]} }
+\CSLLeftMargin{{[}46{]} }
 \CSLRightInline{M. Forshaw, {``Jettison MVP code.''}
 \url{https://github.com/MattForshaw/Jettison/tree/main/MVPCode}, 2023.}
 
 \leavevmode\vadjust pre{\hypertarget{ref-compressiontech}{}}%
-\CSLLeftMargin{{[}46{]} }
+\CSLLeftMargin{{[}47{]} }
 \CSLRightInline{M. J. Watson, A. Liakopoulos, D. Brzakovic, and C.
 Georgakis, {``A practical assessment of process data compression
 techniques,''} \emph{Industrial \& Engineering Chemistry Research}, vol.
@@ -1586,14 +1732,14 @@ techniques,''} \emph{Industrial \& Engineering Chemistry Research}, vol.
 \href{https://doi.org/10.1021/ie970401w}{10.1021/ie970401w}.}
 
 \leavevmode\vadjust pre{\hypertarget{ref-feature_book}{}}%
-\CSLLeftMargin{{[}47{]} }
+\CSLLeftMargin{{[}48{]} }
 \CSLRightInline{C. H. Lubba, B. Fulcher, T. Henderspn, B. Harris, O. r.
 TL, and O. Cliff, {``catch22 features.''}
 \url{https://feature-based-time-series-analys.gitbook.io/catch22-features/},
 2023.}
 
 \leavevmode\vadjust pre{\hypertarget{ref-graphsampling}{}}%
-\CSLLeftMargin{{[}48{]} }
+\CSLLeftMargin{{[}49{]} }
 \CSLRightInline{Y. Wu, N. Cao, D. Archambault, Q. Shen, H. Qu, and W.
 Cui, {``Evaluation of graph sampling: A visualization perspective,''}
 \emph{IEEE Transactions on Visualization and Computer Graphics}, vol.
