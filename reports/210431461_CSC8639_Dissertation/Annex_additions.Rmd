@@ -1,0 +1,20 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+Figure 32 presents the feature with the seventh highest coefficient of variation (`DistributionExponentialFit_MAE` or `CO_Embed2_Dist_tau_d_expfit_meandiff`). To calculate the mean absolute error, this catch22 feature *"represents the time series in a two-dimensional time-delay embedding space... It then computes successive distances between points in this 2D embedding space and analyzes the probability distribution of these distances"* @feature_book. Initial visual analysis suggests that time series '600' and '800' are more affected by this feature.
+
+```{r MAE, echo=FALSE, message=FALSE, warning=FALSE, fig.height=6, fig.with=3}
+# Create the difference line graph for CO_Embed2_Dist_tau_d_expfit_meandiff
+ggplot(filtered_df %>%
+         filter(names == "DistributionExponentialFit_MAE"), 
+       aes(x = as.numeric(vol), y = difference, color = method)) +
+  scale_color_brewer(palette = "Paired") +
+  geom_line(linewidth = 0.5) +
+  scale_x_reverse() +
+  theme_minimal() +
+  theme(text = element_text(family = "Times"), plot.title = element_text(hjust = -0.3, size=11), legend.position = "top", legend.justification = c(-0.04, 1)) +
+  labs(x = "Volume of Data", y = "Scaled Difference", color = "Method", title = "Figure 32: Variation of the Mean Absolute Error of an Exponential Fit") +
+  facet_wrap(~ dataset, ncol = 3)
+```
